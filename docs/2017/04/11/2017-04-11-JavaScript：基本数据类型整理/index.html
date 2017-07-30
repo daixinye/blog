@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JavaScript：基本数据类型整理 | Daixinye</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Undefined Null Boolean String Number  UndefinedUndefined类型只有一个undefined值。 用var声明但未赋值的变量，其值为undefined。 var a; alert(a); //undefined 使用一个未经声明的变量，typeof检测为undefined，但使用时会报错。 alert(a); //Error 访问一个对象中不存在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript：基本数据类型整理">
+<meta property="og:url" content="http://daixinye.com/2017/04/11/2017-04-11-JavaScript：基本数据类型整理/index.html">
+<meta property="og:site_name" content="Daixinye">
+<meta property="og:description" content="Undefined Null Boolean String Number  UndefinedUndefined类型只有一个undefined值。 用var声明但未赋值的变量，其值为undefined。 var a; alert(a); //undefined 使用一个未经声明的变量，typeof检测为undefined，但使用时会报错。 alert(a); //Error 访问一个对象中不存在">
+<meta property="og:updated_time" content="2017-07-30T15:22:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript：基本数据类型整理">
+<meta name="twitter:description" content="Undefined Null Boolean String Number  UndefinedUndefined类型只有一个undefined值。 用var声明但未赋值的变量，其值为undefined。 var a; alert(a); //undefined 使用一个未经声明的变量，typeof检测为undefined，但使用时会报错。 alert(a); //Error 访问一个对象中不存在">
+  
+    <link rel="alternate" href="/atom.xml" title="Daixinye" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Daixinye</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <a id="nav-github" class="nav-icon" title="github" target="_blank" href="https://github.com/daixinye"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://daixinye.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2017-04-11-JavaScript：基本数据类型整理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/11/2017-04-11-JavaScript：基本数据类型整理/" class="article-date">
+  <time datetime="2017-04-11T08:21:00.000Z" itemprop="datePublished">2017-04-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JavaScript：基本数据类型整理
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>Undefined</li>
+<li>Null</li>
+<li>Boolean</li>
+<li>String</li>
+<li>Number</li>
+</ul>
+<h2 id="Undefined"><a href="#Undefined" class="headerlink" title="Undefined"></a>Undefined</h2><p>Undefined类型只有一个undefined值。</p>
+<p>用var声明但未赋值的变量，其值为undefined。</p>
+<pre><code>var a;
+alert(a); //undefined
+</code></pre><p>使用一个未经声明的变量，typeof检测为undefined，但使用时会报错。</p>
+<pre><code>alert(a); //Error
+</code></pre><p>访问一个对象中不存在的属性时，其值为undefined，不会报错。</p>
+<pre><code>var o = {a:1};
+alert(o.b); //undefined
+</code></pre><p>故undefined不能与typeof结合使用来判断一个变量是否被声明。</p>
+<pre><code>var a;
+alert(typeof a); //undefined
+alert(typeof b); //undefined ，变量b并没有被声明
+</code></pre><h2 id="Null"><a href="#Null" class="headerlink" title="Null"></a>Null</h2><p>Null表示一个空对象指针，typeof null会返回object。</p>
+<pre><code>var o = null;
+alert(typeof o); //object
+</code></pre><p>null可以作为空对象的占位符，故如果定义的变量将来用于存放对象，那么最好将该变量初始化为null，这样通过typeof可以判断相应的变量是否保存了一个对象的引用。</p>
+<pre><code>var o = null;
+//...
+if(o == null){
+    //do something
+}
+</code></pre><p>undefined是派生自null的，故下面相等性测试返回的是true</p>
+<pre><code>alert(undefined == null); //true
+</code></pre><p>注意：undefined与null很大的一个区别在于，无论什么情况下，undefined一般都不会被用作显式地初始化变量，而null则推荐用来作为空对象指针。</p>
+<h2 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean"></a>Boolean</h2><p>ECMAScript中，所有类型的值都有与Boolean类型对应的值，我们可以通过转型函数Boolean()来进行转换。</p>
+<ul>
+<li>String类型，非空字符串均返回true，空字符串返回false</li>
+<li>Number类型，非零数字值均返回true，0和NaN返回false</li>
+<li>Object类型，任何非空对象均返回true，null返回false</li>
+<li>Undefined类型，恒为false</li>
+</ul>
+<p>这个转换在流控制语句中如if语句中，会将if()中的变量自动转换成对应的Boolean值，以下代码是相等的：</p>
+<pre><code>var foo = &quot;bar&quot;;
+
+if(foo){
+    //do something
+}
+
+//上下两段代码是相同的
+
+if(Boolean(foo)){
+    //do something
+}
+</code></pre><h2 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h2><p>Number类型使用IEEE754格式来表示整数和浮点数，浮点数值的最高精度是17位小数，故在计算时会产生舍入误差的问题。所以永远不要测试某个特定的浮点数值。</p>
+<pre><code>var a = 0.1;
+var b = 0.2;
+alert(a+b == 0.3) //false，0.1+0.2会变成0.30000000000000004
+</code></pre><h3 id="数值范围"><a href="#数值范围" class="headerlink" title="数值范围"></a>数值范围</h3><ul>
+<li>正无穷：+Infinity</li>
+<li>能够表示的最大正数：Number.MAX_VALUE</li>
+<li>能够表示的最小正数：Number.MIN_VALUE</li>
+<li>0</li>
+<li>能够表示的最大负数：-Number.MIN_VALUE</li>
+<li>能够表示的最小负数：-Number.MAX_VALUE</li>
+<li>负无穷：-Infinity</li>
+</ul>
+<h3 id="NaN"><a href="#NaN" class="headerlink" title="NaN"></a>NaN</h3><p>NaN，Not a Number，用于表示一个本来要返回数值的操作数未返回数值的情况，此时不抛出错误，也不会影响其他代码的执行。</p>
+<p>除了类型转换时会出现NaN之外，0/0也会返回NaN。</p>
+<p>特点：</p>
+<ul>
+<li>NaN与任何数值操作均为NaN</li>
+<li>NaN与任何值都不相等，包括NaN自身</li>
+</ul>
+<p>可以用isNaN()函数来判断一个值是否“不是数值”，isNaN()在接收到一个参数后，会尝试将这个值转换为数值。</p>
+<pre><code>isNaN(NaN); //true
+isNaN(10); //false
+isNaN(&quot;10&quot;); //false，字符串&quot;10&quot;可以转换成数字10
+isNaN(&quot;blue&quot;); //true，字符串&quot;blue&quot;不能被转换成数字
+isNaN(true); //false，布尔值true可以被转换成数字1
+isNaN(false); //false，布尔值false可以被转换成数字0
+</code></pre><h3 id="数值转换"><a href="#数值转换" class="headerlink" title="数值转换"></a>数值转换</h3><ul>
+<li>Number()，转型函数</li>
+<li>parseInt()，全局函数</li>
+<li>parseFloat()，全局函数</li>
+</ul>
+<h4 id="Number-1"><a href="#Number-1" class="headerlink" title="Number()"></a>Number()</h4><ul>
+<li>Boolean，true 1，false 0</li>
+<li>Null，null 0</li>
+<li>Undefined，undefined NaN</li>
+<li>String，字符串只包含数字时（包括+/-，整数/浮点数） 对应数字，空字符串”” 0</li>
+<li>Object，先valueOf()若NaN则toString()，转换规则跟上述一致</li>
+</ul>
+<h4 id="parseInt"><a href="#parseInt" class="headerlink" title="parseInt()"></a>parseInt()</h4><p>parseInt接收两个参数，第一个是待转换的值，第二个是基数（二进制、八进制、十进制、十六进制），其他进制不常用，以下仅讨论十进制。</p>
+<p>与Number()的几个区别是，</p>
+<ol>
+<li>Number()接收任意类型的参数，而parseInt()只接收String，非String一律为NaN。</li>
+<li>parseInt()会对传入的字符串从左到右进行遍历，从第一个数字或正负号开始，到第一个非数字结束，字符串中不存在数字就一定会是NaN，忽略其他非数字的字符；Number()中如果字符串存在非数字字符就会是NaN。</li>
+<li>空字符串Number()转换成0，parseInt()转换成NaN。</li>
+<li>parseInt()只会转换成整数</li>
+</ol>
+<p>示例：</p>
+<pre><code>var n0 = true;
+alert(Number(n0)); //1
+alert(parseInt(n0,10)); //NaN
+
+var n1 = &quot;1234blue&quot;;
+alert(Number(n1)); //NaN
+alert(parseInt(n1,10)); //1234
+
+var n2 = &quot;&quot;;
+alert(Number(n2)); //0
+alert(parseInt(n2,10)); //NaN
+
+var n3 = &quot;22.5&quot;;
+alert(Number(n3)); //22.5
+alert(parseInt(n3,10)); //22
+</code></pre><h4 id="parseFloat"><a href="#parseFloat" class="headerlink" title="parseFloat()"></a>parseFloat()</h4><p>parseFloat()与parseInt()的解析机制基本相同，以下为两个比较主要的区别：</p>
+<ol>
+<li>parseFloat()没有第二个参数，只解析十进制</li>
+<li>parseFloat()识别小数点，遇到第二个小数点停止解析</li>
+</ol>
+<h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><p>String类型用于表示由零或多个16位Unicode字符组成的字符序列，即字符串。</p>
+<p>用双引号表示的字符串与用单引号表示的字符串完全相同。</p>
+<h3 id="字符字面量"><a href="#字符字面量" class="headerlink" title="字符字面量"></a>字符字面量</h3><p>即转义序列，用于表示非打印字符或其他用途的字符。常见的有：</p>
+<ul>
+<li>\n 换行</li>
+<li>\t 制表</li>
+<li>\r 回车</li>
+<li>\b 退格</li>
+<li>\xnn 以十六进制代码nn表示一个字符（n为0~F）</li>
+<li>\unnnn 以十六进制代码nnnn表示的一个Unicode字符（其中n为0~f)</li>
+</ul>
+<p>注意：\unnnn类型的字符虽然在代码中占6个字符，但是在length属性中只占1个字符。</p>
+<p>但是如果字符串中包含双字节字符，那么length属性可能不会精确地返回字符串中的字符数目。</p>
+<h3 id="字符串的特点"><a href="#字符串的特点" class="headerlink" title="字符串的特点"></a>字符串的特点</h3><p>字符串是不可变的，一旦创建，它们的值就不能改变。要改变的话，则会先销毁原来的字符串，再用一个包含新值的字符串填充该变量。</p>
+<pre><code>var lang = &quot;Java&quot;;
+lang = lang + &quot;Script&quot;;
+</code></pre><ol>
+<li>首先创建一个10字符的新字符串</li>
+<li>接着填充”Java”和”Script”</li>
+<li>将新字符串赋值给lang</li>
+<li>删除”Java”和”Script”</li>
+</ol>
+<h3 id="转换为字符串"><a href="#转换为字符串" class="headerlink" title="转换为字符串"></a>转换为字符串</h3><p>转换为字符串有两种方法，分别是toString()和String()。</p>
+<p>还有一种是用加号操作符，这里先不作讨论。</p>
+<h4 id="toString-NaN"><a href="#toString-NaN" class="headerlink" title="toString()"></a>toString()</h4><p>几乎每个值都有toString()方法，返回响应值的字符串表现。</p>
+<ul>
+<li>Number，即数字本身，还可以传递一个参数以指定基数</li>
+<li>Boolean，即”true”或”false”</li>
+<li>String，即字符串本身</li>
+</ul>
+<p>示例：</p>
+<pre><code>var num = 10;
+alert(num.toString()); //10，默认十进制
+alert(num.toString(2)); //1010，二进制
+alert(num.toString(16)); //a,十六进制
+</code></pre><p>Null和Undefined没有toString方法。</p>
+<h4 id="String-1"><a href="#String-1" class="headerlink" title="String()"></a>String()</h4><p>就像Number()和parseInt()的关系一样，String()转型函数能够接收任意类型的值作为参数，但是区别在于Number()和parseInt()之间相对平等，而String()更像是toString()的超集。</p>
+<ul>
+<li>如果传入的值有toString()方法，则调用该方法</li>
+<li>Null类型，返回”null”</li>
+<li>Undefined类型，返回”undefined”</li>
+</ul>
+<p>不过String()在转换数值时就不能指定基数了。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>JavaScript基本数据类型有5种，分别是Null，Undefined，Boolean，Number和String。其中，Undefined派生自Null，故null==undefined返回true。</p>
+<p>Boolean只有true和false两个值，注意Boolean()转型函数的转换规则，以及与if()等流程控制语句的关系。</p>
+<p>Number类型不区分整数和浮点数，要注意其数值范围以及精度的问题，要当心0.1+0.2不等于0.3的判断问题。还有对NaN的理解，注意NaN与任何值都不相等的特性。此外，Number()转型函数，parseInt()和parseFloat()各有机制上的共通点和不同处，要做好区别。</p>
+<p>String类型，包含字符字面量，转义字符，字符串的特点以及字符串的转换，重点理解如何使用toString()和String()来进行字符串转换。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/04/11/2017-04-11-HTTP：协议基础/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          HTTP基础（1）：概述
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/04/07/2017-04-07-Mac在Terminal打开Finder/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">Mac：如何在Terminal中打开Finder</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Catégories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/FE/">FE</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTTP/">HTTP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mac/">Mac</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SVN/">SVN</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Sublime/">Sublime</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell/">shell</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/07/06/2017-07-06-Shell 脚本入门/">Shell 脚本入门</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/23/2017-05-23-什么是Hybrid App/">什么是Hybrid App</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/14/2017-04-14-React：基本环境搭建简明步骤/">React：基本环境搭建简明步骤</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/12/2017-04-12-HTTP：常见的状态码/">HTTP基础（2）：常见的状态码</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/11/2017-04-11-HTTP：协议基础/">HTTP基础（1）：概述</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Xinye Dai<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

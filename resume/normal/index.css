@@ -1,0 +1,287 @@
+/* 全局  */
+body {
+    background-color: #ddd;
+    padding-bottom: 5em;
+    font-family: "微软雅黑";
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+h1 {
+    text-indent: -9999px;
+}
+
+h2 {
+    border-left: 0.5em solid #337ecc;
+    border-top: transparent solid 0.25em;
+    border-bottom: transparent solid 0.25em;
+    padding-left: 1em;
+}
+
+em {
+    background-color: #48c;
+    border-radius: 5px;
+    color: #eee;
+    display: inline-block;
+    font-size: 0.75em;
+    font-style: normal;
+    height: 2em;
+    line-height: 2em;
+    padding: 0 0.5em;
+    vertical-align: top;
+}
+
+/* 工具  */
+.availabel {
+    color: #337ecc;
+}
+
+.f-r {
+    float: right;
+}
+.f-l {
+    float: left;
+}
+
+@keyframes fadein {
+    0% {
+        opacity: 0;
+        position: relative;
+        left: -100px;
+    }
+    100% {
+        opacity: 1;
+        position: relative;
+        left: 0;
+    }
+}
+
+/* 正文  */
+.resume {
+    max-width: 780px;
+    background-color: #fff;
+    box-shadow: 0 0 10px #555;
+    color: #666;
+    margin: 0 auto;
+    padding: 2rem;
+    animation: fadein 1s ease 0s 1;
+}
+
+.profile {
+    float: left;
+}
+
+.profile h2 {
+    border: none;
+    color: #333;
+    font-size: 2rem;
+    line-height: 1;
+    margin: 8px 0;
+    padding: 0;
+}
+
+.profile p {
+    line-height: 1.7em;
+    margin: 0;
+}
+
+.contact {
+    float: right;
+    line-height: 1.6;
+    text-align: right;
+}
+
+.title::after {
+    content: "";
+    display: block;
+    width: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.college p,
+.practice li {
+    padding-left: 1em;
+}
+
+.flex-container {
+    display: flex;
+    line-height: 2.5em;
+    transition: box-shadow 0.25s linear;
+}
+
+.flex-container:hover {
+    box-shadow: 0 0 10px #aaa;
+}
+
+.flex-container span:first-child {
+    width: 150px;
+}
+
+.flex-container span~span {
+    display: inline-block;
+    flex: 1;
+    text-align: center;
+}
+
+.skill ul {
+    list-style: inherit;
+    padding-left: 2em;
+    line-height: 2.5em;
+}
+
+.project li,
+.award li {
+    padding: 0.25em 1em;
+    transition: box-shadow 0.25s linear;
+}
+
+.project li:hover,
+.award li:hover {
+    padding: 0.25em 1em;
+    box-shadow: 0 0 10px #aaa;
+    position: relative;
+}
+
+.project li:nth-child(even),
+.award li:nth-child(even) {
+    background-color: #f8f8f8;
+}
+
+.project p,
+.award p {
+    margin: 0.5em 0;
+}
+
+.project h3,
+.award h3 {
+    margin: 0.5em 0;
+}
+
+.project h3 span {
+    font-weight: normal;
+    font-size: 0.75em;
+}
+
+ins {
+    color: #337ecc;
+    cursor: pointer;
+    display: inline-block;
+    float: right; 
+    font-weight: normal;
+    font-size: 0.75em;
+    text-decoration: none;
+}
+
+ins:hover {
+    text-decoration: underline;
+}
+
+
+/* popup */
+
+@keyframes popup-fadein {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.popup {
+    animation: popup-fadein 1s ease 0s 1;
+    background-color: #fff;
+    box-shadow: 0 0 10px #555;
+    left: 50%;
+    width: 350px;
+    margin-left: -200px;
+    margin-top: -300px;
+    padding: 0 25px 2em;
+    position: fixed;
+    top: 50%;
+    z-index: 3;
+}
+
+.popup li {
+    line-height: 2.5em;
+    vertical-align: baseline;
+}
+
+.popup em {
+    vertical-align: baseline;
+}
+
+.mask {
+    background-color: #888;
+    height: 100%;
+    left: 0;
+    opacity: 0.5;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+}
+
+footer {
+    color: rgb(104, 165, 226);
+    width: 100%;
+    text-align: center;
+}
+
+@media print {
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #fff;
+    }
+    body > h1 {
+        display: none;
+    }
+    h2,
+    p {
+        margin-top: 5px;
+        margin-bottom: 0;
+    }
+    h2 {
+        font-size: 1em;
+    }
+    .resume {
+        padding: 1em;
+    }
+    .contact {
+        line-height: 1.5;
+    }
+    li.flex-container,
+    p.flex-container {
+        line-height: 1.5em;
+    }
+    .skill li {
+        line-height: 1.5em;
+    }
+    .project h3,
+    .award h3 {
+        font-size: 1em;
+        margin: 1px 0;
+    }
+    .project p,
+    .award p {
+        margin: 1px 0;
+    }
+    footer p {
+        margin:0;
+    }
+}

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>React：基本环境搭建简明步骤 | Daixinye</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="超简的步骤整理。待完善。  Babel ESLint webpack  Babelbabel是一个多用途的JavaScript编译器，用它的目的有二：一是支持ES6语法，二是支持React的一些特性（JSX）语法等。 安装在这里我们是跟webpack一起用的，所以需要的是babel-core核心模块和babel-lodaer，如果需要单独使用babel则安装babel-cli。 $ npm i b">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React：基本环境搭建简明步骤">
+<meta property="og:url" content="http://daixinye.com/2017/04/14/2017-04-14-React：基本环境搭建简明步骤/index.html">
+<meta property="og:site_name" content="Daixinye">
+<meta property="og:description" content="超简的步骤整理。待完善。  Babel ESLint webpack  Babelbabel是一个多用途的JavaScript编译器，用它的目的有二：一是支持ES6语法，二是支持React的一些特性（JSX）语法等。 安装在这里我们是跟webpack一起用的，所以需要的是babel-core核心模块和babel-lodaer，如果需要单独使用babel则安装babel-cli。 $ npm i b">
+<meta property="og:updated_time" content="2017-07-30T15:22:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React：基本环境搭建简明步骤">
+<meta name="twitter:description" content="超简的步骤整理。待完善。  Babel ESLint webpack  Babelbabel是一个多用途的JavaScript编译器，用它的目的有二：一是支持ES6语法，二是支持React的一些特性（JSX）语法等。 安装在这里我们是跟webpack一起用的，所以需要的是babel-core核心模块和babel-lodaer，如果需要单独使用babel则安装babel-cli。 $ npm i b">
+  
+    <link rel="alternate" href="/atom.xml" title="Daixinye" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Daixinye</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <a id="nav-github" class="nav-icon" title="github" target="_blank" href="https://github.com/daixinye"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://daixinye.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2017-04-14-React：基本环境搭建简明步骤" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/14/2017-04-14-React：基本环境搭建简明步骤/" class="article-date">
+  <time datetime="2017-04-14T14:34:00.000Z" itemprop="datePublished">2017-04-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/React/">React</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      React：基本环境搭建简明步骤
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>超简的步骤整理。待完善。</p>
+<ul>
+<li>Babel</li>
+<li>ESLint</li>
+<li>webpack</li>
+</ul>
+<h2 id="Babel"><a href="#Babel" class="headerlink" title="Babel"></a>Babel</h2><p><code>babel</code>是一个多用途的JavaScript编译器，用它的目的有二：一是支持ES6语法，二是支持<code>React</code>的一些特性（JSX）语法等。</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>在这里我们是跟<code>webpack</code>一起用的，所以需要的是<code>babel-core</code>核心模块和<code>babel-lodaer</code>，如果需要单独使用<code>babel</code>则安装<code>babel-cli</code>。</p>
+<pre><code>$ npm i babel-core babel-loader --save-dev
+</code></pre><p>接下来安装babel presets</p>
+<pre><code>$ npm i babel-preset-es2015 babel-preset-react --save-dev
+</code></pre><h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>在根目录下新建一个<code>.babelrc</code>文件，并加入以下配置</p>
+<pre><code>{
+    &quot;presets&quot;: [&quot;es2015&quot;, &quot;react&quot;]
+}
+</code></pre><h2 id="ESLint"><a href="#ESLint" class="headerlink" title="ESLint"></a>ESLint</h2><p>ESLint是一个代码检查工具，用于检查和统一代码规范。</p>
+<h3 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h3><pre><code>$ npm i eslint eslint-loader --save-dev
+</code></pre><h3 id="配置-1"><a href="#配置-1" class="headerlink" title="配置"></a>配置</h3><pre><code>$ eslint --init
+</code></pre><p>接下来根据你的需求进行选择即可，非常方便。最终可选择生成一个<code>.eslint.json</code>文件。我的配置如下：</p>
+<pre><code>{
+    &quot;env&quot;: {
+        &quot;browser&quot;: true,
+        &quot;commonjs&quot;: true,
+        &quot;es6&quot;: true,
+        &quot;node&quot;: true
+    },
+    &quot;extends&quot;: &quot;eslint:recommended&quot;,
+    &quot;parserOptions&quot;: {
+        &quot;ecmaFeatures&quot;: {
+            &quot;experimentalObjectRestSpread&quot;: true,
+            &quot;jsx&quot;: true
+        },
+        &quot;sourceType&quot;: &quot;module&quot;
+    },
+    &quot;plugins&quot;: [
+        &quot;react&quot;
+    ],
+    &quot;rules&quot;: {
+        &quot;linebreak-style&quot;: [
+            &quot;error&quot;,
+            &quot;unix&quot;
+        ],
+        &quot;quotes&quot;: [
+            &quot;error&quot;,
+            &quot;single&quot;
+        ],
+        &quot;semi&quot;: [
+            &quot;error&quot;,
+            &quot;always&quot;
+        ]
+    }
+}
+</code></pre><p>更多的配置可参照<a href="http://eslint.org" target="_blank" rel="external">ESLint</a></p>
+<h2 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h2><p><code>webpack</code>是当前非常流行的模块打包工具，上述的<code>Babel</code>和<code>ESLint</code>都可以作为<code>loader</code>在<code>webpack</code>中被使用。</p>
+<p>注意：本文使用的是<code>webpack 2</code>，<code>webpack 1</code>和<code>webpack 2</code>在配置上有诸多不同之处，请务必留心。</p>
+<p><a href="https://webpack.js.org/guides/migrating/" target="_blank" rel="external">链接：webpack 1和2的区别</a></p>
+<h3 id="安装-2"><a href="#安装-2" class="headerlink" title="安装"></a>安装</h3><pre><code>$ npm i webpack webpack-dev-server --save-dev
+</code></pre><h3 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h3><p>用于自动生成HTML页面，并引入正确的JavaScript文件依赖。</p>
+<pre><code>$ npm i html-webpack-plugin --save-dev
+</code></pre><h3 id="loader"><a href="#loader" class="headerlink" title="loader"></a>loader</h3><p>处理CSS文件需要用到的两个loader。</p>
+<pre><code>$ npm i css-loader style-loader
+</code></pre><h3 id="配置-2"><a href="#配置-2" class="headerlink" title="配置"></a>配置</h3><p>在根目录下新建一个<code>app</code>目录，同时再创建一个<code>webpack.config.js</code>文件。</p>
+<pre><code>var path = require(&apos;path&apos;);
+var HtmlWebpackPlugin = require(&apos;html-webpack-plugin&apos;);
+
+var ROOT_PATH = path.resolve(__dirname);
+var APP_PATH = path.resolve(ROOT_PATH, &apos;app&apos;);
+var BUILD_PATH = path.resolve(ROOT_PATH, &apos;build&apos;);
+
+module.exports = {
+    entry: {
+        app: path.resolve(APP_PATH, &apos;app.jsx&apos;)
+    },
+    output: {
+        path: BUILD_PATH,
+        filename: &apos;bundle.js&apos;
+    },
+    devtool: &apos;eval-source-map&apos;,
+    devServer: {
+        historyApiFallback: true,
+        hot: true,
+        inline: true,
+    },
+    module: {
+        rules: [{
+            test: /\.jsx?$/,
+            enforce: &apos;pre&apos;,
+            loaders: [&apos;eslint-loader&apos;],
+            include: APP_PATH
+        }, {
+            test: /\.css$/,
+            loaders: [&apos;style-loader&apos;, &apos;css-loader&apos;]
+        }, {
+            test: /\.jsx?$/,
+            loader: [&apos;babel-loader&apos;],
+            include: APP_PATH
+        }],
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            title: &apos;react-dev&apos;
+        })
+    ],
+    resolve: {
+        extensions: [&apos;.js&apos;, &apos;.jsx&apos;]
+    }
+};
+</code></pre><h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>添加两条命令到<code>package.json</code>里。</p>
+<pre><code>&quot;scripts&quot;: {
+    &quot;build&quot;:&quot;webpack&quot;,
+    &quot;dev&quot;:&quot;webpack-dev-server --hot&quot;
+}
+</code></pre><p>通过在Terminal中输入 <code>npm run build</code> 或 <code>npm run dev</code> 执行。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/05/23/2017-05-23-什么是Hybrid App/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          什么是Hybrid App
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/04/12/2017-04-12-HTTP：常见的状态码/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">HTTP基础（2）：常见的状态码</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Catégories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/FE/">FE</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTTP/">HTTP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mac/">Mac</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SVN/">SVN</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Sublime/">Sublime</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell/">shell</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/07/06/2017-07-06-Shell 脚本入门/">Shell 脚本入门</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/23/2017-05-23-什么是Hybrid App/">什么是Hybrid App</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/14/2017-04-14-React：基本环境搭建简明步骤/">React：基本环境搭建简明步骤</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/12/2017-04-12-HTTP：常见的状态码/">HTTP基础（2）：常见的状态码</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/11/2017-04-11-HTTP：协议基础/">HTTP基础（1）：概述</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Xinye Dai<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Sublime Text 3的基本安装与配置 | Daixinye</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="下载官网下载 Package Control安装简易方法最简单的安装方法，是通过Sublime Text控制台来安装。你可以通过Ctrl + ` 快捷键或者通过菜单栏 View &amp;gt; Show Console 来打开控制台。接着，输入下面这段代码按下回车即可。（最新的版本请参照官网） import urllib.request,os,hashlib; h = &amp;apos;df21e130d21">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sublime Text 3的基本安装与配置">
+<meta property="og:url" content="http://daixinye.com/2017/04/02/2017-04-02-Sublime-Text-3的基本安装与配置/index.html">
+<meta property="og:site_name" content="Daixinye">
+<meta property="og:description" content="下载官网下载 Package Control安装简易方法最简单的安装方法，是通过Sublime Text控制台来安装。你可以通过Ctrl + ` 快捷键或者通过菜单栏 View &amp;gt; Show Console 来打开控制台。接着，输入下面这段代码按下回车即可。（最新的版本请参照官网） import urllib.request,os,hashlib; h = &amp;apos;df21e130d21">
+<meta property="og:updated_time" content="2017-07-30T15:21:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Sublime Text 3的基本安装与配置">
+<meta name="twitter:description" content="下载官网下载 Package Control安装简易方法最简单的安装方法，是通过Sublime Text控制台来安装。你可以通过Ctrl + ` 快捷键或者通过菜单栏 View &amp;gt; Show Console 来打开控制台。接着，输入下面这段代码按下回车即可。（最新的版本请参照官网） import urllib.request,os,hashlib; h = &amp;apos;df21e130d21">
+  
+    <link rel="alternate" href="/atom.xml" title="Daixinye" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Daixinye</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <a id="nav-github" class="nav-icon" title="github" target="_blank" href="https://github.com/daixinye"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://daixinye.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2017-04-02-Sublime-Text-3的基本安装与配置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/02/2017-04-02-Sublime-Text-3的基本安装与配置/" class="article-date">
+  <time datetime="2017-04-01T16:13:06.000Z" itemprop="datePublished">2017-04-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Sublime/">Sublime</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Sublime Text 3的基本安装与配置
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p><a href="https://www.sublimetext.com/" target="_blank" rel="external">官网下载</a></p>
+<h2 id="Package-Control"><a href="#Package-Control" class="headerlink" title="Package Control"></a>Package Control</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><h3 id="简易方法"><a href="#简易方法" class="headerlink" title="简易方法"></a>简易方法</h3><p>最简单的安装方法，是通过Sublime Text控制台来安装。你可以通过Ctrl + ` 快捷键或者通过菜单栏 View &gt; Show Console 来打开控制台。接着，输入下面这段代码按下回车即可。（最新的版本请参照官网）</p>
+<pre><code>import urllib.request,os,hashlib; h = &apos;df21e130d211cfc94d9b0905775a7c0f&apos; + &apos;1e3d39e33b79698005270310898eea76&apos;; pf = &apos;Package Control.sublime-package&apos;; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( &apos;http://packagecontrol.io/&apos; + pf.replace(&apos; &apos;, &apos;%20&apos;)).read(); dh = hashlib.sha256(by).hexdigest(); print(&apos;Error validating download (got %s instead of %s), please try manual install&apos; % (dh, h)) if dh != h else open(os.path.join( ipp, pf), &apos;wb&apos; ).write(by)
+</code></pre><p>这段代码在必要的情况下会为你创建一个Installed Packages 文件夹，然后下载Package Control.sublime-package到这个文件夹中。这个下载由于Python标准库的限制，会通过HTTP而不是HTTPS来完成。文件会通过SHA-256来验证。</p>
+<h3 id="手动下载"><a href="#手动下载" class="headerlink" title="手动下载"></a>手动下载</h3><p>如果由于一些原因，你无法在控制台中完成下载，那么你可以通过以下几个步骤来手动安装Package Control：</p>
+<ol>
+<li>点击菜单中的Preferences &gt; Browse Packages…</li>
+<li>在打开的文件夹中创建一个Installed Packages文件夹</li>
+<li>下载这个文件<a href="https://packagecontrol.io/Package%20Control.sublime-package" target="_blank" rel="external">Package Control.sublime-package</a>并放到新建的Installed Packages文件夹中</li>
+<li>重启Sublime Text</li>
+</ol>
+<h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><p>完成Package Control的安装后，在Sublime中按住<code>Shift + CMD + P</code>。在输入框中输入<code>Package Control:Install Package</code>，这时Sublime会获取服务器上所有的Package信息，稍等一下后就可以选择自己需要的插件进行安装了。<br>你可以在<a href="https://packagecontrol.io/browse" target="_blank" rel="external">Package Control - Browse</a>中查看所有插件的信息。Package Control也可以用于下载一些Sublime的主题，只要在Package安装选择界面中以Theme开头即可。</p>
+<p>插件的配置和主题的选择都可以在Preferences菜单中进行。</p>
+<h2 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h2><h3 id="在Terminal中打开Sublime"><a href="#在Terminal中打开Sublime" class="headerlink" title="在Terminal中打开Sublime"></a>在Terminal中打开Sublime</h3><p>Sublime Text 包含了一个命令行工具，<code>subl</code>，能让你在命令行中打开文件。这个工具可以用来在Sublime中打开对应的文件和项目文件夹。</p>
+<h4 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h4><p>在Terminal中输入以下这段代码：</p>
+<pre><code>ln -s &quot;/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl&quot; /usr/local/bin/subl
+</code></pre><p>接下来你就可以在命令行中用<code>subl fileName</code>的方式来打开文件了。</p>
+<p>更多用法可以输入<code>subl --help</code>查看。</p>
+<h3 id="在Sublime-Text中运行JavaScript"><a href="#在Sublime-Text中运行JavaScript" class="headerlink" title="在Sublime Text中运行JavaScript"></a>在Sublime Text中运行JavaScript</h3><p>点击菜单中的Tools &gt; Build System &gt; New Build System，复制以下代码：</p>
+<pre><code>{
+    &quot;cmd&quot;: [&quot;/usr/local/bin/node&quot;,&quot;$file&quot;],
+    &quot;selector&quot;: &quot;source.js&quot;
+}
+</code></pre><p>命名为<code>JavaScript.sublime-build</code>保存至Package或Package/User文件夹。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://packagecontrol.io/installation" target="_blank" rel="external">Package Control - Installation</a></p>
+<p><a href="https://www.sublimetext.com/docs/3/osx_command_line.html" target="_blank" rel="external">Sublime Text 3 - OS X Command Line</a></p>
+<p><a href="http://docs.sublimetext.info/en/latest/file_processing/build_systems.html" target="_blank" rel="external">Build Systems</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/04/07/2017-04-07-Mac在Terminal打开Finder/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          Mac：如何在Terminal中打开Finder
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/01/30/2017-01-03-Git：常用命令整理/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">Git：那些常用命令的整理</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Catégories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/FE/">FE</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTTP/">HTTP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mac/">Mac</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SVN/">SVN</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Sublime/">Sublime</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell/">shell</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/07/06/2017-07-06-Shell 脚本入门/">Shell 脚本入门</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/23/2017-05-23-什么是Hybrid App/">什么是Hybrid App</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/14/2017-04-14-React：基本环境搭建简明步骤/">React：基本环境搭建简明步骤</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/12/2017-04-12-HTTP：常见的状态码/">HTTP基础（2）：常见的状态码</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/11/2017-04-11-HTTP：协议基础/">HTTP基础（1）：概述</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Xinye Dai<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

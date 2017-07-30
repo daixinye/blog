@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Mac：如何在Terminal中打开Finder | Daixinye</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言对于习惯使用Terminal的小伙伴们来说，常常有“进入到某个目录中”并“在该目录中打开Finder”的需求。明明已经在目录下了，却还需要在桌面按个CMD+N来打开Finder再在Finder中一层一层打开，简直不要太痛苦。既然如此，那就试试open命令吧。 open命令在Terminal中输入open -h，可以看到如下的说明： Usage: open [-e] [-t] [-f] [-W]">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mac：如何在Terminal中打开Finder">
+<meta property="og:url" content="http://daixinye.com/2017/04/07/2017-04-07-Mac在Terminal打开Finder/index.html">
+<meta property="og:site_name" content="Daixinye">
+<meta property="og:description" content="前言对于习惯使用Terminal的小伙伴们来说，常常有“进入到某个目录中”并“在该目录中打开Finder”的需求。明明已经在目录下了，却还需要在桌面按个CMD+N来打开Finder再在Finder中一层一层打开，简直不要太痛苦。既然如此，那就试试open命令吧。 open命令在Terminal中输入open -h，可以看到如下的说明： Usage: open [-e] [-t] [-f] [-W]">
+<meta property="og:updated_time" content="2017-07-30T15:22:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mac：如何在Terminal中打开Finder">
+<meta name="twitter:description" content="前言对于习惯使用Terminal的小伙伴们来说，常常有“进入到某个目录中”并“在该目录中打开Finder”的需求。明明已经在目录下了，却还需要在桌面按个CMD+N来打开Finder再在Finder中一层一层打开，简直不要太痛苦。既然如此，那就试试open命令吧。 open命令在Terminal中输入open -h，可以看到如下的说明： Usage: open [-e] [-t] [-f] [-W]">
+  
+    <link rel="alternate" href="/atom.xml" title="Daixinye" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Daixinye</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <a id="nav-github" class="nav-icon" title="github" target="_blank" href="https://github.com/daixinye"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://daixinye.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2017-04-07-Mac在Terminal打开Finder" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/07/2017-04-07-Mac在Terminal打开Finder/" class="article-date">
+  <time datetime="2017-04-07T14:16:35.000Z" itemprop="datePublished">2017-04-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Mac/">Mac</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Mac：如何在Terminal中打开Finder
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>对于习惯使用Terminal的小伙伴们来说，常常有“进入到某个目录中”并“在该目录中打开Finder”的需求。<br>明明已经在目录下了，却还需要在桌面按个CMD+N来打开Finder再在Finder中一层一层打开，简直不要太痛苦。<br>既然如此，那就试试open命令吧。</p>
+<h2 id="open命令"><a href="#open命令" class="headerlink" title="open命令"></a>open命令</h2><p>在Terminal中输入<code>open -h</code>，可以看到如下的说明：</p>
+<pre><code>Usage: open [-e] [-t] [-f] [-W] [-R] [-n] [-g] [-h] [-b &lt;bundle identifier&gt;] [-a &lt;application&gt;] [filenames] [--args arguments]
+Help: Open opens files from a shell.
+      By default, opens each file using the default application for that file.  
+      If the file is in the form of a URL, the file will be opened as a URL.
+Options: 
+      -a                Opens with the specified application.
+      -b                Opens with the specified application bundle identifier.
+      -e                Opens with TextEdit.
+      -t                Opens with default text editor.
+      -f                Reads input from standard input and opens with TextEdit.
+      -F  --fresh       Launches the app fresh, that is, without restoring windows. Saved persistent state is lost, excluding Untitled documents.
+      -R, --reveal      Selects in the Finder instead of opening.
+      -W, --wait-apps   Blocks until the used applications are closed (even if they were already running).
+          --args        All remaining arguments are passed in argv to the application&apos;s main() function instead of opened.
+      -n, --new         Open a new instance of the application even if one is already running.
+      -j, --hide        Launches the app hidden.
+      -g, --background  Does not bring the application to the foreground.
+      -h, --header      Searches header file locations for headers matching the given filenames, and opens them.
+</code></pre><p>部分翻译如下：</p>
+<pre><code>使用方法： open [-e] [-t] [-f] [-W] [-R] [-n] [-g] [-h] [-b &lt;bundle identifier&gt;] [-a &lt;应用名&gt;] [文件名] [--args arguments]
+Help: 用于在命令行中打开文件
+      默认情况下，使用默认的应用打开对应的文件。
+      如果是URL格式的文件，那么就会在浏览器中打开。
+Options: 
+      -a                指定打开文件的应用
+      -e                用TextEdit打开该文件
+      -t                用默认文本编辑器打开该文件
+      -R, --reveal      在Finder中显示并选中
+      -g, --background  在后台打开该文件（此时焦点还在Terminal上）
+</code></pre><h2 id="打开目录的正确方式"><a href="#打开目录的正确方式" class="headerlink" title="打开目录的正确方式"></a>打开目录的正确方式</h2><p>那么如何解决“在Terminal中打开当前目录”的问题呢？只要输入以下命令即可：</p>
+<pre><code>$ open ./
+</code></pre><p>没错就这么简单。默认情况下，如果是个open之后是一个目录，那么就会用Finder打开。回车之后，会将焦点直接转移至打开的Finder目录。<br>这时如果你是想打开多个Finder目录，就需要手动切回Terminal再执行命令了。这种情况下，你可以加一个-g参数，来让焦点始终保持在Terminal上。</p>
+<pre><code>$ open -g ./
+</code></pre><p>这样我们就可以一次性在命令行中打开所有想打开的目录了。</p>
+<h3 id="浏览文件"><a href="#浏览文件" class="headerlink" title="浏览文件"></a>浏览文件</h3><p>除此之外，文件太多了，想在Finder中浏览指定文件怎么办呢。可以用-R来解决：</p>
+<pre><code>$ open -R ./test.js
+</code></pre><p>这样就可以在Finder显示，并且已经被选中了。</p>
+<h2 id="打开网站的正确方式"><a href="#打开网站的正确方式" class="headerlink" title="打开网站的正确方式"></a>打开网站的正确方式</h2><p>除了打开目录之外，open命令也可以用于打开网站：</p>
+<pre><code>$ open http://denight.leanote.com
+</code></pre><p>记得一定要加http，否则是不会被识别成URL的。</p>
+<h3 id="指定浏览器打开"><a href="#指定浏览器打开" class="headerlink" title="指定浏览器打开"></a>指定浏览器打开</h3><p>默认情况下，是用Safari打开浏览器的：</p>
+<pre><code>$ open http://denight.leanote.com
+</code></pre><p>等同于</p>
+<pre><code>$ open -a Safari http://denight.leanote.com
+</code></pre><p>如果要换成Firefox或者是Google Chrome，替换命令中的Safari即可</p>
+<pre><code>$ open -a Firefox http://denight.leanote.com
+$ open -a Google\ Chrome http://denight.leanote.com
+</code></pre><h2 id="打开代码的正确方式"><a href="#打开代码的正确方式" class="headerlink" title="打开代码的正确方式"></a>打开代码的正确方式</h2><pre><code>$open -e ./test.js
+</code></pre><p>使用这个命令，可以在TextEdit中打开test.js文件。如果不加-e的话，就会用默认的应用打开。<br>也可以指定想要的打开的编辑器。</p>
+<pre><code>$open -a Sublime\ Text ./test.js
+</code></pre><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://ju.outofmemory.cn/entry/75555" target="_blank" rel="external">在Mac终端下打开Finder</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/04/11/2017-04-11-JavaScript：基本数据类型整理/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          JavaScript：基本数据类型整理
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/04/02/2017-04-02-Sublime-Text-3的基本安装与配置/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">Sublime Text 3的基本安装与配置</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Catégories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/FE/">FE</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTTP/">HTTP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mac/">Mac</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SVN/">SVN</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Sublime/">Sublime</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell/">shell</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/07/06/2017-07-06-Shell 脚本入门/">Shell 脚本入门</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/23/2017-05-23-什么是Hybrid App/">什么是Hybrid App</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/14/2017-04-14-React：基本环境搭建简明步骤/">React：基本环境搭建简明步骤</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/12/2017-04-12-HTTP：常见的状态码/">HTTP基础（2）：常见的状态码</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/11/2017-04-11-HTTP：协议基础/">HTTP基础（1）：概述</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Xinye Dai<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
