@@ -148,6 +148,314 @@
 
 
   
+    <article id="post-2017-07-05-CSS：什么是 BFC" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/05/2017-07-05-CSS：什么是 BFC/" class="article-date">
+  <time datetime="2017-07-05T12:00:00.000Z" itemprop="datePublished">2017-07-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/css/">css</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/05/2017-07-05-CSS：什么是 BFC/">CSS：什么是 BFC</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="什么是-BFC"><a href="#什么是-BFC" class="headerlink" title="什么是 BFC"></a>什么是 BFC</h2><p>BFC，Block Formatting Context，直译为<strong>块级格式化上下文</strong>。</p>
+<p>在 BFC 中，HTML 元素按照一定的规则进行布局，并且不管其中的元素如何变换样式，均不会影响 BFC 外部的任何元素同样也不受外部任何元素的影响。</p>
+<h2 id="触发-BFC-的方法"><a href="#触发-BFC-的方法" class="headerlink" title="触发 BFC 的方法"></a>触发 BFC 的方法</h2><h3 id="0、the-root-element"><a href="#0、the-root-element" class="headerlink" title="0、the root element"></a>0、the root element</h3><p>一个 HTML 文档本身就是一个 BFC 。</p>
+<h3 id="1、float"><a href="#1、float" class="headerlink" title="1、float"></a>1、float</h3><p>float 属性不为 none 时，即如果一个元素是浮动元素，那么它就是一个 BFC 。</p>
+<ul>
+<li>float: left;</li>
+<li>float: right;</li>
+</ul>
+<h3 id="2、overflow"><a href="#2、overflow" class="headerlink" title="2、overflow"></a>2、overflow</h3><p>overflow 属性不为 visible 时，即 overflow 为auto、scroll、hidden 时会形成一个 BFC 。</p>
+<ul>
+<li>overflow: hidden;</li>
+<li>overflow: scroll;</li>
+<li>overflow: auto; </li>
+</ul>
+<h3 id="3、display"><a href="#3、display" class="headerlink" title="3、display"></a>3、display</h3><p>display 属性为 table-cell、table-caption 或 inline-block 时也会触发 BFC。</p>
+<ul>
+<li>display: table-cell;</li>
+<li>display: table-caption;</li>
+<li>display: inline-block;</li>
+</ul>
+<h3 id="4、position"><a href="#4、position" class="headerlink" title="4、position"></a>4、position</h3><p>position 属性不为 relative 或 static 时，即 postion 为 absolute、fixed 时也会触发 BFC 。</p>
+<ul>
+<li>position: relative;</li>
+<li>position: fixed;</li>
+</ul>
+<h2 id="BFC-的作用"><a href="#BFC-的作用" class="headerlink" title="BFC 的作用"></a>BFC 的作用</h2><ul>
+<li><p>不让文字环绕浮动的兄弟元素（自适应布局）</p>
+</li>
+<li><p>在有浮动子元素的情况下，不让父元素高度坍缩（包含浮动）</p>
+</li>
+<li><p>让兄弟元素之间的外边距不重合（边距折叠）</p>
+</li>
+</ul>
+<p>测试代码：<a href="https://github.com/daixinye/practice/blob/master/HTML/BFC.html" target="_blank" rel="external">https://github.com/daixinye/practice/blob/master/HTML/BFC.html</a></p>
+<p>参考：</p>
+<p><a href="https://www.w3cplus.com/css/understanding-bfc-and-margin-collapse.html" target="_blank" rel="external">https://www.w3cplus.com/css/understanding-bfc-and-margin-collapse.html</a></p>
+<p><a href="http://www.zhangxinxu.com/wordpress/2015/02/css-deep-understand-flow-bfc-column-two-auto-layout/" target="_blank" rel="external">http://www.zhangxinxu.com/wordpress/2015/02/css-deep-understand-flow-bfc-column-two-auto-layout/</a></p>
+<p><a href="http://www.cnblogs.com/MockingBirdHome/p/3365346.html" target="_blank" rel="external">http://www.cnblogs.com/MockingBirdHome/p/3365346.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2017-06-21-Vue：基础用法与指令" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/21/2017-06-21-Vue：基础用法与指令/" class="article-date">
+  <time datetime="2017-06-21T12:00:00.000Z" itemprop="datePublished">2017-06-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/vue/">vue</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/21/2017-06-21-Vue：基础用法与指令/">Vue：基础用法与指令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Vue-是什么？"><a href="#Vue-是什么？" class="headerlink" title="Vue 是什么？"></a>Vue 是什么？</h2><p>Vue 是一套构建用户界面的渐进式框架，采用自底向上增量开发的设计。Vue 的核心库值关注视图层（View）。</p>
+<h2 id="声明式渲染"><a href="#声明式渲染" class="headerlink" title="声明式渲染"></a>声明式渲染</h2><h3 id="文本插值"><a href="#文本插值" class="headerlink" title="文本插值"></a>文本插值</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &#123;&#123; message &#125;&#125;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var app = new Vue(&#123;</div><div class="line">    el:&apos;#app&apos;,</div><div class="line">    data: &#123;</div><div class="line">        message: &apos;hello&apos;</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h3 id="渲染-DOM-属性（-v-bind-name-指令）"><a href="#渲染-DOM-属性（-v-bind-name-指令）" class="headerlink" title="渲染 DOM 属性（ v-bind:name 指令）"></a>渲染 DOM 属性（ v-bind:name 指令）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;span v-bind:title=&quot;message&quot;&gt;</div><div class="line">        鼠标悬停此处查看动态提示信息</div><div class="line">    &lt;/span&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var app = new Vue(&#123;</div><div class="line">    el: &apos;#app&apos;,</div><div class="line">    data: &#123;</div><div class="line">        message: &apos;提示信息&apos;</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>v-bind 属性被称为指令（指令带有前缀 v-，以表示他们是 Vue 提供的特殊属性）。这里该指令的作用是“将这个元素的 title 属性和 Vue 实例的 message 属性保持一致”。</p>
+<h2 id="条件与循环（-v-if-指令和-v-for-指令）"><a href="#条件与循环（-v-if-指令和-v-for-指令）" class="headerlink" title="条件与循环（ v-if 指令和 v-for 指令）"></a>条件与循环（ v-if 指令和 v-for 指令）</h2><h3 id="条件"><a href="#条件" class="headerlink" title="条件"></a>条件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;p v-if=&quot;seen&quot;&gt;看到了没？&lt;/p&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var app = new Vue(&#123;</div><div class="line">    el: &apos;#app&apos;,</div><div class="line">    data: &#123;</div><div class="line">        seen: true</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;ol&gt;</div><div class="line">        &lt;li v-for=&quot;todo in todos&quot;&gt;</div><div class="line">            &#123;&#123; todo.text &#125;&#125;</div><div class="line">        &lt;/li&gt;</div><div class="line">    &lt;/ol&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">var app = new Vue(&#123;</div><div class="line">    el: &apos;#app&apos;,</div><div class="line">    data: &#123;</div><div class="line">        todos:［</div><div class="line">            &#123; text : &apos;吃饭&apos; &#125;,</div><div class="line">            &#123; text : &apos;睡觉&apos; &#125;,</div><div class="line">            &#123; text : &apos;打游戏&apos; &#125;</div><div class="line">        ］</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h2 id="处理用户输入（-v-on-指令和-v-model-指令）"><a href="#处理用户输入（-v-on-指令和-v-model-指令）" class="headerlink" title="处理用户输入（ v-on 指令和 v-model 指令）"></a>处理用户输入（ v-on 指令和 v-model 指令）</h2><h3 id="事件监听器"><a href="#事件监听器" class="headerlink" title="事件监听器"></a>事件监听器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;p&gt;&#123;&#123; message &#125;&#125;&lt;/p&gt;</div><div class="line">    &lt;button v-on:click=&quot;reverseMessage&quot;&gt;逆转消息&lt;/</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var app = new Vue(&#123;</div><div class="line">    el:&apos;#app&apos;,</div><div class="line">    data: &#123;</div><div class="line">        message: &apos;hello&apos;</div><div class="line">    &#125;,</div><div class="line">    methods: &#123;</div><div class="line">        reverseMessage: function()&#123;</div><div class="line">            this.message = this.message.split(&apos;&apos;).reverse().join()</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h3 id="双向绑定"><a href="#双向绑定" class="headerlink" title="双向绑定"></a>双向绑定</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;p&gt;&#123;&#123; message &#125;&#125;&lt;/p&gt;</div><div class="line">    &lt;input v-model=&quot;message&quot; &gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var app = new Vue(&#123;</div><div class="line">    el: &apos;#app&apos;,</div><div class="line">    data:&#123;</div><div class="line">        message: &apos;hello&apos;</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h2 id="组件化"><a href="#组件化" class="headerlink" title="组件化"></a>组件化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;ol&gt;</div><div class="line">        &lt;todo-item v-for=&quot;item in list&quot; v-bind:todo=&quot;item&quot;&gt;&lt;/todo-item&gt;</div><div class="line">    &lt;/ol&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Vue.component(&apos;todo-item&apos;, &#123;</div><div class="line">    props: [&apos;todo&apos;], //接受一个自定义属性todo</div><div class="line">    template: &apos;&lt;li&gt;&#123;&#123; todo.text &#125;&#125;&lt;/li&gt;&apos;</div><div class="line">&#125;)</div><div class="line"></div><div class="line">var app = new Vue(&#123;</div><div class="line">    el:&apos;#app&apos;,</div><div class="line">    data: &#123;</div><div class="line">        list : [</div><div class="line">            &#123; text: &apos;apple&apos; &#125;,</div><div class="line">            &#123; text: &apos;banana&apos; &#125;,</div><div class="line">            &#123; text: &apos;orange&apos; &#125;</div><div class="line">        ]</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>注意，在这个例子中 v-for 循环渲染子组件 todo-item ，并传递了 item 变量。接着 v-bind 指令将 item 与子组件的 todo 属性绑定起来，接受到 todo 属性的子组件读取 todo.text 插入到 &lt;li&gt; 中。整个过程，父组件向子组件单向传递数据并渲染出来。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><ul>
+<li>v-bind:name </li>
+<li>v-if </li>
+<li>v-for</li>
+<li>v-on</li>
+<li>v-model</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://cn.vuejs.org/v2/guide/" target="_blank" rel="external">https://cn.vuejs.org/v2/guide/</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2017-06-21-CSS：Animation 动画" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/21/2017-06-21-CSS：Animation 动画/" class="article-date">
+  <time datetime="2017-06-21T12:00:00.000Z" itemprop="datePublished">2017-06-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/css/">css</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/21/2017-06-21-CSS：Animation 动画/">CSS：Animation 动画小记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><ul>
+<li>animation-delay 延时</li>
+<li>animation-direction 动画重复播放时是反向运行还是回到开始位置</li>
+<li>animation-duration 动画持续时间</li>
+<li>animation-iteration-count 动画重复次数</li>
+<li>animation-name 关键帧名称</li>
+<li>animation-play-state 允许暂停和回复动画</li>
+<li>animation-timing-function 动画速度函数</li>
+<li>animation-fill-mode 动画执行前后目标元素如何应用样式</li>
+</ul>
+<h2 id="关键帧-keyframes"><a href="#关键帧-keyframes" class="headerlink" title="关键帧 keyframes"></a>关键帧 keyframes</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">p &#123;</div><div class="line">    animation-name: slidein;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@keyframes slidein &#123;</div><div class="line">    from &#123;</div><div class="line">        margin-left: 100%;</div><div class="line">        width: 300%;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    to &#123;</div><div class="line">        margin-left: 0%;</div><div class="line">        width: 100%;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>除了 from 和 to ，也可以用百分比来定义关键帧。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">@keyframes slidein &#123;</div><div class="line">    0% &#123;</div><div class="line">        margin-left: 100%;</div><div class="line">        width: 300%;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    50% &#123;</div><div class="line">        margin-left: 70%;</div><div class="line">        witdh: 250%;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    100% &#123;</div><div class="line">        margin-left: 0;</div><div class="line">        width: 100%;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="重复播放动画"><a href="#重复播放动画" class="headerlink" title="重复播放动画"></a>重复播放动画</h2><p>设置 <code>animation-iteration-coutn</code> 为 <code>infinite</code> 即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">p &#123;</div><div class="line">    animation-name: slidein;</div><div class="line">    animation-iteration-count: infinite;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="来回播放动画"><a href="#来回播放动画" class="headerlink" title="来回播放动画"></a>来回播放动画</h2><p>设置 <code>animation-direction</code> 为 <code>alternate</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">p &#123;</div><div class="line">    animation-name: slidein;</div><div class="line">    animation-iteration-count: infinite;</div><div class="line">    animation-direction: alternate;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="动画事件-Animation-Event"><a href="#动画事件-Animation-Event" class="headerlink" title="动画事件 Animation Event"></a>动画事件 Animation Event</h2><ul>
+<li>animationstart 动画开始时</li>
+<li>animationend 动画结束时</li>
+<li>animationiteration 开始重复动画时</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$(&apos;p&apos;).on(&apos;animationiteration webkitAnimationIteration&apos;, (e) =&gt; &#123;</div><div class="line">    // do something</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>注意添加 webkit 前缀，以兼容低版本浏览器。</p>
+<h2 id="移动设备兼容性"><a href="#移动设备兼容性" class="headerlink" title="移动设备兼容性"></a>移动设备兼容性</h2><p> iOS 9.2 起、安卓 4.2~4.3 起（需添加 webkit 前缀）</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.runoob.com/jsref/event-animationiteration.html" target="_blank" rel="external">http://www.runoob.com/jsref/event-animationiteration.html</a></p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/AnimationEvent" target="_blank" rel="external">https://developer.mozilla.org/en-US/docs/Web/API/AnimationEvent</a></p>
+<p><a href="https://caniuse.com/#search=animation" target="_blank" rel="external">https://caniuse.com/#search=animation</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2017-06-01-CSS：table-cell 用法小" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/01/2017-06-01-CSS：table-cell 用法小/" class="article-date">
+  <time datetime="2017-06-01T12:00:00.000Z" itemprop="datePublished">2017-06-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/css/">css</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/01/2017-06-01-CSS：table-cell 用法小/">CSS：table-cell 用法小记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1、垂直居中"><a href="#1、垂直居中" class="headerlink" title="1、垂直居中"></a>1、垂直居中</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;table-cell&quot;&gt;</div><div class="line">    &lt;div&gt;需要垂直居中的元素&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">.table-cell &#123;</div><div class="line">    display: table-cell;</div><div class="line">    verticall-align: middle;</div><div class="line">    height: 200px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="2、等高布局"><a href="#2、等高布局" class="headerlink" title="2、等高布局"></a>2、等高布局</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;table&quot;&gt;</div><div class="line">    &lt;div class=&quot;table-cell&quot;&gt;</div><div class="line">        &lt;div&gt;等高布局&lt;/div&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">    &lt;div class=&quot;table-cell width-100&quot;&gt;</div><div class="line">        &lt;div&gt;table-cell的高度取决于所有table-cell中最大的高度&lt;/div&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">.table &#123;</div><div class="line">    display: table;</div><div class="line">&#125;</div><div class="line">.table-cell &#123;</div><div class="line">    display: table-cell;</div><div class="line">&#125;</div><div class="line">.width-100 &#123;</div><div class="line">    width: 100px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="3、平均划分子元素"><a href="#3、平均划分子元素" class="headerlink" title="3、平均划分子元素"></a>3、平均划分子元素</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;table&quot;&gt;</div><div class="line">    &lt;div class=&quot;table-cell&quot;&gt;</div><div class="line">        子元素</div><div class="line">    &lt;/div&gt;</div><div class="line">    &lt;div class=&quot;table-cell&quot;&gt;</div><div class="line">        子元素</div><div class="line">    &lt;/div&gt;</div><div class="line">    &lt;div class=&quot;table-cell&quot;&gt;</div><div class="line">        子元素</div><div class="line">    &lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">.table &#123;</div><div class="line">    display: table;</div><div class="line">    width: 100%;</div><div class="line">&#125;</div><div class="line">.table-cell &#123;</div><div class="line">    display: table-cell;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://my.oschina.net/CharmyZ/blog/714983" target="_blank" rel="external">https://my.oschina.net/CharmyZ/blog/714983</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2017-05-28-JavaScript：Promise 小记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/28/2017-05-28-JavaScript：Promise 小记/" class="article-date">
+  <time datetime="2017-05-28T12:00:00.000Z" itemprop="datePublished">2017-05-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/javascript/">javascript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/28/2017-05-28-JavaScript：Promise 小记/">JavaScript：Promise 小记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Promise 对象是一个代理对象（代理一个值），被代理的值在 Promise 对象创建时可能是未知的。它最主要的特点，是可以让异步代码像同步方法那样返回值，并为结果的成功（onFulfilled）和失败（onRejected）绑定相应的处理方法（Handlers）。需要注意的是，尽管看起来像同步方法那样返回了值但是并不是<strong>立即返回执行</strong>的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">new Promise(function(resolve, reject)&#123;</div><div class="line">    resolve(1);</div><div class="line">&#125;).then(function(msg)&#123;</div><div class="line">    console.log(msg);</div><div class="line">&#125;)</div><div class="line"></div><div class="line">console.log(2);</div><div class="line"></div><div class="line">// 输出顺序为</div><div class="line">// 2</div><div class="line">// 1</div></pre></td></tr></table></figure>
+<p>一个 Promise 有以下几种状态：</p>
+<ul>
+<li>pendding 初始状态</li>
+<li>fulfilled 意味着操作成功</li>
+<li>rejected 意味着操作失败</li>
+</ul>
+<p><img src="https://mdn.mozillademos.org/files/8633/promises.png" alt=""></p>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">var promise = new Promise(</div><div class="line">    /* executor */</div><div class="line">    function(resolve, reject) &#123;...&#125;</div><div class="line">);</div><div class="line"></div><div class="line">// 第一种处理方式</div><div class="line">promise.then(</div><div class="line">    /* onFulfilled */</div><div class="line">    function()&#123;...&#125;,</div><div class="line">    </div><div class="line">    /* onRejected */</div><div class="line">    function()&#123;...&#125;</div><div class="line">)</div><div class="line"></div><div class="line">// 第二种处理方式</div><div class="line">promise.then(</div><div class="line">    /* onFulfilled */</div><div class="line">    function()&#123;...&#125;</div><div class="line">).catch(</div><div class="line">    /* onRejected */</div><div class="line">    function()&#123;...&#125;</div><div class="line">)</div></pre></td></tr></table></figure>
+<h2 id="与回调函数的区别"><a href="#与回调函数的区别" class="headerlink" title="与回调函数的区别"></a>与回调函数的区别</h2><p>先来看一下一个普通的异步处理，使用回调函数来处理回调的结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">getAsycn(&quot;file.txt&quot;, function(error, result)&#123;</div><div class="line">    </div><div class="line">    if(error)&#123; // 取得失败时的处理</div><div class="line">        throw error;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    // 取得成功时的处理</div><div class="line">    </div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>接下来是使用Promise的处理方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var promise = getAsyncPromise(&quot;file.txt&quot;); // 返回一个Promise对象</div><div class="line"></div><div class="line">promise.then(function(result)&#123;</div><div class="line">    // 取得成功时的处理</div><div class="line">    </div><div class="line">&#125;.catch(function(error)&#123;</div><div class="line">    // 取得失败时的处理</div><div class="line">    </div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-2017-05-23-什么是Hybrid App" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/05/23/2017-05-23-什么是Hybrid App/" class="article-date">
@@ -155,7 +463,7 @@
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/FE/">FE</a>
+    <a class="article-category-link" href="/categories/fe/">fe</a>
   </div>
 
   </div>
@@ -254,14 +562,14 @@
 
 
   
-    <article id="post-2017-04-14-React：基本环境搭建简明步骤" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2017-05-19-JSON：JSON 方法小记" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/04/14/2017-04-14-React：基本环境搭建简明步骤/" class="article-date">
-  <time datetime="2017-04-14T14:34:00.000Z" itemprop="datePublished">2017-04-14</time>
+    <a href="/2017/05/19/2017-05-19-JSON：JSON 方法小记/" class="article-date">
+  <time datetime="2017-05-19T12:00:00.000Z" itemprop="datePublished">2017-05-19</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/React/">React</a>
+    <a class="article-category-link" href="/categories/javascript/">javascript</a>
   </div>
 
   </div>
@@ -272,7 +580,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/14/2017-04-14-React：基本环境搭建简明步骤/">React：基本环境搭建简明步骤</a>
+      <a class="article-title" href="/2017/05/19/2017-05-19-JSON：JSON 方法小记/">JSON：JSON 方法小记</a>
     </h1>
   
 
@@ -280,857 +588,43 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>超简的步骤整理。待完善。</p>
-<ul>
-<li>Babel</li>
-<li>ESLint</li>
-<li>webpack</li>
-</ul>
-<h2 id="Babel"><a href="#Babel" class="headerlink" title="Babel"></a>Babel</h2><p><code>babel</code>是一个多用途的JavaScript编译器，用它的目的有二：一是支持ES6语法，二是支持<code>React</code>的一些特性（JSX）语法等。</p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>在这里我们是跟<code>webpack</code>一起用的，所以需要的是<code>babel-core</code>核心模块和<code>babel-lodaer</code>，如果需要单独使用<code>babel</code>则安装<code>babel-cli</code>。</p>
-<pre><code>$ npm i babel-core babel-loader --save-dev
-</code></pre><p>接下来安装babel presets</p>
-<pre><code>$ npm i babel-preset-es2015 babel-preset-react --save-dev
-</code></pre><h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>在根目录下新建一个<code>.babelrc</code>文件，并加入以下配置</p>
-<pre><code>{
-    &quot;presets&quot;: [&quot;es2015&quot;, &quot;react&quot;]
-}
-</code></pre><h2 id="ESLint"><a href="#ESLint" class="headerlink" title="ESLint"></a>ESLint</h2><p>ESLint是一个代码检查工具，用于检查和统一代码规范。</p>
-<h3 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h3><pre><code>$ npm i eslint eslint-loader --save-dev
-</code></pre><h3 id="配置-1"><a href="#配置-1" class="headerlink" title="配置"></a>配置</h3><pre><code>$ eslint --init
-</code></pre><p>接下来根据你的需求进行选择即可，非常方便。最终可选择生成一个<code>.eslint.json</code>文件。我的配置如下：</p>
-<pre><code>{
-    &quot;env&quot;: {
-        &quot;browser&quot;: true,
-        &quot;commonjs&quot;: true,
-        &quot;es6&quot;: true,
-        &quot;node&quot;: true
-    },
-    &quot;extends&quot;: &quot;eslint:recommended&quot;,
-    &quot;parserOptions&quot;: {
-        &quot;ecmaFeatures&quot;: {
-            &quot;experimentalObjectRestSpread&quot;: true,
-            &quot;jsx&quot;: true
-        },
-        &quot;sourceType&quot;: &quot;module&quot;
-    },
-    &quot;plugins&quot;: [
-        &quot;react&quot;
-    ],
-    &quot;rules&quot;: {
-        &quot;linebreak-style&quot;: [
-            &quot;error&quot;,
-            &quot;unix&quot;
-        ],
-        &quot;quotes&quot;: [
-            &quot;error&quot;,
-            &quot;single&quot;
-        ],
-        &quot;semi&quot;: [
-            &quot;error&quot;,
-            &quot;always&quot;
-        ]
-    }
-}
-</code></pre><p>更多的配置可参照<a href="http://eslint.org" target="_blank" rel="external">ESLint</a></p>
-<h2 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h2><p><code>webpack</code>是当前非常流行的模块打包工具，上述的<code>Babel</code>和<code>ESLint</code>都可以作为<code>loader</code>在<code>webpack</code>中被使用。</p>
-<p>注意：本文使用的是<code>webpack 2</code>，<code>webpack 1</code>和<code>webpack 2</code>在配置上有诸多不同之处，请务必留心。</p>
-<p><a href="https://webpack.js.org/guides/migrating/" target="_blank" rel="external">链接：webpack 1和2的区别</a></p>
-<h3 id="安装-2"><a href="#安装-2" class="headerlink" title="安装"></a>安装</h3><pre><code>$ npm i webpack webpack-dev-server --save-dev
-</code></pre><h3 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h3><p>用于自动生成HTML页面，并引入正确的JavaScript文件依赖。</p>
-<pre><code>$ npm i html-webpack-plugin --save-dev
-</code></pre><h3 id="loader"><a href="#loader" class="headerlink" title="loader"></a>loader</h3><p>处理CSS文件需要用到的两个loader。</p>
-<pre><code>$ npm i css-loader style-loader
-</code></pre><h3 id="配置-2"><a href="#配置-2" class="headerlink" title="配置"></a>配置</h3><p>在根目录下新建一个<code>app</code>目录，同时再创建一个<code>webpack.config.js</code>文件。</p>
-<pre><code>var path = require(&apos;path&apos;);
-var HtmlWebpackPlugin = require(&apos;html-webpack-plugin&apos;);
-
-var ROOT_PATH = path.resolve(__dirname);
-var APP_PATH = path.resolve(ROOT_PATH, &apos;app&apos;);
-var BUILD_PATH = path.resolve(ROOT_PATH, &apos;build&apos;);
-
-module.exports = {
-    entry: {
-        app: path.resolve(APP_PATH, &apos;app.jsx&apos;)
-    },
-    output: {
-        path: BUILD_PATH,
-        filename: &apos;bundle.js&apos;
-    },
-    devtool: &apos;eval-source-map&apos;,
-    devServer: {
-        historyApiFallback: true,
-        hot: true,
-        inline: true,
-    },
-    module: {
-        rules: [{
-            test: /\.jsx?$/,
-            enforce: &apos;pre&apos;,
-            loaders: [&apos;eslint-loader&apos;],
-            include: APP_PATH
-        }, {
-            test: /\.css$/,
-            loaders: [&apos;style-loader&apos;, &apos;css-loader&apos;]
-        }, {
-            test: /\.jsx?$/,
-            loader: [&apos;babel-loader&apos;],
-            include: APP_PATH
-        }],
-    },
-    plugins: [
-        new HtmlWebpackPlugin({
-            title: &apos;react-dev&apos;
-        })
-    ],
-    resolve: {
-        extensions: [&apos;.js&apos;, &apos;.jsx&apos;]
-    }
-};
-</code></pre><h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>添加两条命令到<code>package.json</code>里。</p>
-<pre><code>&quot;scripts&quot;: {
-    &quot;build&quot;:&quot;webpack&quot;,
-    &quot;dev&quot;:&quot;webpack-dev-server --hot&quot;
-}
-</code></pre><p>通过在Terminal中输入 <code>npm run build</code> 或 <code>npm run dev</code> 执行。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2017-04-12-HTTP：常见的状态码" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/12/2017-04-12-HTTP：常见的状态码/" class="article-date">
-  <time datetime="2017-04-12T05:00:00.000Z" itemprop="datePublished">2017-04-12</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/HTTP/">HTTP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/12/2017-04-12-HTTP：常见的状态码/">HTTP基础（2）：常见的状态码</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>HTTP状态码用于描述客户端向服务器端发送请求后的请求结果。通过状态码，客户端可以知道发出的HTTP是是否被正确处理。</p>
-<p>状态码由<strong>三位数字</strong>和<strong>原因短语</strong>组成，第一位指定了<strong>响应类别</strong>。</p>
-<p>状态码的类别：</p>
-<ul>
-<li>1XX：Informational 信息性状态码，表示服务器接收的请求正在被处理</li>
-<li>2XX：Success 成功状态码，表示请求被正常处理完毕</li>
-<li>3XX：Redirection 重定向状态码，表示客户端需要进行附加操作以完成请求</li>
-<li>4XX：Client Error 客户端错误状态码，表示因某种原因服务器无法处理请求</li>
-<li>5XX：Server Error 服务器错误状态码，表示服务器处理请求时出错</li>
-</ul>
-<h2 id="2XX-成功"><a href="#2XX-成功" class="headerlink" title="2XX 成功"></a>2XX 成功</h2><h3 id="200-OK"><a href="#200-OK" class="headerlink" title="200 OK"></a>200 OK</h3><p>表示客户端的请求被服务器端正常处理了。</p>
-<p>在这个状态码下，服务器的响应内容则依据请求方法决定。如果请求方法为GET，那么，对应请求资源的实体会一并返回；如果请求方法是HEAD，那么仅返回首部，而对应资源的实体不会被返回。</p>
-<h3 id="204-No-Content"><a href="#204-No-Content" class="headerlink" title="204 No Content"></a>204 No Content</h3><p>表示客户端的请求被服务器端正常处理，但是响应报文中不含有实体的主体部分。实际上204状态码下也不允许响应报文中有实体的主体部分。</p>
-<p>该响应码一般用于客户端向服务器端发送信息，而服务器端不必返回新信息的情况下使用。</p>
-<h3 id="206-Parical-Content"><a href="#206-Parical-Content" class="headerlink" title="206 Parical Content"></a>206 Parical Content</h3><p>该状态码表示客户端进行了范围请求（请求资源的一部分内容），而服务器成功执行了这部分的GET请求。响应报文中包含由Content-Range指定的实体内容。</p>
-<h2 id="3XX-重定向"><a href="#3XX-重定向" class="headerlink" title="3XX 重定向"></a>3XX 重定向</h2><h3 id="301-Moved-Permanently"><a href="#301-Moved-Permanently" class="headerlink" title="301 Moved Permanently"></a>301 Moved Permanently</h3><p>永久性重定向。该状态码表示请求的资源已经分配了新的URI，新的URI在Location首部字段中。</p>
-<h3 id="302-Found"><a href="#302-Found" class="headerlink" title="302 Found"></a>302 Found</h3><p>临时性重定向。该状态码表示请求的资源已经分配了新的URI，希望客户端此次能以新的URI进行访问。</p>
-<p>注意302是临时性的重定向，请求的资源在将来还有可能换成别的URI。所以与永久性重定向的区别是，301是让客户端之后都用新的URI访问（相当于搬家，其住址URI不会轻易变更），而302时客户端之后仍然应该访问返回302的页面，以获得请求的资源最新的URI（相当于租房，其住址URI随时会变）。</p>
-<h3 id="303-See-Other"><a href="#303-See-Other" class="headerlink" title="303 See Other"></a>303 See Other</h3><p>该状态码表示由于请求对应的资源存在着另一个URI，应使用GET方法定向获取请求的资源。</p>
-<p>303与302基本相似，唯一不同处是明确规定需要用GET方法去访问新的URI。例如当使用POST方法访问CGI（公共网关接口，Common Gateway Interface）程序，随后服务器端希望客户端以GET方法重定向到另一个URI上去时，返回303状态码。</p>
-<h3 id="304-Not-Modified"><a href="#304-Not-Modified" class="headerlink" title="304 Not Modified"></a>304 Not Modified</h3><p>该状态表示客户端发送附带条件的请求时（在请求头部中包含If-Match、If-Modified-Since、If-None-Match、If-Range、If-Unmodified-Since），服务器端允许请求访问资源，但因发生请求未满足条件，直接返回304。</p>
-<p>即表示服务器端的资源没有发生改变，客户端可以继续使用未过期的缓存资源。</p>
-<p>注意：304虽然在3XX 重定向类别中，但跟重定向实际上没有太大的关系。</p>
-<h3 id="307-TEmporary-Redirect"><a href="#307-TEmporary-Redirect" class="headerlink" title="307 TEmporary Redirect"></a>307 TEmporary Redirect</h3><p>临时重定向。该状态码与302基本相同，不同的是307会遵照浏览器标准，不会从POST变成GET。</p>
-<p>而301、302响应状态码返回时，浏览器一般都会把POST改成GET（尽管301和302标准是禁止这样做的）并删除请求报文的主体，再发起请求。</p>
-<h2 id="4XX-客户端错误"><a href="#4XX-客户端错误" class="headerlink" title="4XX 客户端错误"></a>4XX 客户端错误</h2><h3 id="400-Bad-Request"><a href="#400-Bad-Request" class="headerlink" title="400 Bad Request"></a>400 Bad Request</h3><p>该状态码表示请求报文中存在语法错误，需要客户端修改请求内容后再次发送请求。</p>
-<p>注意：浏览器会像对待200 OK 一样对待该状态码（即不会像3XX那样子有别的行为）</p>
-<h3 id="401-Unauthorized"><a href="#401-Unauthorized" class="headerlink" title="401 Unauthorized"></a>401 Unauthorized</h3><p>该状态码表示发送的请求需要有通过HTTP认证的认证信息。</p>
-<p>第一次返回401时，浏览器会弹出认证用的对话框。</p>
-<p>第二次返回401时，即表示用户认证失败。</p>
-<h3 id="403-Forbidden"><a href="#403-Forbidden" class="headerlink" title="403 Forbidden"></a>403 Forbidden</h3><p>该状态码表示对该资源的请求被服务器拒绝了。服务器没有义务给出拒绝的详细理由，但如果想作说明的话可以在实体的主体部分对原因进行描述。</p>
-<h3 id="404-Not-Found"><a href="#404-Not-Found" class="headerlink" title="404 Not Found"></a>404 Not Found</h3><p>该状态码表示服务器无法找到请求的资源，是最常见的状态码。</p>
-<h2 id="5XX-服务器端错误"><a href="#5XX-服务器端错误" class="headerlink" title="5XX 服务器端错误"></a>5XX 服务器端错误</h2><h3 id="500-Internal-Server-Error"><a href="#500-Internal-Server-Error" class="headerlink" title="500 Internal Server Error"></a>500 Internal Server Error</h3><p>该状态码表示服务器端在处理请求时发生了错误，例如无法连接数据库，或者服务端语言中有语法错误等等。</p>
-<h3 id="503-Service-Unavailable"><a href="#503-Service-Unavailable" class="headerlink" title="503 Service Unavailable"></a>503 Service Unavailable</h3><p>该状态码表示服务器端暂时处理超负载或正在进行停机维护，现在无法处理请求。</p>
-<p>如果事先知道服务器将在何时恢复，则最好写入Retry-After首部字段再返回给客户端。</p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><h3 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h3><p>状态码只在服务器端正确按照规范处理请求的前提下才有意义，不少服务器端会出现状态码与状态不一致的问题，需要在实际开发中注意。</p>
-<h3 id="本文提及的常见的状态码"><a href="#本文提及的常见的状态码" class="headerlink" title="本文提及的常见的状态码"></a>本文提及的常见的状态码</h3><ul>
-<li>200 OK</li>
-<li>202 No Content</li>
-<li>204 Partical Content</li>
-<li>301 Permanently Redirect</li>
-<li>302 Found</li>
-<li>303 See Other</li>
-<li>304 Not Modified</li>
-<li>307 Temporary Redirect</li>
-<li>400 Bad Request</li>
-<li>401 Unauthorized</li>
-<li>403 Forbbiden</li>
-<li>404 Not Found</li>
-<li>500 Interval Server Error</li>
-<li>503 Service Unavailable</li>
-</ul>
-<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p>本文整理了14种常见的状态码，其中包含4个状态类别，2XX，3XX，4XX，5XX，分别代表了成功，重定向，客户端错误和服务器端错误。</p>
-<p>2XX中，要注意202与200的区别，前者不含资源实体的主体。</p>
-<p>3XX中，要注意304与重定向无关，301和302一个是永久重定向，一个是临时重定向，且在标准中是不能把POST请求改成GET请求的（但是实际浏览器都会这么做）。303是302的相反版本，303要求POST改成GET请求。307是302的严格版，不允许把POST改成GET请求。</p>
-<p>4XX中，400和401都是与浏览器有关的，前者是请求有错误后者是没有HTTP认证信息；403和404与服务器端有关，403禁止浏览器访问特定资源，404则是服务器上没有特定的资源。</p>
-<p>5XX中，500是服务器端处理请求时出错，一般是数据库连接、代码有语法问题等等。503则是服务器负载过大或在维护，暂时无法提供服务。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2017-04-11-HTTP：协议基础" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/11/2017-04-11-HTTP：协议基础/" class="article-date">
-  <time datetime="2017-04-11T12:16:00.000Z" itemprop="datePublished">2017-04-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/HTTP/">HTTP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/11/2017-04-11-HTTP：协议基础/">HTTP基础（1）：概述</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h2><p>HTTP，HyperText Tranfer Protocol，超文本传输协议（超文本转移协议）。</p>
-<p>HTTP协议用于客户端和服务器端之间的通信。访问文本或图像等资源的一端称为服务端（即浏览器），提供资源相应的一端称为服务端（即Web服务器）。</p>
-<p>客户端向服务器端发起一个HTTP请求，服务器端在收到HTTP请求后根据请求报文中的内容进行响应，随后返回一个HTTP响应报文。客户端得到响应后便获取到了想要获取的资源或者相关错误信息（如资源不存在）。</p>
-<h2 id="HTTP通过请求和响应的交换达成通信"><a href="#HTTP通过请求和响应的交换达成通信" class="headerlink" title="HTTP通过请求和响应的交换达成通信"></a>HTTP通过请求和响应的交换达成通信</h2><p>HTTP协议规定，请求从客户端发出，最后服务器端响应该请求并返回。</p>
-<h3 id="HTTP请求"><a href="#HTTP请求" class="headerlink" title="HTTP请求"></a>HTTP请求</h3><p>客户端发送请求：</p>
-<pre><code>GET /index.html HTTP/1.1
-Host: www.example.com
-</code></pre><p>GET表示访问服务器的类型，称为方法（method）。随后的字符串<code>/index.html</code>指明了请求访问的资源对象，叫做请求URI（request-URI）。然后是HTTP/1.1，即HTTP的版本号。</p>
-<p>综上，这段请求的意思：通过GET方法，访问<code>www.example.com</code>这台主机上的<code>/index.html</code>页面资源。</p>
-<p>请求报文由以下几部分组成：</p>
-<ul>
-<li>请求方法</li>
-<li>请求URI</li>
-<li>HTTP版本协议</li>
-<li>可选的请求首部字段</li>
-<li>可选的内容实体</li>
-</ul>
-<p>以下是一个用POST方法发起的HTTP请求：</p>
-<pre><code>POST /user/login HTTP/1.1
-Host: www.example.com
-Connect: keep-alive
-Content-Type: application/x-www-form-urlencode
-Content-Length: 16
-
-user=dxy&amp;pwd=123
-</code></pre><p>第一部分分别是请求方法（POST)，请求URI（/user/login），版本协议（HTTP/1.1）。接下来是请求首部字段（Host：…）。最后是内容实体（user=dxy&amp;pwd=123）。</p>
-<p>这段请求的意思是：用POST方法，向<code>www.example.com/user/login</code>提交一个表单数据，表单数据为<code>user=dxy&amp;pwd=123</code>。</p>
-<h3 id="HTTP响应"><a href="#HTTP响应" class="headerlink" title="HTTP响应"></a>HTTP响应</h3><p>服务器端发送响应：</p>
-<pre><code>HTTP/1.1 200 OK
-Date: Mon, 10 Apr 2017 14:17:00 GMT
-Content-Length: 3987
-Content-Type: text/html
-
-&lt;html&gt;
-...
-</code></pre><p>第一部分分别是版本协议（HTTP/1.1），响应状态码（200，status code）和原因短语（reason-phrase）。接下来是创建响应的日期时间，和其他首部字段的内容。最后是一行隔开，为资源实体的主体（entity body）。</p>
-<p>响应报文由以下几部分组成：</p>
-<ul>
-<li>HTTP版本协议</li>
-<li>状态码和原因短语</li>
-<li>创建响应的日期和可选的首部字段</li>
-<li>资源实体的主体</li>
-</ul>
-<h2 id="HTTP是不保存状态的协议"><a href="#HTTP是不保存状态的协议" class="headerlink" title="HTTP是不保存状态的协议"></a>HTTP是不保存状态的协议</h2><p>HTTP是一种无状态的协议（stateless）,这意味着HTTP协议不会保存请求和响应时的通信状态，即对请求和响应都不会做持久化处理。</p>
-<p>这就会导致用户在访问一个网站时，其访问的状态无法得到保存，因为每次发起的HTTP请求都是“新”的请求，与之前是否发送过无关。</p>
-<p>为了解决这个问题，可以通过Cookie技术来实现用户状态的保存。</p>
-<h2 id="请求URI定位资源"><a href="#请求URI定位资源" class="headerlink" title="请求URI定位资源"></a>请求URI定位资源</h2><p>HTTP协议使用URI（统一资源标识符）来定位互联网上的资源。当客户端请求访问某个资源时，需要指定该资源的URI作为HTTP请求中的请求URI。指定的方式由以下两种：<br>第一种是在Host首部字段中写明访问的主机地址（域名或IP）</p>
-<pre><code>GET /index.html HTTP/1.1
-Host: www.example.com
-</code></pre><p>第二种是完整的URI地址：</p>
-<pre><code>GET http://www.example.com/index.html HTTP/1.1
-</code></pre><p>如果不是访问特定资源而是对服务器发起请求，可以用*来代替URI。下面这个例子是查询HTTP服务器端支持的HTTP方法种类。</p>
-<pre><code>OPTIONS * HTTP/1.1
-</code></pre><h2 id="基本的HTTP请求方法"><a href="#基本的HTTP请求方法" class="headerlink" title="基本的HTTP请求方法"></a>基本的HTTP请求方法</h2><h3 id="GET：获取资源"><a href="#GET：获取资源" class="headerlink" title="GET：获取资源"></a>GET：获取资源</h3><p>GET方法用来请求访问已被URI识别的资源。指定的资源经过服务器端解析后返回响应的内容。<br>请求：</p>
-<pre><code>GET /index.html HTTP/1.1
-Host: www.example.com
-If-Modified-Since: Mon, 10 Apr 2017 14:17:00 GMT
-</code></pre><p>响应：<br>返回2017年4月10日14点17分00秒后更新过的index.html内容，若没有更新过，则返回304 Not Modified。</p>
-<h3 id="POST：传输实体主体"><a href="#POST：传输实体主体" class="headerlink" title="POST：传输实体主体"></a>POST：传输实体主体</h3><p>尽管GET也可以传输实体主体，但是一般来说GET用于获取资源，而POST则专门用于传输资源或更新数据。</p>
-<p>请求：</p>
-<pre><code>POST /submit HTTP/1.1
-Host: www.example.com
-ConTent-Length: 16
-
-user=dxy&amp;pwd=123
-</code></pre><p>响应：<br>返回submit响应后的处理结果</p>
-<h3 id="PUT：传输文件"><a href="#PUT：传输文件" class="headerlink" title="PUT：传输文件"></a>PUT：传输文件</h3><p>PUT方法用来传输文件，要求请求报文的主体中包含文件内容，然后保存到URI指定的位置。</p>
-<p>但是由于HTTP/1.1的PUT方法没有验证机制，任何人都可以上传文件，所以存在安全性问题。现在一般只用来配合RESTFul API。</p>
-<h3 id="DELETE：删除文件"><a href="#DELETE：删除文件" class="headerlink" title="DELETE：删除文件"></a>DELETE：删除文件</h3><p>DELETE方法与PUT方法正好相反，用于删除指定URI上的文件。现在一般也只用在RESTFul API上。</p>
-<h3 id="HEAD：获取报文首部"><a href="#HEAD：获取报文首部" class="headerlink" title="HEAD：获取报文首部"></a>HEAD：获取报文首部</h3><p>HEAD方法用来获取报文的首部，确认URI的有效性和资源的更新日期。HEAD方法基本和GET方法一样，只是GET方法获取资源内容，而HEAD方法不获取资源内容，仅获取响应报文的首部。</p>
-<h3 id="OPTIONS：询问支持的方法"><a href="#OPTIONS：询问支持的方法" class="headerlink" title="OPTIONS：询问支持的方法"></a>OPTIONS：询问支持的方法</h3><p>OPTIONS方法用来查询针对请求URI指定的资源支持的方法。</p>
-<p>请求：</p>
-<pre><code>OPTIONS * HTTP/1.1
-Host: www.example.com
-</code></pre><p>响应：</p>
-<pre><code>HTTP/1.1 200 OK
-Allow：Get,Post,Head,Options
-</code></pre><h3 id="TRACE：追踪路径"><a href="#TRACE：追踪路径" class="headerlink" title="TRACE：追踪路径"></a>TRACE：追踪路径</h3><p>TRACE方法是让Web服务器端将之前的请求通信环回给客户端的方法。客户端通过TRACE方法可以查询发送出去的请求是怎样被加工修改的。</p>
-<p>由于TRACE方法容易引发XST（Cross-Site Tracing 跨站追踪）攻击，且本身就不常用，这里不作展开。</p>
-<h3 id="CONNECT：要求用隧道协议连接代理"><a href="#CONNECT：要求用隧道协议连接代理" class="headerlink" title="CONNECT：要求用隧道协议连接代理"></a>CONNECT：要求用隧道协议连接代理</h3><p>CONNECT方法要求在与代理服务器通信时建立隧道，实现使用隧道协议进行TCP通信。主要使用SSL（Secure Sockets Layer，安全套接字）和TLS（Transport Layer Security，传输层安全）协议把通信内容加密后经网络隧道传输。</p>
-<h2 id="建立持久连接以节省通信量"><a href="#建立持久连接以节省通信量" class="headerlink" title="建立持久连接以节省通信量"></a>建立持久连接以节省通信量</h2><p>在HTTP协议的初始版本中，每次发送HTTP协议都会经历一次TCP连接和关闭。随着Web的发展，一个网页会包含多个HTTP请求去加载JS文件、CSS文件、图片文件等等。如果每次HTTP请求都要断开TCP连接的话，就会带来额外的通信量。为此，HTTP/1.1新增了持久化连接（HTTP keep-alive）的方案。</p>
-<p>持久连接的特点是：只要任意一方没有明确需要断开TCP连接，那么客户端和服务器端将一直保持TCP连接，旨在一次TCP连接中进行多次HTTP请求和响应。</p>
-<p>HTTP/1.1中，所有的连接默认都是持久连接。当然这需要客户端和服务器端同时支持。</p>
-<p>持久连接使得多数请求能够以管线化的方式发送，可以让客户端并行发送多个HTTP请求，大大降低Web页面的显示速度。如果没有持久化连接，那么每次发起HTTP请求，下一个HTTP请求都得等待上一个HTTP请求得到响应后才能发送。</p>
-<h2 id="使用Cookie进行状态管理"><a href="#使用Cookie进行状态管理" class="headerlink" title="使用Cookie进行状态管理"></a>使用Cookie进行状态管理</h2><p>一方面，无状态协议能够节省服务器计算资源的开销，另一方面由于无状态的存在使得状态管理成为一个难题。</p>
-<p>为了保留无状态协议同时实现状态管理，引入了Cookie技术，通过在请求和响应的报文中写入Cookie信息来控制客户端的状态。</p>
-<p>第一次请求（没有Cookie信息）：</p>
-<pre><code>GET /reader HTTP/1.1
-Host: www.example.com
-</code></pre><p>响应（服务器生成Cookie信息）：</p>
-<pre><code>HTTP/1.1 200 OK
-Date: Mon, 10 Apr 2017 14:17:00 GMT
-Server: Apache
-Set-Cookie: sid=1342077140226724; path=/; expires=Wed, 10-OCT-12 07:12:20 GMT
-Content-Type: text/plain; charset=UTF-8
-</code></pre><p>之后再发起请求时，会自带Cookie信息：</p>
-<pre><code>GET /other HTTP/1.1
-Host: www.example.com
-Cookie: sid=1342077140226724
-</code></pre><p>可见服务器通过Set-Cookie来通知客户端保存Cookie信息，客户端随后针对这个站点的HTTP请求都会在请求头部中加入Cookie字段。如此一来，服务器端在接收到请求时就能根据客户端传来的Cookie中的sid信息，来辨别客户端了，客户端的状态就能够得到保持。</p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>HTTP协议是通过请求和响应来进行通信的无状态协议。</p>
-<p>其中要注意HTTP请求的基本格式，其组成（请求方法，请求URI，版本协议，可选的首部字段，可选的传输实体）。HTTP响应的基本格式，以及其组成（版本协议，状态码，原因短语，可选的首部字段，资源实体的主体）。</p>
-<p>要熟悉常见的请求方法（GET、POST、PUT、DELETE、OPTIONS、TRACE、CONNECT）。能写出基本的请求报文。</p>
-<p>能说出持久化连接的实现方法及其优点，以及如何通过Cookie解决客户端状态保持的问题。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2017-04-11-JavaScript：基本数据类型整理" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/11/2017-04-11-JavaScript：基本数据类型整理/" class="article-date">
-  <time datetime="2017-04-11T08:21:00.000Z" itemprop="datePublished">2017-04-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/11/2017-04-11-JavaScript：基本数据类型整理/">JavaScript：基本数据类型整理</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>Undefined</li>
-<li>Null</li>
-<li>Boolean</li>
-<li>String</li>
-<li>Number</li>
-</ul>
-<h2 id="Undefined"><a href="#Undefined" class="headerlink" title="Undefined"></a>Undefined</h2><p>Undefined类型只有一个undefined值。</p>
-<p>用var声明但未赋值的变量，其值为undefined。</p>
-<pre><code>var a;
-alert(a); //undefined
-</code></pre><p>使用一个未经声明的变量，typeof检测为undefined，但使用时会报错。</p>
-<pre><code>alert(a); //Error
-</code></pre><p>访问一个对象中不存在的属性时，其值为undefined，不会报错。</p>
-<pre><code>var o = {a:1};
-alert(o.b); //undefined
-</code></pre><p>故undefined不能与typeof结合使用来判断一个变量是否被声明。</p>
-<pre><code>var a;
-alert(typeof a); //undefined
-alert(typeof b); //undefined ，变量b并没有被声明
-</code></pre><h2 id="Null"><a href="#Null" class="headerlink" title="Null"></a>Null</h2><p>Null表示一个空对象指针，typeof null会返回object。</p>
-<pre><code>var o = null;
-alert(typeof o); //object
-</code></pre><p>null可以作为空对象的占位符，故如果定义的变量将来用于存放对象，那么最好将该变量初始化为null，这样通过typeof可以判断相应的变量是否保存了一个对象的引用。</p>
-<pre><code>var o = null;
-//...
-if(o == null){
-    //do something
-}
-</code></pre><p>undefined是派生自null的，故下面相等性测试返回的是true</p>
-<pre><code>alert(undefined == null); //true
-</code></pre><p>注意：undefined与null很大的一个区别在于，无论什么情况下，undefined一般都不会被用作显式地初始化变量，而null则推荐用来作为空对象指针。</p>
-<h2 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean"></a>Boolean</h2><p>ECMAScript中，所有类型的值都有与Boolean类型对应的值，我们可以通过转型函数Boolean()来进行转换。</p>
-<ul>
-<li>String类型，非空字符串均返回true，空字符串返回false</li>
-<li>Number类型，非零数字值均返回true，0和NaN返回false</li>
-<li>Object类型，任何非空对象均返回true，null返回false</li>
-<li>Undefined类型，恒为false</li>
-</ul>
-<p>这个转换在流控制语句中如if语句中，会将if()中的变量自动转换成对应的Boolean值，以下代码是相等的：</p>
-<pre><code>var foo = &quot;bar&quot;;
-
-if(foo){
-    //do something
-}
-
-//上下两段代码是相同的
-
-if(Boolean(foo)){
-    //do something
-}
-</code></pre><h2 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h2><p>Number类型使用IEEE754格式来表示整数和浮点数，浮点数值的最高精度是17位小数，故在计算时会产生舍入误差的问题。所以永远不要测试某个特定的浮点数值。</p>
-<pre><code>var a = 0.1;
-var b = 0.2;
-alert(a+b == 0.3) //false，0.1+0.2会变成0.30000000000000004
-</code></pre><h3 id="数值范围"><a href="#数值范围" class="headerlink" title="数值范围"></a>数值范围</h3><ul>
-<li>正无穷：+Infinity</li>
-<li>能够表示的最大正数：Number.MAX_VALUE</li>
-<li>能够表示的最小正数：Number.MIN_VALUE</li>
-<li>0</li>
-<li>能够表示的最大负数：-Number.MIN_VALUE</li>
-<li>能够表示的最小负数：-Number.MAX_VALUE</li>
-<li>负无穷：-Infinity</li>
-</ul>
-<h3 id="NaN"><a href="#NaN" class="headerlink" title="NaN"></a>NaN</h3><p>NaN，Not a Number，用于表示一个本来要返回数值的操作数未返回数值的情况，此时不抛出错误，也不会影响其他代码的执行。</p>
-<p>除了类型转换时会出现NaN之外，0/0也会返回NaN。</p>
-<p>特点：</p>
-<ul>
-<li>NaN与任何数值操作均为NaN</li>
-<li>NaN与任何值都不相等，包括NaN自身</li>
-</ul>
-<p>可以用isNaN()函数来判断一个值是否“不是数值”，isNaN()在接收到一个参数后，会尝试将这个值转换为数值。</p>
-<pre><code>isNaN(NaN); //true
-isNaN(10); //false
-isNaN(&quot;10&quot;); //false，字符串&quot;10&quot;可以转换成数字10
-isNaN(&quot;blue&quot;); //true，字符串&quot;blue&quot;不能被转换成数字
-isNaN(true); //false，布尔值true可以被转换成数字1
-isNaN(false); //false，布尔值false可以被转换成数字0
-</code></pre><h3 id="数值转换"><a href="#数值转换" class="headerlink" title="数值转换"></a>数值转换</h3><ul>
-<li>Number()，转型函数</li>
-<li>parseInt()，全局函数</li>
-<li>parseFloat()，全局函数</li>
-</ul>
-<h4 id="Number-1"><a href="#Number-1" class="headerlink" title="Number()"></a>Number()</h4><ul>
-<li>Boolean，true 1，false 0</li>
-<li>Null，null 0</li>
-<li>Undefined，undefined NaN</li>
-<li>String，字符串只包含数字时（包括+/-，整数/浮点数） 对应数字，空字符串”” 0</li>
-<li>Object，先valueOf()若NaN则toString()，转换规则跟上述一致</li>
-</ul>
-<h4 id="parseInt"><a href="#parseInt" class="headerlink" title="parseInt()"></a>parseInt()</h4><p>parseInt接收两个参数，第一个是待转换的值，第二个是基数（二进制、八进制、十进制、十六进制），其他进制不常用，以下仅讨论十进制。</p>
-<p>与Number()的几个区别是，</p>
-<ol>
-<li>Number()接收任意类型的参数，而parseInt()只接收String，非String一律为NaN。</li>
-<li>parseInt()会对传入的字符串从左到右进行遍历，从第一个数字或正负号开始，到第一个非数字结束，字符串中不存在数字就一定会是NaN，忽略其他非数字的字符；Number()中如果字符串存在非数字字符就会是NaN。</li>
-<li>空字符串Number()转换成0，parseInt()转换成NaN。</li>
-<li>parseInt()只会转换成整数</li>
-</ol>
-<p>示例：</p>
-<pre><code>var n0 = true;
-alert(Number(n0)); //1
-alert(parseInt(n0,10)); //NaN
-
-var n1 = &quot;1234blue&quot;;
-alert(Number(n1)); //NaN
-alert(parseInt(n1,10)); //1234
-
-var n2 = &quot;&quot;;
-alert(Number(n2)); //0
-alert(parseInt(n2,10)); //NaN
-
-var n3 = &quot;22.5&quot;;
-alert(Number(n3)); //22.5
-alert(parseInt(n3,10)); //22
-</code></pre><h4 id="parseFloat"><a href="#parseFloat" class="headerlink" title="parseFloat()"></a>parseFloat()</h4><p>parseFloat()与parseInt()的解析机制基本相同，以下为两个比较主要的区别：</p>
-<ol>
-<li>parseFloat()没有第二个参数，只解析十进制</li>
-<li>parseFloat()识别小数点，遇到第二个小数点停止解析</li>
-</ol>
-<h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><p>String类型用于表示由零或多个16位Unicode字符组成的字符序列，即字符串。</p>
-<p>用双引号表示的字符串与用单引号表示的字符串完全相同。</p>
-<h3 id="字符字面量"><a href="#字符字面量" class="headerlink" title="字符字面量"></a>字符字面量</h3><p>即转义序列，用于表示非打印字符或其他用途的字符。常见的有：</p>
-<ul>
-<li>\n 换行</li>
-<li>\t 制表</li>
-<li>\r 回车</li>
-<li>\b 退格</li>
-<li>\xnn 以十六进制代码nn表示一个字符（n为0~F）</li>
-<li>\unnnn 以十六进制代码nnnn表示的一个Unicode字符（其中n为0~f)</li>
-</ul>
-<p>注意：\unnnn类型的字符虽然在代码中占6个字符，但是在length属性中只占1个字符。</p>
-<p>但是如果字符串中包含双字节字符，那么length属性可能不会精确地返回字符串中的字符数目。</p>
-<h3 id="字符串的特点"><a href="#字符串的特点" class="headerlink" title="字符串的特点"></a>字符串的特点</h3><p>字符串是不可变的，一旦创建，它们的值就不能改变。要改变的话，则会先销毁原来的字符串，再用一个包含新值的字符串填充该变量。</p>
-<pre><code>var lang = &quot;Java&quot;;
-lang = lang + &quot;Script&quot;;
-</code></pre><ol>
-<li>首先创建一个10字符的新字符串</li>
-<li>接着填充”Java”和”Script”</li>
-<li>将新字符串赋值给lang</li>
-<li>删除”Java”和”Script”</li>
-</ol>
-<h3 id="转换为字符串"><a href="#转换为字符串" class="headerlink" title="转换为字符串"></a>转换为字符串</h3><p>转换为字符串有两种方法，分别是toString()和String()。</p>
-<p>还有一种是用加号操作符，这里先不作讨论。</p>
-<h4 id="toString-NaN"><a href="#toString-NaN" class="headerlink" title="toString()"></a>toString()</h4><p>几乎每个值都有toString()方法，返回响应值的字符串表现。</p>
-<ul>
-<li>Number，即数字本身，还可以传递一个参数以指定基数</li>
-<li>Boolean，即”true”或”false”</li>
-<li>String，即字符串本身</li>
-</ul>
-<p>示例：</p>
-<pre><code>var num = 10;
-alert(num.toString()); //10，默认十进制
-alert(num.toString(2)); //1010，二进制
-alert(num.toString(16)); //a,十六进制
-</code></pre><p>Null和Undefined没有toString方法。</p>
-<h4 id="String-1"><a href="#String-1" class="headerlink" title="String()"></a>String()</h4><p>就像Number()和parseInt()的关系一样，String()转型函数能够接收任意类型的值作为参数，但是区别在于Number()和parseInt()之间相对平等，而String()更像是toString()的超集。</p>
-<ul>
-<li>如果传入的值有toString()方法，则调用该方法</li>
-<li>Null类型，返回”null”</li>
-<li>Undefined类型，返回”undefined”</li>
-</ul>
-<p>不过String()在转换数值时就不能指定基数了。</p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>JavaScript基本数据类型有5种，分别是Null，Undefined，Boolean，Number和String。其中，Undefined派生自Null，故null==undefined返回true。</p>
-<p>Boolean只有true和false两个值，注意Boolean()转型函数的转换规则，以及与if()等流程控制语句的关系。</p>
-<p>Number类型不区分整数和浮点数，要注意其数值范围以及精度的问题，要当心0.1+0.2不等于0.3的判断问题。还有对NaN的理解，注意NaN与任何值都不相等的特性。此外，Number()转型函数，parseInt()和parseFloat()各有机制上的共通点和不同处，要做好区别。</p>
-<p>String类型，包含字符字面量，转义字符，字符串的特点以及字符串的转换，重点理解如何使用toString()和String()来进行字符串转换。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2017-04-07-Mac在Terminal打开Finder" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/07/2017-04-07-Mac在Terminal打开Finder/" class="article-date">
-  <time datetime="2017-04-07T14:16:35.000Z" itemprop="datePublished">2017-04-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Mac/">Mac</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/07/2017-04-07-Mac在Terminal打开Finder/">Mac：如何在Terminal中打开Finder</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>对于习惯使用Terminal的小伙伴们来说，常常有“进入到某个目录中”并“在该目录中打开Finder”的需求。<br>明明已经在目录下了，却还需要在桌面按个CMD+N来打开Finder再在Finder中一层一层打开，简直不要太痛苦。<br>既然如此，那就试试open命令吧。</p>
-<h2 id="open命令"><a href="#open命令" class="headerlink" title="open命令"></a>open命令</h2><p>在Terminal中输入<code>open -h</code>，可以看到如下的说明：</p>
-<pre><code>Usage: open [-e] [-t] [-f] [-W] [-R] [-n] [-g] [-h] [-b &lt;bundle identifier&gt;] [-a &lt;application&gt;] [filenames] [--args arguments]
-Help: Open opens files from a shell.
-      By default, opens each file using the default application for that file.  
-      If the file is in the form of a URL, the file will be opened as a URL.
-Options: 
-      -a                Opens with the specified application.
-      -b                Opens with the specified application bundle identifier.
-      -e                Opens with TextEdit.
-      -t                Opens with default text editor.
-      -f                Reads input from standard input and opens with TextEdit.
-      -F  --fresh       Launches the app fresh, that is, without restoring windows. Saved persistent state is lost, excluding Untitled documents.
-      -R, --reveal      Selects in the Finder instead of opening.
-      -W, --wait-apps   Blocks until the used applications are closed (even if they were already running).
-          --args        All remaining arguments are passed in argv to the application&apos;s main() function instead of opened.
-      -n, --new         Open a new instance of the application even if one is already running.
-      -j, --hide        Launches the app hidden.
-      -g, --background  Does not bring the application to the foreground.
-      -h, --header      Searches header file locations for headers matching the given filenames, and opens them.
-</code></pre><p>部分翻译如下：</p>
-<pre><code>使用方法： open [-e] [-t] [-f] [-W] [-R] [-n] [-g] [-h] [-b &lt;bundle identifier&gt;] [-a &lt;应用名&gt;] [文件名] [--args arguments]
-Help: 用于在命令行中打开文件
-      默认情况下，使用默认的应用打开对应的文件。
-      如果是URL格式的文件，那么就会在浏览器中打开。
-Options: 
-      -a                指定打开文件的应用
-      -e                用TextEdit打开该文件
-      -t                用默认文本编辑器打开该文件
-      -R, --reveal      在Finder中显示并选中
-      -g, --background  在后台打开该文件（此时焦点还在Terminal上）
-</code></pre><h2 id="打开目录的正确方式"><a href="#打开目录的正确方式" class="headerlink" title="打开目录的正确方式"></a>打开目录的正确方式</h2><p>那么如何解决“在Terminal中打开当前目录”的问题呢？只要输入以下命令即可：</p>
-<pre><code>$ open ./
-</code></pre><p>没错就这么简单。默认情况下，如果是个open之后是一个目录，那么就会用Finder打开。回车之后，会将焦点直接转移至打开的Finder目录。<br>这时如果你是想打开多个Finder目录，就需要手动切回Terminal再执行命令了。这种情况下，你可以加一个-g参数，来让焦点始终保持在Terminal上。</p>
-<pre><code>$ open -g ./
-</code></pre><p>这样我们就可以一次性在命令行中打开所有想打开的目录了。</p>
-<h3 id="浏览文件"><a href="#浏览文件" class="headerlink" title="浏览文件"></a>浏览文件</h3><p>除此之外，文件太多了，想在Finder中浏览指定文件怎么办呢。可以用-R来解决：</p>
-<pre><code>$ open -R ./test.js
-</code></pre><p>这样就可以在Finder显示，并且已经被选中了。</p>
-<h2 id="打开网站的正确方式"><a href="#打开网站的正确方式" class="headerlink" title="打开网站的正确方式"></a>打开网站的正确方式</h2><p>除了打开目录之外，open命令也可以用于打开网站：</p>
-<pre><code>$ open http://denight.leanote.com
-</code></pre><p>记得一定要加http，否则是不会被识别成URL的。</p>
-<h3 id="指定浏览器打开"><a href="#指定浏览器打开" class="headerlink" title="指定浏览器打开"></a>指定浏览器打开</h3><p>默认情况下，是用Safari打开浏览器的：</p>
-<pre><code>$ open http://denight.leanote.com
-</code></pre><p>等同于</p>
-<pre><code>$ open -a Safari http://denight.leanote.com
-</code></pre><p>如果要换成Firefox或者是Google Chrome，替换命令中的Safari即可</p>
-<pre><code>$ open -a Firefox http://denight.leanote.com
-$ open -a Google\ Chrome http://denight.leanote.com
-</code></pre><h2 id="打开代码的正确方式"><a href="#打开代码的正确方式" class="headerlink" title="打开代码的正确方式"></a>打开代码的正确方式</h2><pre><code>$open -e ./test.js
-</code></pre><p>使用这个命令，可以在TextEdit中打开test.js文件。如果不加-e的话，就会用默认的应用打开。<br>也可以指定想要的打开的编辑器。</p>
-<pre><code>$open -a Sublime\ Text ./test.js
-</code></pre><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://ju.outofmemory.cn/entry/75555" target="_blank" rel="external">在Mac终端下打开Finder</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2017-04-02-Sublime-Text-3的基本安装与配置" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/02/2017-04-02-Sublime-Text-3的基本安装与配置/" class="article-date">
-  <time datetime="2017-04-01T16:13:06.000Z" itemprop="datePublished">2017-04-02</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Sublime/">Sublime</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/02/2017-04-02-Sublime-Text-3的基本安装与配置/">Sublime Text 3的基本安装与配置</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p><a href="https://www.sublimetext.com/" target="_blank" rel="external">官网下载</a></p>
-<h2 id="Package-Control"><a href="#Package-Control" class="headerlink" title="Package Control"></a>Package Control</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><h3 id="简易方法"><a href="#简易方法" class="headerlink" title="简易方法"></a>简易方法</h3><p>最简单的安装方法，是通过Sublime Text控制台来安装。你可以通过Ctrl + ` 快捷键或者通过菜单栏 View &gt; Show Console 来打开控制台。接着，输入下面这段代码按下回车即可。（最新的版本请参照官网）</p>
-<pre><code>import urllib.request,os,hashlib; h = &apos;df21e130d211cfc94d9b0905775a7c0f&apos; + &apos;1e3d39e33b79698005270310898eea76&apos;; pf = &apos;Package Control.sublime-package&apos;; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( &apos;http://packagecontrol.io/&apos; + pf.replace(&apos; &apos;, &apos;%20&apos;)).read(); dh = hashlib.sha256(by).hexdigest(); print(&apos;Error validating download (got %s instead of %s), please try manual install&apos; % (dh, h)) if dh != h else open(os.path.join( ipp, pf), &apos;wb&apos; ).write(by)
-</code></pre><p>这段代码在必要的情况下会为你创建一个Installed Packages 文件夹，然后下载Package Control.sublime-package到这个文件夹中。这个下载由于Python标准库的限制，会通过HTTP而不是HTTPS来完成。文件会通过SHA-256来验证。</p>
-<h3 id="手动下载"><a href="#手动下载" class="headerlink" title="手动下载"></a>手动下载</h3><p>如果由于一些原因，你无法在控制台中完成下载，那么你可以通过以下几个步骤来手动安装Package Control：</p>
-<ol>
-<li>点击菜单中的Preferences &gt; Browse Packages…</li>
-<li>在打开的文件夹中创建一个Installed Packages文件夹</li>
-<li>下载这个文件<a href="https://packagecontrol.io/Package%20Control.sublime-package" target="_blank" rel="external">Package Control.sublime-package</a>并放到新建的Installed Packages文件夹中</li>
-<li>重启Sublime Text</li>
-</ol>
-<h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><p>完成Package Control的安装后，在Sublime中按住<code>Shift + CMD + P</code>。在输入框中输入<code>Package Control:Install Package</code>，这时Sublime会获取服务器上所有的Package信息，稍等一下后就可以选择自己需要的插件进行安装了。<br>你可以在<a href="https://packagecontrol.io/browse" target="_blank" rel="external">Package Control - Browse</a>中查看所有插件的信息。Package Control也可以用于下载一些Sublime的主题，只要在Package安装选择界面中以Theme开头即可。</p>
-<p>插件的配置和主题的选择都可以在Preferences菜单中进行。</p>
-<h2 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h2><h3 id="在Terminal中打开Sublime"><a href="#在Terminal中打开Sublime" class="headerlink" title="在Terminal中打开Sublime"></a>在Terminal中打开Sublime</h3><p>Sublime Text 包含了一个命令行工具，<code>subl</code>，能让你在命令行中打开文件。这个工具可以用来在Sublime中打开对应的文件和项目文件夹。</p>
-<h4 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h4><p>在Terminal中输入以下这段代码：</p>
-<pre><code>ln -s &quot;/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl&quot; /usr/local/bin/subl
-</code></pre><p>接下来你就可以在命令行中用<code>subl fileName</code>的方式来打开文件了。</p>
-<p>更多用法可以输入<code>subl --help</code>查看。</p>
-<h3 id="在Sublime-Text中运行JavaScript"><a href="#在Sublime-Text中运行JavaScript" class="headerlink" title="在Sublime Text中运行JavaScript"></a>在Sublime Text中运行JavaScript</h3><p>点击菜单中的Tools &gt; Build System &gt; New Build System，复制以下代码：</p>
-<pre><code>{
-    &quot;cmd&quot;: [&quot;/usr/local/bin/node&quot;,&quot;$file&quot;],
-    &quot;selector&quot;: &quot;source.js&quot;
-}
-</code></pre><p>命名为<code>JavaScript.sublime-build</code>保存至Package或Package/User文件夹。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://packagecontrol.io/installation" target="_blank" rel="external">Package Control - Installation</a></p>
-<p><a href="https://www.sublimetext.com/docs/3/osx_command_line.html" target="_blank" rel="external">Sublime Text 3 - OS X Command Line</a></p>
-<p><a href="http://docs.sublimetext.info/en/latest/file_processing/build_systems.html" target="_blank" rel="external">Build Systems</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2017-01-03-Git：常用命令整理" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/01/30/2017-01-03-Git：常用命令整理/" class="article-date">
-  <time datetime="2017-01-30T14:45:14.000Z" itemprop="datePublished">2017-01-30</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Git/">Git</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/30/2017-01-03-Git：常用命令整理/">Git：那些常用命令的整理</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Git是一个分布式版本控制系统，相比集中式的版本控制系统，分布式版本控制系统每个人手上都是一个完整的版本库。</p>
-<h2 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h2><pre><code>git init
-</code></pre><p>初始化一个git仓库。</p>
-<pre><code>git add &lt;file&gt;
-</code></pre><p>添加文件到暂存区。</p>
-<pre><code>git commit -m &quot;message&quot;
-</code></pre><p>把之前<code>git add</code>的文件提交到仓库，可以add多个文件，然后执行一次commit。</p>
-<blockquote>
-<p>SVN上<code>add</code>之后直接就添加到版本库了，但是Git上还需要<code>commit</code>才行，注意SVN与Git之间<code>commit</code>与<code>add</code>的异同。</p>
+        <h2 id="JSON-parse"><a href="#JSON-parse" class="headerlink" title="JSON.parse()"></a>JSON.parse()</h2><blockquote>
+<p>JSON.parse( text[, reviver] )</p>
 </blockquote>
-<h2 id="查看版本库的状态"><a href="#查看版本库的状态" class="headerlink" title="查看版本库的状态"></a>查看版本库的状态</h2><pre><code>git status
-</code></pre><p>查看当前工作区的状态。</p>
-<pre><code>git diff
-</code></pre><p>查看difference，显示的格式是Unix通用的diff格式。</p>
-<blockquote>
-<p>简单来说<code>git status</code>命令可以知道哪些文件做了修改，<code>git diff</code>命令可以知道被修改了哪些内容。</p>
-</blockquote>
-<pre><code>git log
-git log --pretty=oneline
-</code></pre><p>显示从最近到最远的提交日志。</p>
-<blockquote>
-<p><code>commit id</code>是版本号，用 SHA1 十六进制表示</p>
-</blockquote>
-<h2 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h2><pre><code>git reset --hard HEAD^
-git reset --hard HEAD~100
-git reset --hard 3628164
-</code></pre><p><code>HEAD</code>表示当前版本，<code>HEAD^</code>表示当前版本的上一个版本，<code>~100</code>等同于100个<code>^</code>。<code>3628164</code>是版本号，版本号不用写全，Git中只要知道<code>commit id</code>就可以回退。</p>
-<pre><code>git reflog
-</code></pre><p>查看历史命令，通过历史命令可以知道版本号。</p>
-<blockquote>
-<p>需要提交的文件通通使用<code>git add</code>放到暂存区（stage），然后使用<code>git commit</code>一次性提交暂存区所有修改到分之。工作区（working diretory）是电脑里能看到的目录，版本库（repository）则是工作区中一个隐藏的文件夹<code>.git</code>。<br>git跟踪并管理的是修改，每次修改都需要<code>add</code>到暂存区，这样才能被<code>commit</code>到分支中。</p>
-</blockquote>
-<h2 id="管理修改"><a href="#管理修改" class="headerlink" title="管理修改"></a>管理修改</h2><pre><code>git checkout --file
-</code></pre><p>把file在工作区的修改全部撤销，也就是把这个文件回到最近一次<code>git commit</code>或者<code>git add</code>的状态（用版本库的版本替换工作区）。</p>
-<pre><code>git reset HEAD file
-</code></pre><p>把暂存区的修改回退到工作区，不会影响工作区的状态。</p>
-<pre><code>git rm file
-</code></pre><p>从版本库中删除某个文件。这个命令跟<code>git add</code>一样，需要<code>git commit</code>之后才能提交到版本库中。</p>
-<h2 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h2><h3 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h3><pre><code>git checkout -b dev
-</code></pre><p>创建并切换到dev分支，<code>-b</code>参数表示<strong>创建并切换</strong>，这个命令实际上是下面两个命令的结合。</p>
-<pre><code>git branch dev
-git checkout dev 
-</code></pre><p><code>git branch</code>是创建一个dev分支，<code>git checkout</code>则是切换到dev分支。</p>
-<pre><code>git branch
-</code></pre><p>查看当前分支，当前分支会标有一个*号。</p>
-<pre><code>git checkout master
-</code></pre><p>切换到master分支。</p>
-<pre><code>git merge dev
-</code></pre><p>合并指定分支到当前分支。</p>
-<pre><code>git branch -d dev
-</code></pre><p>删除指定分支。</p>
-<h3 id="解决冲突"><a href="#解决冲突" class="headerlink" title="解决冲突"></a>解决冲突</h3><p>当切换到master分支并尝试合并dev分支时，若有冲突存在，必须手动解决冲突再进行提交。</p>
-<p>Git用&lt;&lt;&lt;&lt;&lt;&lt;，======，&gt;&gt;&gt;&gt;&gt;&gt;标记处不同分支的内容。</p>
-<pre><code>git log --graph --pretty=oneline --abbrev-commit
-</code></pre><p>用带参数的<code>git log</code>命令可以看到分支的合并情况。</p>
-<blockquote>
-<p>当Git无法自动合并分支时，必须首先解决冲突，再提交。合并后用<code>git log --graph</code>可以看到分支合并图。</p>
-</blockquote>
-<h3 id="分支管理策略"><a href="#分支管理策略" class="headerlink" title="分支管理策略"></a>分支管理策略</h3><p>默认情况下，Git会用<code>Fast forward</code>模式合并分支，但这种情况下，删除分支会丢掉分支信息，会看不出来曾经做过合并</p>
-<pre><code>git merge --no-ff -m &quot;message&quot; dev
-</code></pre><p>本次合并会创建一个新的commit，通过<code>-m</code>把commit描述写进去，<code>--no-ff</code>表示禁用<code>Fast forward</code>。</p>
-<blockquote>
-<p><code>master</code>一般是最稳定的版本，用来发布新版本。<br>建立以个<code>dev</code>分支来进行协作，每个人都在<code>dev</code>分支上写代码，时不时向<code>dev</code>分支上提交，dev提交到<code>master</code>上来发布稳定版本。</p>
-</blockquote>
-<h3 id="Bug分支"><a href="#Bug分支" class="headerlink" title="Bug分支"></a>Bug分支</h3><pre><code>git stash
-</code></pre><p>可以把当前工作区存起来，等以后恢复现场继续工作。执行完后，工作区是clean的，可以拿来创建分支。</p>
-<pre><code>git checkout master
-git checkout -b issue-101
-</code></pre><p>创建<code>issue-101</code>分支并修复Bug。</p>
-<pre><code>git stash list
-</code></pre><p>查看保存的工作区。</p>
-<pre><code>git stash apply
-</code></pre><p>恢复指定工作区。</p>
-<pre><code>git stash drop
-</code></pre><p>删除stash。</p>
-<pre><code>git stash pop
-</code></pre><p>恢复的同时会删除stash的内容。</p>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>git config 命令用来设置git的一些基本设置，包括全局配置以及针对特定仓库的配置。</p>
-<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><h4 id="设置名字"><a href="#设置名字" class="headerlink" title="设置名字"></a>设置名字</h4><pre><code>git config user.name &lt;name&gt;
-</code></pre><p>设置当前仓库<code>commit</code>时作者的名字。</p>
-<pre><code>git config --global user.name &lt;name&gt;
-</code></pre><p>设置全局的作者名字，这样以后其他仓库<code>commit</code>时，都会以这个名字提交。</p>
-<h4 id="设置邮箱"><a href="#设置邮箱" class="headerlink" title="设置邮箱"></a>设置邮箱</h4><pre><code>git config --global user.email &lt;email&gt;
-</code></pre><p>设置全局的作者邮箱。</p>
-<p>例子：</p>
-<pre><code>git config --global user.name &quot;denight&quot;
-git config --global user.email denight@qq.com
-</code></pre><h4 id="设置简写-别名"><a href="#设置简写-别名" class="headerlink" title="设置简写/别名"></a>设置简写/别名</h4><pre><code>git config --global alias.&lt;alias-name&gt; &lt;git-comman&gt;
-</code></pre><p>设置git命令的简写。比如<code>git status</code>可以通过下面的命令简写为<code>git st</code>。</p>
-<pre><code>git config --global alias.st status
-</code></pre><h3 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h3><p>Git把配置文件存储在三个不同的文件中，一个作用于当前仓库，一个作用于当前用户，一个作用于整个系统。</p>
 <ul>
-<li><repo>/.git/config 当前仓库的配置</repo></li>
-<li>~/.gitconfig 当前用户所属的配置，即—global的配置</li>
-<li>$(prefix)/etc/gitconfig 系统级别的配置</li>
+<li><p>text : 要被解析成 JavaScript 值的字符串</p>
+</li>
+<li><p>reviver : 规定原始值如何被解析改造的函数</p>
+</li>
 </ul>
-<p>优先级从高到底。</p>
+<h3 id="reviver-函数"><a href="#reviver-函数" class="headerlink" title="reviver 函数"></a>reviver 函数</h3><p>解析值本身以及它所包含的值，从里向外调用去调用 <code>reviver</code> 函数。属性名和属性值会作为参数传入 <code>reviver</code> 中，如果 <code>reviver</code> 返回 <code>undefined</code> ，那么当前属性就会从对象中删除；如果返回其他值，返回值就会作为当前属性新的属性值。</p>
+<p>注意，遍历到顶层时，传入 <code>reviver</code> 函数的是空字符串和当前对象，即<code>{&quot;&quot; : 修改过的解析值 }</code>。这是个特例，需要特别注意。</p>
+<p>所以 <code>reviver</code> 函数有基本两种种用法：</p>
+<p>1、删除特定属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var str = &apos;&#123;&quot;a&quot;:1, &quot;b&quot;:2&#125;&apos;;</div><div class="line"></div><div class="line">// 将属性值置为 undefined 删除属性</div><div class="line">var json = JSON.parse(str,function(key, value)&#123;</div><div class="line">    return key == &apos;a&apos; ? undefined : value;</div><div class="line">&#125;)</div><div class="line"></div><div class="line">console.log(json); // &#123;b:2&#125;</div></pre></td></tr></table></figure>
+<p>2、修改特定属性的值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var str = &apos;&#123;&quot;a&quot;:1, &quot;b&quot;:2&#125;&apos;;</div><div class="line"></div><div class="line">var json = JSON.parse(str, function(key, value)&#123;</div><div class="line">    return key == &apos;a&apos; ? value * 2 : value;</div><div class="line">&#125;)</div><div class="line"></div><div class="line">console.log(json); // &#123;a:2, b:4&#125;</div></pre></td></tr></table></figure>
+<h2 id="JSON-stringify"><a href="#JSON-stringify" class="headerlink" title="JSON.stringify()"></a>JSON.stringify()</h2><blockquote>
+<p>JSON.stringify value[, replacer[, space ]] )</p>
+</blockquote>
+<ul>
+<li>value : 要被转换成 JSON 字符串的值</li>
+<li>replacer : 规定如何转换和处理值的属性</li>
+<li>space : 指定缩进用的空白字符串</li>
+</ul>
+<h3 id="replacer-参数"><a href="#replacer-参数" class="headerlink" title="replacer 参数"></a>replacer 参数</h3><h4 id="传入函数"><a href="#传入函数" class="headerlink" title="传入函数"></a>传入函数</h4><p>返回 <code>undefined</code> 代表不输出该属性；输出其他（包括 <code>null</code> ）都会替代原来的属性值输出。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">function replacer(key, value) &#123;</div><div class="line">  if (typeof value === &quot;string&quot;) &#123;</div><div class="line">    return undefined;</div><div class="line">  &#125;</div><div class="line">  return value;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var foo = &#123;foundation: &quot;Mozilla&quot;, model: &quot;box&quot;, week: 45, transport: &quot;car&quot;, month: 7&#125;;</div><div class="line">var jsonString = JSON.stringify(foo, replacer);</div><div class="line"></div><div class="line">console.log(jsonString); // &#123;&quot;week&quot;:45,&quot;month&quot;:7&#125;</div></pre></td></tr></table></figure>
+<h4 id="传入数组"><a href="#传入数组" class="headerlink" title="传入数组"></a>传入数组</h4><p>根据属性名指定哪些属性会被输出。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var foo = &#123;foundation: &quot;Mozilla&quot;, model: &quot;box&quot;, week: 45, transport: &quot;car&quot;, month: 7&#125;;</div><div class="line">var jsonString = JSON.stringify(foo, [&apos;week&apos;,&apos;model&apos;]);</div><div class="line"></div><div class="line">console.log(jsonString); // &#123;&quot;week&quot;:45,&quot;model&quot;:&quot;box&quot;&#125;</div></pre></td></tr></table></figure>
+<h4 id="传入-undefined-或-null"><a href="#传入-undefined-或-null" class="headerlink" title="传入 undefined 或 null"></a>传入 <code>undefined</code> 或 <code>null</code></h4><p>输出所有的属性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var foo = &#123;foundation: &quot;Mozilla&quot;, model: &quot;box&quot;, week: 45, transport: &quot;car&quot;, month: 7&#125;;</div><div class="line">var jsonString = JSON.stringify(foo, null);</div><div class="line"></div><div class="line">console.log(jsonString); // &#123;&quot;foundation&quot;:&quot;Mozilla&quot;,&quot;model&quot;:&quot;box&quot;,&quot;week&quot;:45,&quot;transport&quot;:&quot;car&quot;,&quot;month&quot;:7&#125;</div></pre></td></tr></table></figure>
+<h3 id="space-参数"><a href="#space-参数" class="headerlink" title="space 参数"></a>space 参数</h3><p>指定缩进用的空白字符串，用于美化输出。</p>
+<p>如果参数是数字，就代表有多少空格，上限是10；</p>
+<p>如果参数是字符串，则为该字符串的前10个字母；</p>
+<p>如果参数没有提供，就意味着没有空格。</p>
+<p>除此之外，也可以传入转义字符（ <code>\t</code> ）来用 tab 进行缩进。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse" target="_blank" rel="external">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse</a></p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify" target="_blank" rel="external">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify</a></p>
 
       
     </div>
@@ -1144,14 +638,14 @@ git config --global user.email denight@qq.com
 
 
   
-    <article id="post-2016-04-24-深入浅出React读后笔记" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2017-05-08-JavaScript：逻辑与 与 逻辑或" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/04/24/2016-04-24-深入浅出React读后笔记/" class="article-date">
-  <time datetime="2016-04-24T10:36:56.000Z" itemprop="datePublished">2016-04-24</time>
+    <a href="/2017/05/08/2017-05-08-JavaScript：逻辑与 与 逻辑或/" class="article-date">
+  <time datetime="2017-05-08T12:00:00.000Z" itemprop="datePublished">2017-05-08</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/React/">React</a>
+    <a class="article-category-link" href="/categories/javascript/">javascript</a>
   </div>
 
   </div>
@@ -1162,7 +656,7 @@ git config --global user.email denight@qq.com
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/24/2016-04-24-深入浅出React读后笔记/">深入浅出React读后笔记</a>
+      <a class="article-title" href="/2017/05/08/2017-05-08-JavaScript：逻辑与 与 逻辑或/">JavaScript：逻辑与 与 逻辑或</a>
     </h1>
   
 
@@ -1170,26 +664,89 @@ git config --global user.email denight@qq.com
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="React的设计哲学"><a href="#React的设计哲学" class="headerlink" title="React的设计哲学"></a>React的设计哲学</h2><p>React最有价值的是声明式的，直观的编程方式。编程方式 简单直观 且 符合习惯，可以使得代码 更容易理解 、易于维护和有助于演进。可理解，可维护的代码代表着工程的质量和效率。</p>
-<h2 id="JSX定义用户界面更加直观"><a href="#JSX定义用户界面更加直观" class="headerlink" title="JSX定义用户界面更加直观"></a>JSX定义用户界面更加直观</h2><p>JSX定义的用户界面使得HTML可以直接嵌入到JS中，而不使用模板。原因在于，模板背后的代码逻辑严重依赖其模板中的内容和DOM结构，两者紧密耦合。虽然模板可以使得文件分离，且让非开发人员也可以对界面进行修改，但是为了保证两者之间的协作，需要引入更多的概念和机制。</p>
-<p>而在JSX中，React并没有引入更多新的概念，你仍可以用HTML和JS的思路去构建自己的应用。这种直观的方式降低了React的学习门槛，也使得新手更容易理解。</p>
-<h2 id="所谓组件，其实就是状态机器"><a href="#所谓组件，其实就是状态机器" class="headerlink" title="所谓组件，其实就是状态机器"></a>所谓组件，其实就是状态机器</h2><p>组件是某个独立功能或界面的封装（定义），使其能够进行复用或是业务逻辑分离（目的）。</p>
-<p>在React中，为了更加容易保证界面一致性，React把它看做简单的状态机器。即根据状态去输出基于状态的界面，React则负责以最高效的方式去更新整个界面和DOM树。</p>
-<p>对组件的管理，实际就是对组件状态的管理。更新一个组件，就是更新一个组件的状态。设计者需要做的，就是关心不同状态的用户界面。这相比于原始的JS直接控制真实DOM（过于自由）来说，预先设定好组件的状态对应的用户界面，可以让问题缩小到组件中，而不需要开发者考虑整一个应用的DOM或是担心新加入的代码可能会产生不被期望的副作用。像这样将DOM限制在组件之中，尽管失去了“自由”，但是也可以使得开发者更好的对界面进行管理和控制。</p>
-<p>组件作为用户界面的基本单位，与外界的交互方式除了状态（state）之外，还有其属性（props）。state由组件内部进行维护，而属性则是在外部初始化时传递进来，一旦赋值不建议进行变化。同一类组件就像是人一样，可以有着不同的身高和肤色（属性），但是其呼吸、运动等活动方式（状态）则是相通的。</p>
-<h2 id="每一次变化都是整体刷新"><a href="#每一次变化都是整体刷新" class="headerlink" title="每一次变化都是整体刷新"></a>每一次变化都是整体刷新</h2><p>数据模型驱动用户界面在概念上是直观的，但是在实践中确实困难重重。数据模型的变化可能会导致分散在整个用户界面各个角落的UI同时进行变化。界面越复杂，数据与界面的一致性越难以维护。</p>
-<p>关于这个问题，在原文中并没有被解释的很清楚。所谓数据模型，是一个整体的、全局的数据，不同于AJAX获取那种局部的数据，数据模型代表了整个UI界面的状态。</p>
-<p>考虑一下实际的开发场景，当我们拿到一个新的数据之后，我们需要做哪些事情。首先是分析数据，在概念上明确我们需要更新的UI，接着拿新数据与UI进行对比（检查），判断哪些需要更新而哪些不需要变化。接下来是实际通过编码的方式更新UI，进行DOM操作，最后检查UI是否被正确的刷新。</p>
-<p>实际上在界面复杂并且有许多UI之间的依赖更新的情况下，开发者无法立刻得知当前的UI与之后刷新的UI是否一致。出于减少DOM操作的角度考虑，当然是只刷新那些有变化的UI就好。但是想要实现它，开发者必须对UI一一进行前后对比，界面越复杂越难以实现。而如果把涉及到的所有UI都进行更新，则会产生不必要的性能损耗（把一个UI删除了又产生一个同样的UI）。<br>为此，React引入了虚拟DOM的概念。既然整体进行渲染（把所有涉及到的UI都进行刷新）一定可以保证数据模型与用户界面的一致性，那不如就整体进行刷新吧，让框架来解决哪些需要进行DOM操作而哪些UI则保持原样。React通过虚拟DOM把所有的现有UI的数据模型与新的数据模型进行一一的对比，最终进行最优化的局部真实DOM更新。虚拟DOM可以通过其算法获得不论界面多么复杂的情况下，都可以接受的性能代价。<br>何时是React的最有价值的时候？当你的界面越来越复杂时。</p>
-<h2 id="单向数据流动Flux"><a href="#单向数据流动Flux" class="headerlink" title="单向数据流动Flux"></a>单向数据流动Flux</h2><p>既然已经有了组件机制去定义界面，那么也还需要一定的机制来定义组件之间，以及组件和数据模型之间如何通信。为此Facebook提出了Flux，其提倡的是单向数据流动。即永远只有模型到视图的数据流动。</p>
-<p>Flux的定义非常宽松，目前社区中还出现了很多不同的实现，如Flexible，Reflux等。</p>
-<h2 id="让数据模型也变简单"><a href="#让数据模型也变简单" class="headerlink" title="让数据模型也变简单"></a>让数据模型也变简单</h2><p>React提倡只用只读数据来建立数据模型，所有的数据都是只读的，如果你想要进行修改，那么就只能产生一份包含新的修改的数据。这有点像同一个类的实例，其成员变量是私有的并且在实例化之后没有相关函数能够对其进行修改，如果想要进行修改，那么就只能重新实例一个。</p>
-<p>只读的数据可以让代码更加的安全和易于维护，至少开发者不用担心数据在某个角落被某段神奇的代码所修改。数据的来源只有数据出生的时候，这无疑可以抹杀很多bug出现的可能。</p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>React Native：移动开发。React把UI层进行了完美的抽象使得开发者不需要进行DOM操作，而React Native正是把DOM替换成了iOS或Android的原声控件。其开发方式都是一致的。</p>
-<p>React Canvas：所有的界面元素都通过Canvas来进行绘制，彻底舍弃了DOM。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>任何框架诞生的初衷都离不开对开发问题的解决。React同样是为了解决前端开发中的痛点而生。原文总结分析了其相关技术背后的设计思想，是一篇质量很高的文章。</p>
-<p>我一直坚信在计算机这样的人造学科中，理解一门技术的初衷，能够使自己更好的去学习和使用。很多人都可以在短时间入门一门技术，但是很少有人去关注其背后的设计思想和方式。尽管我现在技术基础不扎实，但是React的设计思路确确实实是我在实际开发中会遇到和疑惑的问题。这样一想，React就变得十分可爱了，我也期望自己能在实际的开发中，遵循简单直观的原则，进行高效率和高质量的开发。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.infoq.com/cn/articles/react-art-of-simplity" target="_blank" rel="external">深入浅出React（一）：React的设计哲学 - 简单之美</a></p>
+        <h2 id="逻辑与"><a href="#逻辑与" class="headerlink" title="逻辑与"></a>逻辑与</h2><p>逻辑与是<strong>短路操作</strong>，如果第一个<strong>操作数</strong>能够决定结果，那么将不会对接下来的<strong>操作数</strong>进行<strong>求值</strong>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var a = 0,</div><div class="line">    b = 1;</div><div class="line"></div><div class="line">a &amp;&amp; b++;</div><div class="line"></div><div class="line">console.log(a); // 0</div><div class="line">console.log(b); // 1, b++没有执行</div></pre></td></tr></table></figure>
+<h3 id="表达式语句的值"><a href="#表达式语句的值" class="headerlink" title="表达式语句的值"></a>表达式语句的值</h3><p>如果操作数都是<code>True</code>（对象、非空字符串、非<code>0</code>或<code>NaN</code>的数字、布尔值<code>True</code>），则返回最后一个操作数。</p>
+<p>如果操作数中有若干个<code>False</code>（<code>Null</code>、<code>Undefined</code>、空字符串、<code>NaN</code>、布尔值<code>False</code>），则返回第一个<code>False</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&#123;&#125; &amp;&amp; false ; // false</div><div class="line">&#123;&#125; &amp;&amp; 0; // 0</div><div class="line">&#123;&#125; &amp;&amp; null; // null</div><div class="line">&#123;&#125; &amp;&amp; undefined; // undefined</div><div class="line"></div><div class="line">null &amp;&amp; 0; // null</div><div class="line"></div><div class="line">&#123;a:1&#125; &amp;&amp; &#123;b:1&#125; &amp;&amp; &#123;c:1&#125;; // &#123;c:1&#125;</div></pre></td></tr></table></figure>
+<p>与函数相结合</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">true &amp;&amp; foo(); // 执行foo</div><div class="line">true &amp;&amp; false &amp;&amp; foo(); // 返回false，不执行foo</div></pre></td></tr></table></figure>
+<h2 id="逻辑或"><a href="#逻辑或" class="headerlink" title="逻辑或"></a>逻辑或</h2><p>逻辑或与逻辑与一样，也是<strong>短路操作</strong>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var a = 0,</div><div class="line">    b = 1;</div><div class="line"></div><div class="line">b || a++;</div><div class="line"></div><div class="line">console.log(a); // 0</div><div class="line">console.log(b); // 1</div></pre></td></tr></table></figure>
+<h3 id="表达式语句的值-1"><a href="#表达式语句的值-1" class="headerlink" title="表达式语句的值"></a>表达式语句的值</h3><p>如果操作数都是False，则返回最后一个操作数。</p>
+<p>如果操作数中有若干个True，则返回第一个True。</p>
+<p>逻辑或一般用于避免给变量赋null或undefined值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var foo = null;</div><div class="line">    bar = 1;</div><div class="line"></div><div class="line">var value = foo || bar;</div></pre></td></tr></table></figure>
+<p>也可以用来在函数中对参数进行校验，下面三个函数等价，但是显然第一个是最优雅的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">function(v)&#123;</div><div class="line">    var value = v || defaultValue;</div><div class="line">&#125;</div><div class="line"></div><div class="line">function(v)&#123;</div><div class="line">    var value = !!v ? v : defaultValue;</div><div class="line">&#125;</div><div class="line"></div><div class="line">function(v)&#123;</div><div class="line">    if(v)&#123;</div><div class="line">        var value = v;</div><div class="line">    &#125;else&#123;</div><div class="line">        var value = defaultValue;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2017-05-03-JavaScript：从代码复用到面向对象" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/03/2017-05-03-JavaScript：从代码复用到面向对象/" class="article-date">
+  <time datetime="2017-05-03T12:00:00.000Z" itemprop="datePublished">2017-05-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/javascript/">javascript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/03/2017-05-03-JavaScript：从代码复用到面向对象/">JavaScript：从代码复用到面向对象</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="代码复用的问题"><a href="#代码复用的问题" class="headerlink" title="代码复用的问题"></a>代码复用的问题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var foo = &#123;color:&apos;red&apos;&#125;;</div><div class="line">var bar = &#123;color:&apos;green&apos;&#125;;</div></pre></td></tr></table></figure>
+<p>这段代码中我们生成了两个属性相似的对象，每次生成一个类似的对象都需要重新写一遍代码。</p>
+<h2 id="装饰器函数"><a href="#装饰器函数" class="headerlink" title="装饰器函数"></a>装饰器函数</h2><h3 id="添加属性"><a href="#添加属性" class="headerlink" title="添加属性"></a>添加属性</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">// lib.js</div><div class="line">var fn = function(obj,color)&#123;</div><div class="line">    obj.color = color;</div><div class="line">    return obj;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// app.js</div><div class="line">var foo = fn(&#123;&#125;,&apos;red&apos;);</div><div class="line">var bar = fn(&#123;&#125;,&apos;green&apos;);</div></pre></td></tr></table></figure>
+<p>我们可以通过一个装饰器函数，来解决生成类似对象的问题。</p>
+<p>装饰器函数的作用，就是给某个已拥有某些功能的对象添加属性。这里我们传入了一个空的对象，通过fn函数来对这个空对象进行”装饰“（添加属性）。</p>
+<h3 id="添加方法"><a href="#添加方法" class="headerlink" title="添加方法"></a>添加方法</h3><h4 id="浪费内存"><a href="#浪费内存" class="headerlink" title="浪费内存"></a>浪费内存</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">// lib.js</div><div class="line">var fn = function(obj,color)&#123;</div><div class="line">    obj.color = color;</div><div class="line">    obj.printColor = function()&#123;</div><div class="line">        console.log(this.color);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return obj;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// app.js</div><div class="line">var foo = fn(&#123;&#125;,&apos;red&apos;);</div><div class="line">foo.printColor(); // red</div><div class="line">var bar = fn(&#123;&#125;,&apos;green&apos;);</div><div class="line">bar.printColor(); // green</div></pre></td></tr></table></figure>
+<p>上述添加方法的方式，优点是具有良好的封装性，但是最大的问题是每次调用装饰器函数都会在内存中生成一个新的<code>printColor函数</code>。在对象比较多的情况下，就容易浪费内存。</p>
+<h4 id="更多的缺点"><a href="#更多的缺点" class="headerlink" title="更多的缺点"></a>更多的缺点</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">// lib.js</div><div class="line">var fn = function(obj,color)&#123;</div><div class="line">    obj.color = color;</div><div class="line">    obj.printColor = printColor;</div><div class="line">    return obj;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var printColor = function()&#123;</div><div class="line">    console.log(this.printColor);</div><div class="line">&#125;</div><div class="line"></div><div class="line">// app.js</div><div class="line">var foo = fn(&#123;&#125;,&apos;red&apos;);</div><div class="line">foo.printColor(); // red</div><div class="line">var bar = fn(&#123;&#125;,&apos;green&apos;);</div><div class="line">bar.printColor(); // green</div></pre></td></tr></table></figure>
+<p>上述添加方法的方式，尽管解决了内存占用的问题，但是失去了良好的封装性。</p>
+<p>除此之外，如果添加的方法比较多，每次都需要在fn中对函数进行绑定，效率很低。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">// lib.js</div><div class="line">var fn = function(obj,color)&#123;</div><div class="line">    obj.color = color;</div><div class="line">    obj.method_1 = method_1;</div><div class="line">    obj.method_2 = method_2;</div><div class="line">    // ...</div><div class="line">    obj.method_1000 = method_3;</div><div class="line"></div><div class="line">    return obj;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var method_1 = function()&#123; //... &#125;;</div><div class="line">var method_2 = function()&#123; //... &#125;;</div><div class="line">// ...</div><div class="line">var method_1000 = function()&#123; //... &#125;;</div></pre></td></tr></table></figure>
+<h4 id="把方法都装在一起"><a href="#把方法都装在一起" class="headerlink" title="把方法都装在一起"></a>把方法都装在一起</h4><p>在把方法都装进<code>methods</code>中，通过遍历的方式可以把任意数量的方法绑定到<code>obj</code>上。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">// lib.js</div><div class="line">var fn = function(obj,color)&#123;</div><div class="line">    obj.color = color;</div><div class="line"></div><div class="line">    extend(obj,methods); // extend()代表把methods中的属性复制到obj中，注意它并不是原生的函数</div><div class="line"></div><div class="line">    return obj;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var methods = &#123;</div><div class="line">    method_1:function()&#123; //... &#125;,</div><div class="line">    method_2:function()&#123; //... &#125;,</div><div class="line">    // ...</div><div class="line">    method_1000:function()&#123; //... &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h4 id="借助Function对象的属性"><a href="#借助Function对象的属性" class="headerlink" title="借助Function对象的属性"></a>借助Function对象的属性</h4><p><code>methods</code>与<code>fn</code>之间没有一个非常明显的联系，为此我们可以利用<code>Function对象</code>的属性来解决。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">// lib.js</div><div class="line">var fn = function(obj,color)&#123;</div><div class="line">    obj.color = color;</div><div class="line"></div><div class="line">    extend(obj, fn.methods);</div><div class="line"></div><div class="line">    return obj;</div><div class="line">&#125;</div><div class="line"></div><div class="line">fn.methods = &#123;</div><div class="line">    method_1:function()&#123; //... &#125;,</div><div class="line">    method_2:function()&#123; //... &#125;,</div><div class="line">    // ...</div><div class="line">    method_1000:function()&#123; //... &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="直接在function内部创建对象"><a href="#直接在function内部创建对象" class="headerlink" title="直接在function内部创建对象"></a>直接在function内部创建对象</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">// lib.js</div><div class="line"></div><div class="line">var fn = function(color)&#123;</div><div class="line">    var obj = &#123;&#125;;</div><div class="line">    obj.color = color;</div><div class="line"></div><div class="line">    extend(obj, fn.methods);</div><div class="line"></div><div class="line">    return obj;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="原型委托"><a href="#原型委托" class="headerlink" title="原型委托"></a>原型委托</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">// lib.js</div><div class="line">var fn = function(color)&#123;</div><div class="line">    var obj = Object.create(fn.methods);</div><div class="line">    obj.color = color;</div><div class="line"></div><div class="line">    return obj;</div><div class="line">&#125;</div><div class="line"></div><div class="line">fn.methods = &#123; //... &#125;;</div></pre></td></tr></table></figure>
+<h3 id="使用prototype属性"><a href="#使用prototype属性" class="headerlink" title="使用prototype属性"></a>使用prototype属性</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">// lib.js</div><div class="line">var fn = function(color)&#123;</div><div class="line">    var obj = Object.create(fn.prototype);</div><div class="line">    obj.color = color;</div><div class="line"></div><div class="line">    return obj;</div><div class="line">&#125;</div><div class="line">fn.prototype.printColor = function()&#123;</div><div class="line">    console.log(this.color);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>此时<code>fn</code>就是一个“构造函数”，每一个函数对象被创建时都会有一个<code>prototype</code>属性，这个属性跟之前的<code>fn.methods</code>其实并没有太大的区别，唯一的区别在于<code>prototype.constructor</code>指向了函数对象本身。</p>
+<p>在我们讨论“实例的原型”和“构造函数的原型”时要注意：“实例的原型”实际上就是<code>instance.prototype</code>，在实例中没有的属性会被委托到原型中进行查找。而“构造函数的原型”，实际上是“创建一个对象，并且把这个对象委托给原型进行函数共享”。</p>
+<h3 id="关系验证"><a href="#关系验证" class="headerlink" title="关系验证"></a>关系验证</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// app.js</div><div class="line">var foo = fn(&apos;red&apos;);</div><div class="line">var bar = fn(&apos;green&apos;);</div><div class="line"></div><div class="line">console.log(foo instanceof fn); // true</div><div class="line">// instanceof 操作符 实际上执行的就是下面的操作</div><div class="line">console.log(foo.constructor == fn.prototype.construector); // true</div></pre></td></tr></table></figure>
+<h3 id="new-关键字"><a href="#new-关键字" class="headerlink" title="new 关键字"></a>new 关键字</h3><p>在fn中，创建一个对象、原型委托和返回对象是一定会做的一件事情，我们可以通过<code>new关键字</code>来简化。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// lib.js</div><div class="line">var fn = function(color)&#123;</div><div class="line">    this.color = color;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在使用<code>new关键字</code>进行调用时（构造模式），解释器会自动插入两行代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// lib.js</div><div class="line">var fn = function(color)&#123;</div><div class="line">    this = Object.create(fn.prototype); // 将新对象委托给原型对象</div><div class="line"></div><div class="line">    this.color;</div><div class="line"></div><div class="line">    return this; // 返回这个新对象</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用构造模式即使用<code>new关键字</code>调用fn函数才能被真正称作“构造函数”。</p>
+<h3 id="子类继承"><a href="#子类继承" class="headerlink" title="子类继承"></a>子类继承</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">var Human = function(name)&#123;</div><div class="line">    this.name = name;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Human.prototype.sayName = function()&#123;</div><div class="line">    console.log(this.name);</div><div class="line">&#125;</div><div class="line"></div><div class="line">var Man = function(name)&#123;</div><div class="line">    Human.call(this, name);</div><div class="line">    this.sex = &apos;male&apos;;</div><div class="line">&#125;</div><div class="line">Man.prototype = Object.create(Human.prototype);</div><div class="line">Man.prototype.constructor = Man;</div><div class="line"></div><div class="line">var frank = new Man(&apos;frank&apos;);</div><div class="line"></div><div class="line">frank.sayName(); // frank</div><div class="line">console.log(frank instanceof Man); // true</div><div class="line">console.log(frank instanceof Human); // true</div></pre></td></tr></table></figure>
+<p>务必注意<code>Man</code>继承<code>Human</code>时调用的<code>Human</code>方法，其使用<code>call</code>方法指定了<code>this</code>绑定的对象。<code>this</code>在JavaScript中可以作为一个传入的参数来看待，在使用<code>obj.method()</code>时，<code>method</code>中的<code>this</code>指向<code>obj</code>，而使用<code>new method()</code>时，<code>this</code>指向新构造的空对象。</p>
+<p>此外，<code>Man.prototype</code>对象的原型委托给了<code>Human.prototype</code>形成了原型链<code>。</code>这里还需要注意要重新指定<code>Man.prototype.constructor</code>赋值<code>Man</code>。</p>
 
       
     </div>
@@ -1206,7 +763,7 @@ git config --global user.email denight@qq.com
 
 
   <nav id="page-nav">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">next&raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">next&raquo;</a>
   </nav>
 </section>
         
@@ -1216,7 +773,7 @@ git config --global user.email denight@qq.com
   <div class="widget-wrap">
     <h3 class="widget-title">Catégories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/FE/">FE</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTTP/">HTTP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mac/">Mac</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SVN/">SVN</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Sublime/">Sublime</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell/">shell</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/fe/">fe</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/http/">http</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/jquery/">jquery</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/mac/">mac</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell/">shell</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/sublime/">sublime</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/">svn</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li></ul>
     </div>
   </div>
 
@@ -1231,7 +788,7 @@ git config --global user.email denight@qq.com
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
   </div>
 
@@ -1248,19 +805,19 @@ git config --global user.email denight@qq.com
           </li>
         
           <li>
-            <a href="/2017/05/23/2017-05-23-什么是Hybrid App/">什么是Hybrid App</a>
+            <a href="/2017/07/05/2017-07-05-CSS：什么是 BFC/">CSS：什么是 BFC</a>
           </li>
         
           <li>
-            <a href="/2017/04/14/2017-04-14-React：基本环境搭建简明步骤/">React：基本环境搭建简明步骤</a>
+            <a href="/2017/06/21/2017-06-21-Vue：基础用法与指令/">Vue：基础用法与指令</a>
           </li>
         
           <li>
-            <a href="/2017/04/12/2017-04-12-HTTP：常见的状态码/">HTTP基础（2）：常见的状态码</a>
+            <a href="/2017/06/21/2017-06-21-CSS：Animation 动画/">CSS：Animation 动画小记</a>
           </li>
         
           <li>
-            <a href="/2017/04/11/2017-04-11-HTTP：协议基础/">HTTP基础（1）：概述</a>
+            <a href="/2017/06/01/2017-06-01-CSS：table-cell 用法小/">CSS：table-cell 用法小记</a>
           </li>
         
       </ul>

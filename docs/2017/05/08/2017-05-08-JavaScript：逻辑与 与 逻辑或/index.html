@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JavaScript：逻辑与 与 逻辑或 | Daixinye</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="逻辑与逻辑与是短路操作，如果第一个操作数能够决定结果，那么将不会对接下来的操作数进行求值。 1234567var a = 0,    b = 1;a &amp;amp;&amp;amp; b++;console.log(a); // 0console.log(b); // 1, b++没有执行 表达式语句的值如果操作数都是True（对象、非空字符串、非0或NaN的数字、布尔值True），则返回最后一个操作数。 如">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript：逻辑与 与 逻辑或">
+<meta property="og:url" content="http://daixinye.com/2017/05/08/2017-05-08-JavaScript：逻辑与 与 逻辑或/index.html">
+<meta property="og:site_name" content="Daixinye">
+<meta property="og:description" content="逻辑与逻辑与是短路操作，如果第一个操作数能够决定结果，那么将不会对接下来的操作数进行求值。 1234567var a = 0,    b = 1;a &amp;amp;&amp;amp; b++;console.log(a); // 0console.log(b); // 1, b++没有执行 表达式语句的值如果操作数都是True（对象、非空字符串、非0或NaN的数字、布尔值True），则返回最后一个操作数。 如">
+<meta property="og:updated_time" content="2017-07-31T16:34:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript：逻辑与 与 逻辑或">
+<meta name="twitter:description" content="逻辑与逻辑与是短路操作，如果第一个操作数能够决定结果，那么将不会对接下来的操作数进行求值。 1234567var a = 0,    b = 1;a &amp;amp;&amp;amp; b++;console.log(a); // 0console.log(b); // 1, b++没有执行 表达式语句的值如果操作数都是True（对象、非空字符串、非0或NaN的数字、布尔值True），则返回最后一个操作数。 如">
+  
+    <link rel="alternate" href="/atom.xml" title="Daixinye" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Daixinye</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <a id="nav-github" class="nav-icon" title="github" target="_blank" href="https://github.com/daixinye"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://daixinye.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2017-05-08-JavaScript：逻辑与 与 逻辑或" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/08/2017-05-08-JavaScript：逻辑与 与 逻辑或/" class="article-date">
+  <time datetime="2017-05-08T12:00:00.000Z" itemprop="datePublished">2017-05-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/javascript/">javascript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JavaScript：逻辑与 与 逻辑或
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="逻辑与"><a href="#逻辑与" class="headerlink" title="逻辑与"></a>逻辑与</h2><p>逻辑与是<strong>短路操作</strong>，如果第一个<strong>操作数</strong>能够决定结果，那么将不会对接下来的<strong>操作数</strong>进行<strong>求值</strong>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var a = 0,</div><div class="line">    b = 1;</div><div class="line"></div><div class="line">a &amp;&amp; b++;</div><div class="line"></div><div class="line">console.log(a); // 0</div><div class="line">console.log(b); // 1, b++没有执行</div></pre></td></tr></table></figure>
+<h3 id="表达式语句的值"><a href="#表达式语句的值" class="headerlink" title="表达式语句的值"></a>表达式语句的值</h3><p>如果操作数都是<code>True</code>（对象、非空字符串、非<code>0</code>或<code>NaN</code>的数字、布尔值<code>True</code>），则返回最后一个操作数。</p>
+<p>如果操作数中有若干个<code>False</code>（<code>Null</code>、<code>Undefined</code>、空字符串、<code>NaN</code>、布尔值<code>False</code>），则返回第一个<code>False</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&#123;&#125; &amp;&amp; false ; // false</div><div class="line">&#123;&#125; &amp;&amp; 0; // 0</div><div class="line">&#123;&#125; &amp;&amp; null; // null</div><div class="line">&#123;&#125; &amp;&amp; undefined; // undefined</div><div class="line"></div><div class="line">null &amp;&amp; 0; // null</div><div class="line"></div><div class="line">&#123;a:1&#125; &amp;&amp; &#123;b:1&#125; &amp;&amp; &#123;c:1&#125;; // &#123;c:1&#125;</div></pre></td></tr></table></figure>
+<p>与函数相结合</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">true &amp;&amp; foo(); // 执行foo</div><div class="line">true &amp;&amp; false &amp;&amp; foo(); // 返回false，不执行foo</div></pre></td></tr></table></figure>
+<h2 id="逻辑或"><a href="#逻辑或" class="headerlink" title="逻辑或"></a>逻辑或</h2><p>逻辑或与逻辑与一样，也是<strong>短路操作</strong>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var a = 0,</div><div class="line">    b = 1;</div><div class="line"></div><div class="line">b || a++;</div><div class="line"></div><div class="line">console.log(a); // 0</div><div class="line">console.log(b); // 1</div></pre></td></tr></table></figure>
+<h3 id="表达式语句的值-1"><a href="#表达式语句的值-1" class="headerlink" title="表达式语句的值"></a>表达式语句的值</h3><p>如果操作数都是False，则返回最后一个操作数。</p>
+<p>如果操作数中有若干个True，则返回第一个True。</p>
+<p>逻辑或一般用于避免给变量赋null或undefined值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var foo = null;</div><div class="line">    bar = 1;</div><div class="line"></div><div class="line">var value = foo || bar;</div></pre></td></tr></table></figure>
+<p>也可以用来在函数中对参数进行校验，下面三个函数等价，但是显然第一个是最优雅的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">function(v)&#123;</div><div class="line">    var value = v || defaultValue;</div><div class="line">&#125;</div><div class="line"></div><div class="line">function(v)&#123;</div><div class="line">    var value = !!v ? v : defaultValue;</div><div class="line">&#125;</div><div class="line"></div><div class="line">function(v)&#123;</div><div class="line">    if(v)&#123;</div><div class="line">        var value = v;</div><div class="line">    &#125;else&#123;</div><div class="line">        var value = defaultValue;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/05/19/2017-05-19-JSON：JSON 方法小记/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          JSON：JSON 方法小记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/05/03/2017-05-03-JavaScript：从代码复用到面向对象/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">JavaScript：从代码复用到面向对象</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Catégories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/fe/">fe</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/http/">http</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/jquery/">jquery</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/mac/">mac</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell/">shell</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/sublime/">sublime</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/">svn</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/07/06/2017-07-06-Shell 脚本入门/">Shell 脚本入门</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/05/2017-07-05-CSS：什么是 BFC/">CSS：什么是 BFC</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/21/2017-06-21-Vue：基础用法与指令/">Vue：基础用法与指令</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/21/2017-06-21-CSS：Animation 动画/">CSS：Animation 动画小记</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/01/2017-06-01-CSS：table-cell 用法小/">CSS：table-cell 用法小记</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Xinye Dai<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -2,7 +2,7 @@
 layout: post
 title:  "JavaScript：基本数据类型整理"
 date:   2017-04-11 16:21:00 +0800
-categories: JavaScript
+categories: javascript
 ---
 - Undefined
 - Null

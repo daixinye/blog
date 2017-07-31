@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>jQuery：事件监听用法 | Daixinye</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="常见事件类型 Form events: 如 submit Focus events: 如 blur, focus, change Input devices events: 如 keyup, keypress, mouseover, mousemove, mouseleave View events: 如 scroll, resize  事件监听三要素 the target element to">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jQuery：事件监听用法">
+<meta property="og:url" content="http://daixinye.com/2017/04/26/2017-04-26-jQuery：事件监听用法/index.html">
+<meta property="og:site_name" content="Daixinye">
+<meta property="og:description" content="常见事件类型 Form events: 如 submit Focus events: 如 blur, focus, change Input devices events: 如 keyup, keypress, mouseover, mousemove, mouseleave View events: 如 scroll, resize  事件监听三要素 the target element to">
+<meta property="og:updated_time" content="2017-07-31T16:36:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jQuery：事件监听用法">
+<meta name="twitter:description" content="常见事件类型 Form events: 如 submit Focus events: 如 blur, focus, change Input devices events: 如 keyup, keypress, mouseover, mousemove, mouseleave View events: 如 scroll, resize  事件监听三要素 the target element to">
+  
+    <link rel="alternate" href="/atom.xml" title="Daixinye" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Daixinye</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <a id="nav-github" class="nav-icon" title="github" target="_blank" href="https://github.com/daixinye"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://daixinye.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2017-04-26-jQuery：事件监听用法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/26/2017-04-26-jQuery：事件监听用法/" class="article-date">
+  <time datetime="2017-04-26T12:00:00.000Z" itemprop="datePublished">2017-04-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/jquery/">jquery</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      jQuery：事件监听用法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="常见事件类型"><a href="#常见事件类型" class="headerlink" title="常见事件类型"></a>常见事件类型</h2><ul>
+<li>Form events: 如 submit</li>
+<li>Focus events: 如 blur, focus, change</li>
+<li>Input devices events: 如 keyup, keypress, mouseover, mousemove, mouseleave</li>
+<li>View events: 如 scroll, resize</li>
+</ul>
+<h2 id="事件监听三要素"><a href="#事件监听三要素" class="headerlink" title="事件监听三要素"></a>事件监听三要素</h2><ul>
+<li>the target element to listen to，监听对象</li>
+<li>the event we want to react to，监听事件</li>
+<li>the actions to take in response，回调函数</li>
+</ul>
+<h2 id="基础示例"><a href="#基础示例" class="headerlink" title="基础示例"></a>基础示例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$(&apos;div.foo button&apos;).on(&apos;click&apos;,function()&#123;</div><div class="line">    $(this).remove();</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h2 id="更多用法"><a href="#更多用法" class="headerlink" title="更多用法"></a>更多用法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// 传递事件对象</div><div class="line">$(&apos;div.foo button).on(&apos;click&apos;,function(event)&#123;</div><div class="line">    $(event.target).remove(); // event.target 事件目标的页面元素</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 阻止默认行为</div><div class="line">$(&apos;div.foo a).on(&apos;click&apos;,function(event)&#123;</div><div class="line">    event.preventDefault();</div><div class="line">    console.log(&apos;the link you clicked will not work&apos;);</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h3 id="event"><a href="#event" class="headerlink" title="event"></a>event</h3><ul>
+<li>event.keyCode，用来了解按下的是哪个键</li>
+<li>event.pageX, event.pageY，用来了解点击发生的坐标位置</li>
+<li>event.type，用来了解发生的事件</li>
+</ul>
+<h2 id="简易写法"><a href="#简易写法" class="headerlink" title="简易写法"></a>简易写法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$(&apos;div.foo&apos;).click(function()&#123;...&#125;);</div><div class="line">$(&apos;div.foo&apos;).hover(function()&#123;...&#125;);</div><div class="line"></div><div class="line">//等等</div></pre></td></tr></table></figure>
+<p>需要注意的是，<code>.hover()</code>监听了两个事件<code>mouseenter</code>和<code>mouseleave</code>，并且并不是所有事件都有简易的写法。</p>
+<p>更多简易写法参考：<a href="http://api.jquery.com/category/events/" target="_blank" rel="external">jQuery: Events</a></p>
+<h2 id="事件代理"><a href="#事件代理" class="headerlink" title="事件代理"></a>事件代理</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;foo&quot;&gt;</div><div class="line">    &lt;ul&gt;</div><div class="line">        &lt;li&gt; 1 &lt;/li&gt;</div><div class="line">        &lt;li&gt; 2 &lt;/li&gt;</div><div class="line">        ...</div><div class="line">        &lt;li&gt; 1000 &lt;/li&gt;</div><div class="line">    &lt;/ul&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<p>假设有如上这样一个DOM片段，如果用以下方式进行事件监听，则会产生过多的监听器，导致性能问题。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$(&apos;div.foo li&apos;).on(&apos;click&apos;,function(event)&#123;</div><div class="line">    console.log(event.target);</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>此时可以使用父元素事件代理（event delegation）的方式来处理，只用了一个监听器。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$(&apos;div.foo&apos;).on(&apos;click&apos;,&apos;li&apos;,function(event)&#123;</div><div class="line">    console.log(event.target);</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://developer.mozilla.org/en-US/docs/Web/Events#Categories" target="_blank" rel="external">MDN: Events Catagory</a></p>
+<p><a href="https://api.jquery.com/category/events/event-object/" target="_blank" rel="external">jQuery: Event Object</a></p>
+<p><a href="https://api.jquery.com/event.target/" target="_blank" rel="external">jQuery: event.targer</a></p>
+<p><a href="https://www.w3.org/TR/DOM-Level-3-Events/" target="_blank" rel="external">W3C: Dom Level-3 Event</a></p>
+<p><a href="https://learn.jquery.com/events/event-delegation/" target="_blank" rel="external">jQuery: Event Delegation</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/04/26/2017-04-26-jQuery：基础 DOM 操作方法/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          jQuery：基础 DOM 操作方法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/04/24/2017-04-24-前端：跨域方法小记/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">前端：跨域方法小记</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Catégories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/fe/">fe</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/http/">http</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/jquery/">jquery</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/mac/">mac</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell/">shell</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/sublime/">sublime</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/">svn</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/07/06/2017-07-06-Shell 脚本入门/">Shell 脚本入门</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/05/2017-07-05-CSS：什么是 BFC/">CSS：什么是 BFC</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/21/2017-06-21-Vue：基础用法与指令/">Vue：基础用法与指令</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/21/2017-06-21-CSS：Animation 动画/">CSS：Animation 动画小记</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/01/2017-06-01-CSS：table-cell 用法小/">CSS：table-cell 用法小记</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Xinye Dai<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

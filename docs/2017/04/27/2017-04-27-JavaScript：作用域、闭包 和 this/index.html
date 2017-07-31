@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JavaScript：作用域、闭包 和 this | Daixinye</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="作用域（Scope）在JavaScript中，函数的一对花括号中会产生一个新的作用域。这个作用域只有函数内部能够访问。 123456789var a = 1;var fn = function()&amp;#123;    var b = 2;    console.log(b);&amp;#125;console.log(a); // 1fn(); // 2console.log(b); // Error 需要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript：作用域、闭包 和 this">
+<meta property="og:url" content="http://daixinye.com/2017/04/27/2017-04-27-JavaScript：作用域、闭包 和 this/index.html">
+<meta property="og:site_name" content="Daixinye">
+<meta property="og:description" content="作用域（Scope）在JavaScript中，函数的一对花括号中会产生一个新的作用域。这个作用域只有函数内部能够访问。 123456789var a = 1;var fn = function()&amp;#123;    var b = 2;    console.log(b);&amp;#125;console.log(a); // 1fn(); // 2console.log(b); // Error 需要">
+<meta property="og:image" content="http://daixinye.com/assets/javascript-excution-context.png">
+<meta property="og:updated_time" content="2017-07-31T16:35:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript：作用域、闭包 和 this">
+<meta name="twitter:description" content="作用域（Scope）在JavaScript中，函数的一对花括号中会产生一个新的作用域。这个作用域只有函数内部能够访问。 123456789var a = 1;var fn = function()&amp;#123;    var b = 2;    console.log(b);&amp;#125;console.log(a); // 1fn(); // 2console.log(b); // Error 需要">
+<meta name="twitter:image" content="http://daixinye.com/assets/javascript-excution-context.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Daixinye" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Daixinye</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <a id="nav-github" class="nav-icon" title="github" target="_blank" href="https://github.com/daixinye"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://daixinye.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2017-04-27-JavaScript：作用域、闭包 和 this" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/27/2017-04-27-JavaScript：作用域、闭包 和 this/" class="article-date">
+  <time datetime="2017-04-27T12:00:00.000Z" itemprop="datePublished">2017-04-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/javascript/">javascript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JavaScript：作用域、闭包 和 this
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="作用域（Scope）"><a href="#作用域（Scope）" class="headerlink" title="作用域（Scope）"></a>作用域（Scope）</h2><p>在JavaScript中，函数的一对花括号中会产生一个新的作用域。这个作用域只有函数内部能够访问。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var a = 1;</div><div class="line">var fn = function()&#123;</div><div class="line">    var b = 2;</div><div class="line">    console.log(b);</div><div class="line">&#125;</div><div class="line"></div><div class="line">console.log(a); // 1</div><div class="line">fn(); // 2</div><div class="line">console.log(b); // Error</div></pre></td></tr></table></figure>
+<p>需要注意的是，if、while、for语句的语句块也是一对花括号构成，但是这对花括号并没有形成新的作用域。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var a = 1;</div><div class="line"></div><div class="line">if(a)&#123;</div><div class="line">    var b = 2;</div><div class="line">    console.log(b); // 2</div><div class="line">&#125;</div><div class="line"></div><div class="line">console.log(a); // 1</div><div class="line">console.log(b); // 2，可以获取if()&#123;&#125;中的变量b</div></pre></td></tr></table></figure>
+<p>while、for语句同理。</p>
+<h3 id="执行上下文（Excution-context）"><a href="#执行上下文（Excution-context）" class="headerlink" title="执行上下文（Excution context）"></a>执行上下文（Excution context）</h3><p>执行上下文是内存中存储的作用域结构，也叫内存作用域。根据执行上下文，我们可以知道哪些变量是可以被访问的，而哪些变量是在作用域之外的。<img src="/assets/javascript-excution-context.png" alt="">需要注意的是，函数在没有被执行之前，我们只需要记下”函数的位置“即可，到真正被调用的时候，再去计算里面的值，此时就需要注意作用域的问题了。</p>
+<h2 id="闭包（Closure）"><a href="#闭包（Closure）" class="headerlink" title="闭包（Closure）"></a>闭包（Closure）</h2><p>由于每个函数可以访问包围它的作用域中的变量，所以闭包指的就是，在外部作用域已经返回之后还能访问该作用域的任意函数。</p>
+<p>简单来说，就是能访问函数内部作用域的函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">function closure()&#123;</div><div class="line">    var a = 1;</div><div class="line">    </div><div class="line">    return function()&#123;</div><div class="line">        console.log(a);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">closure()(); // 1</div></pre></td></tr></table></figure>
+<p>返回的匿名函数可以访问closure的作用域，故能够获取变量a的值。此时，这个返回的匿名函数就是一个闭包。</p>
+<p>闭包能够访问一个函数内部的私有变量，这个私有变量是外部作用域永远无法访问的。</p>
+<p>透彻理解解释器执行代码时的工作方式，以及变量作用域和闭包，对JS面向对象编程是至关重要的。</p>
+<h2 id="this"><a href="#this" class="headerlink" title="this"></a>this</h2><blockquote>
+<p>对this最好的理解，是把它看做函数被调用时传入的参数。</p>
+</blockquote>
+<p>在函数没有被调用前，我们永远无法得知this指向哪一个对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">var fn = function(one, two)&#123;</div><div class="line">    console.log(one, two);</div><div class="line">&#125;</div><div class="line">var r=&#123;&#125;, g=&#123;&#125;, b=&#123;&#125;, y=&#123;&#125;;</div><div class="line"></div><div class="line">r.method = fn;</div><div class="line"></div><div class="line">r.method(); // this=r, one=undefined, two=undefined</div><div class="line">fn(g,b);  // Global, g, b</div><div class="line">fn.call(r, g, b); // r, g, b</div><div class="line">r.method.call(y, g, b); // y, g, b</div><div class="line"></div><div class="line">setTimeout(fn, 1000); // this的值不确定，undefined, undefined</div><div class="line">setTimeout(r.method, 1000); // this的值不确定（跟r无关），undefined,undefined</div><div class="line">setTimeout(function()&#123;</div><div class="line">    r.method(); // r, undefined, undefined </div><div class="line">    &#125;,1000); </div><div class="line"></div><div class="line">console.log(one); // Referrence Error</div><div class="line">console.log(this); // Global</div><div class="line">new r.method(g, b); // &#123;&#125;, g, b</div></pre></td></tr></table></figure>
+<p>上面的代码例子中注意<code>setTimeout(r.method, 1000)</code>和<code>new r.method(g ,b)</code>。</p>
+<h3 id="注意点1：其实是同一个function对象"><a href="#注意点1：其实是同一个function对象" class="headerlink" title="注意点1：其实是同一个function对象"></a>注意点1：其实是同一个function对象</h3><p>实际上<code>r.method</code>和<code>fn</code>指向的是同一个function对象，只是两者在执行时，传入的是不同的<code>this</code>参数。</p>
+<p>所以以下两个语句是相等的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">setTimeout(r.method, 1000);</div><div class="line"></div><div class="line">setTimeout(fn, 1000);</div></pre></td></tr></table></figure>
+<h3 id="注意点2：new关键字的作用"><a href="#注意点2：new关键字的作用" class="headerlink" title="注意点2：new关键字的作用"></a>注意点2：new关键字的作用</h3><p><code>new</code>关键字执行了以下几步：</p>
+<ul>
+<li>创建一个空对象</li>
+<li>把函数的this指向这个空对象</li>
+<li>执行这个函数</li>
+<li>返回创建的对象</li>
+</ul>
+<p>所以下面三条语句实际上是相等的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">new r.method(g, b);</div><div class="line"></div><div class="line">r.method.call(&#123;&#125;,g,b);</div><div class="line"></div><div class="line">fn.call(&#123;&#125;,g,b);</div></pre></td></tr></table></figure>
+<p>全程，其实跟<code>r</code>一点关系都没有。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/05/03/2017-05-03-JavaScript：从代码复用到面向对象/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          JavaScript：从代码复用到面向对象
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/04/26/2017-04-26-jQuery：基础 DOM 操作方法/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">jQuery：基础 DOM 操作方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Catégories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/fe/">fe</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/http/">http</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/jquery/">jquery</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/mac/">mac</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell/">shell</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/sublime/">sublime</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/">svn</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/07/06/2017-07-06-Shell 脚本入门/">Shell 脚本入门</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/05/2017-07-05-CSS：什么是 BFC/">CSS：什么是 BFC</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/21/2017-06-21-Vue：基础用法与指令/">Vue：基础用法与指令</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/21/2017-06-21-CSS：Animation 动画/">CSS：Animation 动画小记</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/01/2017-06-01-CSS：table-cell 用法小/">CSS：table-cell 用法小记</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Xinye Dai<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

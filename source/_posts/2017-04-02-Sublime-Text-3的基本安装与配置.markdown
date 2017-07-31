@@ -2,7 +2,7 @@
 layout: post
 title:  "Sublime Text 3的基本安装与配置"
 date:   2017-04-02 00:13:06 +0800
-categories: Sublime
+categories: sublime
 ---
 ## 下载
 [官网下载](https://www.sublimetext.com/)

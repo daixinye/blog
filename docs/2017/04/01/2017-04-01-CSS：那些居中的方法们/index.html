@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>CSS：那些居中的方法们 | Daixinye</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="水平居中1、宽度已知，使用margin123&amp;lt;div&amp;gt;    &amp;lt;div class=&amp;quot;center&amp;quot;&amp;gt;需要居中的元素&amp;lt;/div&amp;gt;&amp;lt;/div&amp;gt; 1234.center &amp;#123;    width: 100px;    margin: 0 auto;&amp;#125; 2、宽度不定，使用text-align + inline-block">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS：那些居中的方法们">
+<meta property="og:url" content="http://daixinye.com/2017/04/01/2017-04-01-CSS：那些居中的方法们/index.html">
+<meta property="og:site_name" content="Daixinye">
+<meta property="og:description" content="水平居中1、宽度已知，使用margin123&amp;lt;div&amp;gt;    &amp;lt;div class=&amp;quot;center&amp;quot;&amp;gt;需要居中的元素&amp;lt;/div&amp;gt;&amp;lt;/div&amp;gt; 1234.center &amp;#123;    width: 100px;    margin: 0 auto;&amp;#125; 2、宽度不定，使用text-align + inline-block">
+<meta property="og:updated_time" content="2017-07-31T16:38:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS：那些居中的方法们">
+<meta name="twitter:description" content="水平居中1、宽度已知，使用margin123&amp;lt;div&amp;gt;    &amp;lt;div class=&amp;quot;center&amp;quot;&amp;gt;需要居中的元素&amp;lt;/div&amp;gt;&amp;lt;/div&amp;gt; 1234.center &amp;#123;    width: 100px;    margin: 0 auto;&amp;#125; 2、宽度不定，使用text-align + inline-block">
+  
+    <link rel="alternate" href="/atom.xml" title="Daixinye" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Daixinye</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <a id="nav-github" class="nav-icon" title="github" target="_blank" href="https://github.com/daixinye"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://daixinye.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2017-04-01-CSS：那些居中的方法们" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/01/2017-04-01-CSS：那些居中的方法们/" class="article-date">
+  <time datetime="2017-04-01T12:00:00.000Z" itemprop="datePublished">2017-04-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/css/">css</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CSS：那些居中的方法们
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="水平居中"><a href="#水平居中" class="headerlink" title="水平居中"></a>水平居中</h2><h3 id="1、宽度已知，使用margin"><a href="#1、宽度已知，使用margin" class="headerlink" title="1、宽度已知，使用margin"></a>1、宽度已知，使用margin</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div&gt;</div><div class="line">    &lt;div class=&quot;center&quot;&gt;需要居中的元素&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">.center &#123;</div><div class="line">    width: 100px;</div><div class="line">    margin: 0 auto;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="2、宽度不定，使用text-align-inline-block"><a href="#2、宽度不定，使用text-align-inline-block" class="headerlink" title="2、宽度不定，使用text-align + inline-block"></a>2、宽度不定，使用text-align + inline-block</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;wrapper&quot;&gt;</div><div class="line">    &lt;div class=&quot;center&quot;&gt;需要居中的元素&lt;/divß&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">.wrapper &#123;</div><div class="line">    text-align: center;</div><div class="line">&#125;</div><div class="line">.center &#123;</div><div class="line">    display:inline-block;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="3、宽度不定，使用弹性盒子"><a href="#3、宽度不定，使用弹性盒子" class="headerlink" title="3、宽度不定，使用弹性盒子"></a>3、宽度不定，使用弹性盒子</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;wrapper&quot;&gt;</div><div class="line">    &lt;div&gt;需要居中的元素&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">.wrapper &#123;</div><div class="line">    display: flex;</div><div class="line">    justify-content: center;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="4、宽度已知，使用绝对定位"><a href="#4、宽度已知，使用绝对定位" class="headerlink" title="4、宽度已知，使用绝对定位"></a>4、宽度已知，使用绝对定位</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;wrapper&quot;&gt;</div><div class="line">    &lt;div class=&quot;center&quot;&gt;需要居中的元素&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">.wrapper &#123;</div><div class="line">    position: relative;</div><div class="line">&#125;</div><div class="line">.center &#123;</div><div class="line">    postion: absolute;</div><div class="line">    width: 100px;</div><div class="line">    left:50%;</div><div class="line">    margin-left:-50px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="完全居中"><a href="#完全居中" class="headerlink" title="完全居中"></a>完全居中</h2><h3 id="1、完全居中"><a href="#1、完全居中" class="headerlink" title="1、完全居中"></a>1、完全居中</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;wrapper&quot;&gt;</div><div class="line">    &lt;div class=&quot;center&quot;&gt;需要居中的元素&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">.wrapper &#123;</div><div class="line">    height:200px;</div><div class="line">    position: relative;</div><div class="line">&#125;</div><div class="line">.center &#123;</div><div class="line">    height: 50%;</div><div class="line">    width: 50%;</div><div class="line">    margin: auto;</div><div class="line">    position: absolute;</div><div class="line">    top: 0;</div><div class="line">    bottom: 0;</div><div class="line">    left: 0;</div><div class="line">    right: 0；</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="2、使用负margin"><a href="#2、使用负margin" class="headerlink" title="2、使用负margin"></a>2、使用负margin</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;wrapper&quot;&gt;</div><div class="line">    &lt;div class=&quot;center&quot;&gt;需要居中的元素&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">.warpper &#123;</div><div class="line">    height: 200px;</div><div class="line">    position: relative;</div><div class="line">&#125;</div><div class="line">.center &#123;</div><div class="line">    width: 100px;</div><div class="line">    height: 100px;</div><div class="line">    margin: auto;</div><div class="line">    position: absolute;</div><div class="line">    top: 50%;</div><div class="line">    left: 50%;</div><div class="line">    margin-top: -50px;</div><div class="line">    margin-left: -50px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>优点：兼容IE6-7；</p>
+<p>缺点：不能使用百分比的大小，内容高度不可变；内容可能会超出容器；</p>
+<h3 id="3、使用transform"><a href="#3、使用transform" class="headerlink" title="3、使用transform"></a>3、使用transform</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;wrapper&quot;&gt;</div><div class="line">    &lt;div class=&quot;center&quot;&gt;需要居中的元素&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">.wrapper &#123;</div><div class="line">    height: 200px;</div><div class="line">    postion: relative;</div><div class="line">&#125;</div><div class="line">.center &#123;</div><div class="line">    height: 50%;</div><div class="line">    width: 50%;</div><div class="line">    position: absolute;</div><div class="line">    top: 50%;</div><div class="line">    left: 50%;</div><div class="line">    transform:translate(-50%,-50%);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>优点：内容高度可变；</p>
+<p>缺点：不兼容IE8；会和其他transform样式有冲突；</p>
+<h3 id="4、使用table-cell"><a href="#4、使用table-cell" class="headerlink" title="4、使用table-cell"></a>4、使用table-cell</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;table&quot;&gt;</div><div class="line">    &lt;div class=&quot;table-cell&quot;&gt;</div><div class="line">        &lt;div class=&quot;center&quot;&gt;需要居中的元素&lt;/div&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">.table &#123;</div><div class="line">    display: table;</div><div class="line">    width: 100%;</div><div class="line">&#125;</div><div class="line">.table-cell &#123;</div><div class="line">    display: table-cell;</div><div class="line">    vertical-align: middle;</div><div class="line">    height: 200px;</div><div class="line">&#125;</div><div class="line">.center &#123;</div><div class="line">    width: 50%;</div><div class="line">    margin: 0 auto;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>优点：内容高度可变；能自动撑开父元素；浏览器兼容性好；</p>
+<p>缺点：需要额外的HTML标签；</p>
+<h3 id="5、使用flex-box"><a href="#5、使用flex-box" class="headerlink" title="5、使用flex-box"></a>5、使用flex-box</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;wrapper&quot;&gt;</div><div class="line">    &lt;div&gt;需要居中的元素&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">.wrapper &#123;</div><div class="line">    display: flex;</div><div class="line">    align-items: center;</div><div class="line">    justify-content: center;</div><div class="line">    height: 200px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>优点：内容高度可变；</p>
+<p>缺点：不支持IE8-9；</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/04/01/2017-04-01-CSS：如何去除 inline-block 带来的空白间距/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          CSS：如何去除 inline-block 带来的空白间距
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/01/30/2017-01-03-Git：常用命令整理/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">Git：那些常用命令的整理</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Catégories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/fe/">fe</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/http/">http</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/jquery/">jquery</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/mac/">mac</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell/">shell</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/sublime/">sublime</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/">svn</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/07/06/2017-07-06-Shell 脚本入门/">Shell 脚本入门</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/05/2017-07-05-CSS：什么是 BFC/">CSS：什么是 BFC</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/21/2017-06-21-Vue：基础用法与指令/">Vue：基础用法与指令</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/21/2017-06-21-CSS：Animation 动画/">CSS：Animation 动画小记</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/01/2017-06-01-CSS：table-cell 用法小/">CSS：table-cell 用法小记</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Xinye Dai<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -2,7 +2,7 @@
 layout: post
 title:  "SVN：LNMP下搭建SVN服务器简明步骤"
 date:   2016-03-04 14:47:11 +0800
-categories: SVN
+categories: svn
 ---
 下文中PATH、PROJECT等全大写的字符串均为举例用，实际操作时请替换成自己的目录和版本库或项目名称等。
 ## 安装

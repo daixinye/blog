@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>CSS：table-cell 用法小记 | Daixinye</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1、垂直居中123&amp;lt;div class=&amp;quot;table-cell&amp;quot;&amp;gt;    &amp;lt;div&amp;gt;需要垂直居中的元素&amp;lt;/div&amp;gt;&amp;lt;/div&amp;gt; 12345.table-cell &amp;#123;    display: table-cell;    verticall-align: middle;    height: 200px;&amp;#125; 2、">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS：table-cell 用法小记">
+<meta property="og:url" content="http://daixinye.com/2017/06/01/2017-06-01-CSS：table-cell 用法小/index.html">
+<meta property="og:site_name" content="Daixinye">
+<meta property="og:description" content="1、垂直居中123&amp;lt;div class=&amp;quot;table-cell&amp;quot;&amp;gt;    &amp;lt;div&amp;gt;需要垂直居中的元素&amp;lt;/div&amp;gt;&amp;lt;/div&amp;gt; 12345.table-cell &amp;#123;    display: table-cell;    verticall-align: middle;    height: 200px;&amp;#125; 2、">
+<meta property="og:updated_time" content="2017-07-31T16:32:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS：table-cell 用法小记">
+<meta name="twitter:description" content="1、垂直居中123&amp;lt;div class=&amp;quot;table-cell&amp;quot;&amp;gt;    &amp;lt;div&amp;gt;需要垂直居中的元素&amp;lt;/div&amp;gt;&amp;lt;/div&amp;gt; 12345.table-cell &amp;#123;    display: table-cell;    verticall-align: middle;    height: 200px;&amp;#125; 2、">
+  
+    <link rel="alternate" href="/atom.xml" title="Daixinye" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Daixinye</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <a id="nav-github" class="nav-icon" title="github" target="_blank" href="https://github.com/daixinye"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://daixinye.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2017-06-01-CSS：table-cell 用法小" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/01/2017-06-01-CSS：table-cell 用法小/" class="article-date">
+  <time datetime="2017-06-01T12:00:00.000Z" itemprop="datePublished">2017-06-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/css/">css</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CSS：table-cell 用法小记
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1、垂直居中"><a href="#1、垂直居中" class="headerlink" title="1、垂直居中"></a>1、垂直居中</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;table-cell&quot;&gt;</div><div class="line">    &lt;div&gt;需要垂直居中的元素&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">.table-cell &#123;</div><div class="line">    display: table-cell;</div><div class="line">    verticall-align: middle;</div><div class="line">    height: 200px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="2、等高布局"><a href="#2、等高布局" class="headerlink" title="2、等高布局"></a>2、等高布局</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;table&quot;&gt;</div><div class="line">    &lt;div class=&quot;table-cell&quot;&gt;</div><div class="line">        &lt;div&gt;等高布局&lt;/div&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">    &lt;div class=&quot;table-cell width-100&quot;&gt;</div><div class="line">        &lt;div&gt;table-cell的高度取决于所有table-cell中最大的高度&lt;/div&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">.table &#123;</div><div class="line">    display: table;</div><div class="line">&#125;</div><div class="line">.table-cell &#123;</div><div class="line">    display: table-cell;</div><div class="line">&#125;</div><div class="line">.width-100 &#123;</div><div class="line">    width: 100px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="3、平均划分子元素"><a href="#3、平均划分子元素" class="headerlink" title="3、平均划分子元素"></a>3、平均划分子元素</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;table&quot;&gt;</div><div class="line">    &lt;div class=&quot;table-cell&quot;&gt;</div><div class="line">        子元素</div><div class="line">    &lt;/div&gt;</div><div class="line">    &lt;div class=&quot;table-cell&quot;&gt;</div><div class="line">        子元素</div><div class="line">    &lt;/div&gt;</div><div class="line">    &lt;div class=&quot;table-cell&quot;&gt;</div><div class="line">        子元素</div><div class="line">    &lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">.table &#123;</div><div class="line">    display: table;</div><div class="line">    width: 100%;</div><div class="line">&#125;</div><div class="line">.table-cell &#123;</div><div class="line">    display: table-cell;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://my.oschina.net/CharmyZ/blog/714983" target="_blank" rel="external">https://my.oschina.net/CharmyZ/blog/714983</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/06/21/2017-06-21-CSS：Animation 动画/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          CSS：Animation 动画小记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/05/28/2017-05-28-JavaScript：Promise 小记/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">JavaScript：Promise 小记</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Catégories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/fe/">fe</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/http/">http</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/jquery/">jquery</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/mac/">mac</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell/">shell</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/sublime/">sublime</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/">svn</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/07/06/2017-07-06-Shell 脚本入门/">Shell 脚本入门</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/05/2017-07-05-CSS：什么是 BFC/">CSS：什么是 BFC</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/21/2017-06-21-Vue：基础用法与指令/">Vue：基础用法与指令</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/21/2017-06-21-CSS：Animation 动画/">CSS：Animation 动画小记</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/01/2017-06-01-CSS：table-cell 用法小/">CSS：table-cell 用法小记</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Xinye Dai<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>前端：跨域方法小记 | Daixinye</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="产生背景为了防止跨站请求伪造（CSRF，Cross-site request forgery）攻击，浏览器引入了同源策略（SOP，Same-Origin Policy）来提高安全性。 同源策略指的是，只要在同一域名（domain或ip）、同一端口、同一协议下才能互相获取资源。 一个域名A的网页可以获取域名B的静态资源（如CSS文件、图片等），但是不能直接发起AJAX（Asynchronous Ja">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端：跨域方法小记">
+<meta property="og:url" content="http://daixinye.com/2017/04/24/2017-04-24-前端：跨域方法小记/index.html">
+<meta property="og:site_name" content="Daixinye">
+<meta property="og:description" content="产生背景为了防止跨站请求伪造（CSRF，Cross-site request forgery）攻击，浏览器引入了同源策略（SOP，Same-Origin Policy）来提高安全性。 同源策略指的是，只要在同一域名（domain或ip）、同一端口、同一协议下才能互相获取资源。 一个域名A的网页可以获取域名B的静态资源（如CSS文件、图片等），但是不能直接发起AJAX（Asynchronous Ja">
+<meta property="og:updated_time" content="2017-07-31T16:37:09.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端：跨域方法小记">
+<meta name="twitter:description" content="产生背景为了防止跨站请求伪造（CSRF，Cross-site request forgery）攻击，浏览器引入了同源策略（SOP，Same-Origin Policy）来提高安全性。 同源策略指的是，只要在同一域名（domain或ip）、同一端口、同一协议下才能互相获取资源。 一个域名A的网页可以获取域名B的静态资源（如CSS文件、图片等），但是不能直接发起AJAX（Asynchronous Ja">
+  
+    <link rel="alternate" href="/atom.xml" title="Daixinye" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Daixinye</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <a id="nav-github" class="nav-icon" title="github" target="_blank" href="https://github.com/daixinye"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://daixinye.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2017-04-24-前端：跨域方法小记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/24/2017-04-24-前端：跨域方法小记/" class="article-date">
+  <time datetime="2017-04-24T12:00:00.000Z" itemprop="datePublished">2017-04-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/fe/">fe</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      前端：跨域方法小记
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="产生背景"><a href="#产生背景" class="headerlink" title="产生背景"></a>产生背景</h2><p>为了防止跨站请求伪造（CSRF，Cross-site request forgery）攻击，浏览器引入了同源策略（SOP，Same-Origin Policy）来提高安全性。</p>
+<p>同源策略指的是，只要在同一域名（domain或ip）、同一端口、同一协议下才能互相获取资源。</p>
+<p>一个域名A的网页可以获取域名B的静态资源（如CSS文件、图片等），但是不能直接发起AJAX（Asynchronous JavaScript and XML）请求。</p>
+<h2 id="JS跨域"><a href="#JS跨域" class="headerlink" title="JS跨域"></a>JS跨域</h2><h3 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h3><p>原理：通过动态插入JS脚本的方式来实现跨域。</p>
+<p>该方法适合跨域获取JSON类型的数据。缺点是只支持GET方式。</p>
+<h3 id="document-domain"><a href="#document-domain" class="headerlink" title="document.domain"></a>document.domain</h3><p>原理：通过修改两个同一一级域名不同二级域名页面（如example.com与a.example）的<code>document.domain</code>来实现跨域。<code>document.domain</code>只能修改为自身或者高一级的父域名。</p>
+<p>该方法适用于同父域名下的跨域问题。</p>
+<h3 id="window-name"><a href="#window-name" class="headerlink" title="window.name"></a>window.name</h3><p>原理：window对象的name属性有一个特征，即在一个窗口（window）的生命周期下，窗口载入的所有页面都共享一个<code>window.name</code>，故我们可以通过插入一个外部页面的iframe，通过JS修改<code>window.name</code>，再将<code>window.location</code>改为同源的页面，来访问<code>window.name</code>的值进行跨域。</p>
+<p>该方法的缺点是需要额外的同源页面，同时不同浏览器对window.name的大小也有一定的限制。</p>
+<h3 id="window-postMessage"><a href="#window-postMessage" class="headerlink" title="window.postMessage"></a>window.postMessage</h3><p>原理：<code>window.postMessage(message, targetOrigin)</code>，是HTML5新引进的特性，可以用来向同源或者不同源的window对象发送消息。插入一个iframe，获取<code>iframe.contentWindow</code>，然后使用<code>postMessage</code>发送消息，在iframe预先设置<code>onmessage</code>的处理函数，即可获取跨域的数据。</p>
+<p>该方法适用于处理多页面通信以及与iframe之间的消息传递。</p>
+<h2 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h2><h3 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h3><p>原理：通过将外部资源映射成内部的地址，再通过代理服务器去获取真实的资源，然后返回给浏览器，避免在浏览器端进行跨域操作。</p>
+<blockquote>
+<p>反向代理，代理的是服务器，客户端只需要知道代理服务器上的资源URL地址即可，而不关心资源的真正URL。例如负载均衡就会用到反向代理。</p>
+<p>正向代理，则是代理客户端，客户端需要知道资源的实际URL，通过告诉代理服务器真正的资源URL所在的位置，让代理服务器去获取后返还给客户端。例如翻墙工具就是正向代理。</p>
+</blockquote>
+<h3 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h3><p>浏览器发送一个带有<code>Origin</code>首部字段的HTTP请求，表明请求的来源。服务器的响应头中包含<code>Access-Control-Allow-Origin</code>表明允许哪些域名的请求。一旦不匹配则拒绝访问。通常设置为<code>Access-Control-Allow-Origin: *</code>可以允许任意域名跨域请求该服务器上的资源。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/04/26/2017-04-26-jQuery：事件监听用法/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          jQuery：事件监听用法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/04/14/2017-04-14-React：基本环境搭建简明步骤/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">React：基本环境搭建简明步骤</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Catégories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/fe/">fe</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/http/">http</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/jquery/">jquery</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/mac/">mac</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell/">shell</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/sublime/">sublime</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/">svn</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/07/06/2017-07-06-Shell 脚本入门/">Shell 脚本入门</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/05/2017-07-05-CSS：什么是 BFC/">CSS：什么是 BFC</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/21/2017-06-21-Vue：基础用法与指令/">Vue：基础用法与指令</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/21/2017-06-21-CSS：Animation 动画/">CSS：Animation 动画小记</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/01/2017-06-01-CSS：table-cell 用法小/">CSS：table-cell 用法小记</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Xinye Dai<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -2,7 +2,7 @@
 layout: post
 title:  "HTTP基础（2）：常见的状态码"
 date:   2017-04-12 13:00:00 +0800
-categories: HTTP
+categories: http
 ---
 HTTP状态码用于描述客户端向服务器端发送请求后的请求结果。通过状态码，客户端可以知道发出的HTTP是是否被正确处理。
 

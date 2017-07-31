@@ -2,7 +2,7 @@
 layout: post
 title:  "Mac：如何在Terminal中打开Finder"
 date:   2017-04-07 22:16:35 +0800
-categories: Mac
+categories: mac
 ---
 ## 前言
 对于习惯使用Terminal的小伙伴们来说，常常有“进入到某个目录中”并“在该目录中打开Finder”的需求。

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>CSS：line-height 不同取值的差异 | Daixinye</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="百分比值 line-height = （父元素 font-size）×（百分比）  1234&amp;lt;div class=&amp;quot;outer&amp;quot;&amp;gt;    父元素    &amp;lt;div class=&amp;quot;inner&amp;quot;&amp;gt;子元素&amp;lt;/div&amp;gt;&amp;lt;/div&amp;gt; 123456789.outer &amp;#123;    /* 父元素行高 = 父元素font-">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS：line-height 不同取值的差异">
+<meta property="og:url" content="http://daixinye.com/2017/04/02/2017-04-02-CSS：line-height 不同取值的差异/index.html">
+<meta property="og:site_name" content="Daixinye">
+<meta property="og:description" content="百分比值 line-height = （父元素 font-size）×（百分比）  1234&amp;lt;div class=&amp;quot;outer&amp;quot;&amp;gt;    父元素    &amp;lt;div class=&amp;quot;inner&amp;quot;&amp;gt;子元素&amp;lt;/div&amp;gt;&amp;lt;/div&amp;gt; 123456789.outer &amp;#123;    /* 父元素行高 = 父元素font-">
+<meta property="og:updated_time" content="2017-07-31T16:39:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS：line-height 不同取值的差异">
+<meta name="twitter:description" content="百分比值 line-height = （父元素 font-size）×（百分比）  1234&amp;lt;div class=&amp;quot;outer&amp;quot;&amp;gt;    父元素    &amp;lt;div class=&amp;quot;inner&amp;quot;&amp;gt;子元素&amp;lt;/div&amp;gt;&amp;lt;/div&amp;gt; 123456789.outer &amp;#123;    /* 父元素行高 = 父元素font-">
+  
+    <link rel="alternate" href="/atom.xml" title="Daixinye" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Daixinye</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <a id="nav-github" class="nav-icon" title="github" target="_blank" href="https://github.com/daixinye"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://daixinye.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2017-04-02-CSS：line-height 不同取值的差异" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/02/2017-04-02-CSS：line-height 不同取值的差异/" class="article-date">
+  <time datetime="2017-04-02T12:00:00.000Z" itemprop="datePublished">2017-04-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/css/">css</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CSS：line-height 不同取值的差异
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="百分比值"><a href="#百分比值" class="headerlink" title="百分比值"></a>百分比值</h2><blockquote>
+<p>line-height = （父元素 font-size）×（百分比）</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;outer&quot;&gt;</div><div class="line">    父元素</div><div class="line">    &lt;div class=&quot;inner&quot;&gt;子元素&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">.outer &#123;</div><div class="line">    /* 父元素行高 = 父元素font-size 30px × 150% = 45px */</div><div class="line">    line-height: 150%;</div><div class="line">    font-size: 30px;</div><div class="line">&#125;</div><div class="line">.inner &#123;</div><div class="line">    /* 子元素行高 = 父元素font-size 30px × 150% = 45px */</div><div class="line">    font-size: 20px; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="em值"><a href="#em值" class="headerlink" title="em值"></a>em值</h2><blockquote>
+<p>line-height = （父元素 font-size）×（em值）</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">.outer &#123;</div><div class="line">    /* 父元素行高 = 父元素font-size 30px × 1.5 = 45px */</div><div class="line">    line-height: 1.5em;</div><div class="line">    font-size: 30px;</div><div class="line">&#125;</div><div class="line">.inner &#123;</div><div class="line">    /* 子元素行高 = 父元素font-size 30px × 1.5 = 45px */</div><div class="line">    font-size: 20px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里特别要注意尽管em是相对当前元素的<code>font-size</code>值来计算的，同时<code>line-height</code>也是可以被继承的属性，但是实际上子元素继承时并不是<code>line-height: 1.5em</code>，而是父元素计算完成后的<code>line-height: 45px;</code></p>
+<h2 id="无单位数字"><a href="#无单位数字" class="headerlink" title="无单位数字"></a>无单位数字</h2><blockquote>
+<p>line-height = （当前元素 font-size）×（无单位数字）</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">.outer &#123;</div><div class="line">    /* 父元素行高 = 父元素font-size 30px × 1.5 = 45px */</div><div class="line">    line-height: 1.5;</div><div class="line">    font-size: 30px;</div><div class="line">&#125;</div><div class="line">.inner &#123;</div><div class="line">    /* 子元素行高 = 子元素font-size 20px × 1.5 = 30px */</div><div class="line">    font-size: 20px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>无单位数字与百分比值和em值相反，是根据当前元素的<code>font-size</code>来计算的。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>其实仔细观察会发现，百分比值和em值，在子元素继承父元素的<code>line-height</code>属性时，继承的是计算完成后（以px为单位）的值。而无单位数字，则是需要根据子元素的<code>font-size</code>，让子元素自行计算的。</p>
+<h3 id="计算em值的大致流程："><a href="#计算em值的大致流程：" class="headerlink" title="计算em值的大致流程："></a>计算em值的大致流程：</h3><p> –&gt; 设置父元素font-size = 30px；</p>
+<p> –&gt; 设置父元素line-height = 1.5em;</p>
+<p> –&gt; 计算父元素line-height =  font-size × 1.5 = 30px × 1.5 = 45px; </p>
+<p> –&gt; 设置子元素font-size = 20px;</p>
+<p> –&gt; 计算子元素line-height = 继承父元素line-height = 45px; </p>
+<h3 id="计算无单位数字的大致流程："><a href="#计算无单位数字的大致流程：" class="headerlink" title="计算无单位数字的大致流程："></a>计算无单位数字的大致流程：</h3><p>–&gt; 设置父元素font-size = 30px;</p>
+<p>–&gt; 设置父元素line-height = 1.5;</p>
+<p>–&gt; 计算父元素line-height = 当前元素font-size × 1.5 = 30px × 1.5 = 45px;</p>
+<p>–&gt; 设置子元素font-size = 20px;</p>
+<p>–&gt; 计算子元素line-height = 继承父元素line-height = 1.5;</p>
+<p>–&gt; 计算实际子元素line-height = 当前元素font-size × 1.5 = 20px × 1.5 = 30px;</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/04/07/2017-04-07-Mac在Terminal打开Finder/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          Mac：如何在Terminal中打开Finder
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/04/02/2017-04-02-Sublime-Text-3的基本安装与配置/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">Sublime Text 3的基本安装与配置</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Catégories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/fe/">fe</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/http/">http</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/jquery/">jquery</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/mac/">mac</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell/">shell</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/sublime/">sublime</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/">svn</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/07/06/2017-07-06-Shell 脚本入门/">Shell 脚本入门</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/05/2017-07-05-CSS：什么是 BFC/">CSS：什么是 BFC</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/21/2017-06-21-Vue：基础用法与指令/">Vue：基础用法与指令</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/21/2017-06-21-CSS：Animation 动画/">CSS：Animation 动画小记</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/01/2017-06-01-CSS：table-cell 用法小/">CSS：table-cell 用法小记</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Xinye Dai<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

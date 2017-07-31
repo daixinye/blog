@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Daixinye</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Daixinye">
+<meta property="og:url" content="http://daixinye.com/page/3/index.html">
+<meta property="og:site_name" content="Daixinye">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Daixinye">
+  
+    <link rel="alternate" href="/atom.xml" title="Daixinye" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Daixinye</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <a id="nav-github" class="nav-icon" title="github" target="_blank" href="https://github.com/daixinye"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://daixinye.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-2017-04-02-Sublime-Text-3的基本安装与配置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/02/2017-04-02-Sublime-Text-3的基本安装与配置/" class="article-date">
+  <time datetime="2017-04-01T16:13:06.000Z" itemprop="datePublished">2017-04-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/sublime/">sublime</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/02/2017-04-02-Sublime-Text-3的基本安装与配置/">Sublime Text 3的基本安装与配置</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p><a href="https://www.sublimetext.com/" target="_blank" rel="external">官网下载</a></p>
+<h2 id="Package-Control"><a href="#Package-Control" class="headerlink" title="Package Control"></a>Package Control</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><h3 id="简易方法"><a href="#简易方法" class="headerlink" title="简易方法"></a>简易方法</h3><p>最简单的安装方法，是通过Sublime Text控制台来安装。你可以通过Ctrl + ` 快捷键或者通过菜单栏 View &gt; Show Console 来打开控制台。接着，输入下面这段代码按下回车即可。（最新的版本请参照官网）</p>
+<pre><code>import urllib.request,os,hashlib; h = &apos;df21e130d211cfc94d9b0905775a7c0f&apos; + &apos;1e3d39e33b79698005270310898eea76&apos;; pf = &apos;Package Control.sublime-package&apos;; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( &apos;http://packagecontrol.io/&apos; + pf.replace(&apos; &apos;, &apos;%20&apos;)).read(); dh = hashlib.sha256(by).hexdigest(); print(&apos;Error validating download (got %s instead of %s), please try manual install&apos; % (dh, h)) if dh != h else open(os.path.join( ipp, pf), &apos;wb&apos; ).write(by)
+</code></pre><p>这段代码在必要的情况下会为你创建一个Installed Packages 文件夹，然后下载Package Control.sublime-package到这个文件夹中。这个下载由于Python标准库的限制，会通过HTTP而不是HTTPS来完成。文件会通过SHA-256来验证。</p>
+<h3 id="手动下载"><a href="#手动下载" class="headerlink" title="手动下载"></a>手动下载</h3><p>如果由于一些原因，你无法在控制台中完成下载，那么你可以通过以下几个步骤来手动安装Package Control：</p>
+<ol>
+<li>点击菜单中的Preferences &gt; Browse Packages…</li>
+<li>在打开的文件夹中创建一个Installed Packages文件夹</li>
+<li>下载这个文件<a href="https://packagecontrol.io/Package%20Control.sublime-package" target="_blank" rel="external">Package Control.sublime-package</a>并放到新建的Installed Packages文件夹中</li>
+<li>重启Sublime Text</li>
+</ol>
+<h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><p>完成Package Control的安装后，在Sublime中按住<code>Shift + CMD + P</code>。在输入框中输入<code>Package Control:Install Package</code>，这时Sublime会获取服务器上所有的Package信息，稍等一下后就可以选择自己需要的插件进行安装了。<br>你可以在<a href="https://packagecontrol.io/browse" target="_blank" rel="external">Package Control - Browse</a>中查看所有插件的信息。Package Control也可以用于下载一些Sublime的主题，只要在Package安装选择界面中以Theme开头即可。</p>
+<p>插件的配置和主题的选择都可以在Preferences菜单中进行。</p>
+<h2 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h2><h3 id="在Terminal中打开Sublime"><a href="#在Terminal中打开Sublime" class="headerlink" title="在Terminal中打开Sublime"></a>在Terminal中打开Sublime</h3><p>Sublime Text 包含了一个命令行工具，<code>subl</code>，能让你在命令行中打开文件。这个工具可以用来在Sublime中打开对应的文件和项目文件夹。</p>
+<h4 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h4><p>在Terminal中输入以下这段代码：</p>
+<pre><code>ln -s &quot;/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl&quot; /usr/local/bin/subl
+</code></pre><p>接下来你就可以在命令行中用<code>subl fileName</code>的方式来打开文件了。</p>
+<p>更多用法可以输入<code>subl --help</code>查看。</p>
+<h3 id="在Sublime-Text中运行JavaScript"><a href="#在Sublime-Text中运行JavaScript" class="headerlink" title="在Sublime Text中运行JavaScript"></a>在Sublime Text中运行JavaScript</h3><p>点击菜单中的Tools &gt; Build System &gt; New Build System，复制以下代码：</p>
+<pre><code>{
+    &quot;cmd&quot;: [&quot;/usr/local/bin/node&quot;,&quot;$file&quot;],
+    &quot;selector&quot;: &quot;source.js&quot;
+}
+</code></pre><p>命名为<code>JavaScript.sublime-build</code>保存至Package或Package/User文件夹。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://packagecontrol.io/installation" target="_blank" rel="external">Package Control - Installation</a></p>
+<p><a href="https://www.sublimetext.com/docs/3/osx_command_line.html" target="_blank" rel="external">Sublime Text 3 - OS X Command Line</a></p>
+<p><a href="http://docs.sublimetext.info/en/latest/file_processing/build_systems.html" target="_blank" rel="external">Build Systems</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2017-04-01-CSS：如何去除 inline-block 带来的空白间距" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/01/2017-04-01-CSS：如何去除 inline-block 带来的空白间距/" class="article-date">
+  <time datetime="2017-04-01T12:00:00.000Z" itemprop="datePublished">2017-04-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/css/">css</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/01/2017-04-01-CSS：如何去除 inline-block 带来的空白间距/">CSS：如何去除 inline-block 带来的空白间距</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1、使用负margin"><a href="#1、使用负margin" class="headerlink" title="1、使用负margin"></a>1、使用负margin</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;ul&gt;</div><div class="line">    &lt;li&gt;item&lt;/li&gt;</div><div class="line">    &lt;li&gt;item&lt;/li&gt;</div><div class="line">    &lt;li&gt;item&lt;/li&gt;</div><div class="line">&lt;/ul&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">ul &#123;</div><div class="line">    list-style:none;</div><div class="line">&#125;</div><div class="line">li &#123;</div><div class="line">    display: inline-block;</div><div class="line">    margin-left: -4px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="2、改变HTML结构，把li标签写在同一行"><a href="#2、改变HTML结构，把li标签写在同一行" class="headerlink" title="2、改变HTML结构，把li标签写在同一行"></a>2、改变HTML结构，把li标签写在同一行</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;ul&gt;</div><div class="line">    &lt;li&gt;item&lt;/li&gt;&lt;li&gt;item&lt;/li&gt;&lt;li&gt;item&lt;/li&gt;</div><div class="line">&lt;/ul&gt;</div></pre></td></tr></table></figure>
+<h2 id="3、父元素中设置字体大小为0"><a href="#3、父元素中设置字体大小为0" class="headerlink" title="3、父元素中设置字体大小为0"></a>3、父元素中设置字体大小为0</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;ul&gt;</div><div class="line">    &lt;li&gt;item&lt;/li&gt;</div><div class="line">    &lt;li&gt;item&lt;/li&gt;</div><div class="line">    &lt;li&gt;item&lt;/li&gt;</div><div class="line">&lt;/ul&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">ul &#123;</div><div class="line">    list-style: none;</div><div class="line">    font-size: 0;</div><div class="line">&#125;</div><div class="line">li &#123;</div><div class="line">    display: inline-block;</div><div class="line">    font-size: 16px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2017-04-01-CSS：那些居中的方法们" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/01/2017-04-01-CSS：那些居中的方法们/" class="article-date">
+  <time datetime="2017-04-01T12:00:00.000Z" itemprop="datePublished">2017-04-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/css/">css</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/01/2017-04-01-CSS：那些居中的方法们/">CSS：那些居中的方法们</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="水平居中"><a href="#水平居中" class="headerlink" title="水平居中"></a>水平居中</h2><h3 id="1、宽度已知，使用margin"><a href="#1、宽度已知，使用margin" class="headerlink" title="1、宽度已知，使用margin"></a>1、宽度已知，使用margin</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div&gt;</div><div class="line">    &lt;div class=&quot;center&quot;&gt;需要居中的元素&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">.center &#123;</div><div class="line">    width: 100px;</div><div class="line">    margin: 0 auto;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="2、宽度不定，使用text-align-inline-block"><a href="#2、宽度不定，使用text-align-inline-block" class="headerlink" title="2、宽度不定，使用text-align + inline-block"></a>2、宽度不定，使用text-align + inline-block</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;wrapper&quot;&gt;</div><div class="line">    &lt;div class=&quot;center&quot;&gt;需要居中的元素&lt;/divß&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">.wrapper &#123;</div><div class="line">    text-align: center;</div><div class="line">&#125;</div><div class="line">.center &#123;</div><div class="line">    display:inline-block;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="3、宽度不定，使用弹性盒子"><a href="#3、宽度不定，使用弹性盒子" class="headerlink" title="3、宽度不定，使用弹性盒子"></a>3、宽度不定，使用弹性盒子</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;wrapper&quot;&gt;</div><div class="line">    &lt;div&gt;需要居中的元素&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">.wrapper &#123;</div><div class="line">    display: flex;</div><div class="line">    justify-content: center;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="4、宽度已知，使用绝对定位"><a href="#4、宽度已知，使用绝对定位" class="headerlink" title="4、宽度已知，使用绝对定位"></a>4、宽度已知，使用绝对定位</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;wrapper&quot;&gt;</div><div class="line">    &lt;div class=&quot;center&quot;&gt;需要居中的元素&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">.wrapper &#123;</div><div class="line">    position: relative;</div><div class="line">&#125;</div><div class="line">.center &#123;</div><div class="line">    postion: absolute;</div><div class="line">    width: 100px;</div><div class="line">    left:50%;</div><div class="line">    margin-left:-50px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="完全居中"><a href="#完全居中" class="headerlink" title="完全居中"></a>完全居中</h2><h3 id="1、完全居中"><a href="#1、完全居中" class="headerlink" title="1、完全居中"></a>1、完全居中</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;wrapper&quot;&gt;</div><div class="line">    &lt;div class=&quot;center&quot;&gt;需要居中的元素&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">.wrapper &#123;</div><div class="line">    height:200px;</div><div class="line">    position: relative;</div><div class="line">&#125;</div><div class="line">.center &#123;</div><div class="line">    height: 50%;</div><div class="line">    width: 50%;</div><div class="line">    margin: auto;</div><div class="line">    position: absolute;</div><div class="line">    top: 0;</div><div class="line">    bottom: 0;</div><div class="line">    left: 0;</div><div class="line">    right: 0；</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="2、使用负margin"><a href="#2、使用负margin" class="headerlink" title="2、使用负margin"></a>2、使用负margin</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;wrapper&quot;&gt;</div><div class="line">    &lt;div class=&quot;center&quot;&gt;需要居中的元素&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">.warpper &#123;</div><div class="line">    height: 200px;</div><div class="line">    position: relative;</div><div class="line">&#125;</div><div class="line">.center &#123;</div><div class="line">    width: 100px;</div><div class="line">    height: 100px;</div><div class="line">    margin: auto;</div><div class="line">    position: absolute;</div><div class="line">    top: 50%;</div><div class="line">    left: 50%;</div><div class="line">    margin-top: -50px;</div><div class="line">    margin-left: -50px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>优点：兼容IE6-7；</p>
+<p>缺点：不能使用百分比的大小，内容高度不可变；内容可能会超出容器；</p>
+<h3 id="3、使用transform"><a href="#3、使用transform" class="headerlink" title="3、使用transform"></a>3、使用transform</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;wrapper&quot;&gt;</div><div class="line">    &lt;div class=&quot;center&quot;&gt;需要居中的元素&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">.wrapper &#123;</div><div class="line">    height: 200px;</div><div class="line">    postion: relative;</div><div class="line">&#125;</div><div class="line">.center &#123;</div><div class="line">    height: 50%;</div><div class="line">    width: 50%;</div><div class="line">    position: absolute;</div><div class="line">    top: 50%;</div><div class="line">    left: 50%;</div><div class="line">    transform:translate(-50%,-50%);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>优点：内容高度可变；</p>
+<p>缺点：不兼容IE8；会和其他transform样式有冲突；</p>
+<h3 id="4、使用table-cell"><a href="#4、使用table-cell" class="headerlink" title="4、使用table-cell"></a>4、使用table-cell</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;table&quot;&gt;</div><div class="line">    &lt;div class=&quot;table-cell&quot;&gt;</div><div class="line">        &lt;div class=&quot;center&quot;&gt;需要居中的元素&lt;/div&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">.table &#123;</div><div class="line">    display: table;</div><div class="line">    width: 100%;</div><div class="line">&#125;</div><div class="line">.table-cell &#123;</div><div class="line">    display: table-cell;</div><div class="line">    vertical-align: middle;</div><div class="line">    height: 200px;</div><div class="line">&#125;</div><div class="line">.center &#123;</div><div class="line">    width: 50%;</div><div class="line">    margin: 0 auto;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>优点：内容高度可变；能自动撑开父元素；浏览器兼容性好；</p>
+<p>缺点：需要额外的HTML标签；</p>
+<h3 id="5、使用flex-box"><a href="#5、使用flex-box" class="headerlink" title="5、使用flex-box"></a>5、使用flex-box</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;wrapper&quot;&gt;</div><div class="line">    &lt;div&gt;需要居中的元素&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">.wrapper &#123;</div><div class="line">    display: flex;</div><div class="line">    align-items: center;</div><div class="line">    justify-content: center;</div><div class="line">    height: 200px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>优点：内容高度可变；</p>
+<p>缺点：不支持IE8-9；</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2017-01-03-Git：常用命令整理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/30/2017-01-03-Git：常用命令整理/" class="article-date">
+  <time datetime="2017-01-30T14:45:14.000Z" itemprop="datePublished">2017-01-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/git/">git</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/30/2017-01-03-Git：常用命令整理/">Git：那些常用命令的整理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Git是一个分布式版本控制系统，相比集中式的版本控制系统，分布式版本控制系统每个人手上都是一个完整的版本库。</p>
+<h2 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h2><pre><code>git init
+</code></pre><p>初始化一个git仓库。</p>
+<pre><code>git add &lt;file&gt;
+</code></pre><p>添加文件到暂存区。</p>
+<pre><code>git commit -m &quot;message&quot;
+</code></pre><p>把之前<code>git add</code>的文件提交到仓库，可以add多个文件，然后执行一次commit。</p>
+<blockquote>
+<p>SVN上<code>add</code>之后直接就添加到版本库了，但是Git上还需要<code>commit</code>才行，注意SVN与Git之间<code>commit</code>与<code>add</code>的异同。</p>
+</blockquote>
+<h2 id="查看版本库的状态"><a href="#查看版本库的状态" class="headerlink" title="查看版本库的状态"></a>查看版本库的状态</h2><pre><code>git status
+</code></pre><p>查看当前工作区的状态。</p>
+<pre><code>git diff
+</code></pre><p>查看difference，显示的格式是Unix通用的diff格式。</p>
+<blockquote>
+<p>简单来说<code>git status</code>命令可以知道哪些文件做了修改，<code>git diff</code>命令可以知道被修改了哪些内容。</p>
+</blockquote>
+<pre><code>git log
+git log --pretty=oneline
+</code></pre><p>显示从最近到最远的提交日志。</p>
+<blockquote>
+<p><code>commit id</code>是版本号，用 SHA1 十六进制表示</p>
+</blockquote>
+<h2 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h2><pre><code>git reset --hard HEAD^
+git reset --hard HEAD~100
+git reset --hard 3628164
+</code></pre><p><code>HEAD</code>表示当前版本，<code>HEAD^</code>表示当前版本的上一个版本，<code>~100</code>等同于100个<code>^</code>。<code>3628164</code>是版本号，版本号不用写全，Git中只要知道<code>commit id</code>就可以回退。</p>
+<pre><code>git reflog
+</code></pre><p>查看历史命令，通过历史命令可以知道版本号。</p>
+<blockquote>
+<p>需要提交的文件通通使用<code>git add</code>放到暂存区（stage），然后使用<code>git commit</code>一次性提交暂存区所有修改到分之。工作区（working diretory）是电脑里能看到的目录，版本库（repository）则是工作区中一个隐藏的文件夹<code>.git</code>。<br>git跟踪并管理的是修改，每次修改都需要<code>add</code>到暂存区，这样才能被<code>commit</code>到分支中。</p>
+</blockquote>
+<h2 id="管理修改"><a href="#管理修改" class="headerlink" title="管理修改"></a>管理修改</h2><pre><code>git checkout --file
+</code></pre><p>把file在工作区的修改全部撤销，也就是把这个文件回到最近一次<code>git commit</code>或者<code>git add</code>的状态（用版本库的版本替换工作区）。</p>
+<pre><code>git reset HEAD file
+</code></pre><p>把暂存区的修改回退到工作区，不会影响工作区的状态。</p>
+<pre><code>git rm file
+</code></pre><p>从版本库中删除某个文件。这个命令跟<code>git add</code>一样，需要<code>git commit</code>之后才能提交到版本库中。</p>
+<h2 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h2><h3 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h3><pre><code>git checkout -b dev
+</code></pre><p>创建并切换到dev分支，<code>-b</code>参数表示<strong>创建并切换</strong>，这个命令实际上是下面两个命令的结合。</p>
+<pre><code>git branch dev
+git checkout dev 
+</code></pre><p><code>git branch</code>是创建一个dev分支，<code>git checkout</code>则是切换到dev分支。</p>
+<pre><code>git branch
+</code></pre><p>查看当前分支，当前分支会标有一个*号。</p>
+<pre><code>git checkout master
+</code></pre><p>切换到master分支。</p>
+<pre><code>git merge dev
+</code></pre><p>合并指定分支到当前分支。</p>
+<pre><code>git branch -d dev
+</code></pre><p>删除指定分支。</p>
+<h3 id="解决冲突"><a href="#解决冲突" class="headerlink" title="解决冲突"></a>解决冲突</h3><p>当切换到master分支并尝试合并dev分支时，若有冲突存在，必须手动解决冲突再进行提交。</p>
+<p>Git用&lt;&lt;&lt;&lt;&lt;&lt;，======，&gt;&gt;&gt;&gt;&gt;&gt;标记处不同分支的内容。</p>
+<pre><code>git log --graph --pretty=oneline --abbrev-commit
+</code></pre><p>用带参数的<code>git log</code>命令可以看到分支的合并情况。</p>
+<blockquote>
+<p>当Git无法自动合并分支时，必须首先解决冲突，再提交。合并后用<code>git log --graph</code>可以看到分支合并图。</p>
+</blockquote>
+<h3 id="分支管理策略"><a href="#分支管理策略" class="headerlink" title="分支管理策略"></a>分支管理策略</h3><p>默认情况下，Git会用<code>Fast forward</code>模式合并分支，但这种情况下，删除分支会丢掉分支信息，会看不出来曾经做过合并</p>
+<pre><code>git merge --no-ff -m &quot;message&quot; dev
+</code></pre><p>本次合并会创建一个新的commit，通过<code>-m</code>把commit描述写进去，<code>--no-ff</code>表示禁用<code>Fast forward</code>。</p>
+<blockquote>
+<p><code>master</code>一般是最稳定的版本，用来发布新版本。<br>建立以个<code>dev</code>分支来进行协作，每个人都在<code>dev</code>分支上写代码，时不时向<code>dev</code>分支上提交，dev提交到<code>master</code>上来发布稳定版本。</p>
+</blockquote>
+<h3 id="Bug分支"><a href="#Bug分支" class="headerlink" title="Bug分支"></a>Bug分支</h3><pre><code>git stash
+</code></pre><p>可以把当前工作区存起来，等以后恢复现场继续工作。执行完后，工作区是clean的，可以拿来创建分支。</p>
+<pre><code>git checkout master
+git checkout -b issue-101
+</code></pre><p>创建<code>issue-101</code>分支并修复Bug。</p>
+<pre><code>git stash list
+</code></pre><p>查看保存的工作区。</p>
+<pre><code>git stash apply
+</code></pre><p>恢复指定工作区。</p>
+<pre><code>git stash drop
+</code></pre><p>删除stash。</p>
+<pre><code>git stash pop
+</code></pre><p>恢复的同时会删除stash的内容。</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>git config 命令用来设置git的一些基本设置，包括全局配置以及针对特定仓库的配置。</p>
+<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><h4 id="设置名字"><a href="#设置名字" class="headerlink" title="设置名字"></a>设置名字</h4><pre><code>git config user.name &lt;name&gt;
+</code></pre><p>设置当前仓库<code>commit</code>时作者的名字。</p>
+<pre><code>git config --global user.name &lt;name&gt;
+</code></pre><p>设置全局的作者名字，这样以后其他仓库<code>commit</code>时，都会以这个名字提交。</p>
+<h4 id="设置邮箱"><a href="#设置邮箱" class="headerlink" title="设置邮箱"></a>设置邮箱</h4><pre><code>git config --global user.email &lt;email&gt;
+</code></pre><p>设置全局的作者邮箱。</p>
+<p>例子：</p>
+<pre><code>git config --global user.name &quot;denight&quot;
+git config --global user.email denight@qq.com
+</code></pre><h4 id="设置简写-别名"><a href="#设置简写-别名" class="headerlink" title="设置简写/别名"></a>设置简写/别名</h4><pre><code>git config --global alias.&lt;alias-name&gt; &lt;git-comman&gt;
+</code></pre><p>设置git命令的简写。比如<code>git status</code>可以通过下面的命令简写为<code>git st</code>。</p>
+<pre><code>git config --global alias.st status
+</code></pre><h3 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h3><p>Git把配置文件存储在三个不同的文件中，一个作用于当前仓库，一个作用于当前用户，一个作用于整个系统。</p>
+<ul>
+<li><repo>/.git/config 当前仓库的配置</repo></li>
+<li>~/.gitconfig 当前用户所属的配置，即—global的配置</li>
+<li>$(prefix)/etc/gitconfig 系统级别的配置</li>
+</ul>
+<p>优先级从高到底。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2016-04-24-深入浅出React读后笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/24/2016-04-24-深入浅出React读后笔记/" class="article-date">
+  <time datetime="2016-04-24T10:36:56.000Z" itemprop="datePublished">2016-04-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/react/">react</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/24/2016-04-24-深入浅出React读后笔记/">深入浅出React读后笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="React的设计哲学"><a href="#React的设计哲学" class="headerlink" title="React的设计哲学"></a>React的设计哲学</h2><p>React最有价值的是声明式的，直观的编程方式。编程方式 简单直观 且 符合习惯，可以使得代码 更容易理解 、易于维护和有助于演进。可理解，可维护的代码代表着工程的质量和效率。</p>
+<h2 id="JSX定义用户界面更加直观"><a href="#JSX定义用户界面更加直观" class="headerlink" title="JSX定义用户界面更加直观"></a>JSX定义用户界面更加直观</h2><p>JSX定义的用户界面使得HTML可以直接嵌入到JS中，而不使用模板。原因在于，模板背后的代码逻辑严重依赖其模板中的内容和DOM结构，两者紧密耦合。虽然模板可以使得文件分离，且让非开发人员也可以对界面进行修改，但是为了保证两者之间的协作，需要引入更多的概念和机制。</p>
+<p>而在JSX中，React并没有引入更多新的概念，你仍可以用HTML和JS的思路去构建自己的应用。这种直观的方式降低了React的学习门槛，也使得新手更容易理解。</p>
+<h2 id="所谓组件，其实就是状态机器"><a href="#所谓组件，其实就是状态机器" class="headerlink" title="所谓组件，其实就是状态机器"></a>所谓组件，其实就是状态机器</h2><p>组件是某个独立功能或界面的封装（定义），使其能够进行复用或是业务逻辑分离（目的）。</p>
+<p>在React中，为了更加容易保证界面一致性，React把它看做简单的状态机器。即根据状态去输出基于状态的界面，React则负责以最高效的方式去更新整个界面和DOM树。</p>
+<p>对组件的管理，实际就是对组件状态的管理。更新一个组件，就是更新一个组件的状态。设计者需要做的，就是关心不同状态的用户界面。这相比于原始的JS直接控制真实DOM（过于自由）来说，预先设定好组件的状态对应的用户界面，可以让问题缩小到组件中，而不需要开发者考虑整一个应用的DOM或是担心新加入的代码可能会产生不被期望的副作用。像这样将DOM限制在组件之中，尽管失去了“自由”，但是也可以使得开发者更好的对界面进行管理和控制。</p>
+<p>组件作为用户界面的基本单位，与外界的交互方式除了状态（state）之外，还有其属性（props）。state由组件内部进行维护，而属性则是在外部初始化时传递进来，一旦赋值不建议进行变化。同一类组件就像是人一样，可以有着不同的身高和肤色（属性），但是其呼吸、运动等活动方式（状态）则是相通的。</p>
+<h2 id="每一次变化都是整体刷新"><a href="#每一次变化都是整体刷新" class="headerlink" title="每一次变化都是整体刷新"></a>每一次变化都是整体刷新</h2><p>数据模型驱动用户界面在概念上是直观的，但是在实践中确实困难重重。数据模型的变化可能会导致分散在整个用户界面各个角落的UI同时进行变化。界面越复杂，数据与界面的一致性越难以维护。</p>
+<p>关于这个问题，在原文中并没有被解释的很清楚。所谓数据模型，是一个整体的、全局的数据，不同于AJAX获取那种局部的数据，数据模型代表了整个UI界面的状态。</p>
+<p>考虑一下实际的开发场景，当我们拿到一个新的数据之后，我们需要做哪些事情。首先是分析数据，在概念上明确我们需要更新的UI，接着拿新数据与UI进行对比（检查），判断哪些需要更新而哪些不需要变化。接下来是实际通过编码的方式更新UI，进行DOM操作，最后检查UI是否被正确的刷新。</p>
+<p>实际上在界面复杂并且有许多UI之间的依赖更新的情况下，开发者无法立刻得知当前的UI与之后刷新的UI是否一致。出于减少DOM操作的角度考虑，当然是只刷新那些有变化的UI就好。但是想要实现它，开发者必须对UI一一进行前后对比，界面越复杂越难以实现。而如果把涉及到的所有UI都进行更新，则会产生不必要的性能损耗（把一个UI删除了又产生一个同样的UI）。<br>为此，React引入了虚拟DOM的概念。既然整体进行渲染（把所有涉及到的UI都进行刷新）一定可以保证数据模型与用户界面的一致性，那不如就整体进行刷新吧，让框架来解决哪些需要进行DOM操作而哪些UI则保持原样。React通过虚拟DOM把所有的现有UI的数据模型与新的数据模型进行一一的对比，最终进行最优化的局部真实DOM更新。虚拟DOM可以通过其算法获得不论界面多么复杂的情况下，都可以接受的性能代价。<br>何时是React的最有价值的时候？当你的界面越来越复杂时。</p>
+<h2 id="单向数据流动Flux"><a href="#单向数据流动Flux" class="headerlink" title="单向数据流动Flux"></a>单向数据流动Flux</h2><p>既然已经有了组件机制去定义界面，那么也还需要一定的机制来定义组件之间，以及组件和数据模型之间如何通信。为此Facebook提出了Flux，其提倡的是单向数据流动。即永远只有模型到视图的数据流动。</p>
+<p>Flux的定义非常宽松，目前社区中还出现了很多不同的实现，如Flexible，Reflux等。</p>
+<h2 id="让数据模型也变简单"><a href="#让数据模型也变简单" class="headerlink" title="让数据模型也变简单"></a>让数据模型也变简单</h2><p>React提倡只用只读数据来建立数据模型，所有的数据都是只读的，如果你想要进行修改，那么就只能产生一份包含新的修改的数据。这有点像同一个类的实例，其成员变量是私有的并且在实例化之后没有相关函数能够对其进行修改，如果想要进行修改，那么就只能重新实例一个。</p>
+<p>只读的数据可以让代码更加的安全和易于维护，至少开发者不用担心数据在某个角落被某段神奇的代码所修改。数据的来源只有数据出生的时候，这无疑可以抹杀很多bug出现的可能。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>React Native：移动开发。React把UI层进行了完美的抽象使得开发者不需要进行DOM操作，而React Native正是把DOM替换成了iOS或Android的原声控件。其开发方式都是一致的。</p>
+<p>React Canvas：所有的界面元素都通过Canvas来进行绘制，彻底舍弃了DOM。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>任何框架诞生的初衷都离不开对开发问题的解决。React同样是为了解决前端开发中的痛点而生。原文总结分析了其相关技术背后的设计思想，是一篇质量很高的文章。</p>
+<p>我一直坚信在计算机这样的人造学科中，理解一门技术的初衷，能够使自己更好的去学习和使用。很多人都可以在短时间入门一门技术，但是很少有人去关注其背后的设计思想和方式。尽管我现在技术基础不扎实，但是React的设计思路确确实实是我在实际开发中会遇到和疑惑的问题。这样一想，React就变得十分可爱了，我也期望自己能在实际的开发中，遵循简单直观的原则，进行高效率和高质量的开发。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.infoq.com/cn/articles/react-art-of-simplity" target="_blank" rel="external">深入浅出React（一）：React的设计哲学 - 简单之美</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2016-03-04-SVN：同步版本库与网站目录" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/04/2016-03-04-SVN：同步版本库与网站目录/" class="article-date">
+  <time datetime="2016-03-04T15:10:15.000Z" itemprop="datePublished">2016-03-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/svn/">svn</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/04/2016-03-04-SVN：同步版本库与网站目录/">SVN：同步版本库与网站目录</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>承接之前<a href="!--￼0--">Lnmp下搭建Svn服务器</a>的步骤，接下来要使用Svn中的hooks来进行版本库与网站目录的同步更新。以方便对网站代码进行管理和发布。</p>
+<p>注意，下文中PATH、PROJECT等全大写的字符串均为举例用，实际操作时请替换成自己的目录和版本库或项目名称。</p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>首先切换到版本库的目录</p>
+<pre><code>cd /PATH/svn/PROJECT
+ls
+</code></pre><p>会看到有hooks文件夹</p>
+<pre><code>cd hooks
+ls
+</code></pre><p>可以看到有一个post-commit.tmpl，这个是svn官方的一个模板，在每次commit操作之后都会执行这个脚本，其他的hooks同理。</p>
+<p>看到这里你应该可以想到，版本库与网站目录同步的原理，就是在客户端commit了代码之后，执行这个脚本来同时update网站目录的内容，保证两者的同步。</p>
+<h2 id="配置操作"><a href="#配置操作" class="headerlink" title="配置操作"></a>配置操作</h2><h3 id="首先需要在网站目录checkout版本库"><a href="#首先需要在网站目录checkout版本库" class="headerlink" title="首先需要在网站目录checkout版本库"></a>首先需要在网站目录checkout版本库</h3><p>先不要着急打接下来的命令</p>
+<pre><code>cd PATH/wwwroot/www.example.com
+svn checkout file://PATH/svn/PROJECT
+</code></pre><p>因为执行了这个命令之后你也许会发现，在网站目录下多了一个PROJECT文件夹，这个文件夹里面才是版本库控制的内容。</p>
+<p>然而我们的目的是想让当前网站的根目录与svn直接同步，因此我们在上一级目录进行checkout。</p>
+<p>接下来正确的做法是</p>
+<pre><code>cd PATH/wwwroot
+svn checkout file://PATH/svn/PROJECT www.example.com
+</code></pre><p>上述命令是在checkout版本库的同时对它进行了重命名，这样子，网站的根目录就如预想的一样在版本库的控制之下了。</p>
+<h3 id="接下来配置hooks"><a href="#接下来配置hooks" class="headerlink" title="接下来配置hooks"></a>接下来配置hooks</h3><pre><code>cd PATH/svn/PROJECT/hooks
+cp post-commit.tmpl post-commit
+</code></pre><p>复制一份post-commit并去掉它的后缀名，这么做的原因是，.tmpl是一个模板文件，实际并不会执行，只有去掉后缀名之后它才会生效。</p>
+<pre><code>vi post-commit
+</code></pre><p>在末尾加入</p>
+<pre><code>export LANG=zh_CN.UTF-8
+svn update PATH/wwwroot/www.example.com --username USER1 --password PASSWD1 --no-auth-cache
+</code></pre><p>export的作用是防止乱码。</p>
+<p>update则是对网站目录进行更新，让网站目录与版本库同步，这里USER1和PASSWD1是之前的教程里配置的用户名和密码，请根据实际情况进行替换。<br>编辑完成之后，按ESC并输入:wq，保存并退出。</p>
+<h3 id="测试hooks"><a href="#测试hooks" class="headerlink" title="测试hooks"></a>测试hooks</h3><h4 id="添加可执行权限"><a href="#添加可执行权限" class="headerlink" title="添加可执行权限"></a>添加可执行权限</h4><pre><code>chmod +x post-commit
+</code></pre><h4 id="运行测试"><a href="#运行测试" class="headerlink" title="运行测试"></a>运行测试</h4><pre><code>./post-commit
+</code></pre><p>　　如果有报错，请重新vi一遍看看是不是有打错</p>
+<h4 id="切换用户进行测试"><a href="#切换用户进行测试" class="headerlink" title="切换用户进行测试"></a>切换用户进行测试</h4><p>由于ssh VPS之后大多数情况用的都是root用户，而svn commit之后执行hooks的是另外一个用户，所以在root权限下执行没有问题，在另外的用户下可能就没有那么足够的权限了。所以接下来</p>
+<pre><code>su www
+./post-commit
+</code></pre><p>如果执行成功，那么基本不会有问题。<br>如果su www时出现not available的情况，尝试下面这个命令</p>
+<pre><code>usermod -s /bin/bash www
+</code></pre><p>　　如果出现各种权限不足的情况，我建议上述所有步骤都在www用户下执行（除了部分更改文件执行权限操作等必须用root用户的）。</p>
+<h3 id="实际测试"><a href="#实际测试" class="headerlink" title="实际测试"></a>实际测试</h3><p>使用你的svn客户端checkout该版本库并上传一些文件或做一些改动，接着进行commit，查看网站目录是否与版本库同步。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Svn的hooks是非常好用的脚本，在每次commit之后，你也可以加入日志记录、通知提醒等等功能。当然，这些功能也是需要一定的shell能力才写的出来。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2016-03-04-SVN：LNMP下搭建SVN服务器简明步骤" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/04/2016-03-04-SVN：LNMP下搭建SVN服务器简明步骤/" class="article-date">
+  <time datetime="2016-03-04T06:47:11.000Z" itemprop="datePublished">2016-03-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/svn/">svn</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/04/2016-03-04-SVN：LNMP下搭建SVN服务器简明步骤/">SVN：LNMP下搭建SVN服务器简明步骤</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>下文中PATH、PROJECT等全大写的字符串均为举例用，实际操作时请替换成自己的目录和版本库或项目名称等。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><pre><code>yum install subversion
+</code></pre><p>等待一段时间完成svn的安装。</p>
+<p>##建立版本库的文件夹，并给与777的权限</p>
+<pre><code>mkdir PATH/svn
+chmod 777 -R PATH/svn
+</code></pre><h2 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h2><pre><code>svnadmin create PATH/svn/PROJECT
+</code></pre><h2 id="接下来对Svn进行配置"><a href="#接下来对Svn进行配置" class="headerlink" title="接下来对Svn进行配置"></a>接下来对Svn进行配置</h2><h3 id="配置svnserve-conf"><a href="#配置svnserve-conf" class="headerlink" title="配置svnserve.conf"></a>配置svnserve.conf</h3><pre><code>vi PATH/svn/PROJECT/conf/svnserve.conf
+</code></pre><p>将内容中注释掉的以下部分去掉#和空格，并将anon-access = read改为none：</p>
+<pre><code># anon-access = read
+# auth-access = write
+# password-db = passwd
+# authz-db = authz
+</code></pre><p>变成</p>
+<pre><code>anon-access = none
+auth-access = write
+password-db = passwd
+authz-db = authz
+</code></pre><h3 id="配置authz"><a href="#配置authz" class="headerlink" title="配置authz"></a>配置authz</h3><pre><code>vi PATH/svn/PROJECT/conf/authz
+</code></pre><p>　　在[group]下加入</p>
+<pre><code>YOUR_GROUP = USER1,USER2
+</code></pre><p>　　在# [/foo/bar]下加入</p>
+<pre><code>[/]
+@YOUR_GROUP=rw
+* = r
+</code></pre><h3 id="配置passwd"><a href="#配置passwd" class="headerlink" title="配置passwd"></a>配置passwd</h3><pre><code>vi PATH/svn/PROJECT/conf/passwd
+</code></pre><p>　　在[users]下加入</p>
+<pre><code>USER1=PASSWD1
+USER2=PASSWD2
+</code></pre><h2 id="启动SVN服务"><a href="#启动SVN服务" class="headerlink" title="启动SVN服务"></a>启动SVN服务</h2><pre><code>svnserve -d -r PATH/svn/
+</code></pre><p>这里需要注意，这里设置的是svn服务器的根目录。在checkout的时候，以这个目录（PATH/svn/)作为起点，可以添加多个版本库，访问的时候则可以用“svn://域名/版本库名”来进行checkout。</p>
+<h3 id="如何关闭服务"><a href="#如何关闭服务" class="headerlink" title="如何关闭服务"></a>如何关闭服务</h3><p>　　直接杀死相关进程即可</p>
+<pre><code>killall svnserve
+</code></pre><h2 id="客户端访问方式"><a href="#客户端访问方式" class="headerlink" title="客户端访问方式"></a>客户端访问方式</h2><pre><code>svn checkout svn://domain/project
+</code></pre><h2 id="可能出现的问题"><a href="#可能出现的问题" class="headerlink" title="可能出现的问题"></a>可能出现的问题</h2><h3 id="CentOS7下客户端无法访问"><a href="#CentOS7下客户端无法访问" class="headerlink" title="CentOS7下客户端无法访问"></a>CentOS7下客户端无法访问</h3><p>这是因为在CentOS7下，原先的iptables被替换了firewalld，所以对iptables的防火墙设置是没有用的。</p>
+<p>因此如果想要让3690端口（SVN服务器端口）对外开放的话，则需要对firewalld进行配置。</p>
+<pre><code>firewall-cmd --permanent --query-port=3690/tcp
+</code></pre><p>通过上述命令可以查看3690端口是否开放。</p>
+<pre><code>irewall-cmd --permanent --add-port=3690/tcp
+</code></pre><p>通过上述命令则可以添加开放端口。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo;prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Catégories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/fe/">fe</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/http/">http</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/jquery/">jquery</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/mac/">mac</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell/">shell</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/sublime/">sublime</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/">svn</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/07/06/2017-07-06-Shell 脚本入门/">Shell 脚本入门</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/05/2017-07-05-CSS：什么是 BFC/">CSS：什么是 BFC</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/21/2017-06-21-Vue：基础用法与指令/">Vue：基础用法与指令</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/21/2017-06-21-CSS：Animation 动画/">CSS：Animation 动画小记</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/01/2017-06-01-CSS：table-cell 用法小/">CSS：table-cell 用法小记</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Xinye Dai<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Vue：基础用法与指令 | Daixinye</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Vue 是什么？Vue 是一套构建用户界面的渐进式框架，采用自底向上增量开发的设计。Vue 的核心库值关注视图层（View）。 声明式渲染文本插值123&amp;lt;div id=&amp;quot;app&amp;quot;&amp;gt;    &amp;#123;&amp;#123; message &amp;#125;&amp;#125;&amp;lt;/div&amp;gt; 123456var app = new Vue(&amp;#123;    el:&amp;apos;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue：基础用法与指令">
+<meta property="og:url" content="http://daixinye.com/2017/06/21/2017-06-21-Vue：基础用法与指令/index.html">
+<meta property="og:site_name" content="Daixinye">
+<meta property="og:description" content="Vue 是什么？Vue 是一套构建用户界面的渐进式框架，采用自底向上增量开发的设计。Vue 的核心库值关注视图层（View）。 声明式渲染文本插值123&amp;lt;div id=&amp;quot;app&amp;quot;&amp;gt;    &amp;#123;&amp;#123; message &amp;#125;&amp;#125;&amp;lt;/div&amp;gt; 123456var app = new Vue(&amp;#123;    el:&amp;apos;#">
+<meta property="og:updated_time" content="2017-07-31T16:31:27.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue：基础用法与指令">
+<meta name="twitter:description" content="Vue 是什么？Vue 是一套构建用户界面的渐进式框架，采用自底向上增量开发的设计。Vue 的核心库值关注视图层（View）。 声明式渲染文本插值123&amp;lt;div id=&amp;quot;app&amp;quot;&amp;gt;    &amp;#123;&amp;#123; message &amp;#125;&amp;#125;&amp;lt;/div&amp;gt; 123456var app = new Vue(&amp;#123;    el:&amp;apos;#">
+  
+    <link rel="alternate" href="/atom.xml" title="Daixinye" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Daixinye</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <a id="nav-github" class="nav-icon" title="github" target="_blank" href="https://github.com/daixinye"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://daixinye.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2017-06-21-Vue：基础用法与指令" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/21/2017-06-21-Vue：基础用法与指令/" class="article-date">
+  <time datetime="2017-06-21T12:00:00.000Z" itemprop="datePublished">2017-06-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/vue/">vue</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Vue：基础用法与指令
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Vue-是什么？"><a href="#Vue-是什么？" class="headerlink" title="Vue 是什么？"></a>Vue 是什么？</h2><p>Vue 是一套构建用户界面的渐进式框架，采用自底向上增量开发的设计。Vue 的核心库值关注视图层（View）。</p>
+<h2 id="声明式渲染"><a href="#声明式渲染" class="headerlink" title="声明式渲染"></a>声明式渲染</h2><h3 id="文本插值"><a href="#文本插值" class="headerlink" title="文本插值"></a>文本插值</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &#123;&#123; message &#125;&#125;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var app = new Vue(&#123;</div><div class="line">    el:&apos;#app&apos;,</div><div class="line">    data: &#123;</div><div class="line">        message: &apos;hello&apos;</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h3 id="渲染-DOM-属性（-v-bind-name-指令）"><a href="#渲染-DOM-属性（-v-bind-name-指令）" class="headerlink" title="渲染 DOM 属性（ v-bind:name 指令）"></a>渲染 DOM 属性（ v-bind:name 指令）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;span v-bind:title=&quot;message&quot;&gt;</div><div class="line">        鼠标悬停此处查看动态提示信息</div><div class="line">    &lt;/span&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var app = new Vue(&#123;</div><div class="line">    el: &apos;#app&apos;,</div><div class="line">    data: &#123;</div><div class="line">        message: &apos;提示信息&apos;</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>v-bind 属性被称为指令（指令带有前缀 v-，以表示他们是 Vue 提供的特殊属性）。这里该指令的作用是“将这个元素的 title 属性和 Vue 实例的 message 属性保持一致”。</p>
+<h2 id="条件与循环（-v-if-指令和-v-for-指令）"><a href="#条件与循环（-v-if-指令和-v-for-指令）" class="headerlink" title="条件与循环（ v-if 指令和 v-for 指令）"></a>条件与循环（ v-if 指令和 v-for 指令）</h2><h3 id="条件"><a href="#条件" class="headerlink" title="条件"></a>条件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;p v-if=&quot;seen&quot;&gt;看到了没？&lt;/p&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var app = new Vue(&#123;</div><div class="line">    el: &apos;#app&apos;,</div><div class="line">    data: &#123;</div><div class="line">        seen: true</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;ol&gt;</div><div class="line">        &lt;li v-for=&quot;todo in todos&quot;&gt;</div><div class="line">            &#123;&#123; todo.text &#125;&#125;</div><div class="line">        &lt;/li&gt;</div><div class="line">    &lt;/ol&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">var app = new Vue(&#123;</div><div class="line">    el: &apos;#app&apos;,</div><div class="line">    data: &#123;</div><div class="line">        todos:［</div><div class="line">            &#123; text : &apos;吃饭&apos; &#125;,</div><div class="line">            &#123; text : &apos;睡觉&apos; &#125;,</div><div class="line">            &#123; text : &apos;打游戏&apos; &#125;</div><div class="line">        ］</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h2 id="处理用户输入（-v-on-指令和-v-model-指令）"><a href="#处理用户输入（-v-on-指令和-v-model-指令）" class="headerlink" title="处理用户输入（ v-on 指令和 v-model 指令）"></a>处理用户输入（ v-on 指令和 v-model 指令）</h2><h3 id="事件监听器"><a href="#事件监听器" class="headerlink" title="事件监听器"></a>事件监听器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;p&gt;&#123;&#123; message &#125;&#125;&lt;/p&gt;</div><div class="line">    &lt;button v-on:click=&quot;reverseMessage&quot;&gt;逆转消息&lt;/</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var app = new Vue(&#123;</div><div class="line">    el:&apos;#app&apos;,</div><div class="line">    data: &#123;</div><div class="line">        message: &apos;hello&apos;</div><div class="line">    &#125;,</div><div class="line">    methods: &#123;</div><div class="line">        reverseMessage: function()&#123;</div><div class="line">            this.message = this.message.split(&apos;&apos;).reverse().join()</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h3 id="双向绑定"><a href="#双向绑定" class="headerlink" title="双向绑定"></a>双向绑定</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;p&gt;&#123;&#123; message &#125;&#125;&lt;/p&gt;</div><div class="line">    &lt;input v-model=&quot;message&quot; &gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var app = new Vue(&#123;</div><div class="line">    el: &apos;#app&apos;,</div><div class="line">    data:&#123;</div><div class="line">        message: &apos;hello&apos;</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h2 id="组件化"><a href="#组件化" class="headerlink" title="组件化"></a>组件化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;ol&gt;</div><div class="line">        &lt;todo-item v-for=&quot;item in list&quot; v-bind:todo=&quot;item&quot;&gt;&lt;/todo-item&gt;</div><div class="line">    &lt;/ol&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Vue.component(&apos;todo-item&apos;, &#123;</div><div class="line">    props: [&apos;todo&apos;], //接受一个自定义属性todo</div><div class="line">    template: &apos;&lt;li&gt;&#123;&#123; todo.text &#125;&#125;&lt;/li&gt;&apos;</div><div class="line">&#125;)</div><div class="line"></div><div class="line">var app = new Vue(&#123;</div><div class="line">    el:&apos;#app&apos;,</div><div class="line">    data: &#123;</div><div class="line">        list : [</div><div class="line">            &#123; text: &apos;apple&apos; &#125;,</div><div class="line">            &#123; text: &apos;banana&apos; &#125;,</div><div class="line">            &#123; text: &apos;orange&apos; &#125;</div><div class="line">        ]</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>注意，在这个例子中 v-for 循环渲染子组件 todo-item ，并传递了 item 变量。接着 v-bind 指令将 item 与子组件的 todo 属性绑定起来，接受到 todo 属性的子组件读取 todo.text 插入到 &lt;li&gt; 中。整个过程，父组件向子组件单向传递数据并渲染出来。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><ul>
+<li>v-bind:name </li>
+<li>v-if </li>
+<li>v-for</li>
+<li>v-on</li>
+<li>v-model</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://cn.vuejs.org/v2/guide/" target="_blank" rel="external">https://cn.vuejs.org/v2/guide/</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/07/05/2017-07-05-CSS：什么是 BFC/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          CSS：什么是 BFC
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/06/21/2017-06-21-CSS：Animation 动画/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">CSS：Animation 动画小记</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Catégories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/fe/">fe</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/http/">http</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/jquery/">jquery</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/mac/">mac</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell/">shell</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/sublime/">sublime</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/">svn</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/07/06/2017-07-06-Shell 脚本入门/">Shell 脚本入门</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/05/2017-07-05-CSS：什么是 BFC/">CSS：什么是 BFC</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/21/2017-06-21-Vue：基础用法与指令/">Vue：基础用法与指令</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/21/2017-06-21-CSS：Animation 动画/">CSS：Animation 动画小记</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/01/2017-06-01-CSS：table-cell 用法小/">CSS：table-cell 用法小记</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Xinye Dai<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
