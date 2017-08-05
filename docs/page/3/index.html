@@ -58,6 +58,72 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2017-04-02-CSS：line-height 不同取值的差异" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/02/2017-04-02-CSS：line-height 不同取值的差异/" class="article-date">
+  <time datetime="2017-04-02T12:00:00.000Z" itemprop="datePublished">2017-04-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/css/">css</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/02/2017-04-02-CSS：line-height 不同取值的差异/">CSS：line-height 不同取值的差异</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="百分比值"><a href="#百分比值" class="headerlink" title="百分比值"></a>百分比值</h2><blockquote>
+<p>line-height = （父元素 font-size）×（百分比）</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;outer&quot;&gt;</div><div class="line">    父元素</div><div class="line">    &lt;div class=&quot;inner&quot;&gt;子元素&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">.outer &#123;</div><div class="line">    /* 父元素行高 = 父元素font-size 30px × 150% = 45px */</div><div class="line">    line-height: 150%;</div><div class="line">    font-size: 30px;</div><div class="line">&#125;</div><div class="line">.inner &#123;</div><div class="line">    /* 子元素行高 = 父元素font-size 30px × 150% = 45px */</div><div class="line">    font-size: 20px; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="em值"><a href="#em值" class="headerlink" title="em值"></a>em值</h2><blockquote>
+<p>line-height = （父元素 font-size）×（em值）</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">.outer &#123;</div><div class="line">    /* 父元素行高 = 父元素font-size 30px × 1.5 = 45px */</div><div class="line">    line-height: 1.5em;</div><div class="line">    font-size: 30px;</div><div class="line">&#125;</div><div class="line">.inner &#123;</div><div class="line">    /* 子元素行高 = 父元素font-size 30px × 1.5 = 45px */</div><div class="line">    font-size: 20px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里特别要注意尽管em是相对当前元素的<code>font-size</code>值来计算的，同时<code>line-height</code>也是可以被继承的属性，但是实际上子元素继承时并不是<code>line-height: 1.5em</code>，而是父元素计算完成后的<code>line-height: 45px;</code></p>
+<h2 id="无单位数字"><a href="#无单位数字" class="headerlink" title="无单位数字"></a>无单位数字</h2><blockquote>
+<p>line-height = （当前元素 font-size）×（无单位数字）</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">.outer &#123;</div><div class="line">    /* 父元素行高 = 父元素font-size 30px × 1.5 = 45px */</div><div class="line">    line-height: 1.5;</div><div class="line">    font-size: 30px;</div><div class="line">&#125;</div><div class="line">.inner &#123;</div><div class="line">    /* 子元素行高 = 子元素font-size 20px × 1.5 = 30px */</div><div class="line">    font-size: 20px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>无单位数字与百分比值和em值相反，是根据当前元素的<code>font-size</code>来计算的。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>其实仔细观察会发现，百分比值和em值，在子元素继承父元素的<code>line-height</code>属性时，继承的是计算完成后（以px为单位）的值。而无单位数字，则是需要根据子元素的<code>font-size</code>，让子元素自行计算的。</p>
+<h3 id="计算em值的大致流程："><a href="#计算em值的大致流程：" class="headerlink" title="计算em值的大致流程："></a>计算em值的大致流程：</h3><p> –&gt; 设置父元素font-size = 30px；</p>
+<p> –&gt; 设置父元素line-height = 1.5em;</p>
+<p> –&gt; 计算父元素line-height =  font-size × 1.5 = 30px × 1.5 = 45px; </p>
+<p> –&gt; 设置子元素font-size = 20px;</p>
+<p> –&gt; 计算子元素line-height = 继承父元素line-height = 45px; </p>
+<h3 id="计算无单位数字的大致流程："><a href="#计算无单位数字的大致流程：" class="headerlink" title="计算无单位数字的大致流程："></a>计算无单位数字的大致流程：</h3><p>–&gt; 设置父元素font-size = 30px;</p>
+<p>–&gt; 设置父元素line-height = 1.5;</p>
+<p>–&gt; 计算父元素line-height = 当前元素font-size × 1.5 = 30px × 1.5 = 45px;</p>
+<p>–&gt; 设置子元素font-size = 20px;</p>
+<p>–&gt; 计算子元素line-height = 继承父元素line-height = 1.5;</p>
+<p>–&gt; 计算实际子元素line-height = 当前元素font-size × 1.5 = 20px × 1.5 = 30px;</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-2017-04-02-Sublime-Text-3的基本安装与配置" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/04/02/2017-04-02-Sublime-Text-3的基本安装与配置/" class="article-date">
@@ -613,7 +679,7 @@ USER2=PASSWD2
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
   </div>
 
@@ -624,6 +690,10 @@ USER2=PASSWD2
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/08/04/奇怪的JavaScript（1）/">奇怪的JavaScript（1）：基础类型篇</a>
+          </li>
         
           <li>
             <a href="/2017/07/06/2017-07-06-Shell 脚本入门/">Shell 脚本入门</a>
@@ -639,10 +709,6 @@ USER2=PASSWD2
         
           <li>
             <a href="/2017/06/21/2017-06-21-CSS：Animation 动画/">CSS：Animation 动画小记</a>
-          </li>
-        
-          <li>
-            <a href="/2017/06/01/2017-06-01-CSS：table-cell 用法小/">CSS：table-cell 用法小记</a>
           </li>
         
       </ul>

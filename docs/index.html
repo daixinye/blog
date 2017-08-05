@@ -58,6 +58,50 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-奇怪的JavaScript（1）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/04/奇怪的JavaScript（1）/" class="article-date">
+  <time datetime="2017-08-03T16:44:12.000Z" itemprop="datePublished">2017-08-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/04/奇怪的JavaScript（1）/">奇怪的JavaScript（1）：基础类型篇</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>JavaScript 是一门很奇怪的语言，它看起来很“随便”，一个变量可以赋值数字也可以赋值字符串，一个对象竟然用一对花括号就可以创建出来。<br>然而正是在这种“随便”的特点之下，造就了 JavaScript 无比灵活的姿态。它有着性感的体态，却也有着诡异的性格，让人琢磨不透。<br>那么就让我们来盘点一下，JavaScript 那些奇怪的地方吧。</p>
+<h2 id="1、tpyeof-null-object"><a href="#1、tpyeof-null-object" class="headerlink" title="1、tpyeof null; // object"></a>1、tpyeof null; // object</h2><p><code>typeof</code> 是一个用于类型判断的操作符，而 null 则是五大基本数据类型之一，然而 <code>typeof null</code> 却出乎了很多初学者的预料。<br>没错，这个表达式返回居然是 <code>&#39;object&#39;</code>！<br>这个表达式在《JS高程》中也有特意提到，尽管 <code>null</code> 被视作对象的占位符，因此返回的是对象在技术角度上来讲是合理的，但是不得不说这个“特例”会让人觉得相当迷惑。</p>
+<h2 id="2、null-undefined-true"><a href="#2、null-undefined-true" class="headerlink" title="2、null == undefined; // true"></a>2、null == undefined; // true</h2><p>返回的是 <code>true</code>，其原因是 <code>undefined</code> 派生自 <code>null</code>，在不严格的比较下两者是相等的。<br>反正我是没在别的语言见过这种操作啦。</p>
+<h2 id="3、Boolean-false-true-true"><a href="#3、Boolean-false-true-true" class="headerlink" title="3、Boolean(false) == true; // true"></a>3、Boolean(false) == true; // true</h2><p><code>Boolean(false)</code> 是一个包装对象，既然是对象那么它在不严格相等的情况都会转换成 <code>true</code>。<br>你可以用 <code>Boolean(false).valueOf()</code> 来获取真正的 <code>false</code> 值。</p>
+<h2 id="4、0-1-0-2-0-3-false"><a href="#4、0-1-0-2-0-3-false" class="headerlink" title="4、0.1 + 0.2 == 0.3; // false"></a>4、0.1 + 0.2 == 0.3; // false</h2><p>“浮点数值的最高精度是17位小数，但在进行算术计算时其精确度远远不如整数”<br>因此，<code>0.1 + 0.2</code> 等于 <code>0.30000000000000004</code>，而不等于 <code>0.3</code> 。<br>这个其实在所有语言的浮点数运算中都会有类似的问题。</p>
+<h2 id="5、NaN-NaN-false"><a href="#5、NaN-NaN-false" class="headerlink" title="5、NaN == NaN; // false"></a>5、NaN == NaN; // false</h2><p>NaN（Not a Number），有两个特点：<br>一是与其任何的操作都返回 <code>NaN</code>；<br>二是 <code>NaN</code> 与任何值都不相等。<br>所以 <code>NaN != NaN</code> 是成立的。<br>还有就是当 <code>0 / 0</code> 时也会返回 <code>NaN</code>。</p>
+<h2 id="6、”23”-lt-“3”-true"><a href="#6、”23”-lt-“3”-true" class="headerlink" title="6、”23” &lt; “3”; // true"></a>6、”23” &lt; “3”; // true</h2><p>尽管 JS 在进行比较的时候会进行类型转换，但是在直接比较字符串的时候，它可能并不想我们预想中的那样子会直接比较“数值”（因为并没有被转换成数值）。<br>两个字符串进行大小比较时，比较的是字符编码。<code>&#39;3&#39;</code>的字符编码在<code>&#39;2&#39;</code>的后面，所以 <code>&quot;23&quot; &lt; &quot;3&quot;</code> 返回的是 <code>true</code>。<br>需要注意的是，当比较的两个操作数，有一个是数字时，另一个字符串会被转换成数值。如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;23&quot; &lt; 3 // false</div></pre></td></tr></table></figure></p>
+<p>与<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">23 &lt; 3 // false</div></pre></td></tr></table></figure></p>
+<p>是等价的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-2017-07-06-Shell 脚本入门" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/07/06/2017-07-06-Shell 脚本入门/" class="article-date">
@@ -692,74 +736,6 @@
 
 
   
-    <article id="post-2017-05-03-JavaScript：从代码复用到面向对象" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/05/03/2017-05-03-JavaScript：从代码复用到面向对象/" class="article-date">
-  <time datetime="2017-05-03T12:00:00.000Z" itemprop="datePublished">2017-05-03</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/javascript/">javascript</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/03/2017-05-03-JavaScript：从代码复用到面向对象/">JavaScript：从代码复用到面向对象</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="代码复用的问题"><a href="#代码复用的问题" class="headerlink" title="代码复用的问题"></a>代码复用的问题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var foo = &#123;color:&apos;red&apos;&#125;;</div><div class="line">var bar = &#123;color:&apos;green&apos;&#125;;</div></pre></td></tr></table></figure>
-<p>这段代码中我们生成了两个属性相似的对象，每次生成一个类似的对象都需要重新写一遍代码。</p>
-<h2 id="装饰器函数"><a href="#装饰器函数" class="headerlink" title="装饰器函数"></a>装饰器函数</h2><h3 id="添加属性"><a href="#添加属性" class="headerlink" title="添加属性"></a>添加属性</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">// lib.js</div><div class="line">var fn = function(obj,color)&#123;</div><div class="line">    obj.color = color;</div><div class="line">    return obj;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// app.js</div><div class="line">var foo = fn(&#123;&#125;,&apos;red&apos;);</div><div class="line">var bar = fn(&#123;&#125;,&apos;green&apos;);</div></pre></td></tr></table></figure>
-<p>我们可以通过一个装饰器函数，来解决生成类似对象的问题。</p>
-<p>装饰器函数的作用，就是给某个已拥有某些功能的对象添加属性。这里我们传入了一个空的对象，通过fn函数来对这个空对象进行”装饰“（添加属性）。</p>
-<h3 id="添加方法"><a href="#添加方法" class="headerlink" title="添加方法"></a>添加方法</h3><h4 id="浪费内存"><a href="#浪费内存" class="headerlink" title="浪费内存"></a>浪费内存</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">// lib.js</div><div class="line">var fn = function(obj,color)&#123;</div><div class="line">    obj.color = color;</div><div class="line">    obj.printColor = function()&#123;</div><div class="line">        console.log(this.color);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return obj;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// app.js</div><div class="line">var foo = fn(&#123;&#125;,&apos;red&apos;);</div><div class="line">foo.printColor(); // red</div><div class="line">var bar = fn(&#123;&#125;,&apos;green&apos;);</div><div class="line">bar.printColor(); // green</div></pre></td></tr></table></figure>
-<p>上述添加方法的方式，优点是具有良好的封装性，但是最大的问题是每次调用装饰器函数都会在内存中生成一个新的<code>printColor函数</code>。在对象比较多的情况下，就容易浪费内存。</p>
-<h4 id="更多的缺点"><a href="#更多的缺点" class="headerlink" title="更多的缺点"></a>更多的缺点</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">// lib.js</div><div class="line">var fn = function(obj,color)&#123;</div><div class="line">    obj.color = color;</div><div class="line">    obj.printColor = printColor;</div><div class="line">    return obj;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var printColor = function()&#123;</div><div class="line">    console.log(this.printColor);</div><div class="line">&#125;</div><div class="line"></div><div class="line">// app.js</div><div class="line">var foo = fn(&#123;&#125;,&apos;red&apos;);</div><div class="line">foo.printColor(); // red</div><div class="line">var bar = fn(&#123;&#125;,&apos;green&apos;);</div><div class="line">bar.printColor(); // green</div></pre></td></tr></table></figure>
-<p>上述添加方法的方式，尽管解决了内存占用的问题，但是失去了良好的封装性。</p>
-<p>除此之外，如果添加的方法比较多，每次都需要在fn中对函数进行绑定，效率很低。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">// lib.js</div><div class="line">var fn = function(obj,color)&#123;</div><div class="line">    obj.color = color;</div><div class="line">    obj.method_1 = method_1;</div><div class="line">    obj.method_2 = method_2;</div><div class="line">    // ...</div><div class="line">    obj.method_1000 = method_3;</div><div class="line"></div><div class="line">    return obj;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var method_1 = function()&#123; //... &#125;;</div><div class="line">var method_2 = function()&#123; //... &#125;;</div><div class="line">// ...</div><div class="line">var method_1000 = function()&#123; //... &#125;;</div></pre></td></tr></table></figure>
-<h4 id="把方法都装在一起"><a href="#把方法都装在一起" class="headerlink" title="把方法都装在一起"></a>把方法都装在一起</h4><p>在把方法都装进<code>methods</code>中，通过遍历的方式可以把任意数量的方法绑定到<code>obj</code>上。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">// lib.js</div><div class="line">var fn = function(obj,color)&#123;</div><div class="line">    obj.color = color;</div><div class="line"></div><div class="line">    extend(obj,methods); // extend()代表把methods中的属性复制到obj中，注意它并不是原生的函数</div><div class="line"></div><div class="line">    return obj;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var methods = &#123;</div><div class="line">    method_1:function()&#123; //... &#125;,</div><div class="line">    method_2:function()&#123; //... &#125;,</div><div class="line">    // ...</div><div class="line">    method_1000:function()&#123; //... &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h4 id="借助Function对象的属性"><a href="#借助Function对象的属性" class="headerlink" title="借助Function对象的属性"></a>借助Function对象的属性</h4><p><code>methods</code>与<code>fn</code>之间没有一个非常明显的联系，为此我们可以利用<code>Function对象</code>的属性来解决。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">// lib.js</div><div class="line">var fn = function(obj,color)&#123;</div><div class="line">    obj.color = color;</div><div class="line"></div><div class="line">    extend(obj, fn.methods);</div><div class="line"></div><div class="line">    return obj;</div><div class="line">&#125;</div><div class="line"></div><div class="line">fn.methods = &#123;</div><div class="line">    method_1:function()&#123; //... &#125;,</div><div class="line">    method_2:function()&#123; //... &#125;,</div><div class="line">    // ...</div><div class="line">    method_1000:function()&#123; //... &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="直接在function内部创建对象"><a href="#直接在function内部创建对象" class="headerlink" title="直接在function内部创建对象"></a>直接在function内部创建对象</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">// lib.js</div><div class="line"></div><div class="line">var fn = function(color)&#123;</div><div class="line">    var obj = &#123;&#125;;</div><div class="line">    obj.color = color;</div><div class="line"></div><div class="line">    extend(obj, fn.methods);</div><div class="line"></div><div class="line">    return obj;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="原型委托"><a href="#原型委托" class="headerlink" title="原型委托"></a>原型委托</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">// lib.js</div><div class="line">var fn = function(color)&#123;</div><div class="line">    var obj = Object.create(fn.methods);</div><div class="line">    obj.color = color;</div><div class="line"></div><div class="line">    return obj;</div><div class="line">&#125;</div><div class="line"></div><div class="line">fn.methods = &#123; //... &#125;;</div></pre></td></tr></table></figure>
-<h3 id="使用prototype属性"><a href="#使用prototype属性" class="headerlink" title="使用prototype属性"></a>使用prototype属性</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">// lib.js</div><div class="line">var fn = function(color)&#123;</div><div class="line">    var obj = Object.create(fn.prototype);</div><div class="line">    obj.color = color;</div><div class="line"></div><div class="line">    return obj;</div><div class="line">&#125;</div><div class="line">fn.prototype.printColor = function()&#123;</div><div class="line">    console.log(this.color);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>此时<code>fn</code>就是一个“构造函数”，每一个函数对象被创建时都会有一个<code>prototype</code>属性，这个属性跟之前的<code>fn.methods</code>其实并没有太大的区别，唯一的区别在于<code>prototype.constructor</code>指向了函数对象本身。</p>
-<p>在我们讨论“实例的原型”和“构造函数的原型”时要注意：“实例的原型”实际上就是<code>instance.prototype</code>，在实例中没有的属性会被委托到原型中进行查找。而“构造函数的原型”，实际上是“创建一个对象，并且把这个对象委托给原型进行函数共享”。</p>
-<h3 id="关系验证"><a href="#关系验证" class="headerlink" title="关系验证"></a>关系验证</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// app.js</div><div class="line">var foo = fn(&apos;red&apos;);</div><div class="line">var bar = fn(&apos;green&apos;);</div><div class="line"></div><div class="line">console.log(foo instanceof fn); // true</div><div class="line">// instanceof 操作符 实际上执行的就是下面的操作</div><div class="line">console.log(foo.constructor == fn.prototype.construector); // true</div></pre></td></tr></table></figure>
-<h3 id="new-关键字"><a href="#new-关键字" class="headerlink" title="new 关键字"></a>new 关键字</h3><p>在fn中，创建一个对象、原型委托和返回对象是一定会做的一件事情，我们可以通过<code>new关键字</code>来简化。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// lib.js</div><div class="line">var fn = function(color)&#123;</div><div class="line">    this.color = color;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>在使用<code>new关键字</code>进行调用时（构造模式），解释器会自动插入两行代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// lib.js</div><div class="line">var fn = function(color)&#123;</div><div class="line">    this = Object.create(fn.prototype); // 将新对象委托给原型对象</div><div class="line"></div><div class="line">    this.color;</div><div class="line"></div><div class="line">    return this; // 返回这个新对象</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>使用构造模式即使用<code>new关键字</code>调用fn函数才能被真正称作“构造函数”。</p>
-<h3 id="子类继承"><a href="#子类继承" class="headerlink" title="子类继承"></a>子类继承</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">var Human = function(name)&#123;</div><div class="line">    this.name = name;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Human.prototype.sayName = function()&#123;</div><div class="line">    console.log(this.name);</div><div class="line">&#125;</div><div class="line"></div><div class="line">var Man = function(name)&#123;</div><div class="line">    Human.call(this, name);</div><div class="line">    this.sex = &apos;male&apos;;</div><div class="line">&#125;</div><div class="line">Man.prototype = Object.create(Human.prototype);</div><div class="line">Man.prototype.constructor = Man;</div><div class="line"></div><div class="line">var frank = new Man(&apos;frank&apos;);</div><div class="line"></div><div class="line">frank.sayName(); // frank</div><div class="line">console.log(frank instanceof Man); // true</div><div class="line">console.log(frank instanceof Human); // true</div></pre></td></tr></table></figure>
-<p>务必注意<code>Man</code>继承<code>Human</code>时调用的<code>Human</code>方法，其使用<code>call</code>方法指定了<code>this</code>绑定的对象。<code>this</code>在JavaScript中可以作为一个传入的参数来看待，在使用<code>obj.method()</code>时，<code>method</code>中的<code>this</code>指向<code>obj</code>，而使用<code>new method()</code>时，<code>this</code>指向新构造的空对象。</p>
-<p>此外，<code>Man.prototype</code>对象的原型委托给了<code>Human.prototype</code>形成了原型链<code>。</code>这里还需要注意要重新指定<code>Man.prototype.constructor</code>赋值<code>Man</code>。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -788,7 +764,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
   </div>
 
@@ -799,6 +775,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/08/04/奇怪的JavaScript（1）/">奇怪的JavaScript（1）：基础类型篇</a>
+          </li>
         
           <li>
             <a href="/2017/07/06/2017-07-06-Shell 脚本入门/">Shell 脚本入门</a>
@@ -814,10 +794,6 @@
         
           <li>
             <a href="/2017/06/21/2017-06-21-CSS：Animation 动画/">CSS：Animation 动画小记</a>
-          </li>
-        
-          <li>
-            <a href="/2017/06/01/2017-06-01-CSS：table-cell 用法小/">CSS：table-cell 用法小记</a>
           </li>
         
       </ul>
