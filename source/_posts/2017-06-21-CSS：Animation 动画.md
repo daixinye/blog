@@ -2,7 +2,7 @@
 layout: post
 title:  "CSS：Animation 动画小记"
 date:   2017-06-21 20:00:00 +0800
-categories: css
+tags: css
 ---
 
 ## 属性

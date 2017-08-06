@@ -2,7 +2,7 @@
 layout: post
 title:  "JavaScript：从代码复用到面向对象"
 date:   2017-05-03 20:00:00 +0800
-categories: javascript
+tags: javascript
 ---
 
 ## 代码复用的问题

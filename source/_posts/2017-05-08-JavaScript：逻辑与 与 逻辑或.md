@@ -2,7 +2,7 @@
 layout: post
 title:  "JavaScript：逻辑与 与 逻辑或"
 date:   2017-05-08 20:00:00 +0800
-categories: javascript
+tags: javascript
 ---
 
 ## 逻辑与

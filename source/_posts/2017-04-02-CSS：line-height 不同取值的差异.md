@@ -2,7 +2,7 @@
 layout: post
 title:  "CSS：line-height 不同取值的差异"
 date:   2017-04-02 20:00:00 +0800
-categories: css
+tags: css
 ---
 
 ## 百分比值

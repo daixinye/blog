@@ -2,7 +2,7 @@
 layout: post
 title:  "React：基本环境搭建简明步骤"
 date:   2017-04-14 22:34:00 +0800
-categories: react
+tags: react
 ---
 超简的步骤整理。待完善。
 

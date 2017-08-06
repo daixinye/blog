@@ -2,7 +2,7 @@
 layout: post
 title:  "JavaScript：作用域、闭包 和 this"
 date:   2017-04-27 20:00:00 +0800
-categories: javascript
+tags: javascript
 ---
 
 ## 作用域（Scope）

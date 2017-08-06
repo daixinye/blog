@@ -2,7 +2,7 @@
 layout: post
 title:  "JavaScript：Promise 小记"
 date:   2017-05-28 20:00:00 +0800
-categories: javascript
+tags: javascript
 ---
 
 Promise 对象是一个代理对象（代理一个值），被代理的值在 Promise 对象创建时可能是未知的。它最主要的特点，是可以让异步代码像同步方法那样返回值，并为结果的成功（onFulfilled）和失败（onRejected）绑定相应的处理方法（Handlers）。需要注意的是，尽管看起来像同步方法那样返回了值但是并不是**立即返回执行**的。

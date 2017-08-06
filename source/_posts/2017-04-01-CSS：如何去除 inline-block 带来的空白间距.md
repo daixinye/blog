@@ -2,7 +2,7 @@
 layout: post
 title:  "CSS：如何去除 inline-block 带来的空白间距"
 date:   2017-04-01 20:00:00 +0800
-categories: css
+tags: css
 ---
 ## 1、使用负margin
 

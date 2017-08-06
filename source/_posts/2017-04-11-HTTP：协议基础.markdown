@@ -2,7 +2,7 @@
 layout: post
 title:  "HTTP基础（1）：概述"
 date:   2017-04-11 20:16:00 +0800
-categories: http
+tags: http
 ---
 ## HTTP协议
 HTTP，HyperText Tranfer Protocol，超文本传输协议（超文本转移协议）。

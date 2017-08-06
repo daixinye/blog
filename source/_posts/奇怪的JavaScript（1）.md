@@ -1,7 +1,7 @@
 ---
 title: 奇怪的JavaScript（1）：基础类型篇
 date: 2017-08-04 00:44:12
-tags:
+tags: javascript
 ---
 
 ## 前言

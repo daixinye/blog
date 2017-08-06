@@ -2,7 +2,7 @@
 layout: post
 title:  "CSS：table-cell 用法小记"
 date:   2017-06-01 20:00:00 +0800
-categories: css
+tags: css
 ---
 
 ## 1、垂直居中

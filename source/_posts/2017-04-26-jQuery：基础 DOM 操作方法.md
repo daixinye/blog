@@ -2,7 +2,7 @@
 layout: post
 title:  "jQuery：基础 DOM 操作方法"
 date:   2017-04-26 20:00:00 +0800
-categories: jquery
+tags: jquery
 ---
 
 ## 元素选择
