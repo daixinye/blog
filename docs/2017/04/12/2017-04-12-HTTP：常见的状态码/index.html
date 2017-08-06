@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://daixinye.com/2017/04/12/2017-04-12-HTTP：常见的状态码/index.html">
 <meta property="og:site_name" content="Daixinye">
 <meta property="og:description" content="HTTP状态码用于描述客户端向服务器端发送请求后的请求结果。通过状态码，客户端可以知道发出的HTTP是是否被正确处理。 状态码由三位数字和原因短语组成，第一位指定了响应类别。 状态码的类别：  1XX：Informational 信息性状态码，表示服务器接收的请求正在被处理 2XX：Success 成功状态码，表示请求被正常处理完毕 3XX：Redirection 重定向状态码，表示客户端需要进行">
-<meta property="og:updated_time" content="2017-07-31T16:41:53.000Z">
+<meta property="og:updated_time" content="2017-08-06T01:43:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTTP基础（2）：常见的状态码">
 <meta name="twitter:description" content="HTTP状态码用于描述客户端向服务器端发送请求后的请求结果。通过状态码，客户端可以知道发出的HTTP是是否被正确处理。 状态码由三位数字和原因短语组成，第一位指定了响应类别。 状态码的类别：  1XX：Informational 信息性状态码，表示服务器接收的请求正在被处理 2XX：Success 成功状态码，表示请求被正常处理完毕 3XX：Redirection 重定向状态码，表示客户端需要进行">
@@ -109,7 +109,7 @@
 <h3 id="304-Not-Modified"><a href="#304-Not-Modified" class="headerlink" title="304 Not Modified"></a>304 Not Modified</h3><p>该状态表示客户端发送附带条件的请求时（在请求头部中包含If-Match、If-Modified-Since、If-None-Match、If-Range、If-Unmodified-Since），服务器端允许请求访问资源，但因发生请求未满足条件，直接返回304。</p>
 <p>即表示服务器端的资源没有发生改变，客户端可以继续使用未过期的缓存资源。</p>
 <p>注意：304虽然在3XX 重定向类别中，但跟重定向实际上没有太大的关系。</p>
-<h3 id="307-TEmporary-Redirect"><a href="#307-TEmporary-Redirect" class="headerlink" title="307 TEmporary Redirect"></a>307 TEmporary Redirect</h3><p>临时重定向。该状态码与302基本相同，不同的是307会遵照浏览器标准，不会从POST变成GET。</p>
+<h3 id="307-Temporary-Redirect"><a href="#307-Temporary-Redirect" class="headerlink" title="307 Temporary Redirect"></a>307 Temporary Redirect</h3><p>临时重定向。该状态码与302基本相同，不同的是307会遵照浏览器标准，不会从POST变成GET。</p>
 <p>而301、302响应状态码返回时，浏览器一般都会把POST改成GET（尽管301和302标准是禁止这样做的）并删除请求报文的主体，再发起请求。</p>
 <h2 id="4XX-客户端错误"><a href="#4XX-客户端错误" class="headerlink" title="4XX 客户端错误"></a>4XX 客户端错误</h2><h3 id="400-Bad-Request"><a href="#400-Bad-Request" class="headerlink" title="400 Bad Request"></a>400 Bad Request</h3><p>该状态码表示请求报文中存在语法错误，需要客户端修改请求内容后再次发送请求。</p>
 <p>注意：浏览器会像对待200 OK 一样对待该状态码（即不会像3XX那样子有别的行为）</p>

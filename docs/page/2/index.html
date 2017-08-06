@@ -574,7 +574,7 @@ module.exports = {
 <h3 id="304-Not-Modified"><a href="#304-Not-Modified" class="headerlink" title="304 Not Modified"></a>304 Not Modified</h3><p>该状态表示客户端发送附带条件的请求时（在请求头部中包含If-Match、If-Modified-Since、If-None-Match、If-Range、If-Unmodified-Since），服务器端允许请求访问资源，但因发生请求未满足条件，直接返回304。</p>
 <p>即表示服务器端的资源没有发生改变，客户端可以继续使用未过期的缓存资源。</p>
 <p>注意：304虽然在3XX 重定向类别中，但跟重定向实际上没有太大的关系。</p>
-<h3 id="307-TEmporary-Redirect"><a href="#307-TEmporary-Redirect" class="headerlink" title="307 TEmporary Redirect"></a>307 TEmporary Redirect</h3><p>临时重定向。该状态码与302基本相同，不同的是307会遵照浏览器标准，不会从POST变成GET。</p>
+<h3 id="307-Temporary-Redirect"><a href="#307-Temporary-Redirect" class="headerlink" title="307 Temporary Redirect"></a>307 Temporary Redirect</h3><p>临时重定向。该状态码与302基本相同，不同的是307会遵照浏览器标准，不会从POST变成GET。</p>
 <p>而301、302响应状态码返回时，浏览器一般都会把POST改成GET（尽管301和302标准是禁止这样做的）并删除请求报文的主体，再发起请求。</p>
 <h2 id="4XX-客户端错误"><a href="#4XX-客户端错误" class="headerlink" title="4XX 客户端错误"></a>4XX 客户端错误</h2><h3 id="400-Bad-Request"><a href="#400-Bad-Request" class="headerlink" title="400 Bad Request"></a>400 Bad Request</h3><p>该状态码表示请求报文中存在语法错误，需要客户端修改请求内容后再次发送请求。</p>
 <p>注意：浏览器会像对待200 OK 一样对待该状态码（即不会像3XX那样子有别的行为）</p>
