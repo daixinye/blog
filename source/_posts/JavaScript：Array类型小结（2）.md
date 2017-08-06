@@ -91,4 +91,69 @@ console.log(sum ) // 15
 ### reduceRight()
 `reduceRight()` 与 `reduce()` 基本一致，只是前者从后向前归并。
 
-## ES6 新方法
+## ES6 新方法（部分）
+### Array.of()
+`Array.of()` 方法用于创建一个数组。
+之前我们提到，创建数组的方式由两种，一是通过构造函数，二是通过字面量的形式。
+然而通过构造函数的方式有一个令人迷惑的地方：
+```
+let array = new Array(2)
+console.log(array.length) // 2
+console.log(array) // [undefined, undefined]
+```
+当给构造函数传入一个数字时，构造函数会返回一个长度为该数字的数组，并用 undefined 填充。
+而当给构造函数传入一个字符串时，则会创建一个长度为1，元素为该字符串的数组：
+```
+let array = new Array('2')
+console.log(array.length) // 1
+console.log(array) // ['2']
+```
+这样就让我们很难用构造函数来创建只有一个数字的数组了。
+
+为了让创建数组的行为更加一致， `Array.of()` 去除了数组构造函数当传入一个数字时的情况：
+```
+let array = Array.of(2)
+console.log(array.length) // 1
+console.log(array.) // [2]
+```
+这样子，构造数组的方式就更加统一，无需我们去判断只传入一个参数时，参数的类型了。
+
+### Array.from()
+`Array.form()` 方法可以接受可迭代对象或类数组对象作为第一个参数，第二个参数接受一个映射函数，来对第一个参数中的每一个值进行映射转换：
+```
+void function f_1(){
+    let array = Array.from(arguments)
+    console.log(array)
+}(1,2,3,4) // [1,2,3,4]
+
+void function f_2(){
+    let array = Array.from(arguments, value => value + 1)
+    console.log(array)
+}(1,2,3,4) // [2,3,4,5]
+```
+### Array.find()
+`Array.find()` 方法接受一个函数作为参数，用于获取满足某一条件的数组元素：
+```
+let value = [1,2,3,4,5]
+value.find(item => item > 3) // 4
+```
+### Array.findIndex()
+`Array.findIndex()` 与 `Array.find()` 的用法一致，只是前者返回的是查找到的元素下标：
+```
+let value = [1,2,3,4,5]
+value.find(item => item > 3) // 3
+```
+### Array.fill()
+`Array.fill()` 可以用指定的值填充若干个数组元素。
+其接受三个参数，第一个参数是需要替换的值，第二个和第三个是起始下标和结束下标（不包含结束下标对应的值）
+```
+let value = [1,2,3,4]
+value.fill(0) // [0,0,0,0]
+
+value.fill(-1, 1) // [0, -1, -1, -1]
+value.fill(-2, 1, 3) // [0, -2, -2, -1]
+```
+
+
+
+
