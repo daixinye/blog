@@ -1,7 +1,7 @@
 ---
 title: JavaScript：Array 类型小结（1）
 date: 2017-08-06 09:49:54
-tags:
+tags: javascript
 ---
 
 ## 创建
