@@ -6,13 +6,14 @@
   <title>JavaScript：作用域、闭包 和 this | Daixinye</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="作用域（Scope）在JavaScript中，函数的一对花括号中会产生一个新的作用域。这个作用域只有函数内部能够访问。 123456789var a = 1;var fn = function()&amp;#123;    var b = 2;    console.log(b);&amp;#125;console.log(a); // 1fn(); // 2console.log(b); // Error 需要">
+<meta name="keywords" content="javascript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript：作用域、闭包 和 this">
 <meta property="og:url" content="http://daixinye.com/2017/04/27/2017-04-27-JavaScript：作用域、闭包 和 this/index.html">
 <meta property="og:site_name" content="Daixinye">
 <meta property="og:description" content="作用域（Scope）在JavaScript中，函数的一对花括号中会产生一个新的作用域。这个作用域只有函数内部能够访问。 123456789var a = 1;var fn = function()&amp;#123;    var b = 2;    console.log(b);&amp;#125;console.log(a); // 1fn(); // 2console.log(b); // Error 需要">
 <meta property="og:image" content="http://daixinye.com/assets/javascript-excution-context.png">
-<meta property="og:updated_time" content="2017-07-31T16:35:42.000Z">
+<meta property="og:updated_time" content="2017-08-06T12:15:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript：作用域、闭包 和 this">
 <meta name="twitter:description" content="作用域（Scope）在JavaScript中，函数的一对花括号中会产生一个新的作用域。这个作用域只有函数内部能够访问。 123456789var a = 1;var fn = function()&amp;#123;    var b = 2;    console.log(b);&amp;#125;console.log(a); // 1fn(); // 2console.log(b); // Error 需要">
@@ -68,10 +69,6 @@
   <time datetime="2017-04-27T12:00:00.000Z" itemprop="datePublished">2017-04-27</time>
 </a>
     
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/javascript/">javascript</a>
-  </div>
-
   </div>
   <div class="article-inner">
     
@@ -125,6 +122,8 @@
     <footer class="article-footer">
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
     </footer>
   </div>
   
@@ -159,7 +158,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/fe/">fe</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/http/">http</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/jquery/">jquery</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/mac/">mac</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell/">shell</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/sublime/">sublime</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/">svn</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a></li></ul>
     </div>
   </div>
 
@@ -169,7 +168,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fe/">fe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jquery/">jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svn/">svn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li></ul>
     </div>
   </div>
 
@@ -179,7 +178,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/javascript/" style="font-size: 10px;">javascript</a>
+      <a href="/tags/css/" style="font-size: 16.67px;">css</a> <a href="/tags/fe/" style="font-size: 13.33px;">fe</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/http/" style="font-size: 13.33px;">http</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 13.33px;">jquery</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/react/" style="font-size: 13.33px;">react</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/svn/" style="font-size: 13.33px;">svn</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a>
     </div>
   </div>
 
