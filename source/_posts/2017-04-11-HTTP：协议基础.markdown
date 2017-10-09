@@ -5,7 +5,7 @@ date:   2017-04-11 20:16:00 +0800
 tags: http
 ---
 ## HTTP协议
-HTTP，HyperText Tranfer Protocol，超文本传输协议（超文本转移协议）。
+HTTP，HyperText Transfer Protocol，超文本传输协议（超文本转移协议）。
 
 HTTP协议用于客户端和服务器端之间的通信。访问文本或图像等资源的一端称为服务端（即浏览器），提供资源相应的一端称为服务端（即Web服务器）。
 
@@ -19,8 +19,8 @@ HTTP协议规定，请求从客户端发出，最后服务器端响应该请求�
 
 客户端发送请求：
 
-    GET /index.html HTTP/1.1
-    Host: www.example.com
+	GET /index.html HTTP/1.1
+	Host: www.example.com
 
 GET表示访问服务器的类型，称为方法（method）。随后的字符串`/index.html`指明了请求访问的资源对象，叫做请求URI（request-URI）。然后是HTTP/1.1，即HTTP的版本号。
 
@@ -36,14 +36,13 @@ GET表示访问服务器的类型，称为方法（method）。随后的字符�
 
 以下是一个用POST方法发起的HTTP请求：
 
-    POST /user/login HTTP/1.1
-    Host: www.example.com
-    Connect: keep-alive
-    Content-Type: application/x-www-form-urlencode
-    Content-Length: 16
-    
-    user=dxy&pwd=123
-    
+	POST /user/login HTTP/1.1
+	Host: www.example.com
+	Connect: keep-alive
+	Content-Type: application/x-www-form-urlencode
+	Content-Length: 16
+	
+	user=dxy&pwd=123
 第一部分分别是请求方法（POST)，请求URI（/user/login），版本协议（HTTP/1.1）。接下来是请求首部字段（Host：...）。最后是内容实体（user=dxy&pwd=123）。
 
 这段请求的意思是：用POST方法，向`www.example.com/user/login`提交一个表单数据，表单数据为`user=dxy&pwd=123`。
@@ -52,13 +51,13 @@ GET表示访问服务器的类型，称为方法（method）。随后的字符�
 
 服务器端发送响应：
 
-    HTTP/1.1 200 OK
-    Date: Mon, 10 Apr 2017 14:17:00 GMT
-    Content-Length: 3987
-    Content-Type: text/html
-    
-    <html>
-    ...
+	HTTP/1.1 200 OK
+	Date: Mon, 10 Apr 2017 14:17:00 GMT
+	Content-Length: 3987
+	Content-Type: text/html
+	
+	<html>
+	...
 
 第一部分分别是版本协议（HTTP/1.1），响应状态码（200，status code）和原因短语（reason-phrase）。接下来是创建响应的日期时间，和其他首部字段的内容。最后是一行隔开，为资源实体的主体（entity body）。
 
@@ -81,16 +80,16 @@ HTTP是一种无状态的协议（stateless）,这意味着HTTP协议不会保�
 HTTP协议使用URI（统一资源标识符）来定位互联网上的资源。当客户端请求访问某个资源时，需要指定该资源的URI作为HTTP请求中的请求URI。指定的方式由以下两种：
 第一种是在Host首部字段中写明访问的主机地址（域名或IP）
 
-    GET /index.html HTTP/1.1
-    Host: www.example.com
+	GET /index.html HTTP/1.1
+	Host: www.example.com
 
 第二种是完整的URI地址：
 
-    GET http://www.example.com/index.html HTTP/1.1
+	GET http://www.example.com/index.html HTTP/1.1
 
-如果不是访问特定资源而是对服务器发起请求，可以用*来代替URI。下面这个例子是查询HTTP服务器端支持的HTTP方法种类。
+如果不是访问特定资源而是对服务器发起请求，可以用\*来代替URI。下面这个例子是查询HTTP服务器端支持的HTTP方法种类。
 
-    OPTIONS * HTTP/1.1
+	OPTIONS * HTTP/1.1
 
 ## 基本的HTTP请求方法
 
@@ -98,9 +97,9 @@ HTTP协议使用URI（统一资源标识符）来定位互联网上的资源。�
 GET方法用来请求访问已被URI识别的资源。指定的资源经过服务器端解析后返回响应的内容。
 请求：
 
-    GET /index.html HTTP/1.1
-    Host: www.example.com
-    If-Modified-Since: Mon, 10 Apr 2017 14:17:00 GMT
+	GET /index.html HTTP/1.1
+	Host: www.example.com
+	If-Modified-Since: Mon, 10 Apr 2017 14:17:00 GMT
 
 响应：
 返回2017年4月10日14点17分00秒后更新过的index.html内容，若没有更新过，则返回304 Not Modified。
@@ -111,11 +110,11 @@ GET方法用来请求访问已被URI识别的资源。指定的资源经过服�
 
 请求：
 
-    POST /submit HTTP/1.1
-    Host: www.example.com
-    ConTent-Length: 16
-    
-    user=dxy&pwd=123
+	POST /submit HTTP/1.1
+	Host: www.example.com
+	ConTent-Length: 16
+	
+	user=dxy&pwd=123
 
 响应：
 返回submit响应后的处理结果
@@ -140,13 +139,13 @@ OPTIONS方法用来查询针对请求URI指定的资源支持的方法。
 
 请求：
 
-    OPTIONS * HTTP/1.1
-    Host: www.example.com
+	OPTIONS * HTTP/1.1
+	Host: www.example.com
 
 响应：
 
-    HTTP/1.1 200 OK
-    Allow：Get,Post,Head,Options
+	HTTP/1.1 200 OK
+	Allow：Get,Post,Head,Options
 
 ### TRACE：追踪路径
 
@@ -176,22 +175,21 @@ HTTP/1.1中，所有的连接默认都是持久连接。当然这需要客户端
 
 第一次请求（没有Cookie信息）：
 
-    GET /reader HTTP/1.1
-    Host: www.example.com
-    
+	GET /reader HTTP/1.1
+	Host: www.example.com
 响应（服务器生成Cookie信息）：
 
-    HTTP/1.1 200 OK
-    Date: Mon, 10 Apr 2017 14:17:00 GMT
-    Server: Apache
-    Set-Cookie: sid=1342077140226724; path=/; expires=Wed, 10-OCT-12 07:12:20 GMT
-    Content-Type: text/plain; charset=UTF-8
+	HTTP/1.1 200 OK
+	Date: Mon, 10 Apr 2017 14:17:00 GMT
+	Server: Apache
+	Set-Cookie: sid=1342077140226724; path=/; expires=Wed, 10-OCT-12 07:12:20 GMT
+	Content-Type: text/plain; charset=UTF-8
 
 之后再发起请求时，会自带Cookie信息：
 
-    GET /other HTTP/1.1
-    Host: www.example.com
-    Cookie: sid=1342077140226724
+	GET /other HTTP/1.1
+	Host: www.example.com
+	Cookie: sid=1342077140226724
 
 可见服务器通过Set-Cookie来通知客户端保存Cookie信息，客户端随后针对这个站点的HTTP请求都会在请求头部中加入Cookie字段。如此一来，服务器端在接收到请求时就能根据客户端传来的Cookie中的sid信息，来辨别客户端了，客户端的状态就能够得到保持。
 
@@ -204,6 +202,5 @@ HTTP协议是通过请求和响应来进行通信的无状态协议。
 要熟悉常见的请求方法（GET、POST、PUT、DELETE、OPTIONS、TRACE、CONNECT）。能写出基本的请求报文。
 
 能说出持久化连接的实现方法及其优点，以及如何通过Cookie解决客户端状态保持的问题。
-
 
 
