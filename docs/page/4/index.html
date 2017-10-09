@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: javascript | Daixinye</title>
+  <title>Daixinye</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="Daixinye">
-<meta property="og:url" content="http://daixinye.com/tags/javascript/index.html">
+<meta property="og:url" content="http://daixinye.com/page/4/index.html">
 <meta property="og:site_name" content="Daixinye">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Daixinye">
@@ -58,190 +58,88 @@
       <div class="outer">
         <section id="main">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/08/06/JavaScript：Array类型小结（2）/" class="archive-article-date">
-  <time datetime="2017-08-06T06:11:52.000Z" itemprop="datePublished">Aug 6</time>
+    <article id="post-2016-03-04-SVN：LNMP下搭建SVN服务器简明步骤" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/04/2016-03-04-SVN：LNMP下搭建SVN服务器简明步骤/" class="article-date">
+  <time datetime="2016-03-04T06:47:11.000Z" itemprop="datePublished">2016-03-04</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
     <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/06/JavaScript：Array类型小结（2）/">JavaScript：Array类型小结（2）</a>
+      <a class="article-title" href="/2016/03/04/2016-03-04-SVN：LNMP下搭建SVN服务器简明步骤/">SVN：LNMP下搭建SVN服务器简明步骤</a>
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/08/06/JavaScript：Array类型小结（1）/" class="archive-article-date">
-  <time datetime="2017-08-06T01:49:54.000Z" itemprop="datePublished">Aug 6</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/06/JavaScript：Array类型小结（1）/">JavaScript：Array 类型小结（1）</a>
-    </h1>
-  
+        <p>下文中PATH、PROJECT等全大写的字符串均为举例用，实际操作时请替换成自己的目录和版本库或项目名称等。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><pre><code>yum install subversion
+</code></pre><p>等待一段时间完成svn的安装。</p>
+<p>##建立版本库的文件夹，并给与777的权限</p>
+<pre><code>mkdir PATH/svn
+chmod 777 -R PATH/svn
+</code></pre><h2 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h2><pre><code>svnadmin create PATH/svn/PROJECT
+</code></pre><h2 id="接下来对Svn进行配置"><a href="#接下来对Svn进行配置" class="headerlink" title="接下来对Svn进行配置"></a>接下来对Svn进行配置</h2><h3 id="配置svnserve-conf"><a href="#配置svnserve-conf" class="headerlink" title="配置svnserve.conf"></a>配置svnserve.conf</h3><pre><code>vi PATH/svn/PROJECT/conf/svnserve.conf
+</code></pre><p>将内容中注释掉的以下部分去掉#和空格，并将anon-access = read改为none：</p>
+<pre><code># anon-access = read
+# auth-access = write
+# password-db = passwd
+# authz-db = authz
+</code></pre><p>变成</p>
+<pre><code>anon-access = none
+auth-access = write
+password-db = passwd
+authz-db = authz
+</code></pre><h3 id="配置authz"><a href="#配置authz" class="headerlink" title="配置authz"></a>配置authz</h3><pre><code>vi PATH/svn/PROJECT/conf/authz
+</code></pre><p>　　在[group]下加入</p>
+<pre><code>YOUR_GROUP = USER1,USER2
+</code></pre><p>　　在# [/foo/bar]下加入</p>
+<pre><code>[/]
+@YOUR_GROUP=rw
+* = r
+</code></pre><h3 id="配置passwd"><a href="#配置passwd" class="headerlink" title="配置passwd"></a>配置passwd</h3><pre><code>vi PATH/svn/PROJECT/conf/passwd
+</code></pre><p>　　在[users]下加入</p>
+<pre><code>USER1=PASSWD1
+USER2=PASSWD2
+</code></pre><h2 id="启动SVN服务"><a href="#启动SVN服务" class="headerlink" title="启动SVN服务"></a>启动SVN服务</h2><pre><code>svnserve -d -r PATH/svn/
+</code></pre><p>这里需要注意，这里设置的是svn服务器的根目录。在checkout的时候，以这个目录（PATH/svn/)作为起点，可以添加多个版本库，访问的时候则可以用“svn://域名/版本库名”来进行checkout。</p>
+<h3 id="如何关闭服务"><a href="#如何关闭服务" class="headerlink" title="如何关闭服务"></a>如何关闭服务</h3><p>　　直接杀死相关进程即可</p>
+<pre><code>killall svnserve
+</code></pre><h2 id="客户端访问方式"><a href="#客户端访问方式" class="headerlink" title="客户端访问方式"></a>客户端访问方式</h2><pre><code>svn checkout svn://domain/project
+</code></pre><h2 id="可能出现的问题"><a href="#可能出现的问题" class="headerlink" title="可能出现的问题"></a>可能出现的问题</h2><h3 id="CentOS7下客户端无法访问"><a href="#CentOS7下客户端无法访问" class="headerlink" title="CentOS7下客户端无法访问"></a>CentOS7下客户端无法访问</h3><p>这是因为在CentOS7下，原先的iptables被替换了firewalld，所以对iptables的防火墙设置是没有用的。</p>
+<p>因此如果想要让3690端口（SVN服务器端口）对外开放的话，则需要对firewalld进行配置。</p>
+<pre><code>firewall-cmd --permanent --query-port=3690/tcp
+</code></pre><p>通过上述命令可以查看3690端口是否开放。</p>
+<pre><code>irewall-cmd --permanent --add-port=3690/tcp
+</code></pre><p>通过上述命令则可以添加开放端口。</p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/08/04/奇怪的JavaScript（1）/" class="archive-article-date">
-  <time datetime="2017-08-03T16:44:12.000Z" itemprop="datePublished">Aug 4</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/04/奇怪的JavaScript（1）/">奇怪的JavaScript（1）：基础类型篇</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/05/28/2017-05-28-JavaScript：Promise 小记/" class="archive-article-date">
-  <time datetime="2017-05-28T12:00:00.000Z" itemprop="datePublished">May 28</time>
-</a>
+    </div>
+    <footer class="article-footer">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/28/2017-05-28-JavaScript：Promise 小记/">JavaScript：Promise 小记</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/05/19/2017-05-19-JSON：JSON 方法小记/" class="archive-article-date">
-  <time datetime="2017-05-19T12:00:00.000Z" itemprop="datePublished">May 19</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/19/2017-05-19-JSON：JSON 方法小记/">JSON：JSON 方法小记</a>
-    </h1>
-  
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/svn/">svn</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/05/08/2017-05-08-JavaScript：逻辑与 与 逻辑或/" class="archive-article-date">
-  <time datetime="2017-05-08T12:00:00.000Z" itemprop="datePublished">May 8</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/08/2017-05-08-JavaScript：逻辑与 与 逻辑或/">JavaScript：逻辑与 与 逻辑或</a>
-    </h1>
+
+
   
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/05/03/2017-05-03-JavaScript：从代码复用到面向对象/" class="archive-article-date">
-  <time datetime="2017-05-03T12:00:00.000Z" itemprop="datePublished">May 3</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/03/2017-05-03-JavaScript：从代码复用到面向对象/">JavaScript：从代码复用到面向对象</a>
-    </h1>
-  
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/04/27/2017-04-27-JavaScript：作用域、闭包 和 this/" class="archive-article-date">
-  <time datetime="2017-04-27T12:00:00.000Z" itemprop="datePublished">Apr 27</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/04/27/2017-04-27-JavaScript：作用域、闭包 和 this/">JavaScript：作用域、闭包 和 this</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/04/11/2017-04-11-JavaScript：基本数据类型整理/" class="archive-article-date">
-  <time datetime="2017-04-11T08:21:00.000Z" itemprop="datePublished">Apr 11</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/04/11/2017-04-11-JavaScript：基本数据类型整理/">JavaScript：基本数据类型整理</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/page/3/">&laquo;prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+  </nav>
 </section>
         
           <aside id="sidebar">
