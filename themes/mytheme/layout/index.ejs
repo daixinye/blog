@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="<%= page.lang %>">
+<%- partial('_partial/head') %>
+<body>
+  <%- partial('_partial/header') %>
+  <!-- main -->
+
+  <div class="app-main">
+    <div class="app-main__body">
+      <%- partial('_partial/article') %>
+    </div>
+    <div class="app-main__side">
+      <%- partial('_widget/relative') %>
+      <%- partial('_partial/footer') %>
+    </div>
+  </div>
+
+</body>
+</html>
