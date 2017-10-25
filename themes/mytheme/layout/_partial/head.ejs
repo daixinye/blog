@@ -1,7 +1,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Daixinye</title>
+  <title><%= config.title %></title>
   <!--设置浏览器兼容模式 -->
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
   <!--支持响应式 -->
@@ -13,6 +13,9 @@
   <!-- Canonical links -->
   <link rel="canonical" href="<%= config.url %>">
   <!--加载全局js或css -->
-  <link rel="stylesheet" href="./css/index.css" type="text/css">
+  <%- css('css/index') %>
   <!-- RSS -->
+  
+  <script>
+  </script>
 </head>

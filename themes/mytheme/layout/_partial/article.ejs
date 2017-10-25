@@ -1,7 +1,9 @@
 <div class="app-article">
-  <header class="app-article__header">24 篇文章</header>
+  <header class="app-article__header"><%= post.title%></header>
   <article class="app-article__body">
-    <h1 class="app-article__bodyTitle">文章标题</h1>
-    <section>文章内容</section>
+    <h1 class="app-article__bodyTitle"></h1>
+    <section class="markdown-body">
+      <%- post.content %>
+    </section>
   </article>
 </div>
