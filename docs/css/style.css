@@ -123,12 +123,12 @@ body,
   height: 100%;
 }
 body {
-  background: #eee;
+  background: #f3f3f3;
   font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
   -webkit-text-size-adjust: 100%;
 }
 .outer {
-  max-width: 1220px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 0 20px;
 }
@@ -174,7 +174,7 @@ body {
   -ms-transition: 0.2s ease-out;
   transition: 0.2s ease-out;
   z-index: 1;
-  background: #eee;
+  background: #f3f3f3;
 }
 .mobile-nav-on #wrap {
   left: 280px;
@@ -189,8 +189,7 @@ body {
 }
 .article-date,
 .article-category-link,
-.archive-year,
-.widget-title {
+.archive-year {
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -204,10 +203,9 @@ body {
 .article-inner,
 .archive-article-inner {
   background: #fff;
-  -webkit-box-shadow: 1px 2px 3px #ddd;
-  box-shadow: 1px 2px 3px #ddd;
-  border: 1px solid #ddd;
-  border-radius: 3px;
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  border-radius: 2px;
 }
 .article-entry h1,
 .widget h1 {
@@ -308,9 +306,11 @@ body {
   font-weight: bold;
 }
 #header {
-  height: 300px;
+  height: auto;
+  width: 100%;
   position: relative;
-  border-bottom: 1px solid #ddd;
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 #header:before,
 #header:after {
@@ -508,7 +508,7 @@ body {
   color: #777;
 }
 .article {
-  margin: 50px 0;
+  margin: 10px 0;
 }
 .article-inner {
   overflow: hidden;
@@ -682,7 +682,7 @@ a.article-title:hover {
   line-height: 1em;
   padding: 6px 15px;
   border-radius: 15px;
-  background: #eee;
+  background: #f3f3f3;
   color: #999;
   text-shadow: 0 1px #fff;
   text-decoration: none;
@@ -753,7 +753,7 @@ a.article-title:hover {
 }
 @media screen and (min-width: 768px) {
   #article-nav {
-    margin: 50px 0;
+    margin: 10px 0;
   }
   #article-nav:before {
     width: 8px;
@@ -777,7 +777,7 @@ a.article-title:hover {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  margin-top: 50px;
+  margin-top: 10px;
   text-align: center;
   display: block;
 }
@@ -849,7 +849,7 @@ a.article-title:hover {
   line-height: 36px;
 }
 .article-share-links {
-  background: #eee;
+  background: #f3f3f3;
 }
 .article-share-links:before,
 .article-share-links:after {
@@ -951,13 +951,13 @@ a.article-title:hover {
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 3px;
-  margin: 50px 0;
+  margin: 10px 0;
 }
 #comments a {
   color: #258fb8;
 }
 .archives-wrap {
-  margin: 50px 0;
+  margin: 10px 0;
 }
 .archives:before,
 .archives:after {
@@ -1024,7 +1024,7 @@ a.article-title:hover {
   display: block;
 }
 #page-nav {
-  margin: 50px auto;
+  margin: 10px auto;
   background: #fff;
   -webkit-box-shadow: 1px 2px 3px #ddd;
   box-shadow: 1px 2px 3px #ddd;
@@ -1116,7 +1116,7 @@ a.article-title:hover {
   font-family: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
 }
 .article-entry code {
-  background: #eee;
+  background: #f3f3f3;
   text-shadow: 0 1px #fff;
   padding: 0 0.3em;
 }
@@ -1124,6 +1124,9 @@ a.article-title:hover {
   background: none;
   text-shadow: none;
   padding: 0;
+}
+.article-entry .highlight {
+  border-radius: 10px;
 }
 .article-entry .highlight pre {
   border: none;
@@ -1299,17 +1302,26 @@ pre .javascript .function {
   }
 }
 .widget-wrap {
-  margin: 50px 0;
+  margin: 10px 0;
+  background: #fff;
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.widget-title {
+  color: #555;
+  border-bottom: 1px solid #f0f2f7;
+  padding: 0 15px;
+  height: 50px;
+  line-height: 50px;
+  overflow: hidden;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .widget {
-  color: #777;
-  text-shadow: 0 1px #fff;
-  background: #ddd;
-  -webkit-box-shadow: 0 -1px 4px #ccc inset;
-  box-shadow: 0 -1px 4px #ccc inset;
-  border: 1px solid #ccc;
+  color: #555;
   padding: 15px;
-  border-radius: 3px;
+  border-radius: 2px;
 }
 .widget a {
   color: #258fb8;
@@ -1329,6 +1341,18 @@ pre .javascript .function {
 .widget dl dl {
   margin-left: 15px;
   list-style: disc;
+}
+.widget li {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 10px 0;
+}
+.widget li:first-child {
+  margin-top: 0;
+}
+.widget li:last-child {
+  margin-bottom: 0;
 }
 .widget {
   line-height: 1.6em;

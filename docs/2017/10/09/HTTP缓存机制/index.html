@@ -9,10 +9,11 @@
 <meta name="keywords" content="http">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HTTP：缓存机制">
-<meta property="og:url" content="http://daixinye.com/2017/10/09/HTTP缓存机制/index.html">
+<meta property="og:url" content="http://blog.daixinye.com/2017/10/09/HTTP缓存机制/index.html">
 <meta property="og:site_name" content="Daixinye">
 <meta property="og:description" content="Foreword浏览器缓存可以让用户在访问我们的站点时，通过直接使用保存在浏览器上的缓存，从而避免发起不必要的 HTTP 请求，提升页面渲染的速度。那么，对于不了解这个缓存机制的人来说，就有以下几个问题需要求解： 1、浏览器什么时候应该缓存资源？2、浏览器什么时候会使用缓存资源？3、浏览器的缓存资源过期了怎么办？ 本文默认读者对于 HTTP 协议有一定的了解（对于 HTTP 协议请求头、响应头有基">
-<meta property="og:updated_time" content="2017-10-09T15:48:33.000Z">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-10-26T09:59:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTTP：缓存机制">
 <meta name="twitter:description" content="Foreword浏览器缓存可以让用户在访问我们的站点时，通过直接使用保存在浏览器上的缓存，从而避免发起不必要的 HTTP 请求，提升页面渲染的速度。那么，对于不了解这个缓存机制的人来说，就有以下几个问题需要求解： 1、浏览器什么时候应该缓存资源？2、浏览器什么时候会使用缓存资源？3、浏览器的缓存资源过期了怎么办？ 本文默认读者对于 HTTP 协议有一定的了解（对于 HTTP 协议请求头、响应头有基">
@@ -55,19 +56,21 @@
         <a id="nav-github" class="nav-icon" title="github" target="_blank" href="https://github.com/daixinye"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://daixinye.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.daixinye.com"></form>
       </div>
     </div>
   </div>
 </header>
       <div class="outer">
         <section id="main"><article id="post-HTTP缓存机制" class="article article-type-post" itemscope itemprop="blogPost">
+  <!--
   <div class="article-meta">
     <a href="/2017/10/09/HTTP缓存机制/" class="article-date">
   <time datetime="2017-10-09T14:17:47.000Z" itemprop="datePublished">2017-10-09</time>
 </a>
     
   </div>
+  -->
   <div class="article-inner">
     
     
@@ -87,55 +90,29 @@
 <p>1、浏览器什么时候应该缓存资源？<br>2、浏览器什么时候会使用缓存资源？<br>3、浏览器的缓存资源过期了怎么办？</p>
 <p>本文默认读者对于 HTTP 协议有一定的了解（对于 HTTP 协议请求头、响应头有基础的认识，以及对前后端交互有基本的了解）</p>
 <h2 id="第一问：浏览器什么时候会缓存资源？"><a href="#第一问：浏览器什么时候会缓存资源？" class="headerlink" title="第一问：浏览器什么时候会缓存资源？"></a>第一问：浏览器什么时候会缓存资源？</h2><p>第一种：当 HTTP Response 中带有 Expires Header 时，浏览器会缓存该资源。<br>Expires 会告诉浏览器该资源在什么时候过期，并且在这个过期日期之前，浏览器应当一直使用存在浏览器本地的资源副本而不发起 HTTP 请求。<br>下面这个 HTTP Response 说明这个资源在10年后的今天过期。</p>
-<pre><code>HTTP/1.1 200 OK
-Host: daixinye.com
-Expires: Mon, 9 Oct 2027 22:00:00 GMT
-...
-</code></pre><p>第二种：当 HTTP Response 中带有 Cache-Control 及 max-age 指令时。<br>HTTP 1.1 引入了 Cache-Control Header，通过 Cache-Control 指定 max-age 指令可以指定该资源被缓存多久。与 Expires 有两大不同点需要注意：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">HTTP/1.1 <span class="number">200</span> OK</div><div class="line"><span class="attribute">Host</span>: daixinye.com</div><div class="line"><span class="attribute">Expires</span>: Mon, 9 Oct 2027 22:00:00 GMT</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>第二种：当 HTTP Response 中带有 Cache-Control 及 max-age 指令时。<br>HTTP 1.1 引入了 Cache-Control Header，通过 Cache-Control 指定 max-age 指令可以指定该资源被缓存多久。与 Expires 有两大不同点需要注意：</p>
 <ul>
 <li>当 Response 中两者同时存在时，Cache-Control 的优先级高于 Expires</li>
-<li>Expires 指定了过期时间，而 Cache-Control 的 max-age 则以秒为单位，指定了从该 HTTP Request 起经过多少秒后该资源将会过期。<br>  HTTP/1.1 200 OK<br>  Host: daixinye.com<br>  Cache-Control: max-age=31536000<br>  …</li>
+<li>Expires 指定了过期时间，而 Cache-Control 的 max-age 则以秒为单位，指定了从该 HTTP Request 起经过多少秒后该资源将会过期。</li>
 </ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">HTTP/1.1 <span class="number">200</span> OK</div><div class="line"><span class="attribute">Host</span>: daixinye.com</div><div class="line"><span class="attribute">Cache-Control</span>: max-age=31536000</div><div class="line">...</div></pre></td></tr></table></figure>
 <h2 id="第二问：浏览器什么时候会使用缓存资源？"><a href="#第二问：浏览器什么时候会使用缓存资源？" class="headerlink" title="第二问：浏览器什么时候会使用缓存资源？"></a>第二问：浏览器什么时候会使用缓存资源？</h2><p>从第一问可以看到，当 HTTP Response 中包含了 Expires 或 Cache-Control 时，服务器会告诉浏览器该资源何时会过期。<br>在过期时间之前，浏览器应当一直使用本地缓存下来的资源副本，且不发起获取该资源的 HTTP Request。</p>
 <h2 id="第三问：浏览器的缓存资源过期了怎么办？"><a href="#第三问：浏览器的缓存资源过期了怎么办？" class="headerlink" title="第三问：浏览器的缓存资源过期了怎么办？"></a>第三问：浏览器的缓存资源过期了怎么办？</h2><p>当浏览器缓存下来的资源副本过期时，浏览器会发起一个<strong>条件 Get 请求（Conditional Get Request）</strong>。<br>浏览器这个请求会询问服务器，“我现在存下来的资源能不能继续用啊”。<br>如果服务器告诉浏览器，“你这个资源我已经修改过啦，你得重新获取啦”，那么 Response 就会返回 200，同时浏览器会重新下载这个资源以替代之前存在本地的资源。<br>如果服务器告诉浏览器说，“你这个资源我没修改过啦，你接着用吧”，那么就会返回 304 Not Modified。这个时候浏览器只付出了一个 HTTP Response Header 的流量就可以避免一次下载存在服务器的资源带来的额外开销。<br>那么浏览器和服务器是如何判断浏览器的缓存是否有效的呢？这就需要引入 Last-Modified 和 Etags 两个 Response Header 了。</p>
 <h3 id="Last-Modified-Header"><a href="#Last-Modified-Header" class="headerlink" title="Last-Modified Header"></a>Last-Modified Header</h3><p>实际上在一个正常的 HTTP Response 中，服务器会告诉浏览器，这个资源最后被修改的时间，通过这个<strong>最后被修改的时间</strong>，我们就可以判别这个资源是否需要更新：</p>
-<pre><code>HTTP/1.1 200 OK
-Host: daixinye.com
-Cache-Control: max-age=60
-Last-Modified: Mon, 8 Oct 2017 20:00:00 GMT
-
-var iamdxy = true
-...
-</code></pre><p>接下来当资源过期，也就是一分钟后，当浏览器再次打算使用这个本地缓存的资源时发现，“诶这个资源过期了，我得问一下服务器这个缓存还能不能接着用”，于是浏览器根据能省则省的原则发起了一个<strong>条件 Get 请求</strong>：</p>
-<pre><code>GET /index.js HTTP/1.1
-Host: daixinye.com
-If-Modified-Since: Mon, 8 Oct 2017 20:00:00 GMT
-...
-</code></pre><p>这个 Request 中的 If-Modified-Since Header，就是之前服务器 Response 中的 Last-Modified，这里浏览器用来询问服务器，“老哥这个资源你昨天8点以后修改过了吗？”。<br>服务器老哥想回答说：”没修改！你接着用你缓存！“，于是返回一个 Response ：</p>
-<pre><code>HTTP/1.1 304 Not Modified
-</code></pre><p>由此，浏览器收到以后继续使用本地缓存。<br>那如果服务器老哥说：”改过啦，你用这个新的，这个是我今天晚上10点刚刚改过的！“呢，那么就会正常的返回一个 200 的 Response：</p>
-<pre><code>HTTP/1.1 200 OK
-Host: daixinye.com
-Cache-Control: max-age=60
-Last-Modified: Mon, 9 Oct 2017 22:00:00 GMT
-
-var iamdxy = true
-...
-</code></pre><p>由此，浏览器更新本地缓存，同时也付出了一个下载 HTTP Entity 流量的惨痛代价。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">HTTP/1.1 <span class="number">200</span> OK</div><div class="line"><span class="attribute">Host</span>: daixinye.com</div><div class="line"><span class="attribute">Cache-Control</span>: max-age=60</div><div class="line"><span class="attribute">Last-Modified</span>: Mon, 8 Oct 2017 20:00:00 GMT</div><div class="line"></div><div class="line">var iamdxy = true</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>接下来当资源过期，也就是一分钟后，当浏览器再次打算使用这个本地缓存的资源时发现，“诶这个资源过期了，我得问一下服务器这个缓存还能不能接着用”，于是浏览器根据能省则省的原则发起了一个<strong>条件 Get 请求</strong>：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">GET</span> <span class="string">/index.js</span> HTTP/1.1</div><div class="line"><span class="attribute">Host</span>: daixinye.com</div><div class="line"><span class="attribute">If-Modified-Since</span>: Mon, 8 Oct 2017 20:00:00 GMT</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>这个 Request 中的 If-Modified-Since Header，就是之前服务器 Response 中的 Last-Modified，这里浏览器用来询问服务器，“老哥这个资源你昨天8点以后修改过了吗？”。<br>服务器老哥想回答说：”没修改！你接着用你缓存！“，于是返回一个 Response ：</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">HTTP/1.1 <span class="number">304</span> Not Modified</div></pre></td></tr></table></figure>
+<p>由此，浏览器收到以后继续使用本地缓存。<br>那如果服务器老哥说：”改过啦，你用这个新的，这个是我今天晚上10点刚刚改过的！“呢，那么就会正常的返回一个 200 的 Response：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">HTTP/1.1 <span class="number">200</span> OK</div><div class="line"><span class="attribute">Host</span>: daixinye.com</div><div class="line"><span class="attribute">Cache-Control</span>: max-age=60</div><div class="line"><span class="attribute">Last-Modified</span>: Mon, 9 Oct 2017 22:00:00 GMT</div><div class="line"></div><div class="line">var iamdxy = true</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>由此，浏览器更新本地缓存，同时也付出了一个下载 HTTP Entity 流量的惨痛代价。</p>
 <h3 id="Etags-Header"><a href="#Etags-Header" class="headerlink" title="Etags Header"></a>Etags Header</h3><p>Etags，Entity Tags，实体标签。这个 Header 跟 Last-Modified 的用处一样，只是一个是用时间一个则是用<strong>标识了一个资源特定版本的字符串</strong>来辨别资源是否被过期。<br>Etags 的值根据浏览器的具体 Etags 生成策略的不同而不同，这里我们只要知道，当浏览器发起<strong>条件 Get 请求</strong>时，如果本地资源的 Etags 跟服务器上的不匹配，那么此时就需要重新下载资源；若匹配，则又是一个美好的 304 了。<br>服务器 Response：</p>
-<pre><code>HTTP/1.1 200 OK
-Host: daixinye.com
-Cache-Control: max-age=60
-Etags: &quot;1a2b3c4d5f&quot;
-
-var iamdxy = true
-...
-</code></pre><p>浏览器在缓存资源过期时的<strong>条件 Get 请求</strong>：</p>
-<pre><code>GET /index.js HTTP/1.1
-Host: daixinye.com
-If-None-Match: &quot;1a2b3c4d5f&quot;
-...
-</code></pre><p>这里Conditional Get Request 的 If-None-Match Header 与 Response 里的 Etags 是一致的。<br>接下来服务器会对比 Etags ，若匹配则 304，若不匹配则 200。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">HTTP/1.1 <span class="number">200</span> OK</div><div class="line"><span class="attribute">Host</span>: daixinye.com</div><div class="line"><span class="attribute">Cache-Control</span>: max-age=60</div><div class="line"><span class="attribute">Etags</span>: "1a2b3c4d5f"</div><div class="line"></div><div class="line">var iamdxy = true</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>浏览器在缓存资源过期时的<strong>条件 Get 请求</strong>：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">GET</span> <span class="string">/index.js</span> HTTP/1.1</div><div class="line"><span class="attribute">Host</span>: daixinye.com</div><div class="line"><span class="attribute">If-None-Match</span>: "1a2b3c4d5f"</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>这里Conditional Get Request 的 If-None-Match Header 与 Response 里的 Etags 是一致的。<br>接下来服务器会对比 Etags ，若匹配则 304，若不匹配则 200。</p>
 <h3 id="Etags-与-Last-Modified-同时存在时怎么办？"><a href="#Etags-与-Last-Modified-同时存在时怎么办？" class="headerlink" title="Etags 与 Last-Modified 同时存在时怎么办？"></a>Etags 与 Last-Modified 同时存在时怎么办？</h3><p>当 Etags 与 Last-Modified 同时存在时，仅当两者同时与服务器上的资源匹配时，才会返回 304，否则只要其中一个不匹配，服务器就会返回 200 要求浏览器重新下载资源。</p>
 <h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>本文阐述了关于 HTTP 缓存的基本机制，其大致的行为可以描述为：浏览器向服务器请求资源，服务器在返回资源的时候也告诉浏览器，你应该缓存这个资源，并且在何时之前你都可以一直使用这个资源。如果资源过期，那么你就发一个<strong>条件 Get 请求</strong>，如果资源没修改你还可以接着使用本地资源。<br>本文有以下几个核心的概念：</p>
 <ul>
@@ -143,8 +120,10 @@ If-None-Match: &quot;1a2b3c4d5f&quot;
 <li>Cache-Control，max-age</li>
 <li>Last-Modified/If-Modified-Since</li>
 <li>Etags/If-None-Match</li>
-<li>Conditional Get Request<br>相信理解了这几个概念之后，对 HTTP 的缓存机制也就有了一个初步的认识。<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2>谢谢你读到最后，如果你有发现本文中的任何错误，请不吝指出。</li>
+<li>Conditional Get Request</li>
 </ul>
+<p>相信理解了这几个概念之后，对 HTTP 的缓存机制也就有了一个初步的认识。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>谢谢你读到最后，如果你有发现本文中的任何错误，请不吝指出。</p>
 
       
     </div>
@@ -179,36 +158,7 @@ If-None-Match: &quot;1a2b3c4d5f&quot;
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fe/">fe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jquery/">jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svn/">svn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/css/" style="font-size: 17.5px;">css</a> <a href="/tags/fe/" style="font-size: 12.5px;">fe</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/http/" style="font-size: 15px;">http</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 12.5px;">jquery</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/react/" style="font-size: 12.5px;">react</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/svn/" style="font-size: 12.5px;">svn</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">近文</h3>
     <div class="widget">
       <ul>
         
@@ -232,9 +182,32 @@ If-None-Match: &quot;1a2b3c4d5f&quot;
             <a href="/2017/07/06/2017-07-06-Shell 脚本入门/">Shell 脚本入门</a>
           </li>
         
+          <li>
+            <a href="/2017/07/05/2017-07-05-CSS：什么是 BFC/">CSS：什么是 BFC</a>
+          </li>
+        
       </ul>
     </div>
   </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/css/" style="font-size: 17.5px;">css</a> <a href="/tags/fe/" style="font-size: 12.5px;">fe</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/http/" style="font-size: 15px;">http</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 12.5px;">jquery</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/react/" style="font-size: 12.5px;">react</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/svn/" style="font-size: 12.5px;">svn</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">2017年 10月</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">2017年 08月</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">2017年 07月</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">2017年 06月</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">2017年 05月</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">2017年 04月</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">2017年 01月</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">2016年 04月</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">2016年 03月</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
 
   
 </aside>

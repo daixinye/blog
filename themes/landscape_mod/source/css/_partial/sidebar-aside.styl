@@ -1,0 +1,44 @@
+#sidebar
+  @media mq-normal
+    column(sidebar-column)
+
+.widget-wrap
+  margin: block-margin 0
+  background: color-widget-background
+  box-shadow: 0 1px 3px rgba(0,0,0,.1)
+
+.widget-title
+  color: color-sidebar-text
+  border-bottom: 1px solid #f0f2f7
+  padding: 0 15px
+  height: 50px
+  line-height: 50px
+  overflow: hidden
+  font-weight: 700
+  text-overflow: ellipsis
+  white-space: nowrap
+  
+.widget
+  color: color-sidebar-text
+
+  padding: 15px
+  border-radius: 2px
+  a
+    color: color-link
+    text-decoration: none
+    &:hover
+      text-decoration: underline
+  ul, ol, dl
+    ul, ol, dl
+      margin-left: 15px
+      list-style: disc
+  
+  li
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
+    margin: 10px 0
+    &:first-child
+      margin-top: 0
+    &:last-child
+      margin-bottom: 0
