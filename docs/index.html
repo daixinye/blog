@@ -7,8 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="Daixinye">
-<meta property="og:url" content="http://daixinye.com/index.html">
+<meta property="og:url" content="http://blog.daixinye.com/index.html">
 <meta property="og:site_name" content="Daixinye">
+<meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Daixinye">
   
@@ -50,7 +51,7 @@
         <a id="nav-github" class="nav-icon" title="github" target="_blank" href="https://github.com/daixinye"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://daixinye.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.daixinye.com"></form>
       </div>
     </div>
   </div>
@@ -59,12 +60,14 @@
         <section id="main">
   
     <article id="post-HTTP缓存机制" class="article article-type-post" itemscope itemprop="blogPost">
+  <!--
   <div class="article-meta">
     <a href="/2017/10/09/HTTP缓存机制/" class="article-date">
   <time datetime="2017-10-09T14:17:47.000Z" itemprop="datePublished">2017-10-09</time>
 </a>
     
   </div>
+  -->
   <div class="article-inner">
     
     
@@ -84,55 +87,29 @@
 <p>1、浏览器什么时候应该缓存资源？<br>2、浏览器什么时候会使用缓存资源？<br>3、浏览器的缓存资源过期了怎么办？</p>
 <p>本文默认读者对于 HTTP 协议有一定的了解（对于 HTTP 协议请求头、响应头有基础的认识，以及对前后端交互有基本的了解）</p>
 <h2 id="第一问：浏览器什么时候会缓存资源？"><a href="#第一问：浏览器什么时候会缓存资源？" class="headerlink" title="第一问：浏览器什么时候会缓存资源？"></a>第一问：浏览器什么时候会缓存资源？</h2><p>第一种：当 HTTP Response 中带有 Expires Header 时，浏览器会缓存该资源。<br>Expires 会告诉浏览器该资源在什么时候过期，并且在这个过期日期之前，浏览器应当一直使用存在浏览器本地的资源副本而不发起 HTTP 请求。<br>下面这个 HTTP Response 说明这个资源在10年后的今天过期。</p>
-<pre><code>HTTP/1.1 200 OK
-Host: daixinye.com
-Expires: Mon, 9 Oct 2027 22:00:00 GMT
-...
-</code></pre><p>第二种：当 HTTP Response 中带有 Cache-Control 及 max-age 指令时。<br>HTTP 1.1 引入了 Cache-Control Header，通过 Cache-Control 指定 max-age 指令可以指定该资源被缓存多久。与 Expires 有两大不同点需要注意：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">HTTP/1.1 <span class="number">200</span> OK</div><div class="line"><span class="attribute">Host</span>: daixinye.com</div><div class="line"><span class="attribute">Expires</span>: Mon, 9 Oct 2027 22:00:00 GMT</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>第二种：当 HTTP Response 中带有 Cache-Control 及 max-age 指令时。<br>HTTP 1.1 引入了 Cache-Control Header，通过 Cache-Control 指定 max-age 指令可以指定该资源被缓存多久。与 Expires 有两大不同点需要注意：</p>
 <ul>
 <li>当 Response 中两者同时存在时，Cache-Control 的优先级高于 Expires</li>
-<li>Expires 指定了过期时间，而 Cache-Control 的 max-age 则以秒为单位，指定了从该 HTTP Request 起经过多少秒后该资源将会过期。<br>  HTTP/1.1 200 OK<br>  Host: daixinye.com<br>  Cache-Control: max-age=31536000<br>  …</li>
+<li>Expires 指定了过期时间，而 Cache-Control 的 max-age 则以秒为单位，指定了从该 HTTP Request 起经过多少秒后该资源将会过期。</li>
 </ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">HTTP/1.1 <span class="number">200</span> OK</div><div class="line"><span class="attribute">Host</span>: daixinye.com</div><div class="line"><span class="attribute">Cache-Control</span>: max-age=31536000</div><div class="line">...</div></pre></td></tr></table></figure>
 <h2 id="第二问：浏览器什么时候会使用缓存资源？"><a href="#第二问：浏览器什么时候会使用缓存资源？" class="headerlink" title="第二问：浏览器什么时候会使用缓存资源？"></a>第二问：浏览器什么时候会使用缓存资源？</h2><p>从第一问可以看到，当 HTTP Response 中包含了 Expires 或 Cache-Control 时，服务器会告诉浏览器该资源何时会过期。<br>在过期时间之前，浏览器应当一直使用本地缓存下来的资源副本，且不发起获取该资源的 HTTP Request。</p>
 <h2 id="第三问：浏览器的缓存资源过期了怎么办？"><a href="#第三问：浏览器的缓存资源过期了怎么办？" class="headerlink" title="第三问：浏览器的缓存资源过期了怎么办？"></a>第三问：浏览器的缓存资源过期了怎么办？</h2><p>当浏览器缓存下来的资源副本过期时，浏览器会发起一个<strong>条件 Get 请求（Conditional Get Request）</strong>。<br>浏览器这个请求会询问服务器，“我现在存下来的资源能不能继续用啊”。<br>如果服务器告诉浏览器，“你这个资源我已经修改过啦，你得重新获取啦”，那么 Response 就会返回 200，同时浏览器会重新下载这个资源以替代之前存在本地的资源。<br>如果服务器告诉浏览器说，“你这个资源我没修改过啦，你接着用吧”，那么就会返回 304 Not Modified。这个时候浏览器只付出了一个 HTTP Response Header 的流量就可以避免一次下载存在服务器的资源带来的额外开销。<br>那么浏览器和服务器是如何判断浏览器的缓存是否有效的呢？这就需要引入 Last-Modified 和 Etags 两个 Response Header 了。</p>
 <h3 id="Last-Modified-Header"><a href="#Last-Modified-Header" class="headerlink" title="Last-Modified Header"></a>Last-Modified Header</h3><p>实际上在一个正常的 HTTP Response 中，服务器会告诉浏览器，这个资源最后被修改的时间，通过这个<strong>最后被修改的时间</strong>，我们就可以判别这个资源是否需要更新：</p>
-<pre><code>HTTP/1.1 200 OK
-Host: daixinye.com
-Cache-Control: max-age=60
-Last-Modified: Mon, 8 Oct 2017 20:00:00 GMT
-
-var iamdxy = true
-...
-</code></pre><p>接下来当资源过期，也就是一分钟后，当浏览器再次打算使用这个本地缓存的资源时发现，“诶这个资源过期了，我得问一下服务器这个缓存还能不能接着用”，于是浏览器根据能省则省的原则发起了一个<strong>条件 Get 请求</strong>：</p>
-<pre><code>GET /index.js HTTP/1.1
-Host: daixinye.com
-If-Modified-Since: Mon, 8 Oct 2017 20:00:00 GMT
-...
-</code></pre><p>这个 Request 中的 If-Modified-Since Header，就是之前服务器 Response 中的 Last-Modified，这里浏览器用来询问服务器，“老哥这个资源你昨天8点以后修改过了吗？”。<br>服务器老哥想回答说：”没修改！你接着用你缓存！“，于是返回一个 Response ：</p>
-<pre><code>HTTP/1.1 304 Not Modified
-</code></pre><p>由此，浏览器收到以后继续使用本地缓存。<br>那如果服务器老哥说：”改过啦，你用这个新的，这个是我今天晚上10点刚刚改过的！“呢，那么就会正常的返回一个 200 的 Response：</p>
-<pre><code>HTTP/1.1 200 OK
-Host: daixinye.com
-Cache-Control: max-age=60
-Last-Modified: Mon, 9 Oct 2017 22:00:00 GMT
-
-var iamdxy = true
-...
-</code></pre><p>由此，浏览器更新本地缓存，同时也付出了一个下载 HTTP Entity 流量的惨痛代价。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">HTTP/1.1 <span class="number">200</span> OK</div><div class="line"><span class="attribute">Host</span>: daixinye.com</div><div class="line"><span class="attribute">Cache-Control</span>: max-age=60</div><div class="line"><span class="attribute">Last-Modified</span>: Mon, 8 Oct 2017 20:00:00 GMT</div><div class="line"></div><div class="line">var iamdxy = true</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>接下来当资源过期，也就是一分钟后，当浏览器再次打算使用这个本地缓存的资源时发现，“诶这个资源过期了，我得问一下服务器这个缓存还能不能接着用”，于是浏览器根据能省则省的原则发起了一个<strong>条件 Get 请求</strong>：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">GET</span> <span class="string">/index.js</span> HTTP/1.1</div><div class="line"><span class="attribute">Host</span>: daixinye.com</div><div class="line"><span class="attribute">If-Modified-Since</span>: Mon, 8 Oct 2017 20:00:00 GMT</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>这个 Request 中的 If-Modified-Since Header，就是之前服务器 Response 中的 Last-Modified，这里浏览器用来询问服务器，“老哥这个资源你昨天8点以后修改过了吗？”。<br>服务器老哥想回答说：”没修改！你接着用你缓存！“，于是返回一个 Response ：</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">HTTP/1.1 <span class="number">304</span> Not Modified</div></pre></td></tr></table></figure>
+<p>由此，浏览器收到以后继续使用本地缓存。<br>那如果服务器老哥说：”改过啦，你用这个新的，这个是我今天晚上10点刚刚改过的！“呢，那么就会正常的返回一个 200 的 Response：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">HTTP/1.1 <span class="number">200</span> OK</div><div class="line"><span class="attribute">Host</span>: daixinye.com</div><div class="line"><span class="attribute">Cache-Control</span>: max-age=60</div><div class="line"><span class="attribute">Last-Modified</span>: Mon, 9 Oct 2017 22:00:00 GMT</div><div class="line"></div><div class="line">var iamdxy = true</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>由此，浏览器更新本地缓存，同时也付出了一个下载 HTTP Entity 流量的惨痛代价。</p>
 <h3 id="Etags-Header"><a href="#Etags-Header" class="headerlink" title="Etags Header"></a>Etags Header</h3><p>Etags，Entity Tags，实体标签。这个 Header 跟 Last-Modified 的用处一样，只是一个是用时间一个则是用<strong>标识了一个资源特定版本的字符串</strong>来辨别资源是否被过期。<br>Etags 的值根据浏览器的具体 Etags 生成策略的不同而不同，这里我们只要知道，当浏览器发起<strong>条件 Get 请求</strong>时，如果本地资源的 Etags 跟服务器上的不匹配，那么此时就需要重新下载资源；若匹配，则又是一个美好的 304 了。<br>服务器 Response：</p>
-<pre><code>HTTP/1.1 200 OK
-Host: daixinye.com
-Cache-Control: max-age=60
-Etags: &quot;1a2b3c4d5f&quot;
-
-var iamdxy = true
-...
-</code></pre><p>浏览器在缓存资源过期时的<strong>条件 Get 请求</strong>：</p>
-<pre><code>GET /index.js HTTP/1.1
-Host: daixinye.com
-If-None-Match: &quot;1a2b3c4d5f&quot;
-...
-</code></pre><p>这里Conditional Get Request 的 If-None-Match Header 与 Response 里的 Etags 是一致的。<br>接下来服务器会对比 Etags ，若匹配则 304，若不匹配则 200。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">HTTP/1.1 <span class="number">200</span> OK</div><div class="line"><span class="attribute">Host</span>: daixinye.com</div><div class="line"><span class="attribute">Cache-Control</span>: max-age=60</div><div class="line"><span class="attribute">Etags</span>: "1a2b3c4d5f"</div><div class="line"></div><div class="line">var iamdxy = true</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>浏览器在缓存资源过期时的<strong>条件 Get 请求</strong>：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">GET</span> <span class="string">/index.js</span> HTTP/1.1</div><div class="line"><span class="attribute">Host</span>: daixinye.com</div><div class="line"><span class="attribute">If-None-Match</span>: "1a2b3c4d5f"</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>这里Conditional Get Request 的 If-None-Match Header 与 Response 里的 Etags 是一致的。<br>接下来服务器会对比 Etags ，若匹配则 304，若不匹配则 200。</p>
 <h3 id="Etags-与-Last-Modified-同时存在时怎么办？"><a href="#Etags-与-Last-Modified-同时存在时怎么办？" class="headerlink" title="Etags 与 Last-Modified 同时存在时怎么办？"></a>Etags 与 Last-Modified 同时存在时怎么办？</h3><p>当 Etags 与 Last-Modified 同时存在时，仅当两者同时与服务器上的资源匹配时，才会返回 304，否则只要其中一个不匹配，服务器就会返回 200 要求浏览器重新下载资源。</p>
 <h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>本文阐述了关于 HTTP 缓存的基本机制，其大致的行为可以描述为：浏览器向服务器请求资源，服务器在返回资源的时候也告诉浏览器，你应该缓存这个资源，并且在何时之前你都可以一直使用这个资源。如果资源过期，那么你就发一个<strong>条件 Get 请求</strong>，如果资源没修改你还可以接着使用本地资源。<br>本文有以下几个核心的概念：</p>
 <ul>
@@ -140,8 +117,10 @@ If-None-Match: &quot;1a2b3c4d5f&quot;
 <li>Cache-Control，max-age</li>
 <li>Last-Modified/If-Modified-Since</li>
 <li>Etags/If-None-Match</li>
-<li>Conditional Get Request<br>相信理解了这几个概念之后，对 HTTP 的缓存机制也就有了一个初步的认识。<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2>谢谢你读到最后，如果你有发现本文中的任何错误，请不吝指出。</li>
+<li>Conditional Get Request</li>
 </ul>
+<p>相信理解了这几个概念之后，对 HTTP 的缓存机制也就有了一个初步的认识。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>谢谢你读到最后，如果你有发现本文中的任何错误，请不吝指出。</p>
 
       
     </div>
@@ -158,12 +137,14 @@ If-None-Match: &quot;1a2b3c4d5f&quot;
 
   
     <article id="post-JavaScript：Array类型小结（2）" class="article article-type-post" itemscope itemprop="blogPost">
+  <!--
   <div class="article-meta">
     <a href="/2017/08/06/JavaScript：Array类型小结（2）/" class="article-date">
   <time datetime="2017-08-06T06:11:52.000Z" itemprop="datePublished">2017-08-06</time>
 </a>
     
   </div>
+  -->
   <div class="article-inner">
     
     
@@ -180,25 +161,25 @@ If-None-Match: &quot;1a2b3c4d5f&quot;
     <div class="article-entry" itemprop="articleBody">
       
         <p>承接 JavaScript：Array类型小结（1）</p>
-<h2 id="位置方法"><a href="#位置方法" class="headerlink" title="位置方法"></a>位置方法</h2><h3 id="indexOf"><a href="#indexOf" class="headerlink" title="indexOf()"></a>indexOf()</h3><p><code>indexOf()</code> 方法用于从前往后查找元素，当没有查找到该元素时，会返回 -1。<br>此外，indexOf() 不会对传入的查找元素进行类型转换，在进行对比时会使用全等（===）的方式进行比较：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">let value = [1,2,3,4,5] </div><div class="line">console.log(value.indexOf(3)) // 2</div><div class="line">console.log(value.indexOf(4)) // -1</div><div class="line">console.log(value.indexOf(&apos;3&apos;)) // -1</div></pre></td></tr></table></figure></p>
-<p>我们可以再传入一个参数来指定从第几项（从0开始）开始进行查找（查找包含起始的元素）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let value = [1,2,3,4,5]</div><div class="line">console.log(value.indexOf(3,2)) // 3</div><div class="line">console.log(value.indexOf(2,2)) // -1</div></pre></td></tr></table></figure></p>
-<h3 id="lastIndexOf"><a href="#lastIndexOf" class="headerlink" title="lastIndexOf()"></a>lastIndexOf()</h3><p><code>lastIndexOf()</code> 方法用于从后往前查找元素，用法与 <code>indexOf()</code> 基本一致：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">let value = [1,1,2,2,3,3]</div><div class="line">console.log(value.lastIndexOf(1)) // 1</div><div class="line">console.log(value.lastIndexOf(3)) // 5</div><div class="line">console.log(value.lastIndexOf(2,1)) // -1，代表从第1项开始往前查找</div></pre></td></tr></table></figure></p>
-<h2 id="迭代方法"><a href="#迭代方法" class="headerlink" title="迭代方法"></a>迭代方法</h2><h3 id="forEach"><a href="#forEach" class="headerlink" title="forEach"></a>forEach</h3><p><code>forEach()</code> 对数组中每一项运行指定函数，没有返回值。等同于 <code>for</code> 语句：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">let value = [1,2,3,4,5]</div><div class="line">value.forEach( (item, index) =&gt; &#123;</div><div class="line">    console.log(item, index)</div><div class="line">&#125;)</div><div class="line">// 输出</div><div class="line">// 1 0</div><div class="line">// 2 1</div><div class="line">// 3 2</div><div class="line">// 4 3</div><div class="line">// 5 4</div></pre></td></tr></table></figure></p>
-<h3 id="every"><a href="#every" class="headerlink" title="every"></a>every</h3><p><code>every()</code> 对数组每一项运行指定函数，若对任意所有函数都返回 <code>true</code>， 则返回 <code>true</code>。与逻辑与操作符很相似：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">let value = [1,2,3,4,5]</div><div class="line">value.every( item =&gt; &#123;</div><div class="line">    return item &gt; 0</div><div class="line">&#125;) // true</div></pre></td></tr></table></figure></p>
-<h3 id="some"><a href="#some" class="headerlink" title="some"></a>some</h3><p><code>some()</code> 对数组每一项运行指定函数，若存在函数返回 <code>true</code>，则返回 <code>true</code>。与逻辑或操作符很相似：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">let value = [1,2,3,4,5]</div><div class="line">value.some( item =&gt; &#123;</div><div class="line">    return item &gt; 4</div><div class="line">&#125;) // true</div></pre></td></tr></table></figure></p>
-<h3 id="map"><a href="#map" class="headerlink" title="map"></a>map</h3><p><code>map()</code> 对数组每一项运行指定函数，返回由每一项函数的返回值组成的新数组：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">let value = [1,2,3,4,5]</div><div class="line">value.map( item =&gt; &#123;</div><div class="line">    return item + 1</div><div class="line">&#125;) // [2,3,4,5,6]</div></pre></td></tr></table></figure></p>
-<h3 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h3><p><code>filter()</code> 对数组每一项运行指定函数，返回每一项函数返回值为 <code>true</code> 的项组成的新数组：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">let value = [1,2,3,4,5]</div><div class="line">value.map( item =&gt; &#123;</div><div class="line">    return item &lt; 3</div><div class="line">&#125;) // [1,2]</div></pre></td></tr></table></figure></p>
-<h2 id="归并方法"><a href="#归并方法" class="headerlink" title="归并方法"></a>归并方法</h2><h3 id="reduce"><a href="#reduce" class="headerlink" title="reduce()"></a>reduce()</h3><p><code>reduce()</code> 接受一个函数，函数接受4个参数，分别是 前一个值，当前值，项的索引和数组对象。<br><code>reduce()</code> 方法能够遍历整个数组，并将上一个函数的返回值作为第一个参数传给下一个函数：<br>let value = [1,2,3,4,5]<br>let sum = value.reduce((prev, cur, index, array){<br>    return prev + cur<br>})<br>console.log(sum ) // 15</p>
+<h2 id="位置方法"><a href="#位置方法" class="headerlink" title="位置方法"></a>位置方法</h2><h3 id="indexOf"><a href="#indexOf" class="headerlink" title="indexOf()"></a>indexOf()</h3><p><code>indexOf()</code> 方法用于从前往后查找元素，当没有查找到该元素时，会返回 -1。<br>此外，indexOf() 不会对传入的查找元素进行类型转换，在进行对比时会使用全等（===）的方式进行比较：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> value = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>] </div><div class="line"><span class="built_in">console</span>.log(value.indexOf(<span class="number">3</span>)) <span class="comment">// 2</span></div><div class="line"><span class="built_in">console</span>.log(value.indexOf(<span class="number">4</span>)) <span class="comment">// -1</span></div><div class="line"><span class="built_in">console</span>.log(value.indexOf(<span class="string">'3'</span>)) <span class="comment">// -1</span></div></pre></td></tr></table></figure></p>
+<p>我们可以再传入一个参数来指定从第几项（从0开始）开始进行查找（查找包含起始的元素）：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> value = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</div><div class="line"><span class="built_in">console</span>.log(value.indexOf(<span class="number">3</span>,<span class="number">2</span>)) <span class="comment">// 3</span></div><div class="line"><span class="built_in">console</span>.log(value.indexOf(<span class="number">2</span>,<span class="number">2</span>)) <span class="comment">// -1</span></div></pre></td></tr></table></figure></p>
+<h3 id="lastIndexOf"><a href="#lastIndexOf" class="headerlink" title="lastIndexOf()"></a>lastIndexOf()</h3><p><code>lastIndexOf()</code> 方法用于从后往前查找元素，用法与 <code>indexOf()</code> 基本一致：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> value = [<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">3</span>]</div><div class="line"><span class="built_in">console</span>.log(value.lastIndexOf(<span class="number">1</span>)) <span class="comment">// 1</span></div><div class="line"><span class="built_in">console</span>.log(value.lastIndexOf(<span class="number">3</span>)) <span class="comment">// 5</span></div><div class="line"><span class="built_in">console</span>.log(value.lastIndexOf(<span class="number">2</span>,<span class="number">1</span>)) <span class="comment">// -1，代表从第1项开始往前查找</span></div></pre></td></tr></table></figure></p>
+<h2 id="迭代方法"><a href="#迭代方法" class="headerlink" title="迭代方法"></a>迭代方法</h2><h3 id="forEach"><a href="#forEach" class="headerlink" title="forEach"></a>forEach</h3><p><code>forEach()</code> 对数组中每一项运行指定函数，没有返回值。等同于 <code>for</code> 语句：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> value = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</div><div class="line">value.forEach( <span class="function">(<span class="params">item, index</span>) =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(item, index)</div><div class="line">&#125;)</div><div class="line"><span class="comment">// 输出</span></div><div class="line"><span class="comment">// 1 0</span></div><div class="line"><span class="comment">// 2 1</span></div><div class="line"><span class="comment">// 3 2</span></div><div class="line"><span class="comment">// 4 3</span></div><div class="line"><span class="comment">// 5 4</span></div></pre></td></tr></table></figure></p>
+<h3 id="every"><a href="#every" class="headerlink" title="every"></a>every</h3><p><code>every()</code> 对数组每一项运行指定函数，若对任意所有函数都返回 <code>true</code>， 则返回 <code>true</code>。与逻辑与操作符很相似：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> value = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</div><div class="line">value.every( <span class="function"><span class="params">item</span> =&gt;</span> &#123;</div><div class="line">    <span class="keyword">return</span> item &gt; <span class="number">0</span></div><div class="line">&#125;) <span class="comment">// true</span></div></pre></td></tr></table></figure></p>
+<h3 id="some"><a href="#some" class="headerlink" title="some"></a>some</h3><p><code>some()</code> 对数组每一项运行指定函数，若存在函数返回 <code>true</code>，则返回 <code>true</code>。与逻辑或操作符很相似：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> value = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</div><div class="line">value.some( <span class="function"><span class="params">item</span> =&gt;</span> &#123;</div><div class="line">    <span class="keyword">return</span> item &gt; <span class="number">4</span></div><div class="line">&#125;) <span class="comment">// true</span></div></pre></td></tr></table></figure></p>
+<h3 id="map"><a href="#map" class="headerlink" title="map"></a>map</h3><p><code>map()</code> 对数组每一项运行指定函数，返回由每一项函数的返回值组成的新数组：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> value = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</div><div class="line">value.map( <span class="function"><span class="params">item</span> =&gt;</span> &#123;</div><div class="line">    <span class="keyword">return</span> item + <span class="number">1</span></div><div class="line">&#125;) <span class="comment">// [2,3,4,5,6]</span></div></pre></td></tr></table></figure></p>
+<h3 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h3><p><code>filter()</code> 对数组每一项运行指定函数，返回每一项函数返回值为 <code>true</code> 的项组成的新数组：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> value = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</div><div class="line">value.map( <span class="function"><span class="params">item</span> =&gt;</span> &#123;</div><div class="line">    <span class="keyword">return</span> item &lt; <span class="number">3</span></div><div class="line">&#125;) <span class="comment">// [1,2]</span></div></pre></td></tr></table></figure></p>
+<h2 id="归并方法"><a href="#归并方法" class="headerlink" title="归并方法"></a>归并方法</h2><h3 id="reduce"><a href="#reduce" class="headerlink" title="reduce()"></a>reduce()</h3><p><code>reduce()</code> 接受一个函数，函数接受4个参数，分别是 前一个值，当前值，项的索引和数组对象。<br><code>reduce()</code> 方法能够遍历整个数组，并将上一个函数的返回值作为第一个参数传给下一个函数：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> value = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</div><div class="line"><span class="keyword">let</span> sum = value.reduce((prev, cur, index, array)&#123;</div><div class="line">    <span class="keyword">return</span> prev + cur</div><div class="line">&#125;)</div><div class="line"><span class="built_in">console</span>.log(sum ) <span class="comment">// 15</span></div></pre></td></tr></table></figure></p>
 <h3 id="reduceRight"><a href="#reduceRight" class="headerlink" title="reduceRight()"></a>reduceRight()</h3><p><code>reduceRight()</code> 与 <code>reduce()</code> 基本一致，只是前者从后向前归并。</p>
-<h2 id="ES6-新方法（部分）"><a href="#ES6-新方法（部分）" class="headerlink" title="ES6 新方法（部分）"></a>ES6 新方法（部分）</h2><h3 id="Array-of"><a href="#Array-of" class="headerlink" title="Array.of()"></a>Array.of()</h3><p><code>Array.of()</code> 方法用于创建一个数组。<br>之前我们提到，创建数组的方式由两种，一是通过构造函数，二是通过字面量的形式。<br>然而通过构造函数的方式有一个令人迷惑的地方：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let array = new Array(2)</div><div class="line">console.log(array.length) // 2</div><div class="line">console.log(array) // [undefined, undefined]</div></pre></td></tr></table></figure></p>
-<p>当给构造函数传入一个数字时，构造函数会返回一个长度为该数字的数组，并用 undefined 填充。<br>而当给构造函数传入一个字符串时，则会创建一个长度为1，元素为该字符串的数组：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let array = new Array(&apos;2&apos;)</div><div class="line">console.log(array.length) // 1</div><div class="line">console.log(array) // [&apos;2&apos;]</div></pre></td></tr></table></figure></p>
+<h2 id="ES6-新方法（部分）"><a href="#ES6-新方法（部分）" class="headerlink" title="ES6 新方法（部分）"></a>ES6 新方法（部分）</h2><h3 id="Array-of"><a href="#Array-of" class="headerlink" title="Array.of()"></a>Array.of()</h3><p><code>Array.of()</code> 方法用于创建一个数组。<br>之前我们提到，创建数组的方式由两种，一是通过构造函数，二是通过字面量的形式。<br>然而通过构造函数的方式有一个令人迷惑的地方：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> array = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">2</span>)</div><div class="line"><span class="built_in">console</span>.log(array.length) <span class="comment">// 2</span></div><div class="line"><span class="built_in">console</span>.log(array) <span class="comment">// [undefined, undefined]</span></div></pre></td></tr></table></figure></p>
+<p>当给构造函数传入一个数字时，构造函数会返回一个长度为该数字的数组，并用 undefined 填充。<br>而当给构造函数传入一个字符串时，则会创建一个长度为1，元素为该字符串的数组：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> array = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="string">'2'</span>)</div><div class="line"><span class="built_in">console</span>.log(array.length) <span class="comment">// 1</span></div><div class="line"><span class="built_in">console</span>.log(array) <span class="comment">// ['2']</span></div></pre></td></tr></table></figure></p>
 <p>这样就让我们很难用构造函数来创建只有一个数字的数组了。</p>
-<p>为了让创建数组的行为更加一致， <code>Array.of()</code> 去除了数组构造函数当传入一个数字时的情况：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let array = Array.of(2)</div><div class="line">console.log(array.length) // 1</div><div class="line">console.log(array.) // [2]</div></pre></td></tr></table></figure></p>
+<p>为了让创建数组的行为更加一致， <code>Array.of()</code> 去除了数组构造函数当传入一个数字时的情况：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> array = <span class="built_in">Array</span>.of(<span class="number">2</span>)</div><div class="line"><span class="built_in">console</span>.log(array.length) <span class="comment">// 1</span></div><div class="line"><span class="built_in">console</span>.log(array.) <span class="comment">// [2]</span></div></pre></td></tr></table></figure></p>
 <p>这样子，构造数组的方式就更加统一，无需我们去判断只传入一个参数时，参数的类型了。</p>
-<h3 id="Array-from"><a href="#Array-from" class="headerlink" title="Array.from()"></a>Array.from()</h3><p><code>Array.form()</code> 方法可以接受可迭代对象或类数组对象作为第一个参数，第二个参数接受一个映射函数，来对第一个参数中的每一个值进行映射转换：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">void function f_1()&#123;</div><div class="line">    let array = Array.from(arguments)</div><div class="line">    console.log(array)</div><div class="line">&#125;(1,2,3,4) // [1,2,3,4]</div><div class="line"></div><div class="line">void function f_2()&#123;</div><div class="line">    let array = Array.from(arguments, value =&gt; value + 1)</div><div class="line">    console.log(array)</div><div class="line">&#125;(1,2,3,4) // [2,3,4,5]</div></pre></td></tr></table></figure></p>
-<h3 id="Array-find"><a href="#Array-find" class="headerlink" title="Array.find()"></a>Array.find()</h3><p><code>Array.find()</code> 方法接受一个函数作为参数，用于获取满足某一条件的数组元素：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let value = [1,2,3,4,5]</div><div class="line">value.find(item =&gt; item &gt; 3) // 4</div></pre></td></tr></table></figure></p>
-<h3 id="Array-findIndex"><a href="#Array-findIndex" class="headerlink" title="Array.findIndex()"></a>Array.findIndex()</h3><p><code>Array.findIndex()</code> 与 <code>Array.find()</code> 的用法一致，只是前者返回的是查找到的元素下标：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let value = [1,2,3,4,5]</div><div class="line">value.find(item =&gt; item &gt; 3) // 3</div></pre></td></tr></table></figure></p>
-<h3 id="Array-fill"><a href="#Array-fill" class="headerlink" title="Array.fill()"></a>Array.fill()</h3><p><code>Array.fill()</code> 可以用指定的值填充若干个数组元素。<br>其接受三个参数，第一个参数是需要替换的值，第二个和第三个是起始下标和结束下标（不包含结束下标对应的值）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">let value = [1,2,3,4]</div><div class="line">value.fill(0) // [0,0,0,0]</div><div class="line"></div><div class="line">value.fill(-1, 1) // [0, -1, -1, -1]</div><div class="line">value.fill(-2, 1, 3) // [0, -2, -2, -1]</div></pre></td></tr></table></figure></p>
+<h3 id="Array-from"><a href="#Array-from" class="headerlink" title="Array.from()"></a>Array.from()</h3><p><code>Array.form()</code> 方法可以接受可迭代对象或类数组对象作为第一个参数，第二个参数接受一个映射函数，来对第一个参数中的每一个值进行映射转换：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">void</span> <span class="function"><span class="keyword">function</span> <span class="title">f_1</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">let</span> array = <span class="built_in">Array</span>.from(<span class="built_in">arguments</span>)</div><div class="line">    <span class="built_in">console</span>.log(array)</div><div class="line">&#125;(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>) <span class="comment">// [1,2,3,4]</span></div><div class="line"></div><div class="line"><span class="keyword">void</span> <span class="function"><span class="keyword">function</span> <span class="title">f_2</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">let</span> array = <span class="built_in">Array</span>.from(<span class="built_in">arguments</span>, value =&gt; value + <span class="number">1</span>)</div><div class="line">    <span class="built_in">console</span>.log(array)</div><div class="line">&#125;(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>) <span class="comment">// [2,3,4,5]</span></div></pre></td></tr></table></figure></p>
+<h3 id="Array-find"><a href="#Array-find" class="headerlink" title="Array.find()"></a>Array.find()</h3><p><code>Array.find()</code> 方法接受一个函数作为参数，用于获取满足某一条件的数组元素：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> value = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</div><div class="line">value.find(<span class="function"><span class="params">item</span> =&gt;</span> item &gt; <span class="number">3</span>) <span class="comment">// 4</span></div></pre></td></tr></table></figure></p>
+<h3 id="Array-findIndex"><a href="#Array-findIndex" class="headerlink" title="Array.findIndex()"></a>Array.findIndex()</h3><p><code>Array.findIndex()</code> 与 <code>Array.find()</code> 的用法一致，只是前者返回的是查找到的元素下标：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> value = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</div><div class="line">value.find(<span class="function"><span class="params">item</span> =&gt;</span> item &gt; <span class="number">3</span>) <span class="comment">// 3</span></div></pre></td></tr></table></figure></p>
+<h3 id="Array-fill"><a href="#Array-fill" class="headerlink" title="Array.fill()"></a>Array.fill()</h3><p><code>Array.fill()</code> 可以用指定的值填充若干个数组元素。<br>其接受三个参数，第一个参数是需要替换的值，第二个和第三个是起始下标和结束下标（不包含结束下标对应的值）<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> value = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</div><div class="line">value.fill(<span class="number">0</span>) <span class="comment">// [0,0,0,0]</span></div><div class="line"></div><div class="line">value.fill(<span class="number">-1</span>, <span class="number">1</span>) <span class="comment">// [0, -1, -1, -1]</span></div><div class="line">value.fill(<span class="number">-2</span>, <span class="number">1</span>, <span class="number">3</span>) <span class="comment">// [0, -2, -2, -1]</span></div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -215,12 +196,14 @@ If-None-Match: &quot;1a2b3c4d5f&quot;
 
   
     <article id="post-JavaScript：Array类型小结（1）" class="article article-type-post" itemscope itemprop="blogPost">
+  <!--
   <div class="article-meta">
     <a href="/2017/08/06/JavaScript：Array类型小结（1）/" class="article-date">
   <time datetime="2017-08-06T01:49:54.000Z" itemprop="datePublished">2017-08-06</time>
 </a>
     
   </div>
+  -->
   <div class="article-inner">
     
     
@@ -236,33 +219,33 @@ If-None-Match: &quot;1a2b3c4d5f&quot;
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">new Array(5) // 创建一个长度为 5 ，元素值均为 undefined 的数组</div><div class="line">new Array(1, 2, 3) // 创建一个长度为 3 ，元素为 1、2、3 的数组</div><div class="line">new Array(&apos;a&apos;, &apos;b&apos;, &apos;c&apos;) // 创建一个长度为 3 ，元素为 a、b、c 的数组</div></pre></td></tr></table></figure>
+        <h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">5</span>) <span class="comment">// 创建一个长度为 5 ，元素值均为 undefined 的数组</span></div><div class="line"><span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>) <span class="comment">// 创建一个长度为 3 ，元素为 1、2、3 的数组</span></div><div class="line"><span class="keyword">new</span> <span class="built_in">Array</span>(<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>) <span class="comment">// 创建一个长度为 3 ，元素为 a、b、c 的数组</span></div></pre></td></tr></table></figure>
 <p>注意： new 关键字是不必要的。</p>
-<h3 id="字面量"><a href="#字面量" class="headerlink" title="字面量"></a>字面量</h3><p>字面量由若干个元素，以逗号分隔的形式包裹在一对方括号中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[,,,,] // 相当于 new Array(5)</div><div class="line">[1, 2, 3] // 相当于 Array(1, 2, 3)</div><div class="line">[&apos;a&apos;, &apos;b&apos;, &apos;c&apos;] // 相当于 Array(&apos;a&apos;, &apos;b&apos;, &apos;c&apos;)</div></pre></td></tr></table></figure></p>
-<h2 id="length-属性"><a href="#length-属性" class="headerlink" title="length 属性"></a>length 属性</h2><h3 id="获取数组长度"><a href="#获取数组长度" class="headerlink" title="获取数组长度"></a>获取数组长度</h3><p>我们可以通过 <code>length</code> 属性来获取当前数组的长度：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let list = [1, 2, 3]</div><div class="line">console.log(list.length) // 3</div></pre></td></tr></table></figure></p>
+<h3 id="字面量"><a href="#字面量" class="headerlink" title="字面量"></a>字面量</h3><p>字面量由若干个元素，以逗号分隔的形式包裹在一对方括号中：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[,,,,] <span class="comment">// 相当于 new Array(5)</span></div><div class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>] <span class="comment">// 相当于 Array(1, 2, 3)</span></div><div class="line">[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>] <span class="comment">// 相当于 Array('a', 'b', 'c')</span></div></pre></td></tr></table></figure></p>
+<h2 id="length-属性"><a href="#length-属性" class="headerlink" title="length 属性"></a>length 属性</h2><h3 id="获取数组长度"><a href="#获取数组长度" class="headerlink" title="获取数组长度"></a>获取数组长度</h3><p>我们可以通过 <code>length</code> 属性来获取当前数组的长度：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> list = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</div><div class="line"><span class="built_in">console</span>.log(list.length) <span class="comment">// 3</span></div></pre></td></tr></table></figure></p>
 <p>新增元素或删除元素都会动态的改变 length 的值。</p>
-<h3 id="不仅仅是可读的"><a href="#不仅仅是可读的" class="headerlink" title="不仅仅是可读的"></a>不仅仅是可读的</h3><p><code>length</code> 除了可以获取当前数组的长度之外，其也可以用于增加或删除数组元素：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">let list = [1, 2, 3]</div><div class="line">console.log(list.length) // 3</div><div class="line"></div><div class="line">list.length = 2;</div><div class="line">console.log(list) // 输出 1,2， 第3个元素被删除了</div><div class="line"></div><div class="line">list.length = 4</div><div class="line">console.log(list) // 输出 1,2,undefined,undefined，新增了两个值为 undefined 的元素</div><div class="line"></div><div class="line">list[list.length] = 5</div><div class="line">console.log(list) // 输出 1,2,undefined,undefined,5，通过length下标新增一个值为 5 的元素，与 list.push(5) 行为是一致的</div></pre></td></tr></table></figure></p>
-<h3 id="不使用循环来创建值为-1-2-…n-的数组"><a href="#不使用循环来创建值为-1-2-…n-的数组" class="headerlink" title="不使用循环来创建值为 1,2,…n 的数组"></a>不使用循环来创建值为 1,2,…n 的数组</h3><p>使用递归：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">function producer(n,list =[])&#123;</div><div class="line">	return list.length === n ? list : (list[list.length] = list.length + 1) &amp;&amp; producer(n, list)</div><div class="line">&#125;</div><div class="line">console.log(producer(5)); // 1,2,3,4,5</div></pre></td></tr></table></figure></p>
-<h2 id="检测数组"><a href="#检测数组" class="headerlink" title="检测数组"></a>检测数组</h2><h3 id="instanceOf"><a href="#instanceOf" class="headerlink" title="instanceOf"></a>instanceOf</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">new Array() instanceOf Array // true</div></pre></td></tr></table></figure>
+<h3 id="不仅仅是可读的"><a href="#不仅仅是可读的" class="headerlink" title="不仅仅是可读的"></a>不仅仅是可读的</h3><p><code>length</code> 除了可以获取当前数组的长度之外，其也可以用于增加或删除数组元素：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> list = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</div><div class="line"><span class="built_in">console</span>.log(list.length) <span class="comment">// 3</span></div><div class="line"></div><div class="line">list.length = <span class="number">2</span>;</div><div class="line"><span class="built_in">console</span>.log(list) <span class="comment">// 输出 1,2， 第3个元素被删除了</span></div><div class="line"></div><div class="line">list.length = <span class="number">4</span></div><div class="line"><span class="built_in">console</span>.log(list) <span class="comment">// 输出 1,2,undefined,undefined，新增了两个值为 undefined 的元素</span></div><div class="line"></div><div class="line">list[list.length] = <span class="number">5</span></div><div class="line"><span class="built_in">console</span>.log(list) <span class="comment">// 输出 1,2,undefined,undefined,5，通过length下标新增一个值为 5 的元素，与 list.push(5) 行为是一致的</span></div></pre></td></tr></table></figure></p>
+<h3 id="不使用循环来创建值为-1-2-…n-的数组"><a href="#不使用循环来创建值为-1-2-…n-的数组" class="headerlink" title="不使用循环来创建值为 1,2,…n 的数组"></a>不使用循环来创建值为 1,2,…n 的数组</h3><p>使用递归：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">producer</span>(<span class="params">n,list =[]</span>)</span>&#123;</div><div class="line">	<span class="keyword">return</span> list.length === n ? list : (list[list.length] = list.length + <span class="number">1</span>) &amp;&amp; producer(n, list)</div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(producer(<span class="number">5</span>)); <span class="comment">// 1,2,3,4,5</span></div></pre></td></tr></table></figure></p>
+<h2 id="检测数组"><a href="#检测数组" class="headerlink" title="检测数组"></a>检测数组</h2><h3 id="instanceOf"><a href="#instanceOf" class="headerlink" title="instanceOf"></a>instanceOf</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">new</span> <span class="built_in">Array</span>() instanceOf <span class="built_in">Array</span> <span class="comment">// true</span></div></pre></td></tr></table></figure>
 <p><code>操作数1 instanceof 操作数2</code> 操作符实际上做的行为是判断第一个操作数的的构造函数是否等于第二个。<br>因此如果是在有多个全局环境的情况下（网页中有多个iframe），那么一个 iframe 的数组实例的构造函数不一定等于另一个 iframe 的 Array。<br>所以这个方法存在一定的局限性。</p>
-<h3 id="Array-isArray"><a href="#Array-isArray" class="headerlink" title="Array.isArray()"></a>Array.isArray()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let value = new Array()</div><div class="line">Array.isArray(value) // true</div></pre></td></tr></table></figure>
+<h3 id="Array-isArray"><a href="#Array-isArray" class="headerlink" title="Array.isArray()"></a>Array.isArray()</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> value = <span class="keyword">new</span> <span class="built_in">Array</span>()</div><div class="line"><span class="built_in">Array</span>.isArray(value) <span class="comment">// true</span></div></pre></td></tr></table></figure>
 <p>不同于 <code>instanceof</code> 可能会受不同全局环境的影响， <code>isArray()</code> 方法在各种环境下都是可靠的，推荐使用 <code>isArray()</code> 来判断一个变量是否是数组的实例。</p>
-<h2 id="转换方法"><a href="#转换方法" class="headerlink" title="转换方法"></a>转换方法</h2><h3 id="toString-NaN"><a href="#toString-NaN" class="headerlink" title="toString()"></a>toString()</h3><p>在需要字符串的操作场合，都会调用数组的 <code>toString()</code> 方法，返回一个以逗号分隔的字符串：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let value = new Array(1,2,3)</div><div class="line">console.log(value) // 打印的过程中调用了 value 的 toString 方法，输出 [1,2,3]</div></pre></td></tr></table></figure></p>
-<h3 id="join"><a href="#join" class="headerlink" title="join()"></a>join()</h3><p>我们可以通过 <code>join()</code> 方法来拼接数组元素，使其成为一个字符串：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let value = new Array(1,2,3)</div><div class="line">console.log(value.join(&apos;&amp;&apos;)) // 1&amp;2&amp;3</div></pre></td></tr></table></figure></p>
-<h2 id="栈方法（LIFO）"><a href="#栈方法（LIFO）" class="headerlink" title="栈方法（LIFO）"></a>栈方法（LIFO）</h2><h3 id="push"><a href="#push" class="headerlink" title="push()"></a>push()</h3><p><code>push()</code> 用于向数组的末尾添加一个元素：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let value = new Array(1,2,3)</div><div class="line">value.push(4)</div><div class="line">console.log(value) // [1,2,3,4]</div></pre></td></tr></table></figure></p>
-<p>我们可以借助 length 属性来模拟这个行为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let value = new Array(1,2,3)</div><div class="line">value[value.length] = 4</div><div class="line">console.log(value) // [1,2,3,4]</div></pre></td></tr></table></figure></p>
-<h3 id="pop"><a href="#pop" class="headerlink" title="pop()"></a>pop()</h3><p><code>pop()</code> 方法用于移除数组末尾的元素：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let value = new Array(1,2,3,4)</div><div class="line">value.pop()</div><div class="line">console.log(value) // [1,2,3]</div></pre></td></tr></table></figure></p>
-<h2 id="队列方法（FIFO）"><a href="#队列方法（FIFO）" class="headerlink" title="队列方法（FIFO）"></a>队列方法（FIFO）</h2><h3 id="shift"><a href="#shift" class="headerlink" title="shift()"></a>shift()</h3><p><code>shift()</code> 能够移除并返回数组的第一项<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">let value = new Array(1,2,3)</div><div class="line">let shiftedNode = value.shift()</div><div class="line">console.log(value) // [2,3]</div><div class="line">console.log(shiftedNode) // 1</div></pre></td></tr></table></figure></p>
-<h3 id="unshift"><a href="#unshift" class="headerlink" title="unshift()"></a>unshift()</h3><p><code>unshift()</code> 与 <code>shift()</code> 正好相反，后者用于移除，而前者用于添加若干个新元素到数组的前端，并返回新数组的长度：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let value = new Array(1,2,3)</div><div class="line">value.unshift(-2,-1,0)</div><div class="line">console.log(value) // [-2,-1,0,1,2,3]</div></pre></td></tr></table></figure></p>
+<h2 id="转换方法"><a href="#转换方法" class="headerlink" title="转换方法"></a>转换方法</h2><h3 id="toString-NaN"><a href="#toString-NaN" class="headerlink" title="toString()"></a>toString()</h3><p>在需要字符串的操作场合，都会调用数组的 <code>toString()</code> 方法，返回一个以逗号分隔的字符串：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> value = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</div><div class="line"><span class="built_in">console</span>.log(value) <span class="comment">// 打印的过程中调用了 value 的 toString 方法，输出 [1,2,3]</span></div></pre></td></tr></table></figure></p>
+<h3 id="join"><a href="#join" class="headerlink" title="join()"></a>join()</h3><p>我们可以通过 <code>join()</code> 方法来拼接数组元素，使其成为一个字符串：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> value = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</div><div class="line"><span class="built_in">console</span>.log(value.join(<span class="string">'&amp;'</span>)) <span class="comment">// 1&amp;2&amp;3</span></div></pre></td></tr></table></figure></p>
+<h2 id="栈方法（LIFO）"><a href="#栈方法（LIFO）" class="headerlink" title="栈方法（LIFO）"></a>栈方法（LIFO）</h2><h3 id="push"><a href="#push" class="headerlink" title="push()"></a>push()</h3><p><code>push()</code> 用于向数组的末尾添加一个元素：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> value = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</div><div class="line">value.push(<span class="number">4</span>)</div><div class="line"><span class="built_in">console</span>.log(value) <span class="comment">// [1,2,3,4]</span></div></pre></td></tr></table></figure></p>
+<p>我们可以借助 length 属性来模拟这个行为：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> value = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</div><div class="line">value[value.length] = <span class="number">4</span></div><div class="line"><span class="built_in">console</span>.log(value) <span class="comment">// [1,2,3,4]</span></div></pre></td></tr></table></figure></p>
+<h3 id="pop"><a href="#pop" class="headerlink" title="pop()"></a>pop()</h3><p><code>pop()</code> 方法用于移除数组末尾的元素：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> value = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)</div><div class="line">value.pop()</div><div class="line"><span class="built_in">console</span>.log(value) <span class="comment">// [1,2,3]</span></div></pre></td></tr></table></figure></p>
+<h2 id="队列方法（FIFO）"><a href="#队列方法（FIFO）" class="headerlink" title="队列方法（FIFO）"></a>队列方法（FIFO）</h2><h3 id="shift"><a href="#shift" class="headerlink" title="shift()"></a>shift()</h3><p><code>shift()</code> 能够移除并返回数组的第一项<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> value = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</div><div class="line"><span class="keyword">let</span> shiftedNode = value.shift()</div><div class="line"><span class="built_in">console</span>.log(value) <span class="comment">// [2,3]</span></div><div class="line"><span class="built_in">console</span>.log(shiftedNode) <span class="comment">// 1</span></div></pre></td></tr></table></figure></p>
+<h3 id="unshift"><a href="#unshift" class="headerlink" title="unshift()"></a>unshift()</h3><p><code>unshift()</code> 与 <code>shift()</code> 正好相反，后者用于移除，而前者用于添加若干个新元素到数组的前端，并返回新数组的长度：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> value = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</div><div class="line">value.unshift(<span class="number">-2</span>,<span class="number">-1</span>,<span class="number">0</span>)</div><div class="line"><span class="built_in">console</span>.log(value) <span class="comment">// [-2,-1,0,1,2,3]</span></div></pre></td></tr></table></figure></p>
 <p>需要注意的是，<code>unshift()</code> 里的参数是从最右边开始逐个加到数组前端的。</p>
-<h2 id="排序方法"><a href="#排序方法" class="headerlink" title="排序方法"></a>排序方法</h2><h3 id="reverse"><a href="#reverse" class="headerlink" title="reverse()"></a>reverse()</h3><p><code>reverse()</code> 用于反转数组的顺序：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let value = new Array(1,2,3)</div><div class="line">value.reverse()</div><div class="line">console.log(value) // [3,2,1]</div></pre></td></tr></table></figure></p>
-<h3 id="sort"><a href="#sort" class="headerlink" title="sort()"></a>sort()</h3><p><code>sort()</code> 方法用于排序，其默认排序为升序。<br>需要注意的是，sort() 排序时会把所有的元素都转换成字符串进行比较，所以有个比较奇怪的现象如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let value = new Array(1,2,3,11,22,33)</div><div class="line">value.sort()</div><div class="line">console.log(value) // 1,11,2,22,33</div></pre></td></tr></table></figure></p>
-<p>这时我们需要借助一个比较函数来对这个数组进行排序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">function compare(before, after)&#123;</div><div class="line">    // 当返回负数时， before 会排在 after 前；返回正数时，before 会被放到 after 后面。</div><div class="line">    return before - after</div><div class="line">&#125;</div><div class="line"></div><div class="line">let value = new Array(1,2,3,11,22,33)</div><div class="line">value.sort(compare)</div><div class="line">console.log(value) // 1,2,3,11,22,33</div></pre></td></tr></table></figure></p>
-<h2 id="操作方法"><a href="#操作方法" class="headerlink" title="操作方法"></a>操作方法</h2><h3 id="concat"><a href="#concat" class="headerlink" title="concat()"></a>concat()</h3><p><code>concat()</code> 用于连接两个数组：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">let value_1 = new Array(1,2,3)</div><div class="line">let value_2 = new Array(4,5,6)</div><div class="line">let result = value_1.concat(value_2)</div><div class="line">console.log(result) // [1,2,3,4,5,6]</div><div class="line"></div><div class="line">// 当 concat 没有被传入参数时， 返回的是原数组的一个副本，即 concat 可以用来浅拷贝一个数组</div><div class="line">let value_copy = value_1.concat()</div><div class="line">console.log(value_copy) // [1,2,3,4,5,6]</div></pre></td></tr></table></figure></p>
+<h2 id="排序方法"><a href="#排序方法" class="headerlink" title="排序方法"></a>排序方法</h2><h3 id="reverse"><a href="#reverse" class="headerlink" title="reverse()"></a>reverse()</h3><p><code>reverse()</code> 用于反转数组的顺序：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> value = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</div><div class="line">value.reverse()</div><div class="line"><span class="built_in">console</span>.log(value) <span class="comment">// [3,2,1]</span></div></pre></td></tr></table></figure></p>
+<h3 id="sort"><a href="#sort" class="headerlink" title="sort()"></a>sort()</h3><p><code>sort()</code> 方法用于排序，其默认排序为升序。<br>需要注意的是，sort() 排序时会把所有的元素都转换成字符串进行比较，所以有个比较奇怪的现象如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> value = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">11</span>,<span class="number">22</span>,<span class="number">33</span>)</div><div class="line">value.sort()</div><div class="line"><span class="built_in">console</span>.log(value) <span class="comment">// 1,11,2,22,33</span></div></pre></td></tr></table></figure></p>
+<p>这时我们需要借助一个比较函数来对这个数组进行排序<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">compare</span>(<span class="params">before, after</span>)</span>&#123;</div><div class="line">    <span class="comment">// 当返回负数时， before 会排在 after 前；返回正数时，before 会被放到 after 后面。</span></div><div class="line">    <span class="keyword">return</span> before - after</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> value = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">11</span>,<span class="number">22</span>,<span class="number">33</span>)</div><div class="line">value.sort(compare)</div><div class="line"><span class="built_in">console</span>.log(value) <span class="comment">// 1,2,3,11,22,33</span></div></pre></td></tr></table></figure></p>
+<h2 id="操作方法"><a href="#操作方法" class="headerlink" title="操作方法"></a>操作方法</h2><h3 id="concat"><a href="#concat" class="headerlink" title="concat()"></a>concat()</h3><p><code>concat()</code> 用于连接两个数组：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> value_1 = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</div><div class="line"><span class="keyword">let</span> value_2 = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>)</div><div class="line"><span class="keyword">let</span> result = value_1.concat(value_2)</div><div class="line"><span class="built_in">console</span>.log(result) <span class="comment">// [1,2,3,4,5,6]</span></div><div class="line"></div><div class="line"><span class="comment">// 当 concat 没有被传入参数时， 返回的是原数组的一个副本，即 concat 可以用来浅拷贝一个数组</span></div><div class="line"><span class="keyword">let</span> value_copy = value_1.concat()</div><div class="line"><span class="built_in">console</span>.log(value_copy) <span class="comment">// [1,2,3,4,5,6]</span></div></pre></td></tr></table></figure></p>
 <p>需要注意的是，<code>concat()</code> 是不会影响原数组的。</p>
-<h3 id="slice"><a href="#slice" class="headerlink" title="slice()"></a>slice()</h3><p><code>slice()</code> 用来创建一个子数组，其接受两个参数，分别为起始下标和结束下标，当只传了起始下标时，会返回从这个起始下标开始的所有数组元素。<br>需要注意的是，结束下标所在的元素并不会被包含到新的子数组中去：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">let value = new Array(1,2,3,4,5)</div><div class="line">console.log(value.slice(2)) // [3,4,5]</div><div class="line">console.log(value.slice(2, value.length)) // [3,4,5]</div><div class="line">console.log(value.slice(2,3)) // [3]</div></pre></td></tr></table></figure></p>
+<h3 id="slice"><a href="#slice" class="headerlink" title="slice()"></a>slice()</h3><p><code>slice()</code> 用来创建一个子数组，其接受两个参数，分别为起始下标和结束下标，当只传了起始下标时，会返回从这个起始下标开始的所有数组元素。<br>需要注意的是，结束下标所在的元素并不会被包含到新的子数组中去：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> value = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>)</div><div class="line"><span class="built_in">console</span>.log(value.slice(<span class="number">2</span>)) <span class="comment">// [3,4,5]</span></div><div class="line"><span class="built_in">console</span>.log(value.slice(<span class="number">2</span>, value.length)) <span class="comment">// [3,4,5]</span></div><div class="line"><span class="built_in">console</span>.log(value.slice(<span class="number">2</span>,<span class="number">3</span>)) <span class="comment">// [3]</span></div></pre></td></tr></table></figure></p>
 <p><code>slice()</code> 也不会影响原数组，也可以用于浅拷贝一个数组。</p>
-<h3 id="splice"><a href="#splice" class="headerlink" title="splice()"></a>splice()</h3><p><code>splice()</code> 可用于删除、插入和替换元素，其接受三个参数，分别为需要删除或插入的元素下标，需要删除的个数，以及需要插入的元素：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">let value = new Array(1,2,3)</div><div class="line">// 删除一个元素</div><div class="line">value.splice(0,1)</div><div class="line">console.log(value) // [2,3]</div><div class="line">// 插入一个元素</div><div class="line">value.splice(0,0,1.5)</div><div class="line">console.log(value) // [1.5,2,3]</div><div class="line"></div><div class="line">// 删除多个元素和插入多个元素</div><div class="line">value.splice(1,2, 2.5, 3.5)</div><div class="line">console.log(value) // [1.5, 2.5, 3.5]</div></pre></td></tr></table></figure></p>
+<h3 id="splice"><a href="#splice" class="headerlink" title="splice()"></a>splice()</h3><p><code>splice()</code> 可用于删除、插入和替换元素，其接受三个参数，分别为需要删除或插入的元素下标，需要删除的个数，以及需要插入的元素：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> value = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</div><div class="line"><span class="comment">// 删除一个元素</span></div><div class="line">value.splice(<span class="number">0</span>,<span class="number">1</span>)</div><div class="line"><span class="built_in">console</span>.log(value) <span class="comment">// [2,3]</span></div><div class="line"><span class="comment">// 插入一个元素</span></div><div class="line">value.splice(<span class="number">0</span>,<span class="number">0</span>,<span class="number">1.5</span>)</div><div class="line"><span class="built_in">console</span>.log(value) <span class="comment">// [1.5,2,3]</span></div><div class="line"></div><div class="line"><span class="comment">// 删除多个元素和插入多个元素</span></div><div class="line">value.splice(<span class="number">1</span>,<span class="number">2</span>, <span class="number">2.5</span>, <span class="number">3.5</span>)</div><div class="line"><span class="built_in">console</span>.log(value) <span class="comment">// [1.5, 2.5, 3.5]</span></div></pre></td></tr></table></figure></p>
 <p><code>splice()</code> 会返回被删除的元素，与 <code>concat()</code>和 <code>slice()</code> 不同的是，<code>splice()</code> 是会直接影响原数组的。</p>
 
       
@@ -280,12 +263,14 @@ If-None-Match: &quot;1a2b3c4d5f&quot;
 
   
     <article id="post-奇怪的JavaScript（1）" class="article article-type-post" itemscope itemprop="blogPost">
+  <!--
   <div class="article-meta">
     <a href="/2017/08/04/奇怪的JavaScript（1）/" class="article-date">
   <time datetime="2017-08-03T16:44:12.000Z" itemprop="datePublished">2017-08-04</time>
 </a>
     
   </div>
+  -->
   <div class="article-inner">
     
     
@@ -326,12 +311,14 @@ If-None-Match: &quot;1a2b3c4d5f&quot;
 
   
     <article id="post-2017-07-06-Shell 脚本入门" class="article article-type-post" itemscope itemprop="blogPost">
+  <!--
   <div class="article-meta">
     <a href="/2017/07/06/2017-07-06-Shell 脚本入门/" class="article-date">
   <time datetime="2017-07-06T12:00:00.000Z" itemprop="datePublished">2017-07-06</time>
 </a>
     
   </div>
+  -->
   <div class="article-inner">
     
     
@@ -414,12 +401,14 @@ If-None-Match: &quot;1a2b3c4d5f&quot;
 
   
     <article id="post-2017-07-05-CSS：什么是 BFC" class="article article-type-post" itemscope itemprop="blogPost">
+  <!--
   <div class="article-meta">
     <a href="/2017/07/05/2017-07-05-CSS：什么是 BFC/" class="article-date">
   <time datetime="2017-07-05T12:00:00.000Z" itemprop="datePublished">2017-07-05</time>
 </a>
     
   </div>
+  -->
   <div class="article-inner">
     
     
@@ -488,13 +477,79 @@ If-None-Match: &quot;1a2b3c4d5f&quot;
 
 
   
+    <article id="post-2017-06-21-Vue：基础用法与指令" class="article article-type-post" itemscope itemprop="blogPost">
+  <!--
+  <div class="article-meta">
+    <a href="/2017/06/21/2017-06-21-Vue：基础用法与指令/" class="article-date">
+  <time datetime="2017-06-21T12:00:00.000Z" itemprop="datePublished">2017-06-21</time>
+</a>
+    
+  </div>
+  -->
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/21/2017-06-21-Vue：基础用法与指令/">Vue：基础用法与指令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Vue-是什么？"><a href="#Vue-是什么？" class="headerlink" title="Vue 是什么？"></a>Vue 是什么？</h2><p>Vue 是一套构建用户界面的渐进式框架，采用自底向上增量开发的设计。Vue 的核心库值关注视图层（View）。</p>
+<h2 id="声明式渲染"><a href="#声明式渲染" class="headerlink" title="声明式渲染"></a>声明式渲染</h2><h3 id="文本插值"><a href="#文本插值" class="headerlink" title="文本插值"></a>文本插值</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &#123;&#123; message &#125;&#125;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var app = new Vue(&#123;</div><div class="line">    el:&apos;#app&apos;,</div><div class="line">    data: &#123;</div><div class="line">        message: &apos;hello&apos;</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h3 id="渲染-DOM-属性（-v-bind-name-指令）"><a href="#渲染-DOM-属性（-v-bind-name-指令）" class="headerlink" title="渲染 DOM 属性（ v-bind:name 指令）"></a>渲染 DOM 属性（ v-bind:name 指令）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;span v-bind:title=&quot;message&quot;&gt;</div><div class="line">        鼠标悬停此处查看动态提示信息</div><div class="line">    &lt;/span&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var app = new Vue(&#123;</div><div class="line">    el: &apos;#app&apos;,</div><div class="line">    data: &#123;</div><div class="line">        message: &apos;提示信息&apos;</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>v-bind 属性被称为指令（指令带有前缀 v-，以表示他们是 Vue 提供的特殊属性）。这里该指令的作用是“将这个元素的 title 属性和 Vue 实例的 message 属性保持一致”。</p>
+<h2 id="条件与循环（-v-if-指令和-v-for-指令）"><a href="#条件与循环（-v-if-指令和-v-for-指令）" class="headerlink" title="条件与循环（ v-if 指令和 v-for 指令）"></a>条件与循环（ v-if 指令和 v-for 指令）</h2><h3 id="条件"><a href="#条件" class="headerlink" title="条件"></a>条件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;p v-if=&quot;seen&quot;&gt;看到了没？&lt;/p&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var app = new Vue(&#123;</div><div class="line">    el: &apos;#app&apos;,</div><div class="line">    data: &#123;</div><div class="line">        seen: true</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;ol&gt;</div><div class="line">        &lt;li v-for=&quot;todo in todos&quot;&gt;</div><div class="line">            &#123;&#123; todo.text &#125;&#125;</div><div class="line">        &lt;/li&gt;</div><div class="line">    &lt;/ol&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">var app = new Vue(&#123;</div><div class="line">    el: &apos;#app&apos;,</div><div class="line">    data: &#123;</div><div class="line">        todos:［</div><div class="line">            &#123; text : &apos;吃饭&apos; &#125;,</div><div class="line">            &#123; text : &apos;睡觉&apos; &#125;,</div><div class="line">            &#123; text : &apos;打游戏&apos; &#125;</div><div class="line">        ］</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h2 id="处理用户输入（-v-on-指令和-v-model-指令）"><a href="#处理用户输入（-v-on-指令和-v-model-指令）" class="headerlink" title="处理用户输入（ v-on 指令和 v-model 指令）"></a>处理用户输入（ v-on 指令和 v-model 指令）</h2><h3 id="事件监听器"><a href="#事件监听器" class="headerlink" title="事件监听器"></a>事件监听器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;p&gt;&#123;&#123; message &#125;&#125;&lt;/p&gt;</div><div class="line">    &lt;button v-on:click=&quot;reverseMessage&quot;&gt;逆转消息&lt;/</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var app = new Vue(&#123;</div><div class="line">    el:&apos;#app&apos;,</div><div class="line">    data: &#123;</div><div class="line">        message: &apos;hello&apos;</div><div class="line">    &#125;,</div><div class="line">    methods: &#123;</div><div class="line">        reverseMessage: function()&#123;</div><div class="line">            this.message = this.message.split(&apos;&apos;).reverse().join()</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h3 id="双向绑定"><a href="#双向绑定" class="headerlink" title="双向绑定"></a>双向绑定</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;p&gt;&#123;&#123; message &#125;&#125;&lt;/p&gt;</div><div class="line">    &lt;input v-model=&quot;message&quot; &gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var app = new Vue(&#123;</div><div class="line">    el: &apos;#app&apos;,</div><div class="line">    data:&#123;</div><div class="line">        message: &apos;hello&apos;</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h2 id="组件化"><a href="#组件化" class="headerlink" title="组件化"></a>组件化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;ol&gt;</div><div class="line">        &lt;todo-item v-for=&quot;item in list&quot; v-bind:todo=&quot;item&quot;&gt;&lt;/todo-item&gt;</div><div class="line">    &lt;/ol&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Vue.component(&apos;todo-item&apos;, &#123;</div><div class="line">    props: [&apos;todo&apos;], //接受一个自定义属性todo</div><div class="line">    template: &apos;&lt;li&gt;&#123;&#123; todo.text &#125;&#125;&lt;/li&gt;&apos;</div><div class="line">&#125;)</div><div class="line"></div><div class="line">var app = new Vue(&#123;</div><div class="line">    el:&apos;#app&apos;,</div><div class="line">    data: &#123;</div><div class="line">        list : [</div><div class="line">            &#123; text: &apos;apple&apos; &#125;,</div><div class="line">            &#123; text: &apos;banana&apos; &#125;,</div><div class="line">            &#123; text: &apos;orange&apos; &#125;</div><div class="line">        ]</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>注意，在这个例子中 v-for 循环渲染子组件 todo-item ，并传递了 item 变量。接着 v-bind 指令将 item 与子组件的 todo 属性绑定起来，接受到 todo 属性的子组件读取 todo.text 插入到 &lt;li&gt; 中。整个过程，父组件向子组件单向传递数据并渲染出来。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><ul>
+<li>v-bind:name </li>
+<li>v-if </li>
+<li>v-for</li>
+<li>v-on</li>
+<li>v-model</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://cn.vuejs.org/v2/guide/" target="_blank" rel="external">https://cn.vuejs.org/v2/guide/</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-2017-06-21-CSS：Animation 动画" class="article article-type-post" itemscope itemprop="blogPost">
+  <!--
   <div class="article-meta">
     <a href="/2017/06/21/2017-06-21-CSS：Animation 动画/" class="article-date">
   <time datetime="2017-06-21T12:00:00.000Z" itemprop="datePublished">2017-06-21</time>
 </a>
     
   </div>
+  -->
   <div class="article-inner">
     
     
@@ -553,75 +608,15 @@ If-None-Match: &quot;1a2b3c4d5f&quot;
 
 
   
-    <article id="post-2017-06-21-Vue：基础用法与指令" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/06/21/2017-06-21-Vue：基础用法与指令/" class="article-date">
-  <time datetime="2017-06-21T12:00:00.000Z" itemprop="datePublished">2017-06-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/21/2017-06-21-Vue：基础用法与指令/">Vue：基础用法与指令</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Vue-是什么？"><a href="#Vue-是什么？" class="headerlink" title="Vue 是什么？"></a>Vue 是什么？</h2><p>Vue 是一套构建用户界面的渐进式框架，采用自底向上增量开发的设计。Vue 的核心库值关注视图层（View）。</p>
-<h2 id="声明式渲染"><a href="#声明式渲染" class="headerlink" title="声明式渲染"></a>声明式渲染</h2><h3 id="文本插值"><a href="#文本插值" class="headerlink" title="文本插值"></a>文本插值</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &#123;&#123; message &#125;&#125;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var app = new Vue(&#123;</div><div class="line">    el:&apos;#app&apos;,</div><div class="line">    data: &#123;</div><div class="line">        message: &apos;hello&apos;</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<h3 id="渲染-DOM-属性（-v-bind-name-指令）"><a href="#渲染-DOM-属性（-v-bind-name-指令）" class="headerlink" title="渲染 DOM 属性（ v-bind:name 指令）"></a>渲染 DOM 属性（ v-bind:name 指令）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;span v-bind:title=&quot;message&quot;&gt;</div><div class="line">        鼠标悬停此处查看动态提示信息</div><div class="line">    &lt;/span&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var app = new Vue(&#123;</div><div class="line">    el: &apos;#app&apos;,</div><div class="line">    data: &#123;</div><div class="line">        message: &apos;提示信息&apos;</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<p>v-bind 属性被称为指令（指令带有前缀 v-，以表示他们是 Vue 提供的特殊属性）。这里该指令的作用是“将这个元素的 title 属性和 Vue 实例的 message 属性保持一致”。</p>
-<h2 id="条件与循环（-v-if-指令和-v-for-指令）"><a href="#条件与循环（-v-if-指令和-v-for-指令）" class="headerlink" title="条件与循环（ v-if 指令和 v-for 指令）"></a>条件与循环（ v-if 指令和 v-for 指令）</h2><h3 id="条件"><a href="#条件" class="headerlink" title="条件"></a>条件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;p v-if=&quot;seen&quot;&gt;看到了没？&lt;/p&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var app = new Vue(&#123;</div><div class="line">    el: &apos;#app&apos;,</div><div class="line">    data: &#123;</div><div class="line">        seen: true</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;ol&gt;</div><div class="line">        &lt;li v-for=&quot;todo in todos&quot;&gt;</div><div class="line">            &#123;&#123; todo.text &#125;&#125;</div><div class="line">        &lt;/li&gt;</div><div class="line">    &lt;/ol&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">var app = new Vue(&#123;</div><div class="line">    el: &apos;#app&apos;,</div><div class="line">    data: &#123;</div><div class="line">        todos:［</div><div class="line">            &#123; text : &apos;吃饭&apos; &#125;,</div><div class="line">            &#123; text : &apos;睡觉&apos; &#125;,</div><div class="line">            &#123; text : &apos;打游戏&apos; &#125;</div><div class="line">        ］</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<h2 id="处理用户输入（-v-on-指令和-v-model-指令）"><a href="#处理用户输入（-v-on-指令和-v-model-指令）" class="headerlink" title="处理用户输入（ v-on 指令和 v-model 指令）"></a>处理用户输入（ v-on 指令和 v-model 指令）</h2><h3 id="事件监听器"><a href="#事件监听器" class="headerlink" title="事件监听器"></a>事件监听器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;p&gt;&#123;&#123; message &#125;&#125;&lt;/p&gt;</div><div class="line">    &lt;button v-on:click=&quot;reverseMessage&quot;&gt;逆转消息&lt;/</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var app = new Vue(&#123;</div><div class="line">    el:&apos;#app&apos;,</div><div class="line">    data: &#123;</div><div class="line">        message: &apos;hello&apos;</div><div class="line">    &#125;,</div><div class="line">    methods: &#123;</div><div class="line">        reverseMessage: function()&#123;</div><div class="line">            this.message = this.message.split(&apos;&apos;).reverse().join()</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<h3 id="双向绑定"><a href="#双向绑定" class="headerlink" title="双向绑定"></a>双向绑定</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;p&gt;&#123;&#123; message &#125;&#125;&lt;/p&gt;</div><div class="line">    &lt;input v-model=&quot;message&quot; &gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var app = new Vue(&#123;</div><div class="line">    el: &apos;#app&apos;,</div><div class="line">    data:&#123;</div><div class="line">        message: &apos;hello&apos;</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<h2 id="组件化"><a href="#组件化" class="headerlink" title="组件化"></a>组件化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;ol&gt;</div><div class="line">        &lt;todo-item v-for=&quot;item in list&quot; v-bind:todo=&quot;item&quot;&gt;&lt;/todo-item&gt;</div><div class="line">    &lt;/ol&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Vue.component(&apos;todo-item&apos;, &#123;</div><div class="line">    props: [&apos;todo&apos;], //接受一个自定义属性todo</div><div class="line">    template: &apos;&lt;li&gt;&#123;&#123; todo.text &#125;&#125;&lt;/li&gt;&apos;</div><div class="line">&#125;)</div><div class="line"></div><div class="line">var app = new Vue(&#123;</div><div class="line">    el:&apos;#app&apos;,</div><div class="line">    data: &#123;</div><div class="line">        list : [</div><div class="line">            &#123; text: &apos;apple&apos; &#125;,</div><div class="line">            &#123; text: &apos;banana&apos; &#125;,</div><div class="line">            &#123; text: &apos;orange&apos; &#125;</div><div class="line">        ]</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<p>注意，在这个例子中 v-for 循环渲染子组件 todo-item ，并传递了 item 变量。接着 v-bind 指令将 item 与子组件的 todo 属性绑定起来，接受到 todo 属性的子组件读取 todo.text 插入到 &lt;li&gt; 中。整个过程，父组件向子组件单向传递数据并渲染出来。</p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><ul>
-<li>v-bind:name </li>
-<li>v-if </li>
-<li>v-for</li>
-<li>v-on</li>
-<li>v-model</li>
-</ul>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://cn.vuejs.org/v2/guide/" target="_blank" rel="external">https://cn.vuejs.org/v2/guide/</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
     <article id="post-2017-06-01-CSS：table-cell 用法小" class="article article-type-post" itemscope itemprop="blogPost">
+  <!--
   <div class="article-meta">
     <a href="/2017/06/01/2017-06-01-CSS：table-cell 用法小/" class="article-date">
   <time datetime="2017-06-01T12:00:00.000Z" itemprop="datePublished">2017-06-01</time>
 </a>
     
   </div>
+  -->
   <div class="article-inner">
     
     
@@ -660,12 +655,14 @@ If-None-Match: &quot;1a2b3c4d5f&quot;
 
   
     <article id="post-2017-05-28-JavaScript：Promise 小记" class="article article-type-post" itemscope itemprop="blogPost">
+  <!--
   <div class="article-meta">
     <a href="/2017/05/28/2017-05-28-JavaScript：Promise 小记/" class="article-date">
   <time datetime="2017-05-28T12:00:00.000Z" itemprop="datePublished">2017-05-28</time>
 </a>
     
   </div>
+  -->
   <div class="article-inner">
     
     
@@ -725,36 +722,7 @@ If-None-Match: &quot;1a2b3c4d5f&quot;
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fe/">fe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jquery/">jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svn/">svn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/css/" style="font-size: 17.5px;">css</a> <a href="/tags/fe/" style="font-size: 12.5px;">fe</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/http/" style="font-size: 15px;">http</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 12.5px;">jquery</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/react/" style="font-size: 12.5px;">react</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/svn/" style="font-size: 12.5px;">svn</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">近文</h3>
     <div class="widget">
       <ul>
         
@@ -778,9 +746,32 @@ If-None-Match: &quot;1a2b3c4d5f&quot;
             <a href="/2017/07/06/2017-07-06-Shell 脚本入门/">Shell 脚本入门</a>
           </li>
         
+          <li>
+            <a href="/2017/07/05/2017-07-05-CSS：什么是 BFC/">CSS：什么是 BFC</a>
+          </li>
+        
       </ul>
     </div>
   </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/css/" style="font-size: 17.5px;">css</a> <a href="/tags/fe/" style="font-size: 12.5px;">fe</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/http/" style="font-size: 15px;">http</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 12.5px;">jquery</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/react/" style="font-size: 12.5px;">react</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/svn/" style="font-size: 12.5px;">svn</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">2017年 10月</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">2017年 08月</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">2017年 07月</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">2017年 06月</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">2017年 05月</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">2017年 04月</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">2017年 01月</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">2016年 04月</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">2016年 03月</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
 
   
 </aside>
