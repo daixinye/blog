@@ -922,7 +922,7 @@ alert(num.toString(16)); //a,十六进制
       <script type="text/javascript">
       function renderGitment(){
         var gitment = new Gitmint({
-            id: window.location.pathname,
+            id: btoa(window.location.pathname).slice(0,50),
             owner: 'daixinye',
             repo: 'blog',
             
