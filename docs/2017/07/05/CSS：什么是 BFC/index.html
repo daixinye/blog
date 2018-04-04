@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.1.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.1.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.1.0',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="什么是 BFCBFC，Block Formatting Context，直译为块级格式化上下文。 在 BFC 中，HTML 元素按照一定的规则进行布局，并且不管其中的元素如何变换样式，均不会影响 BFC 外部的任何元素同样也不受外部任何元素的影响。 触发 BFC 的方法0、the root element一个 HTML 文档本身就是一个 BFC 。 1、floatfloat 属性不为 none 时">
+<meta name="keywords" content="css">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS：什么是 BFC">
+<meta property="og:url" content="http://blog.daixinye.com/2017/07/05/CSS：什么是 BFC/index.html">
+<meta property="og:site_name" content="Daixinye">
+<meta property="og:description" content="什么是 BFCBFC，Block Formatting Context，直译为块级格式化上下文。 在 BFC 中，HTML 元素按照一定的规则进行布局，并且不管其中的元素如何变换样式，均不会影响 BFC 外部的任何元素同样也不受外部任何元素的影响。 触发 BFC 的方法0、the root element一个 HTML 文档本身就是一个 BFC 。 1、floatfloat 属性不为 none 时">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-10-09T10:09:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS：什么是 BFC">
+<meta name="twitter:description" content="什么是 BFCBFC，Block Formatting Context，直译为块级格式化上下文。 在 BFC 中，HTML 元素按照一定的规则进行布局，并且不管其中的元素如何变换样式，均不会影响 BFC 外部的任何元素同样也不受外部任何元素的影响。 触发 BFC 的方法0、the root element一个 HTML 文档本身就是一个 BFC 。 1、floatfloat 属性不为 none 时">
+
+
+
+
+
+
+  <link rel="canonical" href="http://blog.daixinye.com/2017/07/05/CSS：什么是 BFC/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>CSS：什么是 BFC | Daixinye</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> 
+
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Daixinye</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+          
+  <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">31</span>
+      </a>
+</li>
+
+      
+
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.daixinye.com/2017/07/05/CSS：什么是 BFC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xinye Dai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Daixinye">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CSS：什么是 BFC</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-05T20:00:00+08:00">2017-07-05</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/07/05/CSS：什么是 BFC/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论：</span> <span class="post-comments-count gitment-comments-count" data-xid="/2017/07/05/CSS：什么是 BFC/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="什么是-BFC"><a href="#什么是-BFC" class="headerlink" title="什么是 BFC"></a>什么是 BFC</h2><p>BFC，Block Formatting Context，直译为<strong>块级格式化上下文</strong>。</p>
+<p>在 BFC 中，HTML 元素按照一定的规则进行布局，并且不管其中的元素如何变换样式，均不会影响 BFC 外部的任何元素同样也不受外部任何元素的影响。</p>
+<h2 id="触发-BFC-的方法"><a href="#触发-BFC-的方法" class="headerlink" title="触发 BFC 的方法"></a>触发 BFC 的方法</h2><h3 id="0、the-root-element"><a href="#0、the-root-element" class="headerlink" title="0、the root element"></a>0、the root element</h3><p>一个 HTML 文档本身就是一个 BFC 。</p>
+<h3 id="1、float"><a href="#1、float" class="headerlink" title="1、float"></a>1、float</h3><p>float 属性不为 none 时，即如果一个元素是浮动元素，那么它就是一个 BFC 。</p>
+<ul>
+<li>float: left;</li>
+<li>float: right;</li>
+</ul>
+<h3 id="2、overflow"><a href="#2、overflow" class="headerlink" title="2、overflow"></a>2、overflow</h3><p>overflow 属性不为 visible 时，即 overflow 为auto、scroll、hidden 时会形成一个 BFC 。</p>
+<ul>
+<li>overflow: hidden;</li>
+<li>overflow: scroll;</li>
+<li>overflow: auto; </li>
+</ul>
+<h3 id="3、display"><a href="#3、display" class="headerlink" title="3、display"></a>3、display</h3><p>display 属性为 table-cell、table-caption 或 inline-block 时也会触发 BFC。</p>
+<ul>
+<li>display: table-cell;</li>
+<li>display: table-caption;</li>
+<li>display: inline-block;</li>
+</ul>
+<h3 id="4、position"><a href="#4、position" class="headerlink" title="4、position"></a>4、position</h3><p>position 属性不为 relative 或 static 时，即 postion 为 absolute、fixed 时也会触发 BFC 。</p>
+<ul>
+<li>position: absolute;</li>
+<li>position: fixed;</li>
+</ul>
+<h2 id="BFC-的作用"><a href="#BFC-的作用" class="headerlink" title="BFC 的作用"></a>BFC 的作用</h2><ul>
+<li><p>不让文字环绕浮动的兄弟元素（自适应布局）</p>
+</li>
+<li><p>在有浮动子元素的情况下，不让父元素高度坍缩（包含浮动）</p>
+</li>
+<li><p>让兄弟元素之间的外边距不重合（边距折叠）</p>
+</li>
+</ul>
+<p>测试代码：<a href="https://github.com/daixinye/practice/blob/master/HTML/BFC.html" target="_blank" rel="external">https://github.com/daixinye/practice/blob/master/HTML/BFC.html</a></p>
+<p>参考：</p>
+<p><a href="https://www.w3cplus.com/css/understanding-bfc-and-margin-collapse.html" target="_blank" rel="external">https://www.w3cplus.com/css/understanding-bfc-and-margin-collapse.html</a></p>
+<p><a href="http://www.zhangxinxu.com/wordpress/2015/02/css-deep-understand-flow-bfc-column-two-auto-layout/" target="_blank" rel="external">http://www.zhangxinxu.com/wordpress/2015/02/css-deep-understand-flow-bfc-column-two-auto-layout/</a></p>
+<p><a href="http://www.cnblogs.com/MockingBirdHome/p/3365346.html" target="_blank" rel="external">http://www.cnblogs.com/MockingBirdHome/p/3365346.html</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/css/" rel="tag"># css</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/21/Vue：基础用法与指令/" rel="next" title="Vue：基础用法与指令">
+                <i class="fa fa-chevron-left"></i> Vue：基础用法与指令
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/06/Shell 脚本入门/" rel="prev" title="Shell 脚本入门">
+                Shell 脚本入门 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="Xinye Dai" />
+            
+              <p class="site-author-name" itemprop="name">Xinye Dai</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/daixinye" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是-BFC"><span class="nav-number">1.</span> <span class="nav-text">什么是 BFC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#触发-BFC-的方法"><span class="nav-number">2.</span> <span class="nav-text">触发 BFC 的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0、the-root-element"><span class="nav-number">2.1.</span> <span class="nav-text">0、the root element</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1、float"><span class="nav-number">2.2.</span> <span class="nav-text">1、float</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、overflow"><span class="nav-number">2.3.</span> <span class="nav-text">2、overflow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、display"><span class="nav-number">2.4.</span> <span class="nav-text">3、display</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、position"><span class="nav-number">2.5.</span> <span class="nav-text">4、position</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BFC-的作用"><span class="nav-number">3.</span> <span class="nav-text">BFC 的作用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate"> 
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xinye Dai</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Pisces</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname,
+            owner: 'daixinye',
+            repo: 'blog',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'd3d60074322ace98bf0405fc1bc0165d168a680c',
+            
+                client_id: '6c99788ac1e0551a4bb7'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
