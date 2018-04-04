@@ -346,7 +346,7 @@
             <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>博客好久没更新啦，今天就趁着刚换了新的主题（<a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external">Next</a>），加了评论系统（<a href="https://github.com/imsun/gitment" target="_blank" rel="external">Gitment</a>，需要用 GitHub 账号授权），来更新一下吧。</p>
 <p>最近听听力的时候发现，自己一到有数字的部分就会惊慌地不知所措。个位数的倒还好一些，但是来一个 two months ago 是 one hundred fifty two pounds 然后现在是 one hundred thirty seven pounds 最后问我现在跟俩月前相比瘦了多少磅，那我就得反应个半天了…</p>
 <p>为了让自己对数字更加敏感一些，我打算借助 Shell 脚本来对数字听力做一个专项练习。</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>基于《刻意练习》中的 3F 原则（Focus，Feedback &amp; Fix），练习得有直接正面的反馈和以及能够立即纠正的机制。对此，比较好的一个方式就是由他人随机念出一个数字，我们立即给出罗马数字，接着与正确答案进行比较。如果正确，则继续；如果不正确，则重复一次数字再进行辨认，直到得到正确答案为止。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>基于《刻意练习》中的 3F 原则（Focus，Feedback &amp; Fix），练习得有直接正面的反馈和以及能够立即纠正的机制。对此，比较好的一个方式就是由他人随机念出一个数字，我们立即给出数字，接着与正确答案进行比较。如果正确，则继续；如果不正确，则重复一次数字再进行辨认，直到得到正确答案为止。</p>
 <p>表现为一个程序大概就以下几个步骤：</p>
 <ul>
 <li>用户输入一个范围（例如 1~100）</li>
@@ -371,7 +371,7 @@
 <h3 id="退出"><a href="#退出" class="headerlink" title="退出"></a>退出</h3><p>你可以用 <code>Ctrl + C</code> 随时退出。</p>
 <h2 id="开始练习"><a href="#开始练习" class="headerlink" title="开始练习"></a>开始练习</h2><p>使用的效果，大概就是像这样子（gif 可能有点慢…），请自行脑补声音 🙃：</p>
 <p><img src="/images/practice-shell.gif" alt="practice"></p>
-<p>Tips：<code>say</code>命令的设置，可以在 <em>系统偏好设置-&gt;辅助功能-&gt;语音</em> 中找到，你可以设置使用不同的系统声音，也可以调整它的速率哦。</p>
+<p>Tips：<code>say</code>命令的语音设置，可以在 <em>系统偏好设置-&gt;辅助功能-&gt;语音</em> 中找到，你可以设置使用不同的系统声音，也可以调整它的速率哦。</p>
 <p>好了，这篇文章就到此结束了，希望能对大家有所帮助~</p>
 
           
