@@ -221,7 +221,7 @@
           
   <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">31</span>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">32</span>
       </a>
 </li>
 
@@ -257,6 +257,159 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.daixinye.com/2018/04/04/写一个Shell脚本来练英语听力/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xinye Dai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Daixinye">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/04/写一个Shell脚本来练英语听力/" itemprop="url">写一个Shell脚本来练英语听力</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-04T23:00:00+08:00">2018-04-04</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>博客好久没更新啦，今天就趁着刚换了新的主题（<a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external">Next</a>），加了评论系统（<a href="https://github.com/imsun/gitment" target="_blank" rel="external">Gitment</a>，需要用 GitHub 账号授权），来更新一下吧。</p>
+<p>最近听听力的时候发现，自己一到有数字的部分就会惊慌地不知所措。个位数的倒还好一些，但是来一个 two months ago 是 one hundred fifty two pounds 然后现在是 one hundred thirty seven pounds 最后问我现在跟俩月前相比瘦了多少磅，那我就得反应个半天了…</p>
+<p>为了让自己对数字更加敏感一些，我打算借助 Shell 脚本来对数字听力做一个专项练习。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>基于《刻意练习》中的 3F 原则（Focus，Feedback &amp; Fix），练习得有直接正面的反馈和以及能够立即纠正的机制。对此，比较好的一个方式就是由他人随机念出一个数字，我们立即给出罗马数字，接着与正确答案进行比较。如果正确，则继续；如果不正确，则重复一次数字再进行辨认，直到得到正确答案为止。</p>
+<p>表现为一个程序大概就以下几个步骤：</p>
+<ul>
+<li>用户输入一个范围（例如 1~100）</li>
+<li>程序随机选择给定范围中的一个数字</li>
+<li>程序念出选中的数字</li>
+<li>用户输入答案</li>
+<li>程序比对答案，若正确则念下一个数字，否则重复当前数字直到给出正确答案</li>
+</ul>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>输入输出和对比都不难，关键在于如何让系统“念”数字。</p>
+<p>博主用的是 Mac，在类 Unix 系统中应该都有一个 <code>say</code> 命令，用于把文本转换成语音（Convert text to audible speech）。<code>say</code> 的更多用法和介绍可以在终端中输入以下命令来查看：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> man say</div></pre></td></tr></table></figure>
+<p>通过这个命令，我们就能够实现“念数字”的功能了。万事俱备，只欠代码。简单实现的 Shell 脚本代码如下所示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#! /bin/bash</span></div><div class="line"><span class="built_in">echo</span> -n <span class="string">"Please input the range of numbers: "</span></div><div class="line"><span class="comment"># 输入我们想要练习的数值范围，注意这个范围是左闭右开的，即[min,max)</span></div><div class="line"><span class="built_in">read</span> min max</div><div class="line"></div><div class="line">diff=$((<span class="variable">$max</span>-<span class="variable">$min</span>))</div><div class="line"></div><div class="line"><span class="keyword">while</span> [ <span class="literal">true</span> ]; <span class="keyword">do</span></div><div class="line">    que=$((<span class="variable">$RANDOM</span>%<span class="variable">$diff</span>+<span class="variable">$min</span>)) <span class="comment"># 随机选择给定范围中的一个数字</span></div><div class="line">    say <span class="variable">$que</span> <span class="comment"># 念出这个数字</span></div><div class="line">    <span class="built_in">echo</span> -n <span class="string">'Input the number you just heard: '</span></div><div class="line">    <span class="built_in">read</span> ans <span class="comment"># 输入答案</span></div><div class="line"></div><div class="line">    until [[ <span class="variable">$que</span> = <span class="variable">$ans</span> ]]; <span class="keyword">do</span> <span class="comment"># 直到答案是正确的之前，都重复念同一个数字</span></div><div class="line">        <span class="built_in">echo</span> <span class="string">"❌"</span></div><div class="line">        <span class="built_in">echo</span> -n <span class="string">"Try again: "</span></div><div class="line">        say <span class="variable">$que</span></div><div class="line">        <span class="built_in">read</span> ans <span class="comment"># 再次输入答案</span></div><div class="line">    <span class="keyword">done</span></div><div class="line"></div><div class="line">    <span class="built_in">echo</span> <span class="string">"✅"</span> <span class="comment"># 答案正确，进入下一个循环</span></div><div class="line"><span class="keyword">done</span></div></pre></td></tr></table></figure>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><p>接下来假设你使用的是 Mac…</p>
+<p>如果你有终端的使用经验的话，只需要把打开一个文本编辑器，复制上述代码并保存为以<code>.sh</code>（如 practice.sh）结尾的文件，然后切换到相应的目录，在终端里运行就好了，你可以用以下两种方式来执行一个脚本：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> chmod +x ./practice.sh</span></div><div class="line"><span class="meta">$</span><span class="bash"> ./practice.sh</span></div></pre></td></tr></table></figure>
+<p>或者是</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> /bin/bash ./practice.sh</span></div></pre></td></tr></table></figure>
+<p>如果你没有终端的使用经验的话，那就下载这个文件(<a href="/files/practice.sh">practice.sh</a>)，然后在 Docker 里点一下访达（Finder），把这个文件放到打开的个人目录中。再在启动台中找到并打开终端，输入：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> /bin/bash ./practice.sh</span></div></pre></td></tr></table></figure>
+<p>应该就可以了。</p>
+<h3 id="退出"><a href="#退出" class="headerlink" title="退出"></a>退出</h3><p>你可以用 <code>Ctrl + C</code> 随时退出。</p>
+<h2 id="开始练习"><a href="#开始练习" class="headerlink" title="开始练习"></a>开始练习</h2><p>使用的效果，大概就是像这样子（gif 可能有点慢…），请自行脑补声音 🙃：</p>
+<p><img src="/images/practice-shell.gif" alt="practice"></p>
+<p>Tips：<code>say</code>命令的设置，可以在 <em>系统偏好设置-&gt;辅助功能-&gt;语音</em> 中找到，你可以设置使用不同的系统声音，也可以调整它的速率哦。</p>
+<p>好了，这篇文章就到此结束了，希望能对大家有所帮助~</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -1195,154 +1348,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.daixinye.com/2017/06/21/Vue：基础用法与指令/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Xinye Dai">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Daixinye">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/06/21/Vue：基础用法与指令/" itemprop="url">Vue：基础用法与指令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-21T20:00:00+08:00">2017-06-21</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Vue-是什么？"><a href="#Vue-是什么？" class="headerlink" title="Vue 是什么？"></a>Vue 是什么？</h2><p>Vue 是一套构建用户界面的渐进式框架，采用自底向上增量开发的设计。Vue 的核心库值关注视图层（View）。</p>
-<h2 id="声明式渲染"><a href="#声明式渲染" class="headerlink" title="声明式渲染"></a>声明式渲染</h2><h3 id="文本插值"><a href="#文本插值" class="headerlink" title="文本插值"></a>文本插值</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &#123;&#123; message &#125;&#125;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var app = new Vue(&#123;</div><div class="line">    el:&apos;#app&apos;,</div><div class="line">    data: &#123;</div><div class="line">        message: &apos;hello&apos;</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<h3 id="渲染-DOM-属性（-v-bind-name-指令）"><a href="#渲染-DOM-属性（-v-bind-name-指令）" class="headerlink" title="渲染 DOM 属性（ v-bind:name 指令）"></a>渲染 DOM 属性（ v-bind:name 指令）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;span v-bind:title=&quot;message&quot;&gt;</div><div class="line">        鼠标悬停此处查看动态提示信息</div><div class="line">    &lt;/span&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var app = new Vue(&#123;</div><div class="line">    el: &apos;#app&apos;,</div><div class="line">    data: &#123;</div><div class="line">        message: &apos;提示信息&apos;</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<p>v-bind 属性被称为指令（指令带有前缀 v-，以表示他们是 Vue 提供的特殊属性）。这里该指令的作用是“将这个元素的 title 属性和 Vue 实例的 message 属性保持一致”。</p>
-<h2 id="条件与循环（-v-if-指令和-v-for-指令）"><a href="#条件与循环（-v-if-指令和-v-for-指令）" class="headerlink" title="条件与循环（ v-if 指令和 v-for 指令）"></a>条件与循环（ v-if 指令和 v-for 指令）</h2><h3 id="条件"><a href="#条件" class="headerlink" title="条件"></a>条件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;p v-if=&quot;seen&quot;&gt;看到了没？&lt;/p&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var app = new Vue(&#123;</div><div class="line">    el: &apos;#app&apos;,</div><div class="line">    data: &#123;</div><div class="line">        seen: true</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;ol&gt;</div><div class="line">        &lt;li v-for=&quot;todo in todos&quot;&gt;</div><div class="line">            &#123;&#123; todo.text &#125;&#125;</div><div class="line">        &lt;/li&gt;</div><div class="line">    &lt;/ol&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">var app = new Vue(&#123;</div><div class="line">    el: &apos;#app&apos;,</div><div class="line">    data: &#123;</div><div class="line">        todos:［</div><div class="line">            &#123; text : &apos;吃饭&apos; &#125;,</div><div class="line">            &#123; text : &apos;睡觉&apos; &#125;,</div><div class="line">            &#123; text : &apos;打游戏&apos; &#125;</div><div class="line">        ］</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<h2 id="处理用户输入（-v-on-指令和-v-model-指令）"><a href="#处理用户输入（-v-on-指令和-v-model-指令）" class="headerlink" title="处理用户输入（ v-on 指令和 v-model 指令）"></a>处理用户输入（ v-on 指令和 v-model 指令）</h2><h3 id="事件监听器"><a href="#事件监听器" class="headerlink" title="事件监听器"></a>事件监听器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;p&gt;&#123;&#123; message &#125;&#125;&lt;/p&gt;</div><div class="line">    &lt;button v-on:click=&quot;reverseMessage&quot;&gt;逆转消息&lt;/</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var app = new Vue(&#123;</div><div class="line">    el:&apos;#app&apos;,</div><div class="line">    data: &#123;</div><div class="line">        message: &apos;hello&apos;</div><div class="line">    &#125;,</div><div class="line">    methods: &#123;</div><div class="line">        reverseMessage: function()&#123;</div><div class="line">            this.message = this.message.split(&apos;&apos;).reverse().join()</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<h3 id="双向绑定"><a href="#双向绑定" class="headerlink" title="双向绑定"></a>双向绑定</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;p&gt;&#123;&#123; message &#125;&#125;&lt;/p&gt;</div><div class="line">    &lt;input v-model=&quot;message&quot; &gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var app = new Vue(&#123;</div><div class="line">    el: &apos;#app&apos;,</div><div class="line">    data:&#123;</div><div class="line">        message: &apos;hello&apos;</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<h2 id="组件化"><a href="#组件化" class="headerlink" title="组件化"></a>组件化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;ol&gt;</div><div class="line">        &lt;todo-item v-for=&quot;item in list&quot; v-bind:todo=&quot;item&quot;&gt;&lt;/todo-item&gt;</div><div class="line">    &lt;/ol&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Vue.component(&apos;todo-item&apos;, &#123;</div><div class="line">    props: [&apos;todo&apos;], //接受一个自定义属性todo</div><div class="line">    template: &apos;&lt;li&gt;&#123;&#123; todo.text &#125;&#125;&lt;/li&gt;&apos;</div><div class="line">&#125;)</div><div class="line"></div><div class="line">var app = new Vue(&#123;</div><div class="line">    el:&apos;#app&apos;,</div><div class="line">    data: &#123;</div><div class="line">        list : [</div><div class="line">            &#123; text: &apos;apple&apos; &#125;,</div><div class="line">            &#123; text: &apos;banana&apos; &#125;,</div><div class="line">            &#123; text: &apos;orange&apos; &#125;</div><div class="line">        ]</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<p>注意，在这个例子中 v-for 循环渲染子组件 todo-item ，并传递了 item 变量。接着 v-bind 指令将 item 与子组件的 todo 属性绑定起来，接受到 todo 属性的子组件读取 todo.text 插入到 &lt;li&gt; 中。整个过程，父组件向子组件单向传递数据并渲染出来。</p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><ul>
-<li>v-bind:name </li>
-<li>v-if </li>
-<li>v-for</li>
-<li>v-on</li>
-<li>v-model</li>
-</ul>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://cn.vuejs.org/v2/guide/" target="_blank" rel="external">https://cn.vuejs.org/v2/guide/</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://blog.daixinye.com/2017/06/21/CSS：Animation 动画/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1441,6 +1446,154 @@
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.runoob.com/jsref/event-animationiteration.html" target="_blank" rel="external">http://www.runoob.com/jsref/event-animationiteration.html</a></p>
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/AnimationEvent" target="_blank" rel="external">https://developer.mozilla.org/en-US/docs/Web/API/AnimationEvent</a></p>
 <p><a href="https://caniuse.com/#search=animation" target="_blank" rel="external">https://caniuse.com/#search=animation</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.daixinye.com/2017/06/21/Vue：基础用法与指令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xinye Dai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Daixinye">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/21/Vue：基础用法与指令/" itemprop="url">Vue：基础用法与指令</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-21T20:00:00+08:00">2017-06-21</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Vue-是什么？"><a href="#Vue-是什么？" class="headerlink" title="Vue 是什么？"></a>Vue 是什么？</h2><p>Vue 是一套构建用户界面的渐进式框架，采用自底向上增量开发的设计。Vue 的核心库值关注视图层（View）。</p>
+<h2 id="声明式渲染"><a href="#声明式渲染" class="headerlink" title="声明式渲染"></a>声明式渲染</h2><h3 id="文本插值"><a href="#文本插值" class="headerlink" title="文本插值"></a>文本插值</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &#123;&#123; message &#125;&#125;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var app = new Vue(&#123;</div><div class="line">    el:&apos;#app&apos;,</div><div class="line">    data: &#123;</div><div class="line">        message: &apos;hello&apos;</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h3 id="渲染-DOM-属性（-v-bind-name-指令）"><a href="#渲染-DOM-属性（-v-bind-name-指令）" class="headerlink" title="渲染 DOM 属性（ v-bind:name 指令）"></a>渲染 DOM 属性（ v-bind:name 指令）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;span v-bind:title=&quot;message&quot;&gt;</div><div class="line">        鼠标悬停此处查看动态提示信息</div><div class="line">    &lt;/span&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var app = new Vue(&#123;</div><div class="line">    el: &apos;#app&apos;,</div><div class="line">    data: &#123;</div><div class="line">        message: &apos;提示信息&apos;</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>v-bind 属性被称为指令（指令带有前缀 v-，以表示他们是 Vue 提供的特殊属性）。这里该指令的作用是“将这个元素的 title 属性和 Vue 实例的 message 属性保持一致”。</p>
+<h2 id="条件与循环（-v-if-指令和-v-for-指令）"><a href="#条件与循环（-v-if-指令和-v-for-指令）" class="headerlink" title="条件与循环（ v-if 指令和 v-for 指令）"></a>条件与循环（ v-if 指令和 v-for 指令）</h2><h3 id="条件"><a href="#条件" class="headerlink" title="条件"></a>条件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;p v-if=&quot;seen&quot;&gt;看到了没？&lt;/p&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var app = new Vue(&#123;</div><div class="line">    el: &apos;#app&apos;,</div><div class="line">    data: &#123;</div><div class="line">        seen: true</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;ol&gt;</div><div class="line">        &lt;li v-for=&quot;todo in todos&quot;&gt;</div><div class="line">            &#123;&#123; todo.text &#125;&#125;</div><div class="line">        &lt;/li&gt;</div><div class="line">    &lt;/ol&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">var app = new Vue(&#123;</div><div class="line">    el: &apos;#app&apos;,</div><div class="line">    data: &#123;</div><div class="line">        todos:［</div><div class="line">            &#123; text : &apos;吃饭&apos; &#125;,</div><div class="line">            &#123; text : &apos;睡觉&apos; &#125;,</div><div class="line">            &#123; text : &apos;打游戏&apos; &#125;</div><div class="line">        ］</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h2 id="处理用户输入（-v-on-指令和-v-model-指令）"><a href="#处理用户输入（-v-on-指令和-v-model-指令）" class="headerlink" title="处理用户输入（ v-on 指令和 v-model 指令）"></a>处理用户输入（ v-on 指令和 v-model 指令）</h2><h3 id="事件监听器"><a href="#事件监听器" class="headerlink" title="事件监听器"></a>事件监听器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;p&gt;&#123;&#123; message &#125;&#125;&lt;/p&gt;</div><div class="line">    &lt;button v-on:click=&quot;reverseMessage&quot;&gt;逆转消息&lt;/</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var app = new Vue(&#123;</div><div class="line">    el:&apos;#app&apos;,</div><div class="line">    data: &#123;</div><div class="line">        message: &apos;hello&apos;</div><div class="line">    &#125;,</div><div class="line">    methods: &#123;</div><div class="line">        reverseMessage: function()&#123;</div><div class="line">            this.message = this.message.split(&apos;&apos;).reverse().join()</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h3 id="双向绑定"><a href="#双向绑定" class="headerlink" title="双向绑定"></a>双向绑定</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;p&gt;&#123;&#123; message &#125;&#125;&lt;/p&gt;</div><div class="line">    &lt;input v-model=&quot;message&quot; &gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var app = new Vue(&#123;</div><div class="line">    el: &apos;#app&apos;,</div><div class="line">    data:&#123;</div><div class="line">        message: &apos;hello&apos;</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h2 id="组件化"><a href="#组件化" class="headerlink" title="组件化"></a>组件化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;ol&gt;</div><div class="line">        &lt;todo-item v-for=&quot;item in list&quot; v-bind:todo=&quot;item&quot;&gt;&lt;/todo-item&gt;</div><div class="line">    &lt;/ol&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Vue.component(&apos;todo-item&apos;, &#123;</div><div class="line">    props: [&apos;todo&apos;], //接受一个自定义属性todo</div><div class="line">    template: &apos;&lt;li&gt;&#123;&#123; todo.text &#125;&#125;&lt;/li&gt;&apos;</div><div class="line">&#125;)</div><div class="line"></div><div class="line">var app = new Vue(&#123;</div><div class="line">    el:&apos;#app&apos;,</div><div class="line">    data: &#123;</div><div class="line">        list : [</div><div class="line">            &#123; text: &apos;apple&apos; &#125;,</div><div class="line">            &#123; text: &apos;banana&apos; &#125;,</div><div class="line">            &#123; text: &apos;orange&apos; &#125;</div><div class="line">        ]</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>注意，在这个例子中 v-for 循环渲染子组件 todo-item ，并传递了 item 变量。接着 v-bind 指令将 item 与子组件的 todo 属性绑定起来，接受到 todo 属性的子组件读取 todo.text 插入到 &lt;li&gt; 中。整个过程，父组件向子组件单向传递数据并渲染出来。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><ul>
+<li>v-bind:name </li>
+<li>v-if </li>
+<li>v-for</li>
+<li>v-on</li>
+<li>v-model</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://cn.vuejs.org/v2/guide/" target="_blank" rel="external">https://cn.vuejs.org/v2/guide/</a></p>
 
           
         
@@ -1609,144 +1762,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.daixinye.com/2017/05/28/JavaScript：Promise 小记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Xinye Dai">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Daixinye">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/28/JavaScript：Promise 小记/" itemprop="url">JavaScript：Promise 小记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-28T20:00:00+08:00">2017-05-28</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Promise 对象是一个代理对象（代理一个值），被代理的值在 Promise 对象创建时可能是未知的。它最主要的特点，是可以让异步代码像同步方法那样返回值，并为结果的成功（onFulfilled）和失败（onRejected）绑定相应的处理方法（Handlers）。需要注意的是，尽管看起来像同步方法那样返回了值但是并不是<strong>立即返回执行</strong>的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">new Promise(function(resolve, reject)&#123;</div><div class="line">    resolve(1);</div><div class="line">&#125;).then(function(msg)&#123;</div><div class="line">    console.log(msg);</div><div class="line">&#125;)</div><div class="line"></div><div class="line">console.log(2);</div><div class="line"></div><div class="line">// 输出顺序为</div><div class="line">// 2</div><div class="line">// 1</div></pre></td></tr></table></figure>
-<p>一个 Promise 有以下几种状态：</p>
-<ul>
-<li>pendding 初始状态</li>
-<li>fulfilled 意味着操作成功</li>
-<li>rejected 意味着操作失败</li>
-</ul>
-<p><img src="https://mdn.mozillademos.org/files/8633/promises.png" alt=""></p>
-<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">var promise = new Promise(</div><div class="line">    /* executor */</div><div class="line">    function(resolve, reject) &#123;...&#125;</div><div class="line">);</div><div class="line"></div><div class="line">// 第一种处理方式</div><div class="line">promise.then(</div><div class="line">    /* onFulfilled */</div><div class="line">    function()&#123;...&#125;,</div><div class="line">    </div><div class="line">    /* onRejected */</div><div class="line">    function()&#123;...&#125;</div><div class="line">)</div><div class="line"></div><div class="line">// 第二种处理方式</div><div class="line">promise.then(</div><div class="line">    /* onFulfilled */</div><div class="line">    function()&#123;...&#125;</div><div class="line">).catch(</div><div class="line">    /* onRejected */</div><div class="line">    function()&#123;...&#125;</div><div class="line">)</div></pre></td></tr></table></figure>
-<h2 id="与回调函数的区别"><a href="#与回调函数的区别" class="headerlink" title="与回调函数的区别"></a>与回调函数的区别</h2><p>先来看一下一个普通的异步处理，使用回调函数来处理回调的结果：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">getAsycn(&quot;file.txt&quot;, function(error, result)&#123;</div><div class="line">    </div><div class="line">    if(error)&#123; // 取得失败时的处理</div><div class="line">        throw error;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    // 取得成功时的处理</div><div class="line">    </div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<p>接下来是使用Promise的处理方式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var promise = getAsyncPromise(&quot;file.txt&quot;); // 返回一个Promise对象</div><div class="line"></div><div class="line">promise.then(function(result)&#123;</div><div class="line">    // 取得成功时的处理</div><div class="line">    </div><div class="line">&#125;.catch(function(error)&#123;</div><div class="line">    // 取得失败时的处理</div><div class="line">    </div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1798,7 +1813,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-count">32</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

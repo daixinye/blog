@@ -221,7 +221,7 @@
           
   <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">31</span>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">32</span>
       </a>
 </li>
 
@@ -257,6 +257,144 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.daixinye.com/2017/05/28/JavaScript：Promise 小记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xinye Dai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Daixinye">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/05/28/JavaScript：Promise 小记/" itemprop="url">JavaScript：Promise 小记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-28T20:00:00+08:00">2017-05-28</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Promise 对象是一个代理对象（代理一个值），被代理的值在 Promise 对象创建时可能是未知的。它最主要的特点，是可以让异步代码像同步方法那样返回值，并为结果的成功（onFulfilled）和失败（onRejected）绑定相应的处理方法（Handlers）。需要注意的是，尽管看起来像同步方法那样返回了值但是并不是<strong>立即返回执行</strong>的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">new Promise(function(resolve, reject)&#123;</div><div class="line">    resolve(1);</div><div class="line">&#125;).then(function(msg)&#123;</div><div class="line">    console.log(msg);</div><div class="line">&#125;)</div><div class="line"></div><div class="line">console.log(2);</div><div class="line"></div><div class="line">// 输出顺序为</div><div class="line">// 2</div><div class="line">// 1</div></pre></td></tr></table></figure>
+<p>一个 Promise 有以下几种状态：</p>
+<ul>
+<li>pendding 初始状态</li>
+<li>fulfilled 意味着操作成功</li>
+<li>rejected 意味着操作失败</li>
+</ul>
+<p><img src="https://mdn.mozillademos.org/files/8633/promises.png" alt=""></p>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">var promise = new Promise(</div><div class="line">    /* executor */</div><div class="line">    function(resolve, reject) &#123;...&#125;</div><div class="line">);</div><div class="line"></div><div class="line">// 第一种处理方式</div><div class="line">promise.then(</div><div class="line">    /* onFulfilled */</div><div class="line">    function()&#123;...&#125;,</div><div class="line">    </div><div class="line">    /* onRejected */</div><div class="line">    function()&#123;...&#125;</div><div class="line">)</div><div class="line"></div><div class="line">// 第二种处理方式</div><div class="line">promise.then(</div><div class="line">    /* onFulfilled */</div><div class="line">    function()&#123;...&#125;</div><div class="line">).catch(</div><div class="line">    /* onRejected */</div><div class="line">    function()&#123;...&#125;</div><div class="line">)</div></pre></td></tr></table></figure>
+<h2 id="与回调函数的区别"><a href="#与回调函数的区别" class="headerlink" title="与回调函数的区别"></a>与回调函数的区别</h2><p>先来看一下一个普通的异步处理，使用回调函数来处理回调的结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">getAsycn(&quot;file.txt&quot;, function(error, result)&#123;</div><div class="line">    </div><div class="line">    if(error)&#123; // 取得失败时的处理</div><div class="line">        throw error;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    // 取得成功时的处理</div><div class="line">    </div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>接下来是使用Promise的处理方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var promise = getAsyncPromise(&quot;file.txt&quot;); // 返回一个Promise对象</div><div class="line"></div><div class="line">promise.then(function(result)&#123;</div><div class="line">    // 取得成功时的处理</div><div class="line">    </div><div class="line">&#125;.catch(function(error)&#123;</div><div class="line">    // 取得失败时的处理</div><div class="line">    </div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -1717,186 +1855,6 @@ module.exports = {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.daixinye.com/2017/04/12/HTTP：常见的状态码/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Xinye Dai">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Daixinye">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/04/12/HTTP：常见的状态码/" itemprop="url">HTTP基础（2）：常见的状态码</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-12T13:00:00+08:00">2017-04-12</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>HTTP状态码用于描述客户端向服务器端发送请求后的请求结果。通过状态码，客户端可以知道发出的HTTP是是否被正确处理。</p>
-<p>状态码由<strong>三位数字</strong>和<strong>原因短语</strong>组成，第一位指定了<strong>响应类别</strong>。</p>
-<p>状态码的类别：</p>
-<ul>
-<li>1XX：Informational 信息性状态码，表示服务器接收的请求正在被处理</li>
-<li>2XX：Success 成功状态码，表示请求被正常处理完毕</li>
-<li>3XX：Redirection 重定向状态码，表示客户端需要进行附加操作以完成请求</li>
-<li>4XX：Client Error 客户端错误状态码，表示因某种原因服务器无法处理请求</li>
-<li>5XX：Server Error 服务器错误状态码，表示服务器处理请求时出错</li>
-</ul>
-<h2 id="2XX-成功"><a href="#2XX-成功" class="headerlink" title="2XX 成功"></a>2XX 成功</h2><h3 id="200-OK"><a href="#200-OK" class="headerlink" title="200 OK"></a>200 OK</h3><p>表示客户端的请求被服务器端正常处理了。</p>
-<p>在这个状态码下，服务器的响应内容则依据请求方法决定。如果请求方法为GET，那么，对应请求资源的实体会一并返回；如果请求方法是HEAD，那么仅返回首部，而对应资源的实体不会被返回。</p>
-<h3 id="204-No-Content"><a href="#204-No-Content" class="headerlink" title="204 No Content"></a>204 No Content</h3><p>表示客户端的请求被服务器端正常处理，但是响应报文中不含有实体的主体部分。实际上204状态码下也不允许响应报文中有实体的主体部分。</p>
-<p>该响应码一般用于客户端向服务器端发送信息，而服务器端不必返回新信息的情况下使用。</p>
-<h3 id="206-Parical-Content"><a href="#206-Parical-Content" class="headerlink" title="206 Parical Content"></a>206 Parical Content</h3><p>该状态码表示客户端进行了范围请求（请求资源的一部分内容），而服务器成功执行了这部分的GET请求。响应报文中包含由Content-Range指定的实体内容。</p>
-<h2 id="3XX-重定向"><a href="#3XX-重定向" class="headerlink" title="3XX 重定向"></a>3XX 重定向</h2><h3 id="301-Moved-Permanently"><a href="#301-Moved-Permanently" class="headerlink" title="301 Moved Permanently"></a>301 Moved Permanently</h3><p>永久性重定向。该状态码表示请求的资源已经分配了新的URI，新的URI在Location首部字段中。</p>
-<h3 id="302-Found"><a href="#302-Found" class="headerlink" title="302 Found"></a>302 Found</h3><p>临时性重定向。该状态码表示请求的资源已经分配了新的URI，希望客户端此次能以新的URI进行访问。</p>
-<p>注意302是临时性的重定向，请求的资源在将来还有可能换成别的URI。所以与永久性重定向的区别是，301是让客户端之后都用新的URI访问（相当于搬家，其住址URI不会轻易变更），而302时客户端之后仍然应该访问返回302的页面，以获得请求的资源最新的URI（相当于租房，其住址URI随时会变）。</p>
-<h3 id="303-See-Other"><a href="#303-See-Other" class="headerlink" title="303 See Other"></a>303 See Other</h3><p>该状态码表示由于请求对应的资源存在着另一个URI，应使用GET方法定向获取请求的资源。</p>
-<p>303与302基本相似，唯一不同处是明确规定需要用GET方法去访问新的URI。例如当使用POST方法访问CGI（公共网关接口，Common Gateway Interface）程序，随后服务器端希望客户端以GET方法重定向到另一个URI上去时，返回303状态码。</p>
-<h3 id="304-Not-Modified"><a href="#304-Not-Modified" class="headerlink" title="304 Not Modified"></a>304 Not Modified</h3><p>该状态表示客户端发送附带条件的请求时（在请求头部中包含If-Match、If-Modified-Since、If-None-Match、If-Range、If-Unmodified-Since），服务器端允许请求访问资源，但因发生请求未满足条件，直接返回304。</p>
-<p>即表示服务器端的资源没有发生改变，客户端可以继续使用未过期的缓存资源。</p>
-<p>注意：304虽然在3XX 重定向类别中，但跟重定向实际上没有太大的关系。</p>
-<h3 id="307-Temporary-Redirect"><a href="#307-Temporary-Redirect" class="headerlink" title="307 Temporary Redirect"></a>307 Temporary Redirect</h3><p>临时重定向。该状态码与302基本相同，不同的是307会遵照浏览器标准，不会从POST变成GET。</p>
-<p>而301、302响应状态码返回时，浏览器一般都会把POST改成GET（尽管301和302标准是禁止这样做的）并删除请求报文的主体，再发起请求。</p>
-<h2 id="4XX-客户端错误"><a href="#4XX-客户端错误" class="headerlink" title="4XX 客户端错误"></a>4XX 客户端错误</h2><h3 id="400-Bad-Request"><a href="#400-Bad-Request" class="headerlink" title="400 Bad Request"></a>400 Bad Request</h3><p>该状态码表示请求报文中存在语法错误，需要客户端修改请求内容后再次发送请求。</p>
-<p>注意：浏览器会像对待200 OK 一样对待该状态码（即不会像3XX那样子有别的行为）</p>
-<h3 id="401-Unauthorized"><a href="#401-Unauthorized" class="headerlink" title="401 Unauthorized"></a>401 Unauthorized</h3><p>该状态码表示发送的请求需要有通过HTTP认证的认证信息。</p>
-<p>第一次返回401时，浏览器会弹出认证用的对话框。</p>
-<p>第二次返回401时，即表示用户认证失败。</p>
-<h3 id="403-Forbidden"><a href="#403-Forbidden" class="headerlink" title="403 Forbidden"></a>403 Forbidden</h3><p>该状态码表示对该资源的请求被服务器拒绝了。服务器没有义务给出拒绝的详细理由，但如果想作说明的话可以在实体的主体部分对原因进行描述。</p>
-<h3 id="404-Not-Found"><a href="#404-Not-Found" class="headerlink" title="404 Not Found"></a>404 Not Found</h3><p>该状态码表示服务器无法找到请求的资源，是最常见的状态码。</p>
-<h2 id="5XX-服务器端错误"><a href="#5XX-服务器端错误" class="headerlink" title="5XX 服务器端错误"></a>5XX 服务器端错误</h2><h3 id="500-Internal-Server-Error"><a href="#500-Internal-Server-Error" class="headerlink" title="500 Internal Server Error"></a>500 Internal Server Error</h3><p>该状态码表示服务器端在处理请求时发生了错误，例如无法连接数据库，或者服务端语言中有语法错误等等。</p>
-<h3 id="503-Service-Unavailable"><a href="#503-Service-Unavailable" class="headerlink" title="503 Service Unavailable"></a>503 Service Unavailable</h3><p>该状态码表示服务器端暂时处理超负载或正在进行停机维护，现在无法处理请求。</p>
-<p>如果事先知道服务器将在何时恢复，则最好写入Retry-After首部字段再返回给客户端。</p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><h3 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h3><p>状态码只在服务器端正确按照规范处理请求的前提下才有意义，不少服务器端会出现状态码与状态不一致的问题，需要在实际开发中注意。</p>
-<h3 id="本文提及的常见的状态码"><a href="#本文提及的常见的状态码" class="headerlink" title="本文提及的常见的状态码"></a>本文提及的常见的状态码</h3><ul>
-<li>200 OK</li>
-<li>202 No Content</li>
-<li>204 Partical Content</li>
-<li>301 Permanently Redirect</li>
-<li>302 Found</li>
-<li>303 See Other</li>
-<li>304 Not Modified</li>
-<li>307 Temporary Redirect</li>
-<li>400 Bad Request</li>
-<li>401 Unauthorized</li>
-<li>403 Forbbiden</li>
-<li>404 Not Found</li>
-<li>500 Interval Server Error</li>
-<li>503 Service Unavailable</li>
-</ul>
-<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p>本文整理了14种常见的状态码，其中包含4个状态类别，2XX，3XX，4XX，5XX，分别代表了成功，重定向，客户端错误和服务器端错误。</p>
-<p>2XX中，要注意202与200的区别，前者不含资源实体的主体。</p>
-<p>3XX中，要注意304与重定向无关，301和302一个是永久重定向，一个是临时重定向，且在标准中是不能把POST请求改成GET请求的（但是实际浏览器都会这么做）。303是302的相反版本，303要求POST改成GET请求。307是302的严格版，不允许把POST改成GET请求。</p>
-<p>4XX中，400和401都是与浏览器有关的，前者是请求有错误后者是没有HTTP认证信息；403和404与服务器端有关，403禁止浏览器访问特定资源，404则是服务器上没有特定的资源。</p>
-<p>5XX中，500是服务器端处理请求时出错，一般是数据库连接、代码有语法问题等等。503则是服务器负载过大或在维护，暂时无法提供服务。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1948,7 +1906,7 @@ module.exports = {
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-count">32</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
