@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="百分比值 line-height = （父元素 font-size）×（百分比）  1234&amp;lt;div class=&amp;quot;outer&amp;quot;&amp;gt;    父元素    &amp;lt;div class=&amp;quot;inner&amp;quot;&amp;gt;子元素&amp;lt;/div&amp;gt;&amp;lt;/div&amp;gt; 123456789.outer &amp;#123;    /* 父元素行高 = 父元素font-">
+<meta name="keywords" content="css">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS：line-height 不同取值的差异">
+<meta property="og:url" content="http://blog.daixinye.com/2017/04/02/line-height 不同取值的差异/index.html">
+<meta property="og:site_name" content="Daixinye">
+<meta property="og:description" content="百分比值 line-height = （父元素 font-size）×（百分比）  1234&amp;lt;div class=&amp;quot;outer&amp;quot;&amp;gt;    父元素    &amp;lt;div class=&amp;quot;inner&amp;quot;&amp;gt;子元素&amp;lt;/div&amp;gt;&amp;lt;/div&amp;gt; 123456789.outer &amp;#123;    /* 父元素行高 = 父元素font-">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-02-22T07:32:07.729Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS：line-height 不同取值的差异">
+<meta name="twitter:description" content="百分比值 line-height = （父元素 font-size）×（百分比）  1234&amp;lt;div class=&amp;quot;outer&amp;quot;&amp;gt;    父元素    &amp;lt;div class=&amp;quot;inner&amp;quot;&amp;gt;子元素&amp;lt;/div&amp;gt;&amp;lt;/div&amp;gt; 123456789.outer &amp;#123;    /* 父元素行高 = 父元素font-">
+
+
+
+
+
+
+  <link rel="canonical" href="http://blog.daixinye.com/2017/04/02/line-height 不同取值的差异/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>CSS：line-height 不同取值的差异 | Daixinye</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Daixinye</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.daixinye.com/2017/04/02/line-height 不同取值的差异/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xinye Dai">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Daixinye">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CSS：line-height 不同取值的差异
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2017-04-02 20:00:00" itemprop="dateCreated datePublished" datetime="2017-04-02T20:00:00+08:00">2017-04-02</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-02-22 15:32:07" itemprop="dateModified" datetime="2019-02-22T15:32:07+08:00">2019-02-22</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="百分比值"><a href="#百分比值" class="headerlink" title="百分比值"></a>百分比值</h2><blockquote>
+<p>line-height = （父元素 font-size）×（百分比）</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;outer&quot;&gt;</span><br><span class="line">    父元素</span><br><span class="line">    &lt;div class=&quot;inner&quot;&gt;子元素&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.outer &#123;</span><br><span class="line">    /* 父元素行高 = 父元素font-size 30px × 150% = 45px */</span><br><span class="line">    line-height: 150%;</span><br><span class="line">    font-size: 30px;</span><br><span class="line">&#125;</span><br><span class="line">.inner &#123;</span><br><span class="line">    /* 子元素行高 = 父元素font-size 30px × 150% = 45px */</span><br><span class="line">    font-size: 20px; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="em值"><a href="#em值" class="headerlink" title="em值"></a>em值</h2><blockquote>
+<p>line-height = （父元素 font-size）×（em值）</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.outer &#123;</span><br><span class="line">    /* 父元素行高 = 父元素font-size 30px × 1.5 = 45px */</span><br><span class="line">    line-height: 1.5em;</span><br><span class="line">    font-size: 30px;</span><br><span class="line">&#125;</span><br><span class="line">.inner &#123;</span><br><span class="line">    /* 子元素行高 = 父元素font-size 30px × 1.5 = 45px */</span><br><span class="line">    font-size: 20px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里特别要注意尽管em是相对当前元素的<code>font-size</code>值来计算的，同时<code>line-height</code>也是可以被继承的属性，但是实际上子元素继承时并不是<code>line-height: 1.5em</code>，而是父元素计算完成后的<code>line-height: 45px;</code></p>
+<h2 id="无单位数字"><a href="#无单位数字" class="headerlink" title="无单位数字"></a>无单位数字</h2><blockquote>
+<p>line-height = （当前元素 font-size）×（无单位数字）</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.outer &#123;</span><br><span class="line">    /* 父元素行高 = 父元素font-size 30px × 1.5 = 45px */</span><br><span class="line">    line-height: 1.5;</span><br><span class="line">    font-size: 30px;</span><br><span class="line">&#125;</span><br><span class="line">.inner &#123;</span><br><span class="line">    /* 子元素行高 = 子元素font-size 20px × 1.5 = 30px */</span><br><span class="line">    font-size: 20px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>无单位数字与百分比值和em值相反，是根据当前元素的<code>font-size</code>来计算的。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>其实仔细观察会发现，百分比值和em值，在子元素继承父元素的<code>line-height</code>属性时，继承的是计算完成后（以px为单位）的值。而无单位数字，则是需要根据子元素的<code>font-size</code>，让子元素自行计算的。</p>
+<h3 id="计算em值的大致流程："><a href="#计算em值的大致流程：" class="headerlink" title="计算em值的大致流程："></a>计算em值的大致流程：</h3><p> –&gt; 设置父元素font-size = 30px；</p>
+<p> –&gt; 设置父元素line-height = 1.5em;</p>
+<p> –&gt; 计算父元素line-height =  font-size × 1.5 = 30px × 1.5 = 45px; </p>
+<p> –&gt; 设置子元素font-size = 20px;</p>
+<p> –&gt; 计算子元素line-height = 继承父元素line-height = 45px; </p>
+<h3 id="计算无单位数字的大致流程："><a href="#计算无单位数字的大致流程：" class="headerlink" title="计算无单位数字的大致流程："></a>计算无单位数字的大致流程：</h3><p>–&gt; 设置父元素font-size = 30px;</p>
+<p>–&gt; 设置父元素line-height = 1.5;</p>
+<p>–&gt; 计算父元素line-height = 当前元素font-size × 1.5 = 30px × 1.5 = 45px;</p>
+<p>–&gt; 设置子元素font-size = 20px;</p>
+<p>–&gt; 计算子元素line-height = 继承父元素line-height = 1.5;</p>
+<p>–&gt; 计算实际子元素line-height = 当前元素font-size × 1.5 = 20px × 1.5 = 30px;</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/css/" rel="tag"># css</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/02/Sublime-Text-3的基本安装与配置/" rel="next" title="Sublime Text 3的基本安装与配置">
+                <i class="fa fa-chevron-left"></i> Sublime Text 3的基本安装与配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/07/Mac在Terminal打开Finder/" rel="prev" title="Mac：如何在Terminal中打开Finder">
+                Mac：如何在Terminal中打开Finder <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Xinye Dai</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#百分比值"><span class="nav-number">1.</span> <span class="nav-text">百分比值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#em值"><span class="nav-number">2.</span> <span class="nav-text">em值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无单位数字"><span class="nav-number">3.</span> <span class="nav-text">无单位数字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">4.</span> <span class="nav-text">小结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#计算em值的大致流程："><span class="nav-number">4.1.</span> <span class="nav-text">计算em值的大致流程：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计算无单位数字的大致流程："><span class="nav-number">4.2.</span> <span class="nav-text">计算无单位数字的大致流程：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xinye Dai</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.0.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

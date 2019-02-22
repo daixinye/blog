@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="前言博客好久没更新啦，今天就趁着刚换了新的主题（Next），加了评论系统（Gitment，需要用 GitHub 账号授权），来更新一下吧。 最近听听力的时候发现，自己一到有数字的部分就会惊慌地不知所措。个位数的倒还好一些，但是来一个 two months ago 是 one hundred fifty two pounds 然后现在是 one hundred thirty seven pounds">
+<meta name="keywords" content="shell">
+<meta property="og:type" content="article">
+<meta property="og:title" content="写一个Shell脚本来练英语听力">
+<meta property="og:url" content="http://blog.daixinye.com/2018/04/04/写一个Shell脚本来练英语听力/index.html">
+<meta property="og:site_name" content="Daixinye">
+<meta property="og:description" content="前言博客好久没更新啦，今天就趁着刚换了新的主题（Next），加了评论系统（Gitment，需要用 GitHub 账号授权），来更新一下吧。 最近听听力的时候发现，自己一到有数字的部分就会惊慌地不知所措。个位数的倒还好一些，但是来一个 two months ago 是 one hundred fifty two pounds 然后现在是 one hundred thirty seven pounds">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://blog.daixinye.com/images/practice-shell.gif">
+<meta property="og:updated_time" content="2019-02-22T07:32:07.730Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="写一个Shell脚本来练英语听力">
+<meta name="twitter:description" content="前言博客好久没更新啦，今天就趁着刚换了新的主题（Next），加了评论系统（Gitment，需要用 GitHub 账号授权），来更新一下吧。 最近听听力的时候发现，自己一到有数字的部分就会惊慌地不知所措。个位数的倒还好一些，但是来一个 two months ago 是 one hundred fifty two pounds 然后现在是 one hundred thirty seven pounds">
+<meta name="twitter:image" content="http://blog.daixinye.com/images/practice-shell.gif">
+
+
+
+
+
+
+  <link rel="canonical" href="http://blog.daixinye.com/2018/04/04/写一个Shell脚本来练英语听力/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>写一个Shell脚本来练英语听力 | Daixinye</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Daixinye</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.daixinye.com/2018/04/04/写一个Shell脚本来练英语听力/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xinye Dai">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Daixinye">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">写一个Shell脚本来练英语听力
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-04-04 23:00:00" itemprop="dateCreated datePublished" datetime="2018-04-04T23:00:00+08:00">2018-04-04</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-02-22 15:32:07" itemprop="dateModified" datetime="2019-02-22T15:32:07+08:00">2019-02-22</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>博客好久没更新啦，今天就趁着刚换了新的主题（<a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">Next</a>），加了评论系统（<a href="https://github.com/imsun/gitment" target="_blank" rel="noopener">Gitment</a>，需要用 GitHub 账号授权），来更新一下吧。</p>
+<p>最近听听力的时候发现，自己一到有数字的部分就会惊慌地不知所措。个位数的倒还好一些，但是来一个 two months ago 是 one hundred fifty two pounds 然后现在是 one hundred thirty seven pounds 最后问我现在跟俩月前相比瘦了多少磅，那我就得反应个半天了…</p>
+<p>为了让自己对数字更加敏感一些，我打算借助 Shell 脚本来对数字听力做一个专项练习。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>基于《刻意练习》中的 3F 原则（Focus，Feedback &amp; Fix），练习得有直接正面的反馈和以及能够立即纠正的机制。对此，比较好的一个方式就是由他人随机念出一个数字，我们立即给出数字，接着与正确答案进行比较。如果正确，则继续；如果不正确，则重复一次数字再进行辨认，直到得到正确答案为止。</p>
+<p>表现为一个程序大概就以下几个步骤：</p>
+<ul>
+<li>用户输入一个范围（例如 1~100）</li>
+<li>程序随机选择给定范围中的一个数字</li>
+<li>程序念出选中的数字</li>
+<li>用户输入答案</li>
+<li>程序比对答案，若正确则念下一个数字，否则重复当前数字直到给出正确答案</li>
+</ul>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>输入输出和对比都不难，关键在于如何让系统“念”数字。</p>
+<p>博主用的是 Mac，在类 Unix 系统中应该都有一个 <code>say</code> 命令，用于把文本转换成语音（Convert text to audible speech）。<code>say</code> 的更多用法和介绍可以在终端中输入以下命令来查看：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> man say</span><br></pre></td></tr></table></figure>
+<p>通过这个命令，我们就能够实现“念数字”的功能了。万事俱备，只欠代码。简单实现的 Shell 脚本代码如下所示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#! /bin/bash</span></span><br><span class="line"><span class="built_in">echo</span> -n <span class="string">"Please input the range of numbers: "</span></span><br><span class="line"><span class="comment"># 输入我们想要练习的数值范围，注意这个范围是左闭右开的，即[min,max)</span></span><br><span class="line"><span class="built_in">read</span> min max</span><br><span class="line"></span><br><span class="line">diff=$((<span class="variable">$max</span>-<span class="variable">$min</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> [ <span class="literal">true</span> ]; <span class="keyword">do</span></span><br><span class="line">    que=$((<span class="variable">$RANDOM</span>%<span class="variable">$diff</span>+<span class="variable">$min</span>)) <span class="comment"># 随机选择给定范围中的一个数字</span></span><br><span class="line">    say <span class="variable">$que</span> <span class="comment"># 念出这个数字</span></span><br><span class="line">    <span class="built_in">echo</span> -n <span class="string">'Input the number you just heard: '</span></span><br><span class="line">    <span class="built_in">read</span> ans <span class="comment"># 输入答案</span></span><br><span class="line"></span><br><span class="line">    until [[ <span class="variable">$que</span> = <span class="variable">$ans</span> ]]; <span class="keyword">do</span> <span class="comment"># 直到答案是正确的之前，都重复念同一个数字</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"❌"</span></span><br><span class="line">        <span class="built_in">echo</span> -n <span class="string">"Try again: "</span></span><br><span class="line">        say <span class="variable">$que</span></span><br><span class="line">        <span class="built_in">read</span> ans <span class="comment"># 再次输入答案</span></span><br><span class="line">    <span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"✅"</span> <span class="comment"># 答案正确，进入下一个循环</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><p>接下来假设你使用的是 Mac…</p>
+<p>如果你有终端的使用经验的话，只需要把打开一个文本编辑器，复制上述代码并保存为以<code>.sh</code>（如 practice.sh）结尾的文件，然后切换到相应的目录，在终端里运行就好了，你可以用以下两种方式来执行一个脚本：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> chmod +x ./practice.sh</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./practice.sh</span></span><br></pre></td></tr></table></figure>
+<p>或者是</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> /bin/bash ./practice.sh</span></span><br></pre></td></tr></table></figure>
+<p>如果你没有终端的使用经验的话，那就下载这个文件(<a href="/files/practice.sh">practice.sh</a>)，然后在 Docker 里点一下访达（Finder），把这个文件放到打开的个人目录中。再在启动台中找到并打开终端，输入：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> /bin/bash ./practice.sh</span></span><br></pre></td></tr></table></figure>
+<p>应该就可以了。</p>
+<h3 id="退出"><a href="#退出" class="headerlink" title="退出"></a>退出</h3><p>你可以用 <code>Ctrl + C</code> 随时退出。</p>
+<h2 id="开始练习"><a href="#开始练习" class="headerlink" title="开始练习"></a>开始练习</h2><p>使用的效果，大概就是像这样子（gif 可能有点慢…），请自行脑补声音 🙃：</p>
+<p><img src="/images/practice-shell.gif" alt="practice"></p>
+<p>Tips：<code>say</code>命令的语音设置，可以在 <em>系统偏好设置-&gt;辅助功能-&gt;语音</em> 中找到，你可以设置使用不同的系统声音，也可以调整它的速率哦。</p>
+<p>好了，这篇文章就到此结束了，希望能对大家有所帮助~</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/shell/" rel="tag"># shell</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/09/HTTP缓存机制/" rel="next" title="HTTP：缓存机制">
+                <i class="fa fa-chevron-left"></i> HTTP：缓存机制
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Xinye Dai</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">3.</span> <span class="nav-text">实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#运行"><span class="nav-number">3.1.</span> <span class="nav-text">运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#退出"><span class="nav-number">3.2.</span> <span class="nav-text">退出</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始练习"><span class="nav-number">4.</span> <span class="nav-text">开始练习</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xinye Dai</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.0.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

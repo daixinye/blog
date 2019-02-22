@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="React的设计哲学React最有价值的是声明式的，直观的编程方式。编程方式 简单直观 且 符合习惯，可以使得代码 更容易理解 、易于维护和有助于演进。可理解，可维护的代码代表着工程的质量和效率。 JSX定义用户界面更加直观JSX定义的用户界面使得HTML可以直接嵌入到JS中，而不使用模板。原因在于，模板背后的代码逻辑严重依赖其模板中的内容和DOM结构，两者紧密耦合。虽然模板可以使得文件分离，且让">
+<meta name="keywords" content="react">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入浅出React读后笔记">
+<meta property="og:url" content="http://blog.daixinye.com/2016/04/24/深入浅出React读后笔记/index.html">
+<meta property="og:site_name" content="Daixinye">
+<meta property="og:description" content="React的设计哲学React最有价值的是声明式的，直观的编程方式。编程方式 简单直观 且 符合习惯，可以使得代码 更容易理解 、易于维护和有助于演进。可理解，可维护的代码代表着工程的质量和效率。 JSX定义用户界面更加直观JSX定义的用户界面使得HTML可以直接嵌入到JS中，而不使用模板。原因在于，模板背后的代码逻辑严重依赖其模板中的内容和DOM结构，两者紧密耦合。虽然模板可以使得文件分离，且让">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-02-22T07:32:07.731Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深入浅出React读后笔记">
+<meta name="twitter:description" content="React的设计哲学React最有价值的是声明式的，直观的编程方式。编程方式 简单直观 且 符合习惯，可以使得代码 更容易理解 、易于维护和有助于演进。可理解，可维护的代码代表着工程的质量和效率。 JSX定义用户界面更加直观JSX定义的用户界面使得HTML可以直接嵌入到JS中，而不使用模板。原因在于，模板背后的代码逻辑严重依赖其模板中的内容和DOM结构，两者紧密耦合。虽然模板可以使得文件分离，且让">
+
+
+
+
+
+
+  <link rel="canonical" href="http://blog.daixinye.com/2016/04/24/深入浅出React读后笔记/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>深入浅出React读后笔记 | Daixinye</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Daixinye</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.daixinye.com/2016/04/24/深入浅出React读后笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xinye Dai">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Daixinye">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">深入浅出React读后笔记
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2016-04-24 18:36:56" itemprop="dateCreated datePublished" datetime="2016-04-24T18:36:56+08:00">2016-04-24</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-02-22 15:32:07" itemprop="dateModified" datetime="2019-02-22T15:32:07+08:00">2019-02-22</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="React的设计哲学"><a href="#React的设计哲学" class="headerlink" title="React的设计哲学"></a>React的设计哲学</h2><p>React最有价值的是声明式的，直观的编程方式。编程方式 简单直观 且 符合习惯，可以使得代码 更容易理解 、易于维护和有助于演进。可理解，可维护的代码代表着工程的质量和效率。</p>
+<h2 id="JSX定义用户界面更加直观"><a href="#JSX定义用户界面更加直观" class="headerlink" title="JSX定义用户界面更加直观"></a>JSX定义用户界面更加直观</h2><p>JSX定义的用户界面使得HTML可以直接嵌入到JS中，而不使用模板。原因在于，模板背后的代码逻辑严重依赖其模板中的内容和DOM结构，两者紧密耦合。虽然模板可以使得文件分离，且让非开发人员也可以对界面进行修改，但是为了保证两者之间的协作，需要引入更多的概念和机制。</p>
+<p>而在JSX中，React并没有引入更多新的概念，你仍可以用HTML和JS的思路去构建自己的应用。这种直观的方式降低了React的学习门槛，也使得新手更容易理解。</p>
+<h2 id="所谓组件，其实就是状态机器"><a href="#所谓组件，其实就是状态机器" class="headerlink" title="所谓组件，其实就是状态机器"></a>所谓组件，其实就是状态机器</h2><p>组件是某个独立功能或界面的封装（定义），使其能够进行复用或是业务逻辑分离（目的）。</p>
+<p>在React中，为了更加容易保证界面一致性，React把它看做简单的状态机器。即根据状态去输出基于状态的界面，React则负责以最高效的方式去更新整个界面和DOM树。</p>
+<p>对组件的管理，实际就是对组件状态的管理。更新一个组件，就是更新一个组件的状态。设计者需要做的，就是关心不同状态的用户界面。这相比于原始的JS直接控制真实DOM（过于自由）来说，预先设定好组件的状态对应的用户界面，可以让问题缩小到组件中，而不需要开发者考虑整一个应用的DOM或是担心新加入的代码可能会产生不被期望的副作用。像这样将DOM限制在组件之中，尽管失去了“自由”，但是也可以使得开发者更好的对界面进行管理和控制。</p>
+<p>组件作为用户界面的基本单位，与外界的交互方式除了状态（state）之外，还有其属性（props）。state由组件内部进行维护，而属性则是在外部初始化时传递进来，一旦赋值不建议进行变化。同一类组件就像是人一样，可以有着不同的身高和肤色（属性），但是其呼吸、运动等活动方式（状态）则是相通的。</p>
+<h2 id="每一次变化都是整体刷新"><a href="#每一次变化都是整体刷新" class="headerlink" title="每一次变化都是整体刷新"></a>每一次变化都是整体刷新</h2><p>数据模型驱动用户界面在概念上是直观的，但是在实践中确实困难重重。数据模型的变化可能会导致分散在整个用户界面各个角落的UI同时进行变化。界面越复杂，数据与界面的一致性越难以维护。</p>
+<p>关于这个问题，在原文中并没有被解释的很清楚。所谓数据模型，是一个整体的、全局的数据，不同于AJAX获取那种局部的数据，数据模型代表了整个UI界面的状态。</p>
+<p>考虑一下实际的开发场景，当我们拿到一个新的数据之后，我们需要做哪些事情。首先是分析数据，在概念上明确我们需要更新的UI，接着拿新数据与UI进行对比（检查），判断哪些需要更新而哪些不需要变化。接下来是实际通过编码的方式更新UI，进行DOM操作，最后检查UI是否被正确的刷新。</p>
+<p>实际上在界面复杂并且有许多UI之间的依赖更新的情况下，开发者无法立刻得知当前的UI与之后刷新的UI是否一致。出于减少DOM操作的角度考虑，当然是只刷新那些有变化的UI就好。但是想要实现它，开发者必须对UI一一进行前后对比，界面越复杂越难以实现。而如果把涉及到的所有UI都进行更新，则会产生不必要的性能损耗（把一个UI删除了又产生一个同样的UI）。<br>为此，React引入了虚拟DOM的概念。既然整体进行渲染（把所有涉及到的UI都进行刷新）一定可以保证数据模型与用户界面的一致性，那不如就整体进行刷新吧，让框架来解决哪些需要进行DOM操作而哪些UI则保持原样。React通过虚拟DOM把所有的现有UI的数据模型与新的数据模型进行一一的对比，最终进行最优化的局部真实DOM更新。虚拟DOM可以通过其算法获得不论界面多么复杂的情况下，都可以接受的性能代价。<br>何时是React的最有价值的时候？当你的界面越来越复杂时。</p>
+<h2 id="单向数据流动Flux"><a href="#单向数据流动Flux" class="headerlink" title="单向数据流动Flux"></a>单向数据流动Flux</h2><p>既然已经有了组件机制去定义界面，那么也还需要一定的机制来定义组件之间，以及组件和数据模型之间如何通信。为此Facebook提出了Flux，其提倡的是单向数据流动。即永远只有模型到视图的数据流动。</p>
+<p>Flux的定义非常宽松，目前社区中还出现了很多不同的实现，如Flexible，Reflux等。</p>
+<h2 id="让数据模型也变简单"><a href="#让数据模型也变简单" class="headerlink" title="让数据模型也变简单"></a>让数据模型也变简单</h2><p>React提倡只用只读数据来建立数据模型，所有的数据都是只读的，如果你想要进行修改，那么就只能产生一份包含新的修改的数据。这有点像同一个类的实例，其成员变量是私有的并且在实例化之后没有相关函数能够对其进行修改，如果想要进行修改，那么就只能重新实例一个。</p>
+<p>只读的数据可以让代码更加的安全和易于维护，至少开发者不用担心数据在某个角落被某段神奇的代码所修改。数据的来源只有数据出生的时候，这无疑可以抹杀很多bug出现的可能。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>React Native：移动开发。React把UI层进行了完美的抽象使得开发者不需要进行DOM操作，而React Native正是把DOM替换成了iOS或Android的原声控件。其开发方式都是一致的。</p>
+<p>React Canvas：所有的界面元素都通过Canvas来进行绘制，彻底舍弃了DOM。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>任何框架诞生的初衷都离不开对开发问题的解决。React同样是为了解决前端开发中的痛点而生。原文总结分析了其相关技术背后的设计思想，是一篇质量很高的文章。</p>
+<p>我一直坚信在计算机这样的人造学科中，理解一门技术的初衷，能够使自己更好的去学习和使用。很多人都可以在短时间入门一门技术，但是很少有人去关注其背后的设计思想和方式。尽管我现在技术基础不扎实，但是React的设计思路确确实实是我在实际开发中会遇到和疑惑的问题。这样一想，React就变得十分可爱了，我也期望自己能在实际的开发中，遵循简单直观的原则，进行高效率和高质量的开发。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.infoq.com/cn/articles/react-art-of-simplity" target="_blank" rel="noopener">深入浅出React（一）：React的设计哲学 - 简单之美</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/react/" rel="tag"># react</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/04/SVN：同步版本库与网站目录/" rel="next" title="SVN：同步版本库与网站目录">
+                <i class="fa fa-chevron-left"></i> SVN：同步版本库与网站目录
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/30/Git：常用命令整理/" rel="prev" title="Git：那些常用命令的整理">
+                Git：那些常用命令的整理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Xinye Dai</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#React的设计哲学"><span class="nav-number">1.</span> <span class="nav-text">React的设计哲学</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSX定义用户界面更加直观"><span class="nav-number">2.</span> <span class="nav-text">JSX定义用户界面更加直观</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#所谓组件，其实就是状态机器"><span class="nav-number">3.</span> <span class="nav-text">所谓组件，其实就是状态机器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#每一次变化都是整体刷新"><span class="nav-number">4.</span> <span class="nav-text">每一次变化都是整体刷新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单向数据流动Flux"><span class="nav-number">5.</span> <span class="nav-text">单向数据流动Flux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#让数据模型也变简单"><span class="nav-number">6.</span> <span class="nav-text">让数据模型也变简单</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">7.</span> <span class="nav-text">其他</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">8.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">9.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xinye Dai</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.0.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

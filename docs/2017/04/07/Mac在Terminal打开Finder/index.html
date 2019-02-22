@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="前言对于习惯使用Terminal的小伙伴们来说，常常有“进入到某个目录中”并“在该目录中打开Finder”的需求。明明已经在目录下了，却还需要在桌面按个CMD+N来打开Finder再在Finder中一层一层打开，简直不要太痛苦。既然如此，那就试试open命令吧。 open命令在Terminal中输入open -h，可以看到如下的说明： Usage: open [-e] [-t] [-f] [-W]">
+<meta name="keywords" content="mac">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mac：如何在Terminal中打开Finder">
+<meta property="og:url" content="http://blog.daixinye.com/2017/04/07/Mac在Terminal打开Finder/index.html">
+<meta property="og:site_name" content="Daixinye">
+<meta property="og:description" content="前言对于习惯使用Terminal的小伙伴们来说，常常有“进入到某个目录中”并“在该目录中打开Finder”的需求。明明已经在目录下了，却还需要在桌面按个CMD+N来打开Finder再在Finder中一层一层打开，简直不要太痛苦。既然如此，那就试试open命令吧。 open命令在Terminal中输入open -h，可以看到如下的说明： Usage: open [-e] [-t] [-f] [-W]">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-02-22T07:32:07.727Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mac：如何在Terminal中打开Finder">
+<meta name="twitter:description" content="前言对于习惯使用Terminal的小伙伴们来说，常常有“进入到某个目录中”并“在该目录中打开Finder”的需求。明明已经在目录下了，却还需要在桌面按个CMD+N来打开Finder再在Finder中一层一层打开，简直不要太痛苦。既然如此，那就试试open命令吧。 open命令在Terminal中输入open -h，可以看到如下的说明： Usage: open [-e] [-t] [-f] [-W]">
+
+
+
+
+
+
+  <link rel="canonical" href="http://blog.daixinye.com/2017/04/07/Mac在Terminal打开Finder/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Mac：如何在Terminal中打开Finder | Daixinye</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Daixinye</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.daixinye.com/2017/04/07/Mac在Terminal打开Finder/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xinye Dai">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Daixinye">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Mac：如何在Terminal中打开Finder
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2017-04-07 22:16:35" itemprop="dateCreated datePublished" datetime="2017-04-07T22:16:35+08:00">2017-04-07</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-02-22 15:32:07" itemprop="dateModified" datetime="2019-02-22T15:32:07+08:00">2019-02-22</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>对于习惯使用Terminal的小伙伴们来说，常常有“进入到某个目录中”并“在该目录中打开Finder”的需求。<br>明明已经在目录下了，却还需要在桌面按个CMD+N来打开Finder再在Finder中一层一层打开，简直不要太痛苦。<br>既然如此，那就试试open命令吧。</p>
+<h2 id="open命令"><a href="#open命令" class="headerlink" title="open命令"></a>open命令</h2><p>在Terminal中输入<code>open -h</code>，可以看到如下的说明：</p>
+<pre><code>Usage: open [-e] [-t] [-f] [-W] [-R] [-n] [-g] [-h] [-b &lt;bundle identifier&gt;] [-a &lt;application&gt;] [filenames] [--args arguments]
+Help: Open opens files from a shell.
+      By default, opens each file using the default application for that file.  
+      If the file is in the form of a URL, the file will be opened as a URL.
+Options: 
+      -a                Opens with the specified application.
+      -b                Opens with the specified application bundle identifier.
+      -e                Opens with TextEdit.
+      -t                Opens with default text editor.
+      -f                Reads input from standard input and opens with TextEdit.
+      -F  --fresh       Launches the app fresh, that is, without restoring windows. Saved persistent state is lost, excluding Untitled documents.
+      -R, --reveal      Selects in the Finder instead of opening.
+      -W, --wait-apps   Blocks until the used applications are closed (even if they were already running).
+          --args        All remaining arguments are passed in argv to the application&apos;s main() function instead of opened.
+      -n, --new         Open a new instance of the application even if one is already running.
+      -j, --hide        Launches the app hidden.
+      -g, --background  Does not bring the application to the foreground.
+      -h, --header      Searches header file locations for headers matching the given filenames, and opens them.
+</code></pre><p>部分翻译如下：</p>
+<pre><code>使用方法： open [-e] [-t] [-f] [-W] [-R] [-n] [-g] [-h] [-b &lt;bundle identifier&gt;] [-a &lt;应用名&gt;] [文件名] [--args arguments]
+Help: 用于在命令行中打开文件
+      默认情况下，使用默认的应用打开对应的文件。
+      如果是URL格式的文件，那么就会在浏览器中打开。
+Options: 
+      -a                指定打开文件的应用
+      -e                用TextEdit打开该文件
+      -t                用默认文本编辑器打开该文件
+      -R, --reveal      在Finder中显示并选中
+      -g, --background  在后台打开该文件（此时焦点还在Terminal上）
+</code></pre><h2 id="打开目录的正确方式"><a href="#打开目录的正确方式" class="headerlink" title="打开目录的正确方式"></a>打开目录的正确方式</h2><p>那么如何解决“在Terminal中打开当前目录”的问题呢？只要输入以下命令即可：</p>
+<pre><code>$ open ./
+</code></pre><p>没错就这么简单。默认情况下，如果是个open之后是一个目录，那么就会用Finder打开。回车之后，会将焦点直接转移至打开的Finder目录。<br>这时如果你是想打开多个Finder目录，就需要手动切回Terminal再执行命令了。这种情况下，你可以加一个-g参数，来让焦点始终保持在Terminal上。</p>
+<pre><code>$ open -g ./
+</code></pre><p>这样我们就可以一次性在命令行中打开所有想打开的目录了。</p>
+<h3 id="浏览文件"><a href="#浏览文件" class="headerlink" title="浏览文件"></a>浏览文件</h3><p>除此之外，文件太多了，想在Finder中浏览指定文件怎么办呢。可以用-R来解决：</p>
+<pre><code>$ open -R ./test.js
+</code></pre><p>这样就可以在Finder显示，并且已经被选中了。</p>
+<h2 id="打开网站的正确方式"><a href="#打开网站的正确方式" class="headerlink" title="打开网站的正确方式"></a>打开网站的正确方式</h2><p>除了打开目录之外，open命令也可以用于打开网站：</p>
+<pre><code>$ open http://denight.leanote.com
+</code></pre><p>记得一定要加http，否则是不会被识别成URL的。</p>
+<h3 id="指定浏览器打开"><a href="#指定浏览器打开" class="headerlink" title="指定浏览器打开"></a>指定浏览器打开</h3><p>默认情况下，是用Safari打开浏览器的：</p>
+<pre><code>$ open http://denight.leanote.com
+</code></pre><p>等同于</p>
+<pre><code>$ open -a Safari http://denight.leanote.com
+</code></pre><p>如果要换成Firefox或者是Google Chrome，替换命令中的Safari即可</p>
+<pre><code>$ open -a Firefox http://denight.leanote.com
+$ open -a Google\ Chrome http://denight.leanote.com
+</code></pre><h2 id="打开代码的正确方式"><a href="#打开代码的正确方式" class="headerlink" title="打开代码的正确方式"></a>打开代码的正确方式</h2><pre><code>$open -e ./test.js
+</code></pre><p>使用这个命令，可以在TextEdit中打开test.js文件。如果不加-e的话，就会用默认的应用打开。<br>也可以指定想要的打开的编辑器。</p>
+<pre><code>$open -a Sublime\ Text ./test.js
+</code></pre><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://ju.outofmemory.cn/entry/75555" target="_blank" rel="noopener">在Mac终端下打开Finder</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mac/" rel="tag"># mac</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/02/line-height 不同取值的差异/" rel="next" title="CSS：line-height 不同取值的差异">
+                <i class="fa fa-chevron-left"></i> CSS：line-height 不同取值的差异
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/11/JavaScript：基本数据类型整理/" rel="prev" title="JavaScript：基本数据类型整理">
+                JavaScript：基本数据类型整理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Xinye Dai</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#open命令"><span class="nav-number">2.</span> <span class="nav-text">open命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打开目录的正确方式"><span class="nav-number">3.</span> <span class="nav-text">打开目录的正确方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览文件"><span class="nav-number">3.1.</span> <span class="nav-text">浏览文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打开网站的正确方式"><span class="nav-number">4.</span> <span class="nav-text">打开网站的正确方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#指定浏览器打开"><span class="nav-number">4.1.</span> <span class="nav-text">指定浏览器打开</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打开代码的正确方式"><span class="nav-number">5.</span> <span class="nav-text">打开代码的正确方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xinye Dai</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.0.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

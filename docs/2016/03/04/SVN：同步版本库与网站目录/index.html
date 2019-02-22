@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="承接之前Lnmp下搭建Svn服务器的步骤，接下来要使用Svn中的hooks来进行版本库与网站目录的同步更新。以方便对网站代码进行管理和发布。 注意，下文中PATH、PROJECT等全大写的字符串均为举例用，实际操作时请替换成自己的目录和版本库或项目名称。 原理首先切换到版本库的目录 cd /PATH/svn/PROJECT ls 会看到有hooks文件夹 cd hooks ls 可以看到有一个po">
+<meta name="keywords" content="svn">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SVN：同步版本库与网站目录">
+<meta property="og:url" content="http://blog.daixinye.com/2016/03/04/SVN：同步版本库与网站目录/index.html">
+<meta property="og:site_name" content="Daixinye">
+<meta property="og:description" content="承接之前Lnmp下搭建Svn服务器的步骤，接下来要使用Svn中的hooks来进行版本库与网站目录的同步更新。以方便对网站代码进行管理和发布。 注意，下文中PATH、PROJECT等全大写的字符串均为举例用，实际操作时请替换成自己的目录和版本库或项目名称。 原理首先切换到版本库的目录 cd /PATH/svn/PROJECT ls 会看到有hooks文件夹 cd hooks ls 可以看到有一个po">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-02-22T07:32:07.728Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SVN：同步版本库与网站目录">
+<meta name="twitter:description" content="承接之前Lnmp下搭建Svn服务器的步骤，接下来要使用Svn中的hooks来进行版本库与网站目录的同步更新。以方便对网站代码进行管理和发布。 注意，下文中PATH、PROJECT等全大写的字符串均为举例用，实际操作时请替换成自己的目录和版本库或项目名称。 原理首先切换到版本库的目录 cd /PATH/svn/PROJECT ls 会看到有hooks文件夹 cd hooks ls 可以看到有一个po">
+
+
+
+
+
+
+  <link rel="canonical" href="http://blog.daixinye.com/2016/03/04/SVN：同步版本库与网站目录/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>SVN：同步版本库与网站目录 | Daixinye</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Daixinye</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.daixinye.com/2016/03/04/SVN：同步版本库与网站目录/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xinye Dai">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Daixinye">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SVN：同步版本库与网站目录
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2016-03-04 23:10:15" itemprop="dateCreated datePublished" datetime="2016-03-04T23:10:15+08:00">2016-03-04</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-02-22 15:32:07" itemprop="dateModified" datetime="2019-02-22T15:32:07+08:00">2019-02-22</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>承接之前<a href="!--￼0--">Lnmp下搭建Svn服务器</a>的步骤，接下来要使用Svn中的hooks来进行版本库与网站目录的同步更新。以方便对网站代码进行管理和发布。</p>
+<p>注意，下文中PATH、PROJECT等全大写的字符串均为举例用，实际操作时请替换成自己的目录和版本库或项目名称。</p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>首先切换到版本库的目录</p>
+<pre><code>cd /PATH/svn/PROJECT
+ls
+</code></pre><p>会看到有hooks文件夹</p>
+<pre><code>cd hooks
+ls
+</code></pre><p>可以看到有一个post-commit.tmpl，这个是svn官方的一个模板，在每次commit操作之后都会执行这个脚本，其他的hooks同理。</p>
+<p>看到这里你应该可以想到，版本库与网站目录同步的原理，就是在客户端commit了代码之后，执行这个脚本来同时update网站目录的内容，保证两者的同步。</p>
+<h2 id="配置操作"><a href="#配置操作" class="headerlink" title="配置操作"></a>配置操作</h2><h3 id="首先需要在网站目录checkout版本库"><a href="#首先需要在网站目录checkout版本库" class="headerlink" title="首先需要在网站目录checkout版本库"></a>首先需要在网站目录checkout版本库</h3><p>先不要着急打接下来的命令</p>
+<pre><code>cd PATH/wwwroot/www.example.com
+svn checkout file://PATH/svn/PROJECT
+</code></pre><p>因为执行了这个命令之后你也许会发现，在网站目录下多了一个PROJECT文件夹，这个文件夹里面才是版本库控制的内容。</p>
+<p>然而我们的目的是想让当前网站的根目录与svn直接同步，因此我们在上一级目录进行checkout。</p>
+<p>接下来正确的做法是</p>
+<pre><code>cd PATH/wwwroot
+svn checkout file://PATH/svn/PROJECT www.example.com
+</code></pre><p>上述命令是在checkout版本库的同时对它进行了重命名，这样子，网站的根目录就如预想的一样在版本库的控制之下了。</p>
+<h3 id="接下来配置hooks"><a href="#接下来配置hooks" class="headerlink" title="接下来配置hooks"></a>接下来配置hooks</h3><pre><code>cd PATH/svn/PROJECT/hooks
+cp post-commit.tmpl post-commit
+</code></pre><p>复制一份post-commit并去掉它的后缀名，这么做的原因是，.tmpl是一个模板文件，实际并不会执行，只有去掉后缀名之后它才会生效。</p>
+<pre><code>vi post-commit
+</code></pre><p>在末尾加入</p>
+<pre><code>export LANG=zh_CN.UTF-8
+svn update PATH/wwwroot/www.example.com --username USER1 --password PASSWD1 --no-auth-cache
+</code></pre><p>export的作用是防止乱码。</p>
+<p>update则是对网站目录进行更新，让网站目录与版本库同步，这里USER1和PASSWD1是之前的教程里配置的用户名和密码，请根据实际情况进行替换。<br>编辑完成之后，按ESC并输入:wq，保存并退出。</p>
+<h3 id="测试hooks"><a href="#测试hooks" class="headerlink" title="测试hooks"></a>测试hooks</h3><h4 id="添加可执行权限"><a href="#添加可执行权限" class="headerlink" title="添加可执行权限"></a>添加可执行权限</h4><pre><code>chmod +x post-commit
+</code></pre><h4 id="运行测试"><a href="#运行测试" class="headerlink" title="运行测试"></a>运行测试</h4><pre><code>./post-commit
+</code></pre><p>　　如果有报错，请重新vi一遍看看是不是有打错</p>
+<h4 id="切换用户进行测试"><a href="#切换用户进行测试" class="headerlink" title="切换用户进行测试"></a>切换用户进行测试</h4><p>由于ssh VPS之后大多数情况用的都是root用户，而svn commit之后执行hooks的是另外一个用户，所以在root权限下执行没有问题，在另外的用户下可能就没有那么足够的权限了。所以接下来</p>
+<pre><code>su www
+./post-commit
+</code></pre><p>如果执行成功，那么基本不会有问题。<br>如果su www时出现not available的情况，尝试下面这个命令</p>
+<pre><code>usermod -s /bin/bash www
+</code></pre><p>　　如果出现各种权限不足的情况，我建议上述所有步骤都在www用户下执行（除了部分更改文件执行权限操作等必须用root用户的）。</p>
+<h3 id="实际测试"><a href="#实际测试" class="headerlink" title="实际测试"></a>实际测试</h3><p>使用你的svn客户端checkout该版本库并上传一些文件或做一些改动，接着进行commit，查看网站目录是否与版本库同步。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Svn的hooks是非常好用的脚本，在每次commit之后，你也可以加入日志记录、通知提醒等等功能。当然，这些功能也是需要一定的shell能力才写的出来。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/svn/" rel="tag"># svn</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/04/SVN：LNMP下搭建SVN服务器简明步骤/" rel="next" title="SVN：LNMP下搭建SVN服务器简明步骤">
+                <i class="fa fa-chevron-left"></i> SVN：LNMP下搭建SVN服务器简明步骤
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/24/深入浅出React读后笔记/" rel="prev" title="深入浅出React读后笔记">
+                深入浅出React读后笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Xinye Dai</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-number">1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置操作"><span class="nav-number">2.</span> <span class="nav-text">配置操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#首先需要在网站目录checkout版本库"><span class="nav-number">2.1.</span> <span class="nav-text">首先需要在网站目录checkout版本库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接下来配置hooks"><span class="nav-number">2.2.</span> <span class="nav-text">接下来配置hooks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试hooks"><span class="nav-number">2.3.</span> <span class="nav-text">测试hooks</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#添加可执行权限"><span class="nav-number">2.3.1.</span> <span class="nav-text">添加可执行权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行测试"><span class="nav-number">2.3.2.</span> <span class="nav-text">运行测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#切换用户进行测试"><span class="nav-number">2.3.3.</span> <span class="nav-text">切换用户进行测试</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实际测试"><span class="nav-number">2.4.</span> <span class="nav-text">实际测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xinye Dai</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.0.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
