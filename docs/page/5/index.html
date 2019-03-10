@@ -285,6 +285,273 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.daixinye.com/2017/04/14/React：基本环境搭建简明步骤/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xinye Dai">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Daixinye">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/04/14/React：基本环境搭建简明步骤/" class="post-title-link" itemprop="url">React：基本环境搭建简明步骤</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2017-04-14 22:34:00" itemprop="dateCreated datePublished" datetime="2017-04-14T22:34:00+08:00">2017-04-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-02-22 15:32:07" itemprop="dateModified" datetime="2019-02-22T15:32:07+08:00">2019-02-22</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>超简的步骤整理。待完善。</p>
+<ul>
+<li>Babel</li>
+<li>ESLint</li>
+<li>webpack</li>
+</ul>
+<h2 id="Babel"><a href="#Babel" class="headerlink" title="Babel"></a>Babel</h2><p><code>babel</code>是一个多用途的JavaScript编译器，用它的目的有二：一是支持ES6语法，二是支持<code>React</code>的一些特性（JSX）语法等。</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>在这里我们是跟<code>webpack</code>一起用的，所以需要的是<code>babel-core</code>核心模块和<code>babel-lodaer</code>，如果需要单独使用<code>babel</code>则安装<code>babel-cli</code>。</p>
+<pre><code>$ npm i babel-core babel-loader --save-dev
+</code></pre><p>接下来安装babel presets</p>
+<pre><code>$ npm i babel-preset-es2015 babel-preset-react --save-dev
+</code></pre><h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>在根目录下新建一个<code>.babelrc</code>文件，并加入以下配置</p>
+<pre><code>{
+    &quot;presets&quot;: [&quot;es2015&quot;, &quot;react&quot;]
+}
+</code></pre><h2 id="ESLint"><a href="#ESLint" class="headerlink" title="ESLint"></a>ESLint</h2><p>ESLint是一个代码检查工具，用于检查和统一代码规范。</p>
+<h3 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h3><pre><code>$ npm i eslint eslint-loader --save-dev
+</code></pre><h3 id="配置-1"><a href="#配置-1" class="headerlink" title="配置"></a>配置</h3><pre><code>$ eslint --init
+</code></pre><p>接下来根据你的需求进行选择即可，非常方便。最终可选择生成一个<code>.eslint.json</code>文件。我的配置如下：</p>
+<pre><code>{
+    &quot;env&quot;: {
+        &quot;browser&quot;: true,
+        &quot;commonjs&quot;: true,
+        &quot;es6&quot;: true,
+        &quot;node&quot;: true
+    },
+    &quot;extends&quot;: &quot;eslint:recommended&quot;,
+    &quot;parserOptions&quot;: {
+        &quot;ecmaFeatures&quot;: {
+            &quot;experimentalObjectRestSpread&quot;: true,
+            &quot;jsx&quot;: true
+        },
+        &quot;sourceType&quot;: &quot;module&quot;
+    },
+    &quot;plugins&quot;: [
+        &quot;react&quot;
+    ],
+    &quot;rules&quot;: {
+        &quot;linebreak-style&quot;: [
+            &quot;error&quot;,
+            &quot;unix&quot;
+        ],
+        &quot;quotes&quot;: [
+            &quot;error&quot;,
+            &quot;single&quot;
+        ],
+        &quot;semi&quot;: [
+            &quot;error&quot;,
+            &quot;always&quot;
+        ]
+    }
+}
+</code></pre><p>更多的配置可参照<a href="http://eslint.org" target="_blank" rel="noopener">ESLint</a></p>
+<h2 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h2><p><code>webpack</code>是当前非常流行的模块打包工具，上述的<code>Babel</code>和<code>ESLint</code>都可以作为<code>loader</code>在<code>webpack</code>中被使用。</p>
+<p>注意：本文使用的是<code>webpack 2</code>，<code>webpack 1</code>和<code>webpack 2</code>在配置上有诸多不同之处，请务必留心。</p>
+<p><a href="https://webpack.js.org/guides/migrating/" target="_blank" rel="noopener">链接：webpack 1和2的区别</a></p>
+<h3 id="安装-2"><a href="#安装-2" class="headerlink" title="安装"></a>安装</h3><pre><code>$ npm i webpack webpack-dev-server --save-dev
+</code></pre><h3 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h3><p>用于自动生成HTML页面，并引入正确的JavaScript文件依赖。</p>
+<pre><code>$ npm i html-webpack-plugin --save-dev
+</code></pre><h3 id="loader"><a href="#loader" class="headerlink" title="loader"></a>loader</h3><p>处理CSS文件需要用到的两个loader。</p>
+<pre><code>$ npm i css-loader style-loader
+</code></pre><h3 id="配置-2"><a href="#配置-2" class="headerlink" title="配置"></a>配置</h3><p>在根目录下新建一个<code>app</code>目录，同时再创建一个<code>webpack.config.js</code>文件。</p>
+<pre><code>var path = require(&apos;path&apos;);
+var HtmlWebpackPlugin = require(&apos;html-webpack-plugin&apos;);
+
+var ROOT_PATH = path.resolve(__dirname);
+var APP_PATH = path.resolve(ROOT_PATH, &apos;app&apos;);
+var BUILD_PATH = path.resolve(ROOT_PATH, &apos;build&apos;);
+
+module.exports = {
+    entry: {
+        app: path.resolve(APP_PATH, &apos;app.jsx&apos;)
+    },
+    output: {
+        path: BUILD_PATH,
+        filename: &apos;bundle.js&apos;
+    },
+    devtool: &apos;eval-source-map&apos;,
+    devServer: {
+        historyApiFallback: true,
+        hot: true,
+        inline: true,
+    },
+    module: {
+        rules: [{
+            test: /\.jsx?$/,
+            enforce: &apos;pre&apos;,
+            loaders: [&apos;eslint-loader&apos;],
+            include: APP_PATH
+        }, {
+            test: /\.css$/,
+            loaders: [&apos;style-loader&apos;, &apos;css-loader&apos;]
+        }, {
+            test: /\.jsx?$/,
+            loader: [&apos;babel-loader&apos;],
+            include: APP_PATH
+        }],
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            title: &apos;react-dev&apos;
+        })
+    ],
+    resolve: {
+        extensions: [&apos;.js&apos;, &apos;.jsx&apos;]
+    }
+};
+</code></pre><h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>添加两条命令到<code>package.json</code>里。</p>
+<pre><code>&quot;scripts&quot;: {
+    &quot;build&quot;:&quot;webpack&quot;,
+    &quot;dev&quot;:&quot;webpack-dev-server --hot&quot;
+}
+</code></pre><p>通过在Terminal中输入 <code>npm run build</code> 或 <code>npm run dev</code> 执行。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://blog.daixinye.com/2017/04/12/HTTP：常见的状态码/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1266,187 +1533,6 @@ $ open -a Google\ Chrome http://denight.leanote.com
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.daixinye.com/2017/04/02/line-height 不同取值的差异/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Xinye Dai">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Daixinye">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2017/04/02/line-height 不同取值的差异/" class="post-title-link" itemprop="url">CSS：line-height 不同取值的差异</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2017-04-02 20:00:00" itemprop="dateCreated datePublished" datetime="2017-04-02T20:00:00+08:00">2017-04-02</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-02-22 15:32:07" itemprop="dateModified" datetime="2019-02-22T15:32:07+08:00">2019-02-22</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="百分比值"><a href="#百分比值" class="headerlink" title="百分比值"></a>百分比值</h2><blockquote>
-<p>line-height = （父元素 font-size）×（百分比）</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;outer&quot;&gt;</span><br><span class="line">    父元素</span><br><span class="line">    &lt;div class=&quot;inner&quot;&gt;子元素&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.outer &#123;</span><br><span class="line">    /* 父元素行高 = 父元素font-size 30px × 150% = 45px */</span><br><span class="line">    line-height: 150%;</span><br><span class="line">    font-size: 30px;</span><br><span class="line">&#125;</span><br><span class="line">.inner &#123;</span><br><span class="line">    /* 子元素行高 = 父元素font-size 30px × 150% = 45px */</span><br><span class="line">    font-size: 20px; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="em值"><a href="#em值" class="headerlink" title="em值"></a>em值</h2><blockquote>
-<p>line-height = （父元素 font-size）×（em值）</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.outer &#123;</span><br><span class="line">    /* 父元素行高 = 父元素font-size 30px × 1.5 = 45px */</span><br><span class="line">    line-height: 1.5em;</span><br><span class="line">    font-size: 30px;</span><br><span class="line">&#125;</span><br><span class="line">.inner &#123;</span><br><span class="line">    /* 子元素行高 = 父元素font-size 30px × 1.5 = 45px */</span><br><span class="line">    font-size: 20px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这里特别要注意尽管em是相对当前元素的<code>font-size</code>值来计算的，同时<code>line-height</code>也是可以被继承的属性，但是实际上子元素继承时并不是<code>line-height: 1.5em</code>，而是父元素计算完成后的<code>line-height: 45px;</code></p>
-<h2 id="无单位数字"><a href="#无单位数字" class="headerlink" title="无单位数字"></a>无单位数字</h2><blockquote>
-<p>line-height = （当前元素 font-size）×（无单位数字）</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.outer &#123;</span><br><span class="line">    /* 父元素行高 = 父元素font-size 30px × 1.5 = 45px */</span><br><span class="line">    line-height: 1.5;</span><br><span class="line">    font-size: 30px;</span><br><span class="line">&#125;</span><br><span class="line">.inner &#123;</span><br><span class="line">    /* 子元素行高 = 子元素font-size 20px × 1.5 = 30px */</span><br><span class="line">    font-size: 20px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>无单位数字与百分比值和em值相反，是根据当前元素的<code>font-size</code>来计算的。</p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>其实仔细观察会发现，百分比值和em值，在子元素继承父元素的<code>line-height</code>属性时，继承的是计算完成后（以px为单位）的值。而无单位数字，则是需要根据子元素的<code>font-size</code>，让子元素自行计算的。</p>
-<h3 id="计算em值的大致流程："><a href="#计算em值的大致流程：" class="headerlink" title="计算em值的大致流程："></a>计算em值的大致流程：</h3><p> –&gt; 设置父元素font-size = 30px；</p>
-<p> –&gt; 设置父元素line-height = 1.5em;</p>
-<p> –&gt; 计算父元素line-height =  font-size × 1.5 = 30px × 1.5 = 45px; </p>
-<p> –&gt; 设置子元素font-size = 20px;</p>
-<p> –&gt; 计算子元素line-height = 继承父元素line-height = 45px; </p>
-<h3 id="计算无单位数字的大致流程："><a href="#计算无单位数字的大致流程：" class="headerlink" title="计算无单位数字的大致流程："></a>计算无单位数字的大致流程：</h3><p>–&gt; 设置父元素font-size = 30px;</p>
-<p>–&gt; 设置父元素line-height = 1.5;</p>
-<p>–&gt; 计算父元素line-height = 当前元素font-size × 1.5 = 30px × 1.5 = 45px;</p>
-<p>–&gt; 设置子元素font-size = 20px;</p>
-<p>–&gt; 计算子元素line-height = 继承父元素line-height = 1.5;</p>
-<p>–&gt; 计算实际子元素line-height = 当前元素font-size × 1.5 = 20px × 1.5 = 30px;</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1494,7 +1580,7 @@ $ open -a Google\ Chrome http://denight.leanote.com
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-count">33</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
